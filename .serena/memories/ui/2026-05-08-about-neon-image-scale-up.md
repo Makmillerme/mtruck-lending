@@ -1,0 +1,1 @@
+About neon image: added centered scale on Image — `origin-center scale-[1.1] sm:scale-[1.14]` with retained `object-contain object-center` for larger truck while parent `overflow-hidden` clips excess.

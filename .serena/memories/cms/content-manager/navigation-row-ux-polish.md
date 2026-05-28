@@ -1,0 +1,1 @@
+Polished ContentManager accordion row UX in components/admin/content-manager.tsx based on visual feedback. Added explicit right action zone with border-left for delete button, improved title/subtitle alignment, added custom chevron container for cleaner hierarchy, and hid default AccordionTrigger icon. Ensured no nested button issues and verified lints: no errors.

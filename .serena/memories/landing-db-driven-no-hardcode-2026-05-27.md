@@ -1,0 +1,11 @@
+Landing DB-driven refactor (2026-05-27):
+- Created lib/landing-section-parsers.ts for parsing CMS payloads
+- home-client passes sectionContent to header/hero/about/footer + stats to about
+- Removed hardcoded marketing copy from hero, header, footer, about, services, faq, catalog, why-us
+- Components show empty when DB missing; no fallback marketing strings
+- Footer contact fallbacks removed; links fallback to header navigation
+- Catalog marquee brands only from vehicles DB (0 vehicles = empty marquee)
+- Testimonials carousel empty when no DB rows
+- landing-content accepts de locale rows
+- DB counts: 24 content entries, 4 services, 0 vehicles, 4 faqs, 3 testimonials, 1 contact
+- Remaining hardcode: cta-form-modal labels, catalog-brand-modal UI chrome, neon svg path

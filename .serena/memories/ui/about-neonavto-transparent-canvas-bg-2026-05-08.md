@@ -1,0 +1,1 @@
+Updated components/landing/neon-avto-assemble.tsx to remove black background during animation frames. Replaced per-frame dark fill (ctx.fillStyle + fillRect) with ctx.clearRect to keep canvas transparent so section background appears normal from first frame.

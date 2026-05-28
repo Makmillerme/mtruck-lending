@@ -1,0 +1,1 @@
+May 27 2026: Removed admin panel, DB-driven landing, sk/de/cs locales. Static lib/landing-data.ts with en+uk content; page.tsx uses getLandingBundle(); deleted app/admin, app/api/admin, components/admin, prisma/db/site-builder libs. Fixed cta-form-modal uk mojibake. Build passes with only / and /api/contact-request.

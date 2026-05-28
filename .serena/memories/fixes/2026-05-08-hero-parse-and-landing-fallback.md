@@ -1,0 +1,5 @@
+- Fixed syntax error in components/landing/hero.tsx that caused build failure: mismatched JSX closing tags around final section wrappers. Rewrote component structure with balanced div/section closing tags.
+- Verified fix with `npx tsc --noEmit` (passes).
+- Added resilience in lib/landing-content.ts: introduced getVehiclesSafe() that first queries Prisma vehicle model, then falls back to raw SQL legacy fields if Prisma fails (e.g., missing vehicles.name_uk column/P2022 drift scenarios).
+- Updated _getLandingBundle() to use getVehiclesSafe() and return `vehicles` directly.
+- Verified lint/typecheck after changes: no errors; only pre-existing react-hooks warnings in admin manager files.

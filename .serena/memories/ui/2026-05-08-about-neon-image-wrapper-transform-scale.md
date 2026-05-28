@@ -1,0 +1,1 @@
+About neon truck: scale utilities on Next/Image did not visibly apply for user. Wrapped Image in `relative h-full w-full` div with explicit arbitrary CSS transform `[transform:scale(1.18)] sm:[transform:scale(1.22)]` + `origin-center`; outer `overflow-hidden` clips. Removed scale from Image className.
