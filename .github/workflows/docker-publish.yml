@@ -45,3 +45,21 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Set GHCR package visibility to public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          STATUS=$(curl -sS -o /tmp/pkg.json -w "%{http_code}" -X PATCH \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/user/packages/container/mtrucklending/visibility" \
+            -d '{"visibility":"public"}')
+
+          if [ "${STATUS}" = "204" ] || [ "${STATUS}" = "200" ]; then
+            echo "GHCR package visibility set to public."
+          else
+            echo "GHCR package visibility update returned HTTP ${STATUS}."
+            cat /tmp/pkg.json || true
+          fi
