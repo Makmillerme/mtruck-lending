@@ -1,1 +1,0 @@
-About neon image: switched Next Image from `object-cover` to `object-contain object-center` in components/landing/about.tsx so the full truck is always visible in the square frame without cropping; centered in container.

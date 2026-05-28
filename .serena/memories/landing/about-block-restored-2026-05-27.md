@@ -1,1 +1,0 @@
-About section restored May 27: seeded full CMS about content (imageCallouts, importChain, bridgeTitle, 4 features) via scripts/seed-about-content.ts; about.tsx merges CMS+default features, stats fallback uses locale labels (500+/15+/98%), landing-content maps stat labelSk->labelCs.

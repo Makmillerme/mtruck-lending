@@ -1,3 +1,0 @@
-About neon: (1) Scroll gate observes full `#about` section with `intersectionRatio >= 0.62` and threshold steps — starts neon/callouts when user has scrolled so ~62% of section is visible (not early card-only intersect). Ref moved from card to `<section id="about">`.
-
-(2) `NeonAvtoAssemble` tour phase before assemble: `SceneState` adds `touring`. `TOUR_WAYPOINTS` polyline: top-left → center → bottom-right → top-right → center. `pointOnTourPath` + smoothstep per segment; `TOUR_TOTAL_FRAMES` ~540. Particles spawn at first waypoint with `tourJx/tourJy` chaos; during tour follow group anchor + wander + flow-aligned rotation; then `running` convergence to truck edges as before.
