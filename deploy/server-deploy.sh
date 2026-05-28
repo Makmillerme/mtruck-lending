@@ -2,7 +2,7 @@
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/root/apps/mtrucklending}"
-REPO_URL="${REPO_URL:-https://github.com/Makmillerme/mtrucklending.git}"
+REPO_URL="${REPO_URL:-https://github.com/Makmillerme/mtruck-lending.git}"
 COMPOSE_FILE="${COMPOSE_FILE:-docker-compose.server.yml}"
 
 log() {

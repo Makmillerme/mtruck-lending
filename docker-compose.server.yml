@@ -1,7 +1,7 @@
 services:
   app:
     container_name: mtrucklending
-    image: ghcr.io/makmillerme/mtrucklending:latest
+    image: ghcr.io/makmillerme/mtruck-lending:latest
     pull_policy: always
     restart: unless-stopped
     ports:

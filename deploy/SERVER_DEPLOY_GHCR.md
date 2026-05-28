@@ -6,8 +6,8 @@
 
 ## Prerequisites
 
-- Public repo: `https://github.com/Makmillerme/mtrucklending`
-- Public GHCR image: `ghcr.io/makmillerme/mtrucklending:latest`
+- Public repo: `https://github.com/Makmillerme/mtruck-lending`
+- Public GHCR image: `ghcr.io/makmillerme/mtruck-lending:latest`
 - No `docker login` required when the package is public
 
 ## One-time setup
@@ -16,7 +16,7 @@
 mkdir -p /root/apps/mtrucklending
 cd /root/apps/mtrucklending
 
-git clone https://github.com/Makmillerme/mtrucklending.git .
+git clone https://github.com/Makmillerme/mtruck-lending.git .
 
 cp .env.example .env
 # edit .env — SMTP settings for contact form
