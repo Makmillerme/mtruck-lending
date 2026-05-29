@@ -5,6 +5,7 @@ import { Check, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LandingGlassCard } from "@/components/landing/landing-glass-card";
 import type { Locale } from "@/lib/locale";
+import { pickEntityLocale, pickLocalizedRecord } from "@/lib/pick-locale";
 import { cn } from "@/lib/utils";
 
 import { parseWhyUsContent, pickMetaString, pickText } from "@/lib/landing-section-parsers";
@@ -45,6 +46,40 @@ const defaultContent = {
       { title: "Післяпродажна підтримка", description: "Спеціалізована команда підтримки для будь-яких питань після покупки." },
     ],
   },
+  sk: {
+    badge: "Prečo si vybrať nás",
+    title: "Výhoda",
+    titleHighlight: "Expert Travel",
+    description: "Medzi konkurenciou vynikáme záväzkom ku kvalite, transparentnosti a spokojnosti zákazníkov.",
+    carouselTitle: "Hodnotenia klientov",
+    prevTestimonial: "Predchádzajúce hodnotenie",
+    nextTestimonial: "Ďalšie hodnotenie",
+    reasons: [
+      { title: "Priamy dovoz z Európy", description: "Bez sprostredkovateľov — vozidlá získavame priamo od európskych dodávateľov za najlepšie ceny." },
+      { title: "Kompletná dokumentácia", description: "Úplná história vozidla, servisné záznamy a všetky potrebné dovozné dokumenty sú súčasťou dodávky." },
+      { title: "Záruka kvality", description: "Každé vozidlo prechádza dôkladnou kontrolou pred dodaním so záručným krytím." },
+      { title: "Konkurenčné ceny", description: "Model priameho dovozu nám umožňuje ponúkať prémiovú techniku za konkurenčné trhové ceny." },
+      { title: "Odborné poradenstvo", description: "Náš tím vám pomôže nájsť ideálne vozidlo pre vaše konkrétne obchodné potreby." },
+      { title: "Popredajná podpora", description: "Vyhradený tím podpory pre akékoľvek otázky alebo problémy po nákupe." },
+    ],
+  },
+  de: {
+    badge: "Warum wir",
+    title: "Der Expert Travel",
+    titleHighlight: "Vorteil",
+    description: "Wir heben uns durch unser Engagement für Qualität, Transparenz und Kundenzufriedenheit von der Konkurrenz ab.",
+    carouselTitle: "Kundenbewertungen",
+    prevTestimonial: "Vorherige Bewertung",
+    nextTestimonial: "Nächste Bewertung",
+    reasons: [
+      { title: "Direktimport aus Europa", description: "Ohne Zwischenhändler — wir beziehen Fahrzeuge direkt von europäischen Lieferanten zu besten Preisen." },
+      { title: "Vollständige Dokumentation", description: "Komplette Fahrzeughistorie, Serviceunterlagen und alle erforderlichen Importdokumente inklusive." },
+      { title: "Qualitätsgarantie", description: "Jedes Fahrzeug durchläuft vor der Auslieferung eine gründliche Prüfung mit Garantieabdeckung." },
+      { title: "Wettbewerbsfähige Preise", description: "Das Direktimportmodell ermöglicht uns Premium-Fahrzeuge zu wettbewerbsfähigen Marktpreisen anzubieten." },
+      { title: "Fachberatung", description: "Unser Team hilft Ihnen, das passende Fahrzeug für Ihre spezifischen Geschäftsanforderungen zu finden." },
+      { title: "After-Sales-Support", description: "Dediziertes Support-Team für alle Fragen oder Anliegen nach Ihrem Kauf." },
+    ],
+  },
 } as const;
 
 interface WhyUsProps {
@@ -54,10 +89,16 @@ interface WhyUsProps {
     id: number;
     quoteEn: string;
     quoteUk: string | null;
+    quoteSk?: string | null;
+    quoteDe?: string | null;
     authorEn: string;
     authorUk: string | null;
+    authorSk?: string | null;
+    authorDe?: string | null;
     companyEn: string | null;
     companyUk: string | null;
+    companySk?: string | null;
+    companyDe?: string | null;
     rating: number;
     orderIndex: number;
     isActive: boolean;
@@ -85,14 +126,27 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
 
   const carousel = useMemo(() => {
     if (testimonials.length === 0) {
+      const fallbackQuote = pickLocalizedRecord(
+        {
+          en: "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
+          uk: "Expert Travel допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими.",
+          sk: "Expert Travel nám pomohol rozšíriť vozový park kvalitnými vozidlami za výborné ceny. Ich servis a podpora boli výnimočné.",
+          de: "Expert Travel hat uns geholfen, unsere Flotte mit hochwertigen Fahrzeugen zu erweitern. Service und Betreuung waren hervorragend.",
+        },
+        locale,
+        "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
+      );
+      const fallbackAuthor = pickLocalizedRecord(
+        { en: "Martin Novak", uk: "Мартін Новак", sk: "Martin Novák", de: "Martin Novak" },
+        locale,
+        "Martin Novak",
+      );
+
       return [
         {
           id: 0,
-          quote:
-            locale === "uk"
-              ? "Expert Travel допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими."
-              : "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
-          author: locale === "uk" ? "Мартін Новак" : "Martin Novak",
+          quote: fallbackQuote,
+          author: fallbackAuthor,
           company: "TransCargo s.r.o.",
           rating: 5,
         },
@@ -101,9 +155,24 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
 
     return testimonials.map((item) => ({
       id: item.id,
-      quote: locale === "uk" ? item.quoteUk || item.quoteEn : item.quoteEn,
-      author: locale === "uk" ? item.authorUk || item.authorEn : item.authorEn,
-      company: locale === "uk" ? item.companyUk || item.companyEn || "" : item.companyEn || "",
+      quote: pickEntityLocale(locale, {
+        en: item.quoteEn,
+        uk: item.quoteUk,
+        sk: item.quoteSk,
+        de: item.quoteDe,
+      }),
+      author: pickEntityLocale(locale, {
+        en: item.authorEn,
+        uk: item.authorUk,
+        sk: item.authorSk,
+        de: item.authorDe,
+      }),
+      company: pickEntityLocale(locale, {
+        en: item.companyEn,
+        uk: item.companyUk,
+        sk: item.companySk,
+        de: item.companyDe,
+      }),
       rating: item.rating,
     }));
   }, [testimonials, locale]);

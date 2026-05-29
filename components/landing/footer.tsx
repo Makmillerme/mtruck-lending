@@ -5,6 +5,7 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
 import type { Locale } from "@/lib/locale";
+import { pickEntityLocale } from "@/lib/pick-locale";
 
 import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from "@/lib/branding";
 import { parseFooterContent, parseNavItems, pickText } from "@/lib/landing-section-parsers";
@@ -46,6 +47,42 @@ const defaultContent = {
       { id: "faq", name: "FAQ" },
     ],
   },
+  sk: {
+    ctaTitle: "Pripravení nájsť ideálne vozidlo?",
+    ctaText: "Kontaktujte nás ešte dnes pre personalizovanú konzultáciu a konkurenčnú ponuku.",
+    ctaButton: "Kontaktujte nás",
+    brandText: "Váš spoľahlivý partner pre prémiové úžitkové vozidlá z Európy.",
+    linksTitle: "Rýchle odkazy",
+    servicesTitle: "Služby",
+    contactTitle: "Kontakt",
+    copyright: "© 2026 EXPERT TRAVEL. Všetky práva vyhradené.",
+    legal: ["Ochrana súkromia", "Podmienky služby"],
+    links: [
+      { id: "home", name: "Domov" },
+      { id: "about", name: "O nás" },
+      { id: "services", name: "Služby" },
+      { id: "catalog", name: "Katalóg" },
+      { id: "faq", name: "FAQ" },
+    ],
+  },
+  de: {
+    ctaTitle: "Bereit, Ihr ideales Fahrzeug zu finden?",
+    ctaText: "Kontaktieren Sie uns noch heute für eine persönliche Beratung und ein wettbewerbsfähiges Angebot.",
+    ctaButton: "Kontakt aufnehmen",
+    brandText: "Ihr zuverlässiger Partner für Premium-Nutzfahrzeuge aus Europa.",
+    linksTitle: "Schnelllinks",
+    servicesTitle: "Leistungen",
+    contactTitle: "Kontakt",
+    copyright: "© 2026 EXPERT TRAVEL. Alle Rechte vorbehalten.",
+    legal: ["Datenschutz", "Nutzungsbedingungen"],
+    links: [
+      { id: "home", name: "Startseite" },
+      { id: "about", name: "Über uns" },
+      { id: "services", name: "Leistungen" },
+      { id: "catalog", name: "Katalog" },
+      { id: "faq", name: "FAQ" },
+    ],
+  },
 } as const;
 
 interface FooterProps {
@@ -56,26 +93,25 @@ interface FooterProps {
     phone: string;
     addressEn: string;
     addressUk: string | null;
+    addressSk?: string | null;
+    addressDe?: string | null;
     workingHoursEn?: string | null;
     workingHoursUk?: string | null;
+    workingHoursSk?: string | null;
+    workingHoursDe?: string | null;
   } | null;
   servicesData?: Array<{
     id: number;
     titleEn: string;
     titleUk: string | null;
+    titleSk?: string | null;
+    titleDe?: string | null;
   }>;
   sectionContent?: Record<string, unknown>;
   fallbackLinks?: unknown;
 }
 
-function getLocalizedValue(
-  locale: Locale,
-  valueEn?: string | null,
-  valueUk?: string | null,
-) {
-  if (locale === "uk") return valueUk || valueEn || "";
-  return valueEn || valueUk || "";
-}
+
 
 export function Footer({ locale, onNavigate, contactData, servicesData = [], sectionContent, fallbackLinks }: FooterProps) {
   const cms = parseFooterContent(sectionContent);
@@ -100,13 +136,30 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
   const email = contactData?.email || "sales@m-truck.cz";
   const phone = contactData?.phone || "+420 775 123 456";
   const address =
-    getLocalizedValue(locale, contactData?.addressEn, contactData?.addressUk) ||
+    pickEntityLocale(locale, {
+      en: contactData?.addressEn,
+      uk: contactData?.addressUk,
+      sk: contactData?.addressSk,
+      de: contactData?.addressDe,
+    }) ||
     "Europe";
   const workingHours =
-    getLocalizedValue(locale, contactData?.workingHoursEn, contactData?.workingHoursUk) ||
+    pickEntityLocale(locale, {
+      en: contactData?.workingHoursEn,
+      uk: contactData?.workingHoursUk,
+      sk: contactData?.workingHoursSk,
+      de: contactData?.workingHoursDe,
+    }) ||
     "Mon-Fri 08:00-18:00";
   const serviceLinks = servicesData
-    .map((service) => getLocalizedValue(locale, service.titleEn, service.titleUk))
+    .map((service) =>
+      pickEntityLocale(locale, {
+        en: service.titleEn,
+        uk: service.titleUk,
+        sk: service.titleSk,
+        de: service.titleDe,
+      }),
+    )
     .filter(Boolean);
 
   return (

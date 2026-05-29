@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { Locale } from "@/lib/locale";
+import { pickEntityLocale } from "@/lib/pick-locale";
 
 import { pickMetaString, pickText } from "@/lib/landing-section-parsers";
 
@@ -23,6 +24,18 @@ const content = {
     titleHighlight: "Запитання",
     description: "Знайдіть відповіді на поширені запитання про наші послуги та процес імпорту техніки.",
   },
+  sk: {
+    badge: "FAQ",
+    title: "Často kladené",
+    titleHighlight: "otázky",
+    description: "Nájdite odpovede na bežné otázky o našich službách a procese dovozu vozidiel.",
+  },
+  de: {
+    badge: "FAQ",
+    title: "Häufig gestellte",
+    titleHighlight: "Fragen",
+    description: "Finden Sie Antworten auf häufige Fragen zu unseren Leistungen und dem Importprozess.",
+  },
 };
 
 interface FAQProps {
@@ -31,8 +44,12 @@ interface FAQProps {
     id: number;
     questionEn: string;
     questionUk: string | null;
+    questionSk?: string | null;
+    questionDe?: string | null;
     answerEn: string;
     answerUk: string | null;
+    answerSk?: string | null;
+    answerDe?: string | null;
   }>;
   metaContent?: Record<string, unknown>;
 }
@@ -46,8 +63,18 @@ export function FAQ({ locale, faqsData = [], metaContent }: FAQProps) {
 
   const items = faqsData.map((item) => ({
     id: item.id,
-    question: locale === "uk" ? item.questionUk || item.questionEn : item.questionEn,
-    answer: locale === "uk" ? item.answerUk || item.answerEn : item.answerEn,
+    question: pickEntityLocale(locale, {
+      en: item.questionEn,
+      uk: item.questionUk,
+      sk: item.questionSk,
+      de: item.questionDe,
+    }),
+    answer: pickEntityLocale(locale, {
+      en: item.answerEn,
+      uk: item.answerUk,
+      sk: item.answerSk,
+      de: item.answerDe,
+    }),
   }));
 
   return (

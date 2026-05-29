@@ -28,6 +28,26 @@ const content = {
     cta: "Переглянути каталог",
     secondary: "Зв'язатися з нами",
   },
+  sk: {
+    badge: "Európska kvalita",
+    title: "Prémiová komerčná",
+    titleHighlight: "technika",
+    subtitle: "z Európy",
+    description:
+      "Váš spoľahlivý partner pre nákladné vozidlá, prívesy a úžitkovú techniku. Priamy dovoz z Európy s kompletnou dokumentáciou a zárukou.",
+    cta: "Prezrieť katalóg",
+    secondary: "Kontaktujte nás",
+  },
+  de: {
+    badge: "Europäische Qualität",
+    title: "Premium-Nutzfahrzeuge",
+    titleHighlight: "und Auflieger",
+    subtitle: "aus Europa",
+    description:
+      "Ihr zuverlässiger Partner für Lkw, Auflieger und Nutzfahrzeuge. Direktimport aus Europa mit vollständiger Dokumentation und Garantie.",
+    cta: "Katalog ansehen",
+    secondary: "Kontakt aufnehmen",
+  },
 };
 
 interface HeroProps {

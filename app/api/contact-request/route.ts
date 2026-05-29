@@ -4,11 +4,12 @@ import nodemailer from "nodemailer";
 import { z } from "zod";
 import { consumeRateLimit } from "@/lib/rate-limit";
 import { landingData } from "@/lib/landing-data";
+import { PUBLIC_LOCALE_LABELS, type Locale } from "@/lib/locale";
 
 export const runtime = "nodejs";
 
 const payloadSchema = z.object({
-  locale: z.enum(["en", "uk"]),
+  locale: z.enum(["en", "uk", "sk", "de"]),
   entryPoint: z.enum(["header", "hero", "footer"]),
   sourceLabel: z.string().trim().max(120).optional(),
   name: z.string().trim().min(1).max(120),
@@ -55,8 +56,8 @@ type SmtpConfig = {
   };
 };
 
-function formatLanguageTag(locale: "en" | "uk"): string {
-  return locale === "uk" ? "Ukrainian (uk)" : "English (en)";
+function formatLanguageTag(locale: Locale): string {
+  return `${PUBLIC_LOCALE_LABELS[locale]} (${locale})`;
 }
 
 function parseSmtpConfig():
@@ -114,7 +115,7 @@ async function sendWithFormSubmit(params: {
   origin?: string;
   referer?: string;
   source: string;
-  locale: "en" | "uk";
+  locale: Locale;
   name: string;
   phone: string;
   email: string;

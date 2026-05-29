@@ -40,6 +40,22 @@ const labels = {
     note: "Допомагаємо підібрати та імпортувати техніку під ваші маршрути, вантаж і стандарти автопарку.",
     close: "Закрити",
   },
+  sk: {
+    overview: "O značke",
+    bodyTypes: "Typy nadstavieb",
+    configurations: "Konfigurácie",
+    typicalSpecs: "Typické špecifikácie",
+    note: "Pomáhame vybrať a doviezť techniku podľa vašich trás, nákladu a štandardov flotily.",
+    close: "Zavrieť",
+  },
+  de: {
+    overview: "Über die Marke",
+    bodyTypes: "Aufbauten",
+    configurations: "Konfigurationen",
+    typicalSpecs: "Typische Spezifikationen",
+    note: "Wir helfen bei Auswahl und Import von Fahrzeugen passend zu Ihren Strecken, Frachtprofil und Flottenstandards.",
+    close: "Schließen",
+  },
 };
 
 function InfoList({ title, items }: { title: string; items: string[] }) {

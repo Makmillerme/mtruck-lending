@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Globe } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
-import type { PublicLocale } from "@/lib/locale";
+import { PUBLIC_LOCALE_LABELS, PUBLIC_LOCALES, type PublicLocale } from "@/lib/locale";
 
 import { parseHeaderContent, pickText } from "@/lib/landing-section-parsers";
 
@@ -29,17 +29,37 @@ const navigation = {
     { name: "FAQ", id: "faq" },
     { name: "Контакти", id: "contact" },
   ],
+  sk: [
+    { name: "Domov", id: "home" },
+    { name: "O nás", id: "about" },
+    { name: "Služby", id: "services" },
+    { name: "Katalóg", id: "catalog" },
+    { name: "Prečo my", id: "why-us" },
+    { name: "FAQ", id: "faq" },
+    { name: "Kontakt", id: "contact" },
+  ],
+  de: [
+    { name: "Startseite", id: "home" },
+    { name: "Über uns", id: "about" },
+    { name: "Leistungen", id: "services" },
+    { name: "Katalog", id: "catalog" },
+    { name: "Warum wir", id: "why-us" },
+    { name: "FAQ", id: "faq" },
+    { name: "Kontakt", id: "contact" },
+  ],
 } as const;
 
 const ctaText = {
   en: "Get Quote",
   uk: "Отримати пропозицію",
+  sk: "Získať ponuku",
+  de: "Angebot anfordern",
 } as const;
 
-const languageItems: Array<{ locale: PublicLocale; label: string }> = [
-  { locale: "en", label: "English" },
-  { locale: "uk", label: "Українська" },
-];
+const languageItems: Array<{ locale: PublicLocale; label: string }> = PUBLIC_LOCALES.map((locale) => ({
+  locale,
+  label: PUBLIC_LOCALE_LABELS[locale],
+}));
 
 interface HeaderProps {
   locale: PublicLocale;

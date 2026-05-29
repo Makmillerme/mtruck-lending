@@ -39,6 +39,26 @@ const content = {
     prevBrands: "Попередні бренди",
     nextBrands: "Наступні бренди",
   },
+  sk: {
+    badge: "Náš katalóg",
+    title: "Značky, s",
+    titleHighlight: "ktorými pracujeme",
+    description:
+      "Prehľad komerčných značiek, ktoré dovážame — typy nadstavieb, konfigurácie a typické špecifikácie pre plánovanie vozového parku.",
+    learnMore: "Viac informácií",
+    prevBrands: "Predchádzajúce značky",
+    nextBrands: "Ďalšie značky",
+  },
+  de: {
+    badge: "Unser Katalog",
+    title: "Marken, mit",
+    titleHighlight: "denen wir arbeiten",
+    description:
+      "Überblick über die Nutzfahrzeugmarken, die wir importieren — Aufbauten, Konfigurationen und typische Spezifikationen für Ihre Flottenplanung.",
+    learnMore: "Mehr erfahren",
+    prevBrands: "Vorherige Marken",
+    nextBrands: "Nächste Marken",
+  },
 };
 
 const defaultMarqueeBrands = [

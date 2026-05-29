@@ -19,6 +19,8 @@ function localeFromAcceptLanguage(acceptLanguage: string | null | undefined): Pu
 
   for (const tag of tags) {
     if (tag.startsWith("uk")) return "uk";
+    if (tag.startsWith("sk")) return "sk";
+    if (tag.startsWith("de")) return "de";
     if (tag.startsWith("en")) return "en";
   }
 

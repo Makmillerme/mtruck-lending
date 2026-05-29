@@ -10,6 +10,7 @@ import {
 import { normalizeBrandLogoSrc } from "@/lib/branding";
 import type { CatalogCategory } from "@/lib/catalog-vehicle";
 import type { Locale, PublicLocale } from "@/lib/locale";
+import { PUBLIC_LOCALE_LABELS } from "@/lib/locale";
 
 export function asString(value: unknown, fallback = ""): string {
   return typeof value === "string" ? value : fallback;
@@ -197,6 +198,8 @@ const catalogIconToKey: Record<string, CatalogCategory> = {
 const catalogTabDefaults: Record<Locale, Record<CatalogCategory, string>> = {
   en: { truck: "Trucks", trailer: "Trailers" },
   uk: { truck: "Вантажівки", trailer: "Причепи" },
+  sk: { truck: "Nákladné autá", trailer: "Prívesy" },
+  de: { truck: "Lkw", trailer: "Anhänger" },
 };
 
 function withCatalogTabDefaults(
@@ -265,17 +268,19 @@ export function localizedField(
   locale: Locale,
   en?: string | null,
   uk?: string | null,
+  sk?: string | null,
+  de?: string | null,
 ): string {
-  if (locale === "uk") return uk || en || "";
-  return en || uk || "";
+  const byLocale: Record<Locale, string | null | undefined> = { en, uk, sk, de };
+  const direct = byLocale[locale];
+  if (typeof direct === "string" && direct.trim()) return direct.trim();
+  for (const value of [en, uk, sk, de]) {
+    if (typeof value === "string" && value.trim()) return value.trim();
+  }
+  return "";
 }
 
 export type CtaEntryPoint = "header" | "hero" | "footer";
-
-const PUBLIC_LOCALE_LABELS: Record<PublicLocale, string> = {
-  en: "English",
-  uk: "Українська",
-};
 
 function modalGroup(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -284,7 +289,7 @@ function modalGroup(value: unknown): Record<string, unknown> {
 export function parseLanguageSwitcher(meta?: Record<string, unknown>) {
   const switcher = modalGroup(meta?.languageSwitcher);
   const enabled = switcher.enabled !== false;
-  const raw = Array.isArray(switcher.languages) ? switcher.languages : ["en", "uk"];
+  const raw = Array.isArray(switcher.languages) ? switcher.languages : ["en", "uk", "sk", "de"];
   const items = raw
     .map((item) => (typeof item === "string" ? item.trim() : ""))
     .filter((item): item is PublicLocale => (PUBLIC_LOCALE_LABELS as Record<string, string>)[item] !== undefined)

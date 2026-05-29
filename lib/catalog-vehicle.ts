@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locale";
+import { pickEntityLocale } from "@/lib/pick-locale";
 import type { CatalogBrandCard } from "@/components/landing/catalog-brand-modal";
 import { getCatalogBrandLogo, getCatalogBrandLogoKey } from "@/lib/catalog-brand-logo";
 import type { CatalogBrand } from "@/lib/catalog-brands";
@@ -19,8 +20,12 @@ export type CatalogVehicleRecord = {
   specs: string[];
   tagEn: string | null;
   tagUk: string | null;
+  tagSk?: string | null;
+  tagDe?: string | null;
   descriptionEn: string | null;
   descriptionUk: string | null;
+  descriptionSk?: string | null;
+  descriptionDe?: string | null;
   catalogMeta: unknown;
   orderIndex?: number;
 };
@@ -43,13 +48,19 @@ export function matchesCatalogCategory(vehicleCategory: string, tabKey: CatalogC
 export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale: Locale): CatalogBrandCard {
   const meta = parseVehicleCatalogMeta(vehicle.catalogMeta);
 
-  const tagline =
-    locale === "uk" ? vehicle.tagUk || vehicle.tagEn || "" : vehicle.tagEn || vehicle.tagUk || "";
+  const tagline = pickEntityLocale(locale, {
+    en: vehicle.tagEn,
+    uk: vehicle.tagUk,
+    sk: vehicle.tagSk,
+    de: vehicle.tagDe,
+  });
 
-  const overview =
-    locale === "uk"
-      ? vehicle.descriptionUk || vehicle.descriptionEn || ""
-      : vehicle.descriptionEn || vehicle.descriptionUk || "";
+  const overview = pickEntityLocale(locale, {
+    en: vehicle.descriptionEn,
+    uk: vehicle.descriptionUk,
+    sk: vehicle.descriptionSk,
+    de: vehicle.descriptionDe,
+  });
 
   return {
     id: String(vehicle.id),

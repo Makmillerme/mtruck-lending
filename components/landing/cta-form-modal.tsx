@@ -63,7 +63,61 @@ const copy = {
     helper: "Або зв'яжіться з нами напряму:",
     sourceLabel: { header: "CTA у хедері", hero: "CTA у Hero", footer: "CTA перед футером" },
   },
-} as const;
+  sk: {
+    title: {
+      header: "Získať personalizovanú ponuku",
+      hero: "Požiadať o konzultáciu",
+      footer: "Poslať nám dopyt",
+    },
+    description:
+      "Zanechajte kontaktné údaje a preferovaný typ vozidla. Ozveme sa vám s ponukou na mieru.",
+    fields: {
+      name: "Meno",
+      phone: "Telefón",
+      email: "Email (nepovinné)",
+      message: "Detaily dopytu",
+    },
+    placeholders: {
+      name: "Vaše meno",
+      phone: "+420 ...",
+      email: "name@company.com",
+      message: "Značka, kategória, rozpočet, termín dodania...",
+    },
+    submit: "Odoslať dopyt",
+    submitting: "Odosielame...",
+    success: "Dopyt bol úspešne odoslaný. Čoskoro vás budeme kontaktovať.",
+    errorFallback: "Dopyt sa nepodarilo odoslať. Skúste to prosím neskôr.",
+    helper: "Alebo nás kontaktujte priamo:",
+    sourceLabel: { header: "CTA v hlavičke", hero: "CTA v Hero", footer: "CTA pred pätičkou" },
+  },
+  de: {
+    title: {
+      header: "Personalisiertes Angebot anfordern",
+      hero: "Beratung anfragen",
+      footer: "Anfrage senden",
+    },
+    description:
+      "Hinterlassen Sie Ihre Kontaktdaten und den gewünschten Fahrzeugtyp. Wir melden uns mit einem passenden Angebot.",
+    fields: {
+      name: "Name",
+      phone: "Telefon",
+      email: "E-Mail (optional)",
+      message: "Anfragedetails",
+    },
+    placeholders: {
+      name: "Ihr Name",
+      phone: "+420 ...",
+      email: "name@company.com",
+      message: "Marke, Kategorie, Budget, Lieferzeitpunkt...",
+    },
+    submit: "Anfrage senden",
+    submitting: "Wird gesendet...",
+    success: "Anfrage erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.",
+    errorFallback: "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+    helper: "Oder kontaktieren Sie uns direkt:",
+    sourceLabel: { header: "CTA im Header", hero: "CTA im Hero", footer: "CTA vor dem Footer" },
+  },
+};
 
 export function CtaFormModal({
   locale,
@@ -72,7 +126,7 @@ export function CtaFormModal({
   contactPhone = "+420 775 123 456",
   children,
 }: CtaFormModalProps) {
-  const t = copy[locale === "uk" ? "uk" : "en"];
+  const t = copy[locale] ?? copy.en;
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -104,7 +158,7 @@ export function CtaFormModal({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          locale: locale === "uk" ? "uk" : "en",
+          locale,
           entryPoint,
           sourceLabel: t.sourceLabel[entryPoint],
           name: name.trim(),

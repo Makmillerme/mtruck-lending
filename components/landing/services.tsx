@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { LandingGlassCard } from "@/components/landing/landing-glass-card";
 import type { Locale } from "@/lib/locale";
+import { pickEntityLocale } from "@/lib/pick-locale";
 import { parseStringArray, pickMetaString, pickText } from "@/lib/landing-section-parsers";
 
 const content = {
@@ -30,6 +31,22 @@ const content = {
       "Від вибору транспорту до доставки та післяпродажної підтримки ми надаємо комплексні послуги, адаптовані до ваших потреб.",
     pipeline: ["Підбір", "Перевірка", "Документи", "Доставка"],
   },
+  sk: {
+    badge: "Naše služby",
+    title: "Komplexné riešenia pre",
+    titleHighlight: "váš biznis",
+    description:
+      "Od výberu vozidla až po dodanie a popredajnú podporu poskytujeme komplexné služby prispôsobené vašim potrebám.",
+    pipeline: ["Výber", "Kontrola", "Dokumenty", "Dodanie"],
+  },
+  de: {
+    badge: "Unsere Leistungen",
+    title: "Komplettlösungen für",
+    titleHighlight: "Ihr Unternehmen",
+    description:
+      "Von der Fahrzeugauswahl bis zur Lieferung und After-Sales-Support bieten wir umfassende, auf Ihre Bedürfnisse zugeschnittene Leistungen.",
+    pipeline: ["Auswahl", "Inspektion", "Dokumente", "Lieferung"],
+  },
 };
 
 const iconMap: Record<string, LucideIcon> = {
@@ -47,8 +64,12 @@ interface ServicesProps {
     id: number;
     titleEn: string;
     titleUk: string | null;
+    titleSk?: string | null;
+    titleDe?: string | null;
     descriptionEn: string;
     descriptionUk: string | null;
+    descriptionSk?: string | null;
+    descriptionDe?: string | null;
     icon: string;
   }>;
   metaContent?: Record<string, unknown>;
@@ -66,9 +87,18 @@ export function Services({ locale, servicesData = [], metaContent }: ServicesPro
   const services = servicesData.map((service) => ({
     id: service.id,
     icon: iconMap[service.icon] ?? Truck,
-    title: locale === "uk" ? service.titleUk || service.titleEn : service.titleEn,
-    description:
-      locale === "uk" ? service.descriptionUk || service.descriptionEn : service.descriptionEn,
+    title: pickEntityLocale(locale, {
+      en: service.titleEn,
+      uk: service.titleUk,
+      sk: service.titleSk,
+      de: service.titleDe,
+    }),
+    description: pickEntityLocale(locale, {
+      en: service.descriptionEn,
+      uk: service.descriptionUk,
+      sk: service.descriptionSk,
+      de: service.descriptionDe,
+    }),
   }));
 
   const servicesGridClass =
