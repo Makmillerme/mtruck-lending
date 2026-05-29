@@ -202,7 +202,7 @@ body.react-remove-scroll-bar {
 
 @media (max-width: 639px) {
   .hero-shell {
-    --hero-height: calc((100dvh - 72px) * 0.8);
+    --hero-height: calc((100dvh - 72px) * 0.9);
     /* Cabin center ~45% in source; circle ~25% — avoid left anchor that centers the ring */
     --hero-focal-x: 45%;
     --hero-focal-y: 58%;
@@ -261,6 +261,19 @@ body.react-remove-scroll-bar {
     oklch(0.11 0.022 248 / 0.18) 23.5rem,
     transparent 28rem
   );
+}
+
+@media (max-width: 639px) {
+  .hero-bg-scrim {
+    background: linear-gradient(
+      90deg,
+      oklch(0.07 0.032 252 / 0.55) 0%,
+      oklch(0.09 0.029 250 / 0.42) 8.5rem,
+      oklch(0.1 0.026 248 / 0.24) 15rem,
+      oklch(0.11 0.022 248 / 0.08) 19rem,
+      transparent 23rem
+    );
+  }
 }
 
 @media (min-width: 640px) {
@@ -868,6 +881,15 @@ body.react-remove-scroll-bar {
   grid-auto-columns: min(100%, 19.5rem);
   scroll-padding-inline: 0;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+}
+
+@media (max-width: 639px) {
+  .catalog-cards-track--scroll {
+    scroll-snap-type: x proximity;
+  }
 }
 
 .catalog-cards-track--fit {
@@ -1697,9 +1719,11 @@ body.react-remove-scroll-bar {
 
 /* Chrome/metallic gradient effect */
 .chrome-gradient {
-  background: linear-gradient(135deg, 
-    oklch(0.85 0.01 250) 0%, 
-    oklch(0.65 0.02 250) 50%, 
+  color: transparent;
+  background: linear-gradient(
+    135deg,
+    oklch(0.85 0.01 250) 0%,
+    oklch(0.65 0.02 250) 50%,
     oklch(0.85 0.01 250) 100%
   );
   background-clip: text;
@@ -2031,7 +2055,7 @@ body.react-remove-scroll-bar {
   margin-inline: auto;
   width: 100%;
   max-width: 80rem;
-  padding-inline: 1.5rem;
+  padding-inline: max(1.5rem, env(safe-area-inset-left, 0px)) max(1.5rem, env(safe-area-inset-right, 0px));
 }
 
 @media (min-width: 1024px) {
@@ -2390,6 +2414,40 @@ body.react-remove-scroll-bar {
   .landing-bg .section-seam-accent::before,
   .landing-bg .section-seam-accent::after {
     animation: none;
+  }
+}
+
+/* ── iOS Safari / WebKit mobile ─────────────────────────────────────── */
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body {
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+
+  .hero-shell {
+    --hero-viewport-h: calc(100svh - 72px);
+  }
+
+  @media (max-width: 639px) {
+    .hero-shell {
+      --hero-height: calc((100svh - 72px) * 0.9);
+    }
+  }
+
+  .hero-bg-image {
+    transform: translateZ(0);
+  }
+
+  .catalog-cards-track--scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .landing-bg header {
+    padding-top: env(safe-area-inset-top, 0px);
   }
 }
 

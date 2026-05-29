@@ -208,6 +208,54 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
     trackRef.current?.scrollTo({ left: 0 });
   }, [activeCategory]);
 
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || !useScrollTrack) return;
+
+    let startX = 0;
+    let startY = 0;
+    let scrollAxis: "x" | "y" | null = null;
+
+    const resetTrackOverflow = () => {
+      track.style.removeProperty("overflow-x");
+      scrollAxis = null;
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      if (event.touches.length !== 1) return;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+      scrollAxis = null;
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length !== 1 || scrollAxis !== null) return;
+
+      const dx = event.touches[0].clientX - startX;
+      const dy = event.touches[0].clientY - startY;
+
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+
+      scrollAxis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      if (scrollAxis === "y") {
+        track.style.overflowX = "hidden";
+      }
+    };
+
+    track.addEventListener("touchstart", onTouchStart, { passive: true });
+    track.addEventListener("touchmove", onTouchMove, { passive: true });
+    track.addEventListener("touchend", resetTrackOverflow, { passive: true });
+    track.addEventListener("touchcancel", resetTrackOverflow, { passive: true });
+
+    return () => {
+      track.removeEventListener("touchstart", onTouchStart);
+      track.removeEventListener("touchmove", onTouchMove);
+      track.removeEventListener("touchend", resetTrackOverflow);
+      track.removeEventListener("touchcancel", resetTrackOverflow);
+      resetTrackOverflow();
+    };
+  }, [useScrollTrack, activeCategory]);
+
   return (
     <>
       <section ref={sectionRef} id="catalog" className="section-y-balanced section-catalog-bg section-seam-accent landing-section-contained">
@@ -265,7 +313,7 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                   className={cn(
                     "catalog-cards-track w-full scroll-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
                     useScrollTrack
-                      ? "catalog-cards-track--scroll snap-x snap-mandatory overflow-x-auto touch-pan-x"
+                      ? "catalog-cards-track--scroll snap-x snap-proximity sm:snap-mandatory overflow-x-auto"
                       : "catalog-cards-track--fit overflow-x-hidden justify-center",
                   )}
                 >
