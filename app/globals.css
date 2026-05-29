@@ -2233,9 +2233,21 @@ body.react-remove-scroll-bar {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    column-gap: 1.5rem;
+    column-gap: 0.75rem;
     min-height: 4.5rem;
     padding-block: 0.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .landing-header-inner {
+    column-gap: 1rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .landing-header-inner {
+    column-gap: 1.5rem;
   }
 }
 
@@ -2259,12 +2271,19 @@ body.react-remove-scroll-bar {
 
 @media (min-width: 1024px) {
   .landing-header-logo-box {
+    height: 2.5rem;
+    width: 11.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .landing-header-logo-box {
     height: 2.75rem;
     width: 13.5rem;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1536px) {
   .landing-header-logo-box {
     width: 15rem;
   }
@@ -2275,18 +2294,25 @@ body.react-remove-scroll-bar {
   align-items: center;
   justify-content: center;
   justify-self: center;
-  flex-wrap: wrap;
-  gap: 0.35rem 0.85rem;
+  flex-wrap: nowrap;
+  gap: 0.25rem 0.5rem;
   min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .landing-header-nav {
     display: flex;
+    gap: 0.2rem 0.45rem;
   }
 }
 
 @media (min-width: 1280px) {
+  .landing-header-nav {
+    gap: 0.35rem 0.85rem;
+  }
+}
+
+@media (min-width: 1536px) {
   .landing-header-nav {
     gap: 0.5rem 1.35rem;
   }
@@ -2295,10 +2321,10 @@ body.react-remove-scroll-bar {
 .landing-header-nav-link {
   border: 0;
   background: transparent;
-  padding: 0.35rem 0.15rem;
-  font-size: 0.6875rem;
+  padding: 0.35rem 0.05rem;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   line-height: 1.2;
   text-transform: uppercase;
   color: oklch(0.94 0.03 220 / 0.88);
@@ -2308,8 +2334,17 @@ body.react-remove-scroll-bar {
 
 @media (min-width: 1280px) {
   .landing-header-nav-link {
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    padding-inline: 0.1rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .landing-header-nav-link {
     font-size: 0.8125rem;
     letter-spacing: 0.07em;
+    padding-inline: 0.15rem;
   }
 }
 

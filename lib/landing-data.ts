@@ -139,11 +139,11 @@ const nav = {
     { name: "Kontakt", id: "contact" },
   ],
   de: [
-    { name: "Startseite", id: "home" },
+    { name: "Start", id: "home" },
     { name: "Über uns", id: "about" },
     { name: "Leistungen", id: "services" },
     { name: "Katalog", id: "catalog" },
-    { name: "Warum wir", id: "why-us" },
+    { name: "Vorteile", id: "why-us" },
     { name: "FAQ", id: "faq" },
     { name: "Kontakt", id: "contact" },
   ],
@@ -154,7 +154,7 @@ const content: LandingBundle["content"] = {
     en: { navigation: nav.en, ctaText: "Get Quote", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
     uk: { navigation: nav.uk, ctaText: "Отримати пропозицію", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
     sk: { navigation: nav.sk, ctaText: "Získať ponuku", logo: { src: "/expert-travel.png", alt: "Logo Expert Travel" } },
-    de: { navigation: nav.de, ctaText: "Angebot anfordern", logo: { src: "/expert-travel.png", alt: "Expert Travel Logo" } },
+    de: { navigation: nav.de, ctaText: "Angebot", logo: { src: "/expert-travel.png", alt: "Expert Travel Logo" } },
   },
   hero: {
     en: {

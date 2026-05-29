@@ -26,7 +26,7 @@ test.describe("Locale switcher", () => {
     await selectLanguage(page, "Deutsch");
 
     await expect.poll(async () => page.evaluate(() => document.documentElement.lang)).toBe("de");
-    await expect(page.locator(".landing-header-nav button").first()).toHaveText("Startseite");
+    await expect(page.locator(".landing-header-nav button").first()).toHaveText("Start");
 
     const cookies = await page.context().cookies();
     expect(cookies.find((cookie) => cookie.name === "locale")?.value).toBe("de");

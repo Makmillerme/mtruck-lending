@@ -39,11 +39,11 @@ const navigation = {
     { name: "Kontakt", id: "contact" },
   ],
   de: [
-    { name: "Startseite", id: "home" },
+    { name: "Start", id: "home" },
     { name: "Über uns", id: "about" },
     { name: "Leistungen", id: "services" },
     { name: "Katalog", id: "catalog" },
-    { name: "Warum wir", id: "why-us" },
+    { name: "Vorteile", id: "why-us" },
     { name: "FAQ", id: "faq" },
     { name: "Kontakt", id: "contact" },
   ],
@@ -53,7 +53,7 @@ const ctaText = {
   en: "Get Quote",
   uk: "Отримати пропозицію",
   sk: "Získať ponuku",
-  de: "Angebot anfordern",
+  de: "Angebot",
 } as const;
 
 const languageItems: Array<{ locale: PublicLocale; label: string }> = PUBLIC_LOCALES.map((locale) => ({
@@ -193,7 +193,7 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
             >
               <Button
                 type="button"
-                className="landing-btn landing-btn-primary hidden h-9 px-4 text-xs sm:inline-flex sm:px-5 sm:text-sm lg:px-6"
+                className="landing-btn landing-btn-primary hidden h-9 px-4 text-xs sm:inline-flex sm:px-5 sm:text-sm lg:px-3 lg:text-xs xl:px-5 xl:text-sm 2xl:px-6"
               >
                 {ctaLabel}
               </Button>

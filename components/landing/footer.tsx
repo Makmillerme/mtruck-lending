@@ -76,7 +76,7 @@ const defaultContent = {
     copyright: "© 2026 EXPERT TRAVEL. Alle Rechte vorbehalten.",
     legal: ["Datenschutz", "Nutzungsbedingungen"],
     links: [
-      { id: "home", name: "Startseite" },
+      { id: "home", name: "Start" },
       { id: "about", name: "Über uns" },
       { id: "services", name: "Leistungen" },
       { id: "catalog", name: "Katalog" },
