@@ -1,0 +1,74 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Desktop layout regression", () => {
+  test("header nav, hero width, and catalog row layout stay intact", async ({ page }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    await expect(page.locator(".landing-header-nav")).toBeVisible();
+    await expect(page.locator("#home .hero-copy-panel")).toBeVisible();
+
+    const heroMaxWidth = await page.evaluate(() => {
+      const panel = document.querySelector("#home .hero-copy-panel") as HTMLElement | null;
+      return panel ? parseFloat(getComputedStyle(panel).maxWidth) : 0;
+    });
+    expect(heroMaxWidth).toBeGreaterThanOrEqual(560);
+    expect(heroMaxWidth).toBeLessThanOrEqual(580);
+
+    await page.evaluate(() => {
+      document.getElementById("catalog")?.scrollIntoView({ block: "center", behavior: "auto" });
+    });
+
+    const catalogHeadAlign = await page.evaluate(() => {
+      const head = document.querySelector("#catalog .catalog-section-head") as HTMLElement | null;
+      return head ? getComputedStyle(head).textAlign : "";
+    });
+    expect(catalogHeadAlign).toBe("left");
+
+    const catalogHeaderDirection = await page.evaluate(() => {
+      const block = document.querySelector("#catalog .catalog-header-block") as HTMLElement | null;
+      return block ? getComputedStyle(block).flexDirection : "";
+    });
+    expect(catalogHeaderDirection).toBe("row");
+  });
+
+  test("about desktop callouts stay visible and services use wide pipeline", async ({ page }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      document.getElementById("about")?.scrollIntoView({ block: "center", behavior: "auto" });
+    });
+
+    await expect(page.locator("#about .about-callouts-overlay")).toBeVisible();
+
+    await page.evaluate(() => {
+      document.getElementById("services")?.scrollIntoView({ block: "center", behavior: "auto" });
+    });
+
+    const pipelineLayout = await page.evaluate(() => {
+      const pipeline = document.querySelector("#services .services-pipeline") as HTMLElement | null;
+      if (!pipeline) return { display: "", stepCount: 0 };
+      return {
+        display: getComputedStyle(pipeline).display,
+        stepCount: pipeline.querySelectorAll(".services-pipeline-step").length,
+      };
+    });
+    expect(pipelineLayout.display).toBe("flex");
+    expect(pipelineLayout.stepCount).toBeGreaterThanOrEqual(4);
+  });
+
+  test("footer desktop grid keeps four columns", async ({ page }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      document.getElementById("contact")?.scrollIntoView({ block: "start", behavior: "auto" });
+    });
+
+    const gridAreas = await page.evaluate(() => {
+      const grid = document.querySelector("footer#contact .footer-main-grid") as HTMLElement | null;
+      return grid ? getComputedStyle(grid).gridTemplateAreas : "";
+    });
+    expect(gridAreas).toContain("brand");
+    expect(gridAreas).toContain("links");
+    expect(gridAreas).toContain("services");
+  });
+});

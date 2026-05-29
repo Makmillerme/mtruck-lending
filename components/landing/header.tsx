@@ -99,9 +99,9 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
 
   return (
     <>
-      <div className="h-[72px]" aria-hidden="true" />
+      <div className="landing-header-spacer" aria-hidden="true" />
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${
+        className={`landing-site-header transition-[background-color,box-shadow,border-color] duration-300 ${
           isScrolled
             ? "bg-[linear-gradient(180deg,rgba(14,30,56,0.94)_0%,rgba(10,24,44,0.9)_100%)] border-b border-cyan-100/35 shadow-[0_14px_34px_rgba(0,0,0,0.28)]"
             : "bg-[linear-gradient(180deg,rgba(16,34,62,0.96)_0%,rgba(12,28,52,0.92)_100%)] border-b border-cyan-100/28"

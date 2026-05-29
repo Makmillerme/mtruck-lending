@@ -111,6 +111,10 @@ test.describe("Landing scroll performance", () => {
 });
 
 test.describe("Landing mobile UI polish", () => {
+  test.beforeEach(({ }, testInfo) => {
+    test.skip(testInfo.project.name !== "mobile-chrome", "mobile-only checks");
+  });
+
   test("header and section containers share horizontal padding", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 

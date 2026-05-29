@@ -14,7 +14,12 @@ export default defineConfig({
   projects: [
     {
       name: "mobile-chrome",
+      testIgnore: /desktop-regression/,
       use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "desktop-chrome",
+      use: { ...devices["Desktop Chrome"] },
     },
   ],
   webServer: {

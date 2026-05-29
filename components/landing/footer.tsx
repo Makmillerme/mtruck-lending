@@ -110,7 +110,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
     .filter(Boolean);
 
   return (
-    <footer id="contact" className="section-y-balanced section-blend section-seam-accent">
+    <footer id="contact" className="section-y-balanced section-blend">
       <div className="landing-page-container">
         <div className="footer-cta-card">
           <div className="footer-cta-shine" aria-hidden="true" />
