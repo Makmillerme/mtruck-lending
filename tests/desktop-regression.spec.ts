@@ -7,6 +7,23 @@ test.describe("Desktop layout regression", () => {
     await expect(page.locator(".landing-header-nav")).toBeVisible();
     await expect(page.locator("#home .hero-copy-panel")).toBeVisible();
 
+    await page.evaluate(() => {
+      window.scrollTo({ top: 900, behavior: "auto" });
+    });
+
+    const headerStaysOnTop = await page.evaluate(() => {
+      const header = document.querySelector(".landing-site-header") as HTMLElement | null;
+      if (!header) return false;
+
+      const rect = header.getBoundingClientRect();
+      const sampleY = Math.min(rect.bottom - 4, rect.top + rect.height / 2);
+      const topElement = document.elementFromPoint(window.innerWidth / 2, sampleY);
+
+      return Boolean(topElement && header.contains(topElement));
+    });
+
+    expect(headerStaysOnTop).toBe(true);
+
     const heroMaxWidth = await page.evaluate(() => {
       const panel = document.querySelector("#home .hero-copy-panel") as HTMLElement | null;
       return panel ? parseFloat(getComputedStyle(panel).maxWidth) : 0;

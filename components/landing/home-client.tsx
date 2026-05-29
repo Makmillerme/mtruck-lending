@@ -111,7 +111,12 @@ export function HomeClient({ initialData, sectionOrder }: HomeClientProps) {
   return (
     <main className="min-h-screen landing-bg">
       {sectionOrder.map((key) => (
-        <div key={key}>{sections[key]}</div>
+        <div
+          key={key}
+          className={key === "header" ? "landing-header-slot" : "landing-section-slot"}
+        >
+          {sections[key]}
+        </div>
       ))}
     </main>
   );

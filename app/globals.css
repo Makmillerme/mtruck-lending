@@ -186,9 +186,15 @@ body.react-remove-scroll-bar {
     radial-gradient(ellipse 55% 38% at 82% 18%, oklch(0.7 0.1 252 / 0.09), transparent 58%);
 }
 
-.landing-bg > div {
+.landing-bg > .landing-section-slot {
   position: relative;
   z-index: 1;
+}
+
+.landing-bg > .landing-header-slot {
+  position: relative;
+  z-index: 50;
+  isolation: isolate;
 }
 
 /* Section tone system: stronger per-section contrast with soft blend. */
