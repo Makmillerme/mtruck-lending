@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
 import type { Locale } from "@/lib/locale";
 
+import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from "@/lib/branding";
 import { parseFooterContent, parseNavItems, pickText } from "@/lib/landing-section-parsers";
 
 const defaultContent = {
@@ -96,7 +97,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
       : parseNavItems(fallbackLinks).length > 0
         ? parseNavItems(fallbackLinks)
         : [...base.links];
-  const email = contactData?.email || "sales@expert-travel.com";
+  const email = contactData?.email || "sales@m-truck.cz";
   const phone = contactData?.phone || "+420 775 123 456";
   const address =
     getLocalizedValue(locale, contactData?.addressEn, contactData?.addressUk) ||
@@ -110,7 +111,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
 
   return (
     <footer id="contact" className="section-y-balanced section-blend section-seam-accent">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="landing-page-container">
         <div className="footer-cta-card">
           <div className="footer-cta-shine" aria-hidden="true" />
           <div className="footer-cta-grid">
@@ -129,7 +130,10 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
               contactEmail={email}
               contactPhone={phone}
             >
-              <Button type="button" className="landing-btn landing-btn-primary min-w-48 px-6">
+              <Button
+                type="button"
+                className="landing-btn landing-btn-primary footer-cta-button w-full min-w-0 px-6 sm:w-auto sm:min-w-48"
+              >
                 {footer.ctaButton}
               </Button>
             </CtaFormModal>
@@ -137,30 +141,35 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
         </div>
 
         <div className="footer-main-card mt-8">
-          <div className="grid gap-10 md:grid-cols-[1.2fr_0.9fr_1.1fr_1.35fr]">
-            <div>
+          <div className="footer-main-grid">
+            <div className="footer-brand-col">
               <button
                 type="button"
                 onClick={() => onNavigate?.("home")}
-                className="relative block h-12 w-44 transition-opacity hover:opacity-85"
-                aria-label="EXPERT TRAVEL home"
+                className="footer-brand-logo-btn"
+                aria-label="Expert Travel home"
               >
-                <Image src="/expert-travel-logo.svg" alt="EXPERT TRAVEL logo" fill className="object-contain object-left" />
+                <div className="footer-brand-logo-box">
+                  <Image
+                    src={BRAND_LOGO_SRC}
+                    alt={BRAND_LOGO_ALT}
+                    fill
+                    className="object-contain object-center lg:object-left"
+                  />
+                </div>
               </button>
-              <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                {footer.brandText}
-              </p>
+              <p className="footer-brand-text">{footer.brandText}</p>
             </div>
 
-            <nav aria-label={footer.linksTitle}>
+            <nav className="footer-links-col" aria-label={footer.linksTitle}>
               <h3 className="footer-block-title">{footer.linksTitle}</h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="footer-link-list">
                 {links.map((item) => (
                   <li key={item.id}>
                     <button
                       type="button"
                       onClick={() => onNavigate?.(item.id)}
-                      className="footer-nav-link text-left text-sm"
+                      className="footer-nav-link text-sm"
                     >
                       {item.name}
                     </button>
@@ -169,20 +178,20 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
               </ul>
             </nav>
 
-            <div>
+            <div className="footer-services-col">
               <h3 className="footer-block-title">{footer.servicesTitle}</h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <ul className="footer-service-list">
                 {serviceLinks.map((item, index) => (
                   <li key={`${item}-${index}`}>
-                    <span className="footer-service-pill">{item}</span>
+                    <span className="landing-pipeline-pill">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <address className="not-italic">
+            <address className="footer-contact-col not-italic">
               <h3 className="footer-block-title">{footer.contactTitle}</h3>
-              <div className="mt-4 space-y-3">
+              <div className="footer-contact-list">
                 <a href={`mailto:${email}`} className="footer-contact-item footer-nav-link">
                   <Mail className="footer-contact-icon" />
                   <span>{email}</span>

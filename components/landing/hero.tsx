@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Shield } from "lucide-react";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
@@ -56,17 +55,26 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
     <section id="home" className="relative overflow-hidden">
       <div className="hero-shell relative">
         <div className="hero-bg-layer" aria-hidden="true">
-          <Image
-            src="/images/hero-road-bg.png"
-            alt=""
-            fill
-            priority
-            className="hero-bg-image"
-          />
+          <picture className="absolute inset-0 block">
+            <source
+              media="(max-width: 639px)"
+              srcSet="/images/hero-road-bg-mobile.webp"
+              type="image/webp"
+            />
+            <source srcSet="/images/hero-road-bg.avif" type="image/avif" />
+            <source srcSet="/images/hero-road-bg.webp" type="image/webp" />
+            <img
+              src="/images/hero-road-bg.png"
+              alt=""
+              decoding="async"
+              fetchPriority="high"
+              className="hero-bg-image absolute inset-0 h-full w-full object-cover"
+            />
+          </picture>
           <div className="hero-bg-scrim" />
         </div>
 
-        <div className="hero-content-grid mx-auto max-w-7xl px-6 sm:px-10 lg:px-8">
+        <div className="hero-content-grid landing-page-container">
           <div className="hero-copy-panel justify-self-start space-y-5 sm:space-y-6 lg:space-y-7">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-secondary/45 px-4 py-2">
               <Shield className="h-4 w-4 text-cyan-200" />
@@ -87,7 +95,7 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
 
             <p className="max-w-lg text-sm font-medium text-cyan-50/90 sm:text-base">{t.description}</p>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="hero-cta-row">
               <Button
                 onClick={() => onNavigate("catalog")}
                 className="landing-btn landing-btn-primary px-6"

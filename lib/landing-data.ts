@@ -109,8 +109,8 @@ const nav = {
 
 const content: LandingBundle["content"] = {
   header: {
-    en: { navigation: nav.en, ctaText: "Get Quote", logo: { src: "/expert-travel-logo.svg", alt: "EXPERT TRAVEL" } },
-    uk: { navigation: nav.uk, ctaText: "Отримати пропозицію", logo: { src: "/expert-travel-logo.svg", alt: "EXPERT TRAVEL" } },
+    en: { navigation: nav.en, ctaText: "Get Quote", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
+    uk: { navigation: nav.uk, ctaText: "Отримати пропозицію", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
   },
   hero: {
     en: {
@@ -175,7 +175,7 @@ const content: LandingBundle["content"] = {
   "why-us": {
     en: {
       badge: "Why Choose Us",
-      title: "The EuroTruck",
+      title: "The Expert Travel",
       titleHighlight: "Advantage",
       description:
         "We stand out from the competition with our commitment to quality, transparency, and customer satisfaction.",
@@ -214,7 +214,7 @@ const content: LandingBundle["content"] = {
     uk: {
       badge: "Чому ми",
       title: "Переваги",
-      titleHighlight: "EuroTruck",
+      titleHighlight: "Expert Travel",
       description:
         "Ми виділяємося серед конкурентів завдяки нашій відданості якості, прозорості та задоволеності клієнтів.",
       carouselTitle: "Відгуки клієнтів",
@@ -402,9 +402,9 @@ const testimonials: LandingBundle["testimonials"] = [
   {
     id: 1,
     quoteEn:
-      "EuroTruck helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
+      "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
     quoteUk:
-      "EuroTruck допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими.",
+      "Expert Travel допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими.",
     authorEn: "Martin Novak",
     authorUk: "Мартін Новак",
     companyEn: "TransCargo s.r.o.",

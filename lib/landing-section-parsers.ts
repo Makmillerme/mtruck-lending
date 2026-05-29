@@ -7,6 +7,7 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { normalizeBrandLogoSrc } from "@/lib/branding";
 import type { CatalogCategory } from "@/lib/catalog-vehicle";
 import type { Locale, PublicLocale } from "@/lib/locale";
 
@@ -71,8 +72,8 @@ export function parseHeaderContent(meta?: Record<string, unknown>) {
     navigation: parseNavItems(meta?.navigation),
     ctaText: asString(ctaObj.text),
     ctaTargetId: asString(ctaObj.targetId, "contact"),
-    logoSrc: asNonEmptyString(logoObj.src, "/expert-travel-logo.svg"),
-    logoAlt: asNonEmptyString(logoObj.alt, "Logo"),
+    logoSrc: normalizeBrandLogoSrc(asNonEmptyString(logoObj.src, "/expert-travel.png")),
+    logoAlt: asNonEmptyString(logoObj.alt, "Expert Travel logo"),
     languageSwitcher: parseLanguageSwitcher(meta),
   };
 }

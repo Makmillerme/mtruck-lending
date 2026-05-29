@@ -79,19 +79,17 @@ export function Services({ locale, servicesData = [], metaContent }: ServicesPro
         : "services-stage-grid landing-card-grid grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3";
 
   return (
-    <section id="services" className="section-y-balanced section-services-bg section-seam-accent">
+    <section id="services" className="section-y-balanced section-services-bg section-seam-accent landing-section-contained">
       <div className="services-section-ambient" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="services-header-row section-head-balanced">
-          <div className="max-w-2xl space-y-4">
-            <span className="inline-flex items-center rounded-full border border-cyan-200/30 bg-background/35 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-50/90">
-              {badge}
-            </span>
-            <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl text-balance">
+      <div className="relative landing-page-container">
+        <div className="services-header-row section-head-balanced items-stretch">
+          <div className="services-section-head landing-section-head">
+            <span className="landing-section-badge">{badge}</span>
+            <h2 className="landing-section-title">
               {title} <span className="chrome-gradient">{titleHighlight}</span>
             </h2>
-            <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
+            <p className="landing-section-description">{description}</p>
           </div>
 
           {pipeline.length > 0 ? (

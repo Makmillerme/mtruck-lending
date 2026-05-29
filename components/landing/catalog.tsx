@@ -77,10 +77,10 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
   const categoryTabs = parseCatalogTabs(metaContent, locale);
   const [activeCategory, setActiveCategory] = useState<CatalogTabKey>("truck");
   const [selectedBrand, setSelectedBrand] = useState<CatalogBrandCard | null>(null);
-  const [showCardControls, setShowCardControls] = useState(false);
+  const [showCardControls, setShowCardControls] = useState(true);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
-  const [isSectionInView, setIsSectionInView] = useState(true);
+  const [isSectionInView, setIsSectionInView] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -125,21 +125,25 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
     cards[targetIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
   };
 
+  const hasMultipleCards = categoryBrands.length > 1;
+  const useScrollTrack = hasMultipleCards;
+
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const track = trackRef.current;
     if (!wrapper || !track) return;
 
     let rafId = 0;
+    let remeasureTimer: ReturnType<typeof setTimeout> | undefined;
 
     const update = () => {
       rafId = 0;
       const maxScrollLeft = Math.max(0, track.scrollWidth - wrapper.clientWidth);
       const scrollLeft = track.scrollLeft;
       const epsilon = 2;
+      const scrollable = useScrollTrack && track.scrollWidth > wrapper.clientWidth + epsilon;
 
-      const nextShowControls = track.scrollWidth > wrapper.clientWidth + 1;
-      setShowCardControls((prev) => (prev === nextShowControls ? prev : nextShowControls));
+      setShowCardControls((prev) => (prev === scrollable ? prev : scrollable));
       setCanScrollPrev((prev) => {
         const next = scrollLeft > epsilon;
         return prev === next ? prev : next;
@@ -155,21 +159,31 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
       rafId = requestAnimationFrame(update);
     };
 
-    schedule();
+    const scheduleWithFallback = () => {
+      schedule();
+      if (remeasureTimer) clearTimeout(remeasureTimer);
+      remeasureTimer = setTimeout(schedule, 120);
+    };
 
-    const resizeObserver = new ResizeObserver(schedule);
+    scheduleWithFallback();
+
+    const resizeObserver = new ResizeObserver(scheduleWithFallback);
     resizeObserver.observe(wrapper);
+    resizeObserver.observe(track);
 
     track.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
+    window.addEventListener("resize", scheduleWithFallback);
+    window.addEventListener("load", scheduleWithFallback);
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
+      if (remeasureTimer) clearTimeout(remeasureTimer);
       resizeObserver.disconnect();
       track.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+      window.removeEventListener("resize", scheduleWithFallback);
+      window.removeEventListener("load", scheduleWithFallback);
     };
-  }, [activeCategory, categoryBrandsKey]);
+  }, [activeCategory, categoryBrandsKey, useScrollTrack, isSectionInView]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -182,6 +196,7 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
       },
       {
         threshold: 0.05,
+        rootMargin: "200px 0px",
       },
     );
 
@@ -195,32 +210,30 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
 
   return (
     <>
-      <section ref={sectionRef} id="catalog" className="section-y-balanced section-catalog-bg section-seam-accent">
+      <section ref={sectionRef} id="catalog" className="section-y-balanced section-catalog-bg section-seam-accent landing-section-contained">
         <div className="catalog-section-ambient" aria-hidden="true" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="catalog-header-row section-head-balanced">
-            <div className="flex max-w-2xl flex-col items-center gap-4 lg:items-start">
-              <span className="inline-flex items-center rounded-full border border-cyan-200/30 bg-background/35 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-50/90">
-                {badge}
-              </span>
-              <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl text-balance">
+        <div className="relative landing-page-container">
+          <div className="catalog-header-block section-head-balanced">
+            <div className="catalog-section-head landing-section-head">
+              <span className="landing-section-badge">{badge}</span>
+              <h2 className="landing-section-title">
                 {title} <span className="chrome-gradient">{titleHighlight}</span>
               </h2>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">{description}</p>
+              <p className="landing-section-description">{description}</p>
             </div>
 
             <div className="catalog-brand-marquee" aria-hidden="true">
-              <div className={cn("catalog-brand-marquee-track", !isSectionInView && "catalog-brand-marquee-track--paused")}>
-                {[...marqueeBrands, ...marqueeBrands].map((brand, index) => (
-                  <span
-                    key={`${brand}-${index}`}
-                    className="landing-pipeline-pill catalog-brand-marquee-pill"
-                  >
-                    {brand}
-                  </span>
-                ))}
-              </div>
+            <div className={cn("catalog-brand-marquee-track", !isSectionInView && "catalog-brand-marquee-track--paused")}>
+              {[...marqueeBrands, ...marqueeBrands].map((brand, index) => (
+                <span
+                  key={`${brand}-${index}`}
+                  className="landing-pipeline-pill catalog-brand-marquee-pill"
+                >
+                  {brand}
+                </span>
+              ))}
+            </div>
             </div>
           </div>
 
@@ -246,13 +259,13 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                 })}
               </div>
 
-              <div className="relative -mx-1 px-1 sm:mx-0 sm:px-0" ref={wrapperRef}>
+              <div className="relative w-full" ref={wrapperRef}>
                 <div
                   ref={trackRef}
                   className={cn(
-                    "catalog-cards-track w-full scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-                    showCardControls
-                      ? "catalog-cards-track--scroll snap-x snap-mandatory overflow-x-auto"
+                    "catalog-cards-track w-full scroll-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+                    useScrollTrack
+                      ? "catalog-cards-track--scroll snap-x snap-mandatory overflow-x-auto touch-pan-x"
                       : "catalog-cards-track--fit overflow-x-hidden justify-center",
                   )}
                 >
@@ -271,6 +284,9 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                               src={brand.logoSrc}
                               alt={`${brand.name} logo`}
                               fill
+                              loading="lazy"
+                              decoding="async"
+                              sizes="(max-width: 768px) 120px, 160px"
                               className="catalog-brand-card-logo"
                             />
                           </div>

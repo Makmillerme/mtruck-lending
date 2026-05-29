@@ -6,19 +6,20 @@ import { LocaleProvider } from '@/lib/locale-context'
 import { LOCALE_COOKIE, resolveInitialLocale } from '@/lib/locale-cookie'
 import './globals.css'
 
-const inter = Inter({ 
-  subsets: ["latin", "latin-ext"],
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'EuroTruck CZ | Commercial Vehicles from Europe',
-  description: 'Premium commercial trucks, trailers and cargo vehicles from Europe. Quality vehicles with full service and warranty.',
+  title: 'Expert Travel | Commercial Vehicles from Europe',
+  description: 'Expert Travel — premium commercial trucks, trailers and cargo vehicles from Europe. Full documentation, warranty and after-sales support.',
   generator: 'v0.app',
   keywords: ['trucks', 'trailers', 'commercial vehicles', 'Europe', 'Czech Republic', 'cargo'],
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
 }
 

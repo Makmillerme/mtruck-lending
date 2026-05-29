@@ -191,9 +191,9 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
     const observer = new IntersectionObserver(
       (entries) => {
         const e = entries[0];
-        if (e?.isIntersecting && e.intersectionRatio >= 0.45) trigger();
+        if (e?.isIntersecting && e.intersectionRatio >= 0.35) trigger();
       },
-      { threshold: [0, 0.2, 0.35, 0.45, 0.65, 0.85] },
+      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" },
     );
 
     observer.observe(el);
@@ -211,9 +211,9 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
       id="about"
       ref={aboutSectionRef}
       data-about-active={sectionActive ? "" : undefined}
-      className="section-y-balanced section-about-bg section-seam-accent"
+      className="section-y-balanced section-about-bg section-seam-accent landing-section-deferred"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="landing-page-container">
         <div className="about-layout-grid grid items-stretch gap-10 lg:grid-cols-[0.94fr_1.06fr] lg:gap-12">
           <div className="about-visual-column order-2 flex min-h-0 flex-col lg:order-1 lg:h-full">
             <div className="about-visual-shell min-h-0 flex-1 lg:h-full">
@@ -222,24 +222,43 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
             <div className="about-visual-body">
             <div className="about-truck-stage relative w-full overflow-hidden rounded-[1.35rem] border border-white/[0.07] shadow-[0_20px_56px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-0 z-0 overflow-hidden">
-                <div className="relative h-full w-full origin-center [transform:scale(1.18)] sm:[transform:scale(1.22)]">
+                <div className="about-truck-visual relative h-full w-full origin-center">
                   <NeonAvtoAssemble alt={about.aboutImageAlt || "About visual"} play={sectionActive} />
                 </div>
               </div>
-              {calloutLayout.map((layout, index) => {
-                const label = about.imageCallouts[index];
-                if (!label) return null;
-                return (
-                <AboutFloatingCallout
-                  key={`${layout.phase}-${index}`}
-                  label={label}
-                  phase={layout.phase}
-                  className={layout.className}
-                  inView={sectionActive}
-                  enterStaggerMs={index * 120}
-                />
-                );
-              })}
+              <div className="about-callouts-overlay pointer-events-none absolute inset-0">
+                {calloutLayout.map((layout, index) => {
+                  const label = about.imageCallouts[index];
+                  if (!label) return null;
+                  return (
+                    <AboutFloatingCallout
+                      key={`overlay-${layout.phase}-${index}`}
+                      label={label}
+                      phase={layout.phase}
+                      className={layout.className}
+                      inView={sectionActive}
+                      enterStaggerMs={index * 120}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                "about-callouts-mobile",
+                sectionActive && "about-callouts-mobile--in-view",
+              )}
+            >
+              {about.imageCallouts.map((label, index) => (
+                <span
+                  key={`mobile-callout-${index}`}
+                  className="landing-pipeline-pill landing-pipeline-pill--compact"
+                  style={{ transitionDelay: `${index * 80}ms` } as CSSProperties}
+                >
+                  {label}
+                </span>
+              ))}
             </div>
 
             <div className="about-visual-lower">
@@ -274,11 +293,9 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
           </div>
 
           <div className="about-content-column order-1 flex min-h-0 flex-col space-y-7 lg:order-2 lg:h-full lg:space-y-8">
-            <div className="space-y-4">
-              <span className="inline-flex items-center rounded-full border border-cyan-200/30 bg-background/35 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-50/90">
-                {about.badge}
-              </span>
-              <h2 className="max-w-2xl text-3xl font-bold leading-tight text-foreground sm:text-4xl text-balance">
+            <div className="about-section-head landing-section-head">
+              <span className="landing-section-badge">{about.badge}</span>
+              <h2 className="landing-section-title">
                 {about.title} <span className="chrome-gradient">{about.titleHighlight}</span>
               </h2>
             </div>

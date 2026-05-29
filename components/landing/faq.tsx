@@ -51,16 +51,14 @@ export function FAQ({ locale, faqsData = [], metaContent }: FAQProps) {
   }));
 
   return (
-    <section id="faq" className="section-y-balanced section-tint section-blend section-seam-accent">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8 relative z-10">
-        <div className="flex max-w-2xl flex-col items-center gap-4 text-center mx-auto mb-12">
-          <span className="inline-flex items-center rounded-full border border-cyan-200/30 bg-background/35 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-50/90">
-            {badge}
-          </span>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl text-balance">
+    <section id="faq" className="section-y-balanced section-tint section-blend section-seam-accent landing-section-deferred">
+      <div className="landing-page-container landing-page-container--narrow relative z-10">
+        <div className="landing-section-head items-center text-center mx-auto mb-12">
+          <span className="landing-section-badge">{badge}</span>
+          <h2 className="landing-section-title">
             {title} <span className="chrome-gradient">{titleHighlight}</span>
           </h2>
-          <p className="text-[15px] leading-relaxed text-muted-foreground max-w-xl">{description}</p>
+          <p className="landing-section-description max-w-xl">{description}</p>
         </div>
 
         <Accordion type="single" collapsible className="landing-faq-accordion space-y-4">

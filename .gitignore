@@ -16,6 +16,11 @@ node_modules/
 .next/
 *.tsbuildinfo
 
+# E2E / Playwright
+test-results/
+playwright-report/
+blob-report/
+
 # OS / editor
 .DS_Store
 Thumbs.db

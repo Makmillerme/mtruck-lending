@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { BRAND_CONTACT_EMAIL } from "@/lib/branding";
 import type { Locale, PublicLocale } from "@/lib/locale";
 
 type CtaEntryPoint = "header" | "hero" | "footer";
@@ -67,7 +68,7 @@ const copy = {
 export function CtaFormModal({
   locale,
   entryPoint,
-  contactEmail = "sales@m-truck.cz",
+  contactEmail = BRAND_CONTACT_EMAIL,
   contactPhone = "+420 775 123 456",
   children,
 }: CtaFormModalProps) {

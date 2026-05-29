@@ -33,7 +33,7 @@ export function NeonAvtoAssemble({
         fill
         unoptimized
         sizes="(max-width: 1024px) 100vw, 640px"
-        className="pointer-events-none object-contain [filter:brightness(1.08)_saturate(1.05)]"
+        className="pointer-events-none object-contain hero-neon-truck-image"
       />
     </div>
   );

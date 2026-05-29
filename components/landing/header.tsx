@@ -73,6 +73,25 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (id: string) => {
     onNavigate(id);
     setMobileMenuOpen(false);
@@ -88,64 +107,117 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
             : "bg-[linear-gradient(180deg,rgba(16,34,62,0.96)_0%,rgba(12,28,52,0.92)_100%)] border-b border-cyan-100/28"
         }`}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <button onClick={() => handleNavClick("home")} className="flex items-center gap-3 transition-opacity hover:opacity-85" aria-label="Go home">
-            <div className="relative h-10 w-[200px]">
-              <Image src={header.logoSrc} alt={header.logoAlt} fill className="object-contain" priority />
-            </div>
-          </button>
+        <div className="landing-header-inner landing-page-container w-full">
+          <div className="landing-header-logo">
+            <button
+              type="button"
+              onClick={() => handleNavClick("home")}
+              className="block transition-opacity hover:opacity-85"
+              aria-label="Go home"
+            >
+              <div className="landing-header-logo-box">
+                <Image
+                  src={header.logoSrc}
+                  alt={header.logoAlt}
+                  fill
+                  priority
+                  className="object-contain object-left"
+                />
+              </div>
+            </button>
+          </div>
 
-          <div className="hidden lg:flex lg:items-center lg:gap-8">
+          <nav className="landing-header-nav" aria-label="Main navigation">
             {navItems.map((item) => (
-              <button key={item.id} onClick={() => handleNavClick(item.id)} className="text-sm font-semibold uppercase tracking-[0.07em] text-cyan-50 transition-colors hover:text-white">
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => handleNavClick(item.id)}
+                className="landing-header-nav-link"
+              >
                 {item.name}
               </button>
             ))}
-          </div>
+          </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="landing-header-actions">
             <DropdownMenu modal={false}>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="default" className="landing-btn landing-btn-ghost px-3 hover:text-white">
-                  <Globe className="w-4 h-4" />
-                  <span className="uppercase text-sm">{locale}</span>
+                <Button
+                  variant="ghost"
+                  size="default"
+                  className="landing-btn landing-btn-ghost h-9 px-2.5 sm:px-3 hover:text-white"
+                >
+                  <Globe className="h-4 w-4" />
+                  <span className="text-sm uppercase">{locale}</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-card border-border">
+              <DropdownMenuContent align="end" className="border-border bg-card">
                 {languageItems.map((item) => (
-                  <DropdownMenuItem key={item.locale} onSelect={() => onLocaleChange(item.locale)} className="cursor-pointer">
+                  <DropdownMenuItem
+                    key={item.locale}
+                    onSelect={() => onLocaleChange(item.locale)}
+                    className="cursor-pointer"
+                  >
                     {item.label}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <CtaFormModal locale={locale} entryPoint="header" contactEmail={contactEmail} contactPhone={contactPhone}>
-              <Button type="button" className="hidden sm:flex landing-btn landing-btn-primary px-6">
+            <CtaFormModal
+              locale={locale}
+              entryPoint="header"
+              contactEmail={contactEmail}
+              contactPhone={contactPhone}
+            >
+              <Button
+                type="button"
+                className="landing-btn landing-btn-primary hidden h-9 px-4 text-xs sm:inline-flex sm:px-5 sm:text-sm lg:px-6"
+              >
                 {ctaLabel}
               </Button>
             </CtaFormModal>
 
-            <button type="button" className="lg:hidden p-2 text-cyan-50/85 hover:text-white transition-colors" onClick={() => setMobileMenuOpen((prev) => !prev)} aria-label="Toggle menu">
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-cyan-50/90 transition-colors hover:text-white lg:hidden"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="landing-mobile-menu"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
-        </nav>
+        </div>
 
         {mobileMenuOpen ? (
-          <div className="lg:hidden bg-[linear-gradient(180deg,rgba(14,30,56,0.9)_0%,rgba(10,24,44,0.8)_100%)] border-t border-cyan-100/30">
-            <div className="px-6 py-4 space-y-2">
+          <div id="landing-mobile-menu" className="landing-header-mobile-panel lg:hidden">
+            <nav className="landing-header-mobile-nav" aria-label="Mobile navigation">
               {navItems.map((item) => (
-                <button key={`m-${item.id}`} onClick={() => handleNavClick(item.id)} className="block w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <button
+                  key={`m-${item.id}`}
+                  type="button"
+                  onClick={() => handleNavClick(item.id)}
+                  className="landing-header-mobile-link"
+                >
                   {item.name}
                 </button>
               ))}
-              <CtaFormModal locale={locale} entryPoint="header" contactEmail={contactEmail} contactPhone={contactPhone}>
-                <Button type="button" className="mt-4 w-full landing-btn landing-btn-primary">
-                  {ctaLabel}
-                </Button>
-              </CtaFormModal>
-            </div>
+              <div className="landing-header-mobile-cta">
+                <CtaFormModal
+                  locale={locale}
+                  entryPoint="header"
+                  contactEmail={contactEmail}
+                  contactPhone={contactPhone}
+                >
+                  <Button type="button" className="landing-btn landing-btn-primary w-full">
+                    {ctaLabel}
+                  </Button>
+                </CtaFormModal>
+              </div>
+            </nav>
           </div>
         ) : null}
       </header>

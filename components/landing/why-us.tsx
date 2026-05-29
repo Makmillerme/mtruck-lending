@@ -12,7 +12,7 @@ import { parseWhyUsContent, pickMetaString, pickText } from "@/lib/landing-secti
 const defaultContent = {
   en: {
     badge: "Why Choose Us",
-    title: "The EuroTruck",
+    title: "The Expert Travel",
     titleHighlight: "Advantage",
     description:
       "We stand out from the competition with our commitment to quality, transparency, and customer satisfaction.",
@@ -31,7 +31,7 @@ const defaultContent = {
   uk: {
     badge: "Чому ми",
     title: "Переваги",
-    titleHighlight: "EuroTruck",
+    titleHighlight: "Expert Travel",
     description: "Ми виділяємося серед конкурентів завдяки нашій відданості якості, прозорості та задоволеності клієнтів.",
     carouselTitle: "Відгуки клієнтів",
     prevTestimonial: "Попередній відгук",
@@ -90,8 +90,8 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
           id: 0,
           quote:
             locale === "uk"
-              ? "EuroTruck CZ допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими."
-              : "EuroTruck CZ helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
+              ? "Expert Travel допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими."
+              : "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
           author: locale === "uk" ? "Мартін Новак" : "Martin Novak",
           company: "TransCargo s.r.o.",
           rating: 5,
@@ -182,16 +182,14 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
   }, [carouselKey, carousel.length, locale]);
 
   return (
-    <section id="why-us" className="section-y-balanced section-blend section-seam-accent relative">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-        <div className="flex max-w-2xl flex-col items-center gap-4 text-center mx-auto mb-12">
-          <span className="inline-flex items-center rounded-full border border-cyan-200/30 bg-background/35 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-50/90">
-            {section.badge}
-          </span>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl text-balance">
+    <section id="why-us" className="section-y-balanced section-blend section-seam-accent landing-section-deferred relative">
+      <div className="landing-page-container relative z-10">
+        <div className="landing-section-head items-center text-center mx-auto mb-12">
+          <span className="landing-section-badge">{section.badge}</span>
+          <h2 className="landing-section-title">
             {section.title} <span className="chrome-gradient">{section.titleHighlight}</span>
           </h2>
-          <p className="text-[15px] leading-relaxed text-muted-foreground max-w-xl">{section.description}</p>
+          <p className="landing-section-description max-w-xl">{section.description}</p>
         </div>
 
         <div className="landing-card-grid grid gap-4 sm:grid-cols-2 xl:grid-cols-3 mb-16">
