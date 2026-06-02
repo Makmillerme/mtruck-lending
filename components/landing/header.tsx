@@ -51,7 +51,7 @@ const navigation = {
 
 const ctaText = {
   en: "Get Quote",
-  uk: "Отримати пропозицію",
+  uk: "Пропозиція",
   sk: "Získať ponuku",
   de: "Angebot",
 } as const;
@@ -166,10 +166,10 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
                 <Button
                   variant="ghost"
                   size="default"
-                  className="landing-btn landing-btn-ghost h-9 px-2.5 sm:px-3 hover:text-white"
+                  className="landing-btn landing-btn-ghost landing-header-locale-btn hover:text-white"
                 >
-                  <Globe className="h-4 w-4" />
-                  <span className="text-sm uppercase">{locale}</span>
+                  <Globe className="h-4 w-4 shrink-0" />
+                  <span className="landing-header-locale-label">{locale}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="border-border bg-card">
@@ -193,7 +193,7 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
             >
               <Button
                 type="button"
-                className="landing-btn landing-btn-primary hidden h-9 px-4 text-xs sm:inline-flex sm:px-5 sm:text-sm lg:px-3 lg:text-xs xl:px-5 xl:text-sm 2xl:px-6"
+                className="landing-btn landing-btn-primary landing-header-cta"
               >
                 {ctaLabel}
               </Button>

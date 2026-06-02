@@ -73,33 +73,42 @@ test.describe("Desktop layout regression", () => {
     expect(pipelineLayout.stepCount).toBeGreaterThanOrEqual(4);
   });
 
-  test("German header nav stays on one line at desktop widths", async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/", { waitUntil: "domcontentloaded" });
+  for (const { label, firstNav } of [
+    { label: "Українська", firstNav: "Головна" },
+    { label: "Deutsch", firstNav: "Start" },
+    { label: "Slovenčina", firstNav: "Domov" },
+  ]) {
+    test(`header nav stays on one line for ${label} at 1024px`, async ({ page }) => {
+      await page.setViewportSize({ width: 1024, height: 800 });
+      await page.goto("/", { waitUntil: "domcontentloaded" });
 
-    const trigger = page.locator(".landing-header-actions button").filter({ has: page.locator("svg") }).first();
-    await trigger.click();
-    await page.getByRole("menuitem", { name: "Deutsch" }).click();
+      const trigger = page.locator(".landing-header-actions button").filter({ has: page.locator("svg") }).first();
+      await trigger.click();
+      await page.getByRole("menuitem", { name: label }).click();
 
-    await expect(page.locator(".landing-header-nav")).toBeVisible();
+      await expect(page.locator(".landing-header-nav button").first()).toHaveText(firstNav);
 
-    const navLayout = await page.evaluate(() => {
-      const nav = document.querySelector(".landing-header-nav") as HTMLElement | null;
-      if (!nav) return { wrap: "", lineCount: 0 };
+      const navLayout = await page.evaluate(() => {
+        const nav = document.querySelector(".landing-header-nav") as HTMLElement | null;
+        if (!nav) return { wrap: "", lineCount: 0, fontSize: 0 };
 
-      const links = Array.from(nav.querySelectorAll(".landing-header-nav-link")) as HTMLElement[];
-      const tops = links.map((link) => Math.round(link.getBoundingClientRect().top));
-      const uniqueTops = new Set(tops);
+        const links = Array.from(nav.querySelectorAll(".landing-header-nav-link")) as HTMLElement[];
+        const tops = links.map((link) => Math.round(link.getBoundingClientRect().top));
+        const firstLink = links[0];
 
-      return {
-        wrap: getComputedStyle(nav).flexWrap,
-        lineCount: uniqueTops.size,
-      };
+        return {
+          wrap: getComputedStyle(nav).flexWrap,
+          lineCount: new Set(tops).size,
+          fontSize: firstLink ? parseFloat(getComputedStyle(firstLink).fontSize) : 0,
+        };
+      });
+
+      expect(navLayout.wrap).toBe("nowrap");
+      expect(navLayout.lineCount).toBe(1);
+      expect(navLayout.fontSize).toBeGreaterThanOrEqual(9);
+      expect(navLayout.fontSize).toBeLessThanOrEqual(14);
     });
-
-    expect(navLayout.wrap).toBe("nowrap");
-    expect(navLayout.lineCount).toBe(1);
-  });
+  }
 
   test("footer desktop grid keeps four columns", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });

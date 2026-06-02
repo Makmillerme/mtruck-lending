@@ -152,7 +152,7 @@ const nav = {
 const content: LandingBundle["content"] = {
   header: {
     en: { navigation: nav.en, ctaText: "Get Quote", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
-    uk: { navigation: nav.uk, ctaText: "Отримати пропозицію", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
+    uk: { navigation: nav.uk, ctaText: "Пропозиція", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
     sk: { navigation: nav.sk, ctaText: "Získať ponuku", logo: { src: "/expert-travel.png", alt: "Logo Expert Travel" } },
     de: { navigation: nav.de, ctaText: "Angebot", logo: { src: "/expert-travel.png", alt: "Expert Travel Logo" } },
   },

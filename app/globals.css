@@ -2230,121 +2230,74 @@ body.react-remove-scroll-bar {
 
 @media (min-width: 1024px) {
   .landing-header-inner {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    column-gap: 0.75rem;
+    gap: clamp(0.65rem, 1.2vw, 1.75rem);
     min-height: 4.5rem;
     padding-block: 0.75rem;
   }
 }
 
-@media (min-width: 1280px) {
-  .landing-header-inner {
-    column-gap: 1rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .landing-header-inner {
-    column-gap: 1.5rem;
-  }
-}
-
 .landing-header-logo {
-  flex-shrink: 0;
-  justify-self: start;
+  flex: 0 0 auto;
 }
 
 .landing-header-logo-box {
   position: relative;
   height: 2.25rem;
-  width: 9.5rem;
+  width: clamp(8.75rem, 7rem + 6vw, 13.5rem);
 }
 
 @media (min-width: 640px) {
   .landing-header-logo-box {
     height: 2.5rem;
-    width: 11.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .landing-header-logo-box {
-    height: 2.5rem;
-    width: 11.5rem;
   }
 }
 
 @media (min-width: 1280px) {
   .landing-header-logo-box {
     height: 2.75rem;
-    width: 13.5rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .landing-header-logo-box {
-    width: 15rem;
+    width: clamp(11rem, 9rem + 5vw, 15rem);
   }
 }
 
 .landing-header-nav {
   display: none;
   align-items: center;
-  justify-content: center;
-  justify-self: center;
+  flex: 1 1 auto;
+  justify-content: space-evenly;
   flex-wrap: nowrap;
-  gap: 0.25rem 0.5rem;
+  gap: clamp(0.15rem, 0.35vw, 1rem);
   min-width: 0;
+  max-width: 100%;
+  padding-inline: clamp(0.15rem, 0.8vw, 1.25rem);
 }
 
 @media (min-width: 1024px) {
   .landing-header-nav {
     display: flex;
-    gap: 0.2rem 0.45rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .landing-header-nav {
-    gap: 0.35rem 0.85rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .landing-header-nav {
-    gap: 0.5rem 1.35rem;
   }
 }
 
 .landing-header-nav-link {
   border: 0;
   background: transparent;
-  padding: 0.35rem 0.05rem;
-  font-size: 0.625rem;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 0.35rem 0.08rem;
+  font-size: clamp(0.6875rem, 0.62rem + 0.28vw, 0.875rem);
   font-weight: 600;
-  letter-spacing: 0.05em;
-  line-height: 1.2;
+  letter-spacing: clamp(0.045em, 0.04em + 0.01vw, 0.065em);
+  line-height: 1.15;
   text-transform: uppercase;
   color: oklch(0.94 0.03 220 / 0.88);
   white-space: nowrap;
   transition: color 160ms ease;
 }
 
-@media (min-width: 1280px) {
-  .landing-header-nav-link {
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
-    padding-inline: 0.1rem;
-  }
-}
-
 @media (min-width: 1536px) {
   .landing-header-nav-link {
-    font-size: 0.8125rem;
-    letter-spacing: 0.07em;
-    padding-inline: 0.15rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.065em;
+    padding-inline: 0.12rem;
   }
 }
 
@@ -2356,16 +2309,63 @@ body.react-remove-scroll-bar {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  gap: clamp(0.35rem, 0.6vw, 0.75rem);
   margin-left: auto;
 }
 
 @media (min-width: 1024px) {
   .landing-header-actions {
     margin-left: 0;
-    justify-self: end;
-    gap: 0.65rem;
+  }
+}
+
+.landing-header-locale-btn {
+  height: 2.25rem;
+  padding-inline: 0.65rem;
+}
+
+.landing-header-locale-label {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1180px) {
+  .landing-header-locale-label {
+    display: none;
+  }
+
+  .landing-header-locale-btn {
+    width: 2.25rem;
+    padding-inline: 0;
+  }
+}
+
+.landing-header-cta {
+  display: none;
+  height: 2.25rem;
+  align-items: center;
+  padding-inline: clamp(0.65rem, 0.35rem + 0.9vw, 1.35rem);
+  font-size: clamp(0.6875rem, 0.62rem + 0.22vw, 0.875rem);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .landing-header-cta {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 1180px) {
+  .landing-header-nav-link {
+    font-size: clamp(0.625rem, 0.58rem + 0.18vw, 0.75rem);
+    letter-spacing: 0.04em;
+  }
+
+  .landing-header-cta {
+    padding-inline: 0.65rem;
+    font-size: 0.6875rem;
   }
 }
 
