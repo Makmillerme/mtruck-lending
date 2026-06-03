@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const seamSections = ["#home", "#about", "#services", "#catalog", "#why-us", "#faq"];
-const fullWidthSeams = new Set(["#home", "#faq"]);
+const fullWidthSeams = new Set(["#home"]);
 
 test.describe("Section seam accents", () => {
   test.beforeEach(({ }, testInfo) => {

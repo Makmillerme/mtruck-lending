@@ -78,7 +78,7 @@ export function FAQ({ locale, faqsData = [], metaContent }: FAQProps) {
   }));
 
   return (
-    <section id="faq" className="section-y-balanced section-tint section-blend section-seam-accent section-seam-full-width landing-section-deferred">
+    <section id="faq" className="section-y-balanced section-tint section-blend section-seam-accent landing-section-contained landing-section-deferred">
       <div className="landing-page-container landing-page-container--narrow relative z-10">
         <div className="landing-section-head items-center text-center mx-auto mb-12">
           <span className="landing-section-badge">{badge}</span>
