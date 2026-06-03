@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { CatalogBodyTypeOfferingCard } from "@/components/landing/catalog-body-type-offering-card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import type { CatalogBodyTypeOffering } from "@/lib/catalog-brands";
 import type { Locale } from "@/lib/locale";
 
 export type CatalogBrandCard = {
@@ -15,6 +17,7 @@ export type CatalogBrandCard = {
   bodyTypes: string[];
   configurations: string[];
   typicalSpecs: string[];
+  bodyTypeOfferings?: CatalogBodyTypeOffering[];
 };
 
 interface CatalogBrandModalProps {
@@ -23,12 +26,27 @@ interface CatalogBrandModalProps {
   onClose: () => void;
 }
 
-const labels = {
+type ModalLabels = {
+  overview: string;
+  bodyTypes: string;
+  configurations: string;
+  typicalSpecs: string;
+  modelRange: string;
+  modifications: string;
+  generalSpecs: string;
+  note: string;
+  close: string;
+};
+
+const labels: Record<Locale, ModalLabels> = {
   en: {
     overview: "About the brand",
     bodyTypes: "Body types",
     configurations: "Configurations",
     typicalSpecs: "Typical specifications",
+    modelRange: "Model range",
+    modifications: "Modifications",
+    generalSpecs: "General data",
     note: "We help select and import equipment that matches your routes, cargo profile, and fleet standards.",
     close: "Close",
   },
@@ -37,6 +55,9 @@ const labels = {
     bodyTypes: "Типи кузовів",
     configurations: "Комплектації",
     typicalSpecs: "Типові характеристики",
+    modelRange: "Моделі",
+    modifications: "Модифікації",
+    generalSpecs: "Загальні дані",
     note: "Допомагаємо підібрати та імпортувати техніку під ваші маршрути, вантаж і стандарти автопарку.",
     close: "Закрити",
   },
@@ -45,6 +66,9 @@ const labels = {
     bodyTypes: "Typy nadstavieb",
     configurations: "Konfigurácie",
     typicalSpecs: "Typické špecifikácie",
+    modelRange: "Modely",
+    modifications: "Modifikácie",
+    generalSpecs: "Všeobecné údaje",
     note: "Pomáhame vybrať a doviezť techniku podľa vašich trás, nákladu a štandardov flotily.",
     close: "Zavrieť",
   },
@@ -53,6 +77,9 @@ const labels = {
     bodyTypes: "Aufbauten",
     configurations: "Konfigurationen",
     typicalSpecs: "Typische Spezifikationen",
+    modelRange: "Modellpalette",
+    modifications: "Modifikationen",
+    generalSpecs: "Allgemeine Daten",
     note: "Wir helfen bei Auswahl und Import von Fahrzeugen passend zu Ihren Strecken, Frachtprofil und Flottenstandards.",
     close: "Schließen",
   },
@@ -83,7 +110,11 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
   const hasTagline = Boolean(brand.tagline?.trim());
   const hasHighlights = brand.highlights.length > 0;
   const hasOverview = Boolean(brand.overview?.trim());
-  const hasMetaLists = brand.bodyTypes.length > 0 || brand.configurations.length > 0 || brand.typicalSpecs.length > 0;
+  const bodyTypeOfferings = brand.bodyTypeOfferings ?? [];
+  const hasBodyTypeOfferings = bodyTypeOfferings.length > 0;
+  const hasMetaLists =
+    !hasBodyTypeOfferings &&
+    (brand.bodyTypes.length > 0 || brand.configurations.length > 0 || brand.typicalSpecs.length > 0);
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
@@ -93,33 +124,38 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
           {hasOverview ? brand.overview : brand.tagline || brand.name}
         </DialogDescription>
 
-        <div className="catalog-brand-modal-header relative overflow-hidden px-6 py-8 lg:px-8">
+        <div className="catalog-brand-modal-header relative overflow-hidden px-6 py-6 lg:px-8 lg:py-7">
           <div className="catalog-brand-card-media-glow absolute inset-0" aria-hidden="true" />
-          {brand.logoSrc ? (
-            <div className="relative z-10 mb-4 h-12 w-44 max-w-full">
+
+          <div className="relative z-10 space-y-3">
+            {brand.logoSrc ? (
               <Image
                 src={brand.logoSrc}
-                alt={`${brand.name} logo`}
-                fill
-                className="object-contain object-left"
+                alt={brand.name}
+                width={160}
+                height={56}
+                className="catalog-brand-modal-logo-mark h-12 w-auto max-w-[10rem] object-contain object-left sm:h-14 sm:max-w-[12rem]"
               />
-            </div>
-          ) : null}
-          {hasTagline ? (
-            <p className="relative z-10 mb-2 text-xs font-semibold uppercase tracking-[0.08em] text-cyan-100/80">
-              {brand.tagline}
-            </p>
-          ) : null}
-          <h2 className="relative z-10 text-3xl font-bold text-foreground lg:text-4xl">{brand.name}</h2>
-          {hasHighlights ? (
-            <div className="relative z-10 mt-3 flex flex-wrap gap-2">
-              {brand.highlights.map((item, index) => (
-                <span key={`${brand.id}-highlight-${item}-${index}`} className="catalog-spec-pill">
-                  {item}
-                </span>
-              ))}
-            </div>
-          ) : null}
+            ) : (
+              <h2 className="catalog-brand-modal-title">{brand.name}</h2>
+            )}
+
+            {hasTagline || hasHighlights ? (
+              <div className="catalog-brand-modal-copy space-y-2.5">
+                {hasTagline ? <p className="catalog-brand-modal-tagline">{brand.tagline}</p> : null}
+
+                {hasHighlights ? (
+                  <div className="flex flex-wrap gap-2">
+                    {brand.highlights.map((item, index) => (
+                      <span key={`${brand.id}-highlight-${item}-${index}`} className="catalog-spec-pill">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
         </div>
 
         <div className="space-y-8 p-6 lg:p-8">
@@ -130,16 +166,39 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
             </div>
           ) : null}
 
-          {brand.bodyTypes.length > 0 || brand.configurations.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2">
-              <InfoList title={t.bodyTypes} items={brand.bodyTypes} />
-              <InfoList title={t.configurations} items={brand.configurations} />
+          {hasBodyTypeOfferings ? (
+            <div>
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">
+                {t.modelRange}
+              </h3>
+              <div className="catalog-body-type-list">
+                {bodyTypeOfferings.map((offering) => (
+                  <CatalogBodyTypeOfferingCard
+                    key={offering.id}
+                    offering={offering}
+                    labels={{
+                      bodyTypes: t.bodyTypes,
+                      modifications: t.modifications,
+                      generalSpecs: t.generalSpecs,
+                    }}
+                  />
+                ))}
+              </div>
             </div>
-          ) : null}
+          ) : (
+            <>
+              {brand.bodyTypes.length > 0 || brand.configurations.length > 0 ? (
+                <div className="grid gap-8 sm:grid-cols-2">
+                  <InfoList title={t.bodyTypes} items={brand.bodyTypes} />
+                  <InfoList title={t.configurations} items={brand.configurations} />
+                </div>
+              ) : null}
 
-          <InfoList title={t.typicalSpecs} items={brand.typicalSpecs} />
+              <InfoList title={t.typicalSpecs} items={brand.typicalSpecs} />
+            </>
+          )}
 
-          {hasMetaLists ? (
+          {hasMetaLists || hasBodyTypeOfferings ? (
             <p className="rounded-xl border border-cyan-200/12 bg-cyan-200/5 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
               {t.note}
             </p>

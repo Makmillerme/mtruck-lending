@@ -1,9 +1,25 @@
 import type { Locale } from "@/lib/locale";
+import {
+  catalogBodyTypeItemsByBrandId,
+  type CatalogBodyTypeItem,
+} from "@/lib/catalog-body-type-items";
+
+export type { CatalogBodyTypeItem } from "@/lib/catalog-body-type-items";
 
 export type CatalogCategory = "truck" | "trailer";
 
 type LocalizedText = Record<Locale, string>;
 type LocalizedList = Record<Locale, string[]>;
+
+export type CatalogBodyTypeOffering = {
+  id: string;
+  imageSrc: string;
+  imageAlt: string;
+  title: string;
+  bodyTypes: string[];
+  modifications: string[];
+  specs: string[];
+};
 
 export type CatalogBrand = {
   id: string;
@@ -15,9 +31,155 @@ export type CatalogBrand = {
   bodyTypes: LocalizedList;
   configurations: LocalizedList;
   typicalSpecs: LocalizedList;
+  bodyTypeItems?: CatalogBodyTypeItem[];
 };
 
-export const catalogBrands: CatalogBrand[] = [
+const rawCatalogBrands: CatalogBrand[] = [
+  {
+    id: "mercedes",
+    category: "truck",
+    name: "Mercedes-Benz",
+    tagline: {
+      en: "Actros, Atego, and Arocs for long-haul, regional, and construction fleets.",
+      uk: "Actros, Atego та Arocs — для магістралі, регіону та будівельної логістики.",
+      sk: "Actros, Atego a Arocs pre diaľkovú, regionálnu a stavebnú logistiku.",
+      de: "Actros, Atego und Arocs für Fernverkehr, Regional- und Baustellenflotten.",
+    },
+    highlights: {
+      en: ["Actros", "Atego", "Arocs"],
+      uk: ["Actros", "Atego", "Arocs"],
+      sk: ["Actros", "Atego", "Arocs"],
+      de: ["Actros", "Atego", "Arocs"],
+    },
+    overview: {
+      en: "Mercedes-Benz Trucks sets the benchmark for safety, comfort, and fleet technology in European transport. We import Actros tractors for line-haul and Arocs models for demanding distribution and construction logistics.",
+      uk: "Mercedes-Benz Trucks задає стандарт безпеки, комфорту та технологій для європейської логістики. Імпортуємо Actros для магістральних перевезень і Arocs для розподільної та будівельної логістики.",
+      sk: "Mercedes-Benz Trucks je referenčnou značkou v oblasti bezpečnosti, komfortu a technológií pre európsku dopravu. Dovážame Actros pre diaľkovú dopravu a Arocs pre náročnú distribučnú a stavebnú logistiku.",
+      de: "Mercedes-Benz Trucks setzt Maßstäbe bei Sicherheit, Komfort und Flottentechnologie im europäischen Transport. Wir importieren Actros für den Fernverkehr und Arocs für anspruchsvolle Verteilungs- und Baustellenlogistik.",
+    },
+    bodyTypes: {
+      en: ["Actros long-haul tractors (4x2, 6x2)", "Arocs distribution and construction chassis"],
+      uk: ["Магістральні Actros (4x2, 6x2)", "Розподільні та будівельні шасі Arocs"],
+      sk: ["Diaľkové Actros (4x2, 6x2)", "Distribučné a stavebné podvozky Arocs"],
+      de: ["Actros-Fernverkehrszugmaschinen (4x2, 6x2)", "Arocs-Verteilungs- und Baufahrgestelle"],
+    },
+    configurations: {
+      en: ["GigaSpace and StreamSpace sleeper cabs", "PowerShift and manual transmissions", "Predictive Powertrain Control and fleet telematics"],
+      uk: ["Спальні кабіни GigaSpace і StreamSpace", "КПП PowerShift і механічні", "Predictive Powertrain Control і телематика"],
+      sk: ["Spacie kabíny GigaSpace a StreamSpace", "Prevodovky PowerShift a manuálne", "Predictive Powertrain Control a telematika"],
+      de: ["GigaSpace- und StreamSpace-Schlafkabinen", "PowerShift- und Schaltgetriebe", "Predictive Powertrain Control und Flotten-Telematik"],
+    },
+    typicalSpecs: {
+      en: ["Engine power from 420 to 530 hp", "EURO 6 emission class", "Full air suspension and disc brakes", "Verified service history and pre-delivery inspection"],
+      uk: ["Потужність двигуна від 420 до 530 к.с.", "Екологічний клас EURO 6", "Повна пневмопідвіска та дискові гальма", "Підтверджена сервісна історія та перевірка перед передачею"],
+      sk: ["Výkon motora od 420 do 530 hp", "Emisná trieda EURO 6", "Plné pneumatické odpruženie a kotúčové brzdy", "Overená servisná história a kontrola pred odovzdaním"],
+      de: ["Motorleistung von 420 bis 530 PS", "Abgasnorm EURO 6", "Vollluftfederung und Scheibenbremsen", "Verifizierte Servicehistorie und Abnahmeprüfung"],
+    },
+    bodyTypeItems: [
+      {
+        id: "mercedes-actros",
+        imageSrc: "/catalog/body-types/placeholder.svg",
+        imageAlt: {
+          en: "Mercedes-Benz Actros",
+          uk: "Mercedes-Benz Actros",
+          sk: "Mercedes-Benz Actros",
+          de: "Mercedes-Benz Actros",
+        },
+        title: {
+          en: "Actros",
+          uk: "Actros",
+          sk: "Actros",
+          de: "Actros",
+        },
+        bodyTypes: {
+          en: ["Long-haul tractors 4x2 and 6x2", "Sleeper cab line-haul", "Swap body and container chassis"],
+          uk: ["Магістральні тягачі 4x2 та 6x2", "Sleeper cab для дальніх маршрутів", "Шасі під swap body та контейнеровоз"],
+          sk: ["Diaľkové ťahače 4x2 a 6x2", "Sleeper cab pre dlhé trasy", "Podvozok pre swap body a kontajner"],
+          de: ["Fernverkehrszugmaschinen 4x2 und 6x2", "Schlafkabine Fernverkehr", "Wechselbrücken- und Container-Fahrgestell"],
+        },
+        modifications: {
+          en: ["GigaSpace and StreamSpace sleeper cabs", "PowerShift and manual transmissions", "Predictive Powertrain Control"],
+          uk: ["Спальні кабіни GigaSpace і StreamSpace", "КПП PowerShift і механічні", "Predictive Powertrain Control"],
+          sk: ["Spacie kabíny GigaSpace a StreamSpace", "Prevodovky PowerShift a manuálne", "Predictive Powertrain Control"],
+          de: ["GigaSpace- und StreamSpace-Schlafkabinen", "PowerShift- und Schaltgetriebe", "Predictive Powertrain Control"],
+        },
+        specs: {
+          en: ["Engine power 420–530 hp", "EURO 6", "Full air suspension and disc brakes"],
+          uk: ["Потужність двигуна 420–530 к.с.", "EURO 6", "Повна пневмопідвіска та дискові гальма"],
+          sk: ["Výkon motora 420–530 hp", "EURO 6", "Plné pneumatické odpruženie a kotúčové brzdy"],
+          de: ["Motorleistung 420–530 PS", "EURO 6", "Vollluftfederung und Scheibenbremsen"],
+        },
+      },
+      {
+        id: "mercedes-atego",
+        imageSrc: "/catalog/body-types/placeholder.svg",
+        imageAlt: {
+          en: "Mercedes-Benz Atego",
+          uk: "Mercedes-Benz Atego",
+          sk: "Mercedes-Benz Atego",
+          de: "Mercedes-Benz Atego",
+        },
+        title: {
+          en: "Atego",
+          uk: "Atego",
+          sk: "Atego",
+          de: "Atego",
+        },
+        bodyTypes: {
+          en: ["Regional distribution chassis", "Box and curtainsider bodies", "Refrigerated urban logistics"],
+          uk: ["Регіональне розподільне шасі", "Фургонні та бортові кузови", "Міський рефрижератор"],
+          sk: ["Regionálny distribučný podvozok", "Skriňové a plachtové nadstavby", "Mestská chladiarenská logistika"],
+          de: ["Regionales Verteilungsfahrgestell", "Koffer- und Planenaufbauten", "Städtische Kühllogistik"],
+        },
+        modifications: {
+          en: ["Day cab and short cab variants", "Manual and automated gearboxes", "Crane and liftgate preparation"],
+          uk: ["Day cab і коротка кабіна", "Механічні та автоматичні КПП", "Підготовка під КМУ та гідроборт"],
+          sk: ["Day cab a krátka kabína", "Manuálne a automatické prevodovky", "Príprava pre žeriav a hydraulickú čelo"],
+          de: ["Day Cab und Kurzhauber", "Schalt- und Automatikgetriebe", "Kran- und Ladebordwand-Vorbereitung"],
+        },
+        specs: {
+          en: ["Engine power 220–340 hp", "EURO 6", "Verified service history"],
+          uk: ["Потужність 220–340 к.с.", "EURO 6", "Підтверджена сервісна історія"],
+          sk: ["Výkon 220–340 hp", "EURO 6", "Overená servisná história"],
+          de: ["Leistung 220–340 PS", "EURO 6", "Verifizierte Servicehistorie"],
+        },
+      },
+      {
+        id: "mercedes-arocs",
+        imageSrc: "/catalog/body-types/placeholder.svg",
+        imageAlt: {
+          en: "Mercedes-Benz Arocs",
+          uk: "Mercedes-Benz Arocs",
+          sk: "Mercedes-Benz Arocs",
+          de: "Mercedes-Benz Arocs",
+        },
+        title: {
+          en: "Arocs",
+          uk: "Arocs",
+          sk: "Arocs",
+          de: "Arocs",
+        },
+        bodyTypes: {
+          en: ["Construction and tipper chassis", "Mixer and crane superstructures", "Container and swap body setups"],
+          uk: ["Будівельне та самоскидне шасі", "Міксери та КМУ", "Контейнеровоз і swap body"],
+          sk: ["Stavebný a sklápací podvozok", "Miešače a žeriavové nadstavby", "Kontajnerovoz a swap body"],
+          de: ["Bau- und Kipperfahrgestell", "Mischer- und Kranaufbauten", "Container- und Wechselbrücken-Setups"],
+        },
+        modifications: {
+          en: ["All-wheel-drive variants", "Reinforced frame packages", "Off-road axle configurations"],
+          uk: ["Повнопривідні версії", "Посилена рама", "Пакети осей для бездоріжжя"],
+          sk: ["Plný pohon varianty", "Zosilnený rám", "Terénne konfigurácie náprav"],
+          de: ["Allradvarianten", "Verstärkter Rahmen", "Offroad-Achskonfigurationen"],
+        },
+        specs: {
+          en: ["Engine power 360–460 hp", "EURO 6", "Fleet telematics ready"],
+          uk: ["Потужність 360–460 к.с.", "EURO 6", "Підготовка під телематику автопарку"],
+          sk: ["Výkon 360–460 hp", "EURO 6", "Pripravenosť na flotovú telematiku"],
+          de: ["Leistung 360–460 PS", "EURO 6", "Flotten-Telematik vorbereitet"],
+        },
+      },
+    ],
+  },
   {
     id: "man",
     category: "truck",
@@ -101,47 +263,6 @@ export const catalogBrands: CatalogBrand[] = [
     },
   },
   {
-    id: "volvo",
-    category: "truck",
-    name: "Volvo",
-    tagline: {
-      en: "FH and FM tractors with I-Shift for modern European fleets.",
-      uk: "Тягачі FH і FM з I-Shift для сучасних європейських автопарків.",
-      sk: "Ťahače FH a FM s I-Shift pre moderné európske vozové parky.",
-      de: "FH- und FM-Zugmaschinen mit I-Shift für moderne europäische Fuhrparks.",
-    },
-    highlights: {
-      en: ["FH", "FM", "I-Shift"],
-      uk: ["FH", "FM", "I-Shift"],
-      sk: ["FH", "FM", "I-Shift"],
-      de: ["FH", "FM", "I-Shift"],
-    },
-    overview: {
-      en: "Volvo trucks combine safety systems, ergonomic cabs, and strong resale value. Our focus is on tractors prepared for international forwarding and mixed cargo operations.",
-      uk: "Volvo поєднує системи безпеки, ергономічні кабіни та високу ліквідність. Працюємо з тягачами для міжнародних перевезень і змішаних вантажів.",
-      sk: "Nákladné autá Volvo spájajú bezpečnostné systémy, ergonomické kabíny a vysokú likviditu. Zameriavame sa na ťahače pripravené pre medzinárodnú prepravu a zmiešanú nákladovú dopravu.",
-      de: "Volvo-Lkw verbinden Sicherheitssysteme, ergonomische Fahrerhäuser und hohe Wiederverkaufswerte. Im Fokus stehen Zugmaschinen für internationalen Speditionsverkehr und gemischte Transporte.",
-    },
-    bodyTypes: {
-      en: ["FH long-haul tractors", "FM regional and construction chassis"],
-      uk: ["Магістральні FH", "Регіональні та будівельні шасі FM"],
-      sk: ["Magistrálne FH", "Regionálne a stavebné podvozky FM"],
-      de: ["FH-Fernverkehrszugmaschinen", "FM-Regional- und Baustellenfahrgestelle"],
-    },
-    configurations: {
-      en: ["Globetrotter and sleeper cabs", "I-Shift automated transmission", "Volvo Dynamic Steering options"],
-      uk: ["Кабіни Globetrotter і зі спальним місцем", "Автоматична КПП I-Shift", "Volvo Dynamic Steering"],
-      sk: ["Kabíny Globetrotter a so spacím miestom", "Automatická prevodovka I-Shift", "Volvo Dynamic Steering"],
-      de: ["Globetrotter- und Schlafkabinen", "I-Shift-Automatikgetriebe", "Volvo Dynamic Steering"],
-    },
-    typicalSpecs: {
-      en: ["420–500 hp typical range", "EURO 6", "Air suspension on all axles", "Service history and inspection before handover"],
-      uk: ["Типовий діапазон 420–500 к.с.", "EURO 6", "Пневмопідвіска всіх осей", "Сервісна історія та перевірка перед передачею"],
-      sk: ["Typický rozsah 420–500 hp", "EURO 6", "Pneumatické odpruženie všetkých náprav", "Servisná história a kontrola pred odovzdaním"],
-      de: ["Typischer Bereich 420–500 PS", "EURO 6", "Luftfederung an allen Achsen", "Servicehistorie und Abnahmeprüfung vor Übergabe"],
-    },
-  },
-  {
     id: "daf",
     category: "truck",
     name: "DAF",
@@ -180,6 +301,47 @@ export const catalogBrands: CatalogBrand[] = [
       uk: ["Типовий діапазон 430–530 к.с.", "EURO 6", "Пневмопідвіска", "Повний пакет імпортної документації"],
       sk: ["Typický rozsah 430–530 hp", "EURO 6", "Pneumatické odpruženie", "Kompletná importná dokumentácia"],
       de: ["Typischer Bereich 430–530 PS", "EURO 6", "Luftfederung", "Vollständige Importdokumentation"],
+    },
+  },
+  {
+    id: "volvo",
+    category: "truck",
+    name: "Volvo",
+    tagline: {
+      en: "FH and FM tractors with I-Shift for modern European fleets.",
+      uk: "Тягачі FH і FM з I-Shift для сучасних європейських автопарків.",
+      sk: "Ťahače FH a FM s I-Shift pre moderné európske vozové parky.",
+      de: "FH- und FM-Zugmaschinen mit I-Shift für moderne europäische Fuhrparks.",
+    },
+    highlights: {
+      en: ["FH", "FM", "I-Shift"],
+      uk: ["FH", "FM", "I-Shift"],
+      sk: ["FH", "FM", "I-Shift"],
+      de: ["FH", "FM", "I-Shift"],
+    },
+    overview: {
+      en: "Volvo trucks combine safety systems, ergonomic cabs, and strong resale value. Our focus is on tractors prepared for international forwarding and mixed cargo operations.",
+      uk: "Volvo поєднує системи безпеки, ергономічні кабіни та високу ліквідність. Працюємо з тягачами для міжнародних перевезень і змішаних вантажів.",
+      sk: "Nákladné autá Volvo spájajú bezpečnostné systémy, ergonomické kabíny a vysokú likviditu. Zameriavame sa na ťahače pripravené pre medzinárodnú prepravu a zmiešanú nákladovú dopravu.",
+      de: "Volvo-Lkw verbinden Sicherheitssysteme, ergonomische Fahrerhäuser und hohe Wiederverkaufswerte. Im Fokus stehen Zugmaschinen für internationalen Speditionsverkehr und gemischte Transporte.",
+    },
+    bodyTypes: {
+      en: ["FH long-haul tractors", "FM regional and construction chassis"],
+      uk: ["Магістральні FH", "Регіональні та будівельні шасі FM"],
+      sk: ["Magistrálne FH", "Regionálne a stavebné podvozky FM"],
+      de: ["FH-Fernverkehrszugmaschinen", "FM-Regional- und Baustellenfahrgestelle"],
+    },
+    configurations: {
+      en: ["Globetrotter and sleeper cabs", "I-Shift automated transmission", "Volvo Dynamic Steering options"],
+      uk: ["Кабіни Globetrotter і зі спальним місцем", "Автоматична КПП I-Shift", "Volvo Dynamic Steering"],
+      sk: ["Kabíny Globetrotter a so spacím miestom", "Automatická prevodovka I-Shift", "Volvo Dynamic Steering"],
+      de: ["Globetrotter- und Schlafkabinen", "I-Shift-Automatikgetriebe", "Volvo Dynamic Steering"],
+    },
+    typicalSpecs: {
+      en: ["420–500 hp typical range", "EURO 6", "Air suspension on all axles", "Service history and inspection before handover"],
+      uk: ["Типовий діапазон 420–500 к.с.", "EURO 6", "Пневмопідвіска всіх осей", "Сервісна історія та перевірка перед передачею"],
+      sk: ["Typický rozsah 420–500 hp", "EURO 6", "Pneumatické odpruženie všetkých náprav", "Servisná história a kontrola pred odovzdaním"],
+      de: ["Typischer Bereich 420–500 PS", "EURO 6", "Luftfederung an allen Achsen", "Servicehistorie und Abnahmeprüfung vor Übergabe"],
     },
   },
   {
@@ -430,10 +592,52 @@ export const catalogBrands: CatalogBrand[] = [
   },
 ];
 
+export const catalogBrands: CatalogBrand[] = rawCatalogBrands.map((brand) => {
+  if (brand.bodyTypeItems?.length) return brand;
+  const items = catalogBodyTypeItemsByBrandId[brand.id];
+  return items ? { ...brand, bodyTypeItems: items } : brand;
+});
+
+function normalizeCatalogBrandName(brand: string) {
+  return brand
+    .toLowerCase()
+    .normalize("NFKD")
+    .replaceAll(/[\u0300-\u036f]/g, "")
+    .replaceAll(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+export function getCatalogBrandByName(name: string): CatalogBrand | undefined {
+  const normalized = normalizeCatalogBrandName(name);
+  if (!normalized) return undefined;
+
+  return catalogBrands.find((brand) => {
+    const brandNormalized = normalizeCatalogBrandName(brand.name);
+    return brand.id === normalized || brandNormalized === normalized || brandNormalized.startsWith(`${normalized} `);
+  });
+}
+
 export function getCatalogBrandsByCategory(category: CatalogCategory): CatalogBrand[] {
   return catalogBrands.filter((brand) => brand.category === category);
 }
 
 export function pickLocalized<T extends LocalizedText | LocalizedList>(field: T, locale: Locale): T[Locale] {
   return field[locale] ?? field.en;
+}
+
+export function pickBodyTypeOfferings(
+  items: CatalogBodyTypeItem[] | undefined,
+  locale: Locale,
+): CatalogBodyTypeOffering[] {
+  if (!items?.length) return [];
+
+  return items.map((item) => ({
+    id: item.id,
+    imageSrc: item.imageSrc,
+    imageAlt: pickLocalized(item.imageAlt, locale),
+    title: pickLocalized(item.title, locale),
+    bodyTypes: pickLocalized(item.bodyTypes, locale),
+    modifications: pickLocalized(item.modifications, locale),
+    specs: pickLocalized(item.specs, locale),
+  }));
 }

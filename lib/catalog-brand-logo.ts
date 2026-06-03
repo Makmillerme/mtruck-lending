@@ -1,4 +1,5 @@
 const brandLogos: Record<string, string> = {
+  mercedes: "/brands/mercedes.svg",
   man: "/brands/man.svg",
   scania: "/brands/scania.svg",
   volvo: "/brands/volvo.svg",

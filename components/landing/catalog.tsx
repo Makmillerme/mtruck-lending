@@ -62,10 +62,11 @@ const content = {
 };
 
 const defaultMarqueeBrands = [
+  "Mercedes-Benz",
   "MAN",
   "Scania",
-  "Volvo",
   "DAF",
+  "Volvo",
   "Renault",
   "Schmitz",
   "Krone",
@@ -387,7 +388,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon"
                       onClick={() => scrollCards("prev")}
                       className="catalog-carousel-btn landing-btn landing-btn-control"
                       aria-label={prevBrands}
@@ -399,7 +399,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon"
                       onClick={() => scrollCards("next")}
                       className="catalog-carousel-btn landing-btn landing-btn-control"
                       aria-label={nextBrands}
@@ -413,7 +412,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon"
                       className="catalog-carousel-btn landing-btn landing-btn-control"
                       aria-label={prevBrands}
                       disabled
@@ -423,7 +421,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                     <Button
                       type="button"
                       variant="ghost"
-                      size="icon"
                       className="catalog-carousel-btn landing-btn landing-btn-control"
                       aria-label={nextBrands}
                       disabled

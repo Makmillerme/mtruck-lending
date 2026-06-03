@@ -121,7 +121,7 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
                 className="landing-btn landing-btn-primary px-6"
               >
                 {t.cta}
-                <ArrowRight className="ml-1 h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
 
               <CtaFormModal
@@ -131,7 +131,7 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
                 contactPhone={contactPhone}
               >
                 <Button type="button" variant="ghost" className="landing-btn landing-btn-secondary px-5">
-                  <Phone className="mr-2 h-4 w-4" />
+                  <Phone className="h-4 w-4" />
                   {t.secondary}
                 </Button>
               </CtaFormModal>

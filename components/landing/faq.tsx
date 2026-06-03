@@ -16,25 +16,25 @@ const content = {
     badge: "FAQ",
     title: "Frequently Asked",
     titleHighlight: "Questions",
-    description: "Find answers to common questions about our services and vehicle import process.",
+    description: "Practical answers about buying vehicles, paperwork, and working with Expert Travel.",
   },
   uk: {
     badge: "FAQ",
     title: "Часті",
-    titleHighlight: "Запитання",
-    description: "Знайдіть відповіді на поширені запитання про наші послуги та процес імпорту техніки.",
+    titleHighlight: "запитання",
+    description: "Практичні відповіді про купівлю техніки, документи та співпрацю з Expert Travel.",
   },
   sk: {
     badge: "FAQ",
     title: "Často kladené",
-    titleHighlight: "otázky",
-    description: "Nájdite odpovede na bežné otázky o našich službách a procese dovozu vozidiel.",
+    titleHighlight: "Otázky",
+    description: "Praktické odpovede o kúpe vozidiel, dokumentoch a spolupráci s Expert Travel.",
   },
   de: {
     badge: "FAQ",
     title: "Häufig gestellte",
     titleHighlight: "Fragen",
-    description: "Finden Sie Antworten auf häufige Fragen zu unseren Leistungen und dem Importprozess.",
+    description: "Praktische Antworten zu Fahrzeugkauf, Unterlagen und der Zusammenarbeit mit Expert Travel.",
   },
 };
 

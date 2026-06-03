@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe } from "lucide-react";
@@ -73,6 +73,9 @@ interface HeaderProps {
 export function Header({ locale, onLocaleChange, onNavigate, contactEmail, contactPhone, sectionContent }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
   const header = parseHeaderContent(sectionContent);
   const navItems = header.navigation.length > 0 ? header.navigation : [...navigation[locale]];
   const ctaLabel = pickText(header.ctaText, ctaText[locale]);
@@ -104,11 +107,23 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
       if (window.innerWidth >= 1024) setMobileMenuOpen(false);
     };
 
+    const closeMenu = () => setMobileMenuOpen(false);
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (mobileMenuRef.current?.contains(target)) return;
+      if (menuToggleRef.current?.contains(target)) return;
+      closeMenu();
+    };
+
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
+    document.addEventListener("pointerdown", onPointerDown, true);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
+      document.removeEventListener("pointerdown", onPointerDown, true);
     };
   }, [mobileMenuOpen]);
 
@@ -120,7 +135,17 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
   return (
     <>
       <div className="landing-header-spacer" aria-hidden="true" />
+      {mobileMenuOpen ? (
+        <button
+          type="button"
+          className="landing-mobile-menu-backdrop"
+          aria-label="Закрити меню"
+          tabIndex={-1}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      ) : null}
       <header
+        ref={headerRef}
         className={`landing-site-header transition-[background-color,box-shadow,border-color] duration-300 ${
           isScrolled
             ? "bg-[linear-gradient(180deg,rgba(14,30,56,0.94)_0%,rgba(10,24,44,0.9)_100%)] border-b border-cyan-100/35 shadow-[0_14px_34px_rgba(0,0,0,0.28)]"
@@ -166,7 +191,7 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
                 <Button
                   variant="ghost"
                   size="default"
-                  className="landing-btn landing-btn-ghost landing-header-locale-btn hover:text-white"
+                  className="landing-btn landing-btn-ghost landing-btn--compact landing-header-locale-btn hover:text-white"
                 >
                   <Globe className="h-4 w-4 shrink-0" />
                   <span className="landing-header-locale-label">{locale}</span>
@@ -193,15 +218,16 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
             >
               <Button
                 type="button"
-                className="landing-btn landing-btn-primary landing-header-cta"
+                className="landing-btn landing-btn-primary landing-btn--compact landing-header-cta"
               >
                 {ctaLabel}
               </Button>
             </CtaFormModal>
 
             <button
+              ref={menuToggleRef}
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-cyan-50/90 transition-colors hover:text-white lg:hidden"
+              className="landing-header-icon-toggle"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-expanded={mobileMenuOpen}
               aria-controls="landing-mobile-menu"
@@ -213,7 +239,7 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
         </div>
 
         {mobileMenuOpen ? (
-          <div id="landing-mobile-menu" className="landing-header-mobile-panel lg:hidden">
+          <div ref={mobileMenuRef} id="landing-mobile-menu" className="landing-header-mobile-panel">
             <nav className="landing-header-mobile-nav" aria-label="Mobile navigation">
               {navItems.map((item) => (
                 <button

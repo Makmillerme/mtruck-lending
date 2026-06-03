@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Check, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LandingGlassCard } from "@/components/landing/landing-glass-card";
 import type { Locale } from "@/lib/locale";
-import { pickEntityLocale, pickLocalizedRecord } from "@/lib/pick-locale";
+
 import { cn } from "@/lib/utils";
 
+import { SubmitReviewModal } from "@/components/landing/submit-review-modal";
 import { parseWhyUsContent, pickMetaString, pickText } from "@/lib/landing-section-parsers";
+import type { SiteReviewPublic } from "@/lib/site-reviews";
 
 const defaultContent = {
   en: {
@@ -18,6 +20,7 @@ const defaultContent = {
     description:
       "We stand out from the competition with our commitment to quality, transparency, and customer satisfaction.",
     carouselTitle: "Client Reviews",
+    emptyReviews: "No reviews yet. Be the first to share your experience.",
     prevTestimonial: "Previous testimonial",
     nextTestimonial: "Next testimonial",
     reasons: [
@@ -35,6 +38,7 @@ const defaultContent = {
     titleHighlight: "Expert Travel",
     description: "Ми виділяємося серед конкурентів завдяки нашій відданості якості, прозорості та задоволеності клієнтів.",
     carouselTitle: "Відгуки клієнтів",
+    emptyReviews: "Поки немає відгуків. Станьте першим — залиште свій досвід.",
     prevTestimonial: "Попередній відгук",
     nextTestimonial: "Наступний відгук",
     reasons: [
@@ -52,6 +56,7 @@ const defaultContent = {
     titleHighlight: "Expert Travel",
     description: "Medzi konkurenciou vynikáme záväzkom ku kvalite, transparentnosti a spokojnosti zákazníkov.",
     carouselTitle: "Hodnotenia klientov",
+    emptyReviews: "Zatiaľ žiadne hodnotenia. Buďte prvý — podeľte sa o skúsenosť.",
     prevTestimonial: "Predchádzajúce hodnotenie",
     nextTestimonial: "Ďalšie hodnotenie",
     reasons: [
@@ -69,6 +74,7 @@ const defaultContent = {
     titleHighlight: "Vorteil",
     description: "Wir heben uns durch unser Engagement für Qualität, Transparenz und Kundenzufriedenheit von der Konkurrenz ab.",
     carouselTitle: "Kundenbewertungen",
+    emptyReviews: "Noch keine Bewertungen. Seien Sie der Erste.",
     prevTestimonial: "Vorherige Bewertung",
     nextTestimonial: "Nächste Bewertung",
     reasons: [
@@ -85,27 +91,9 @@ const defaultContent = {
 interface WhyUsProps {
   locale: Locale;
   metaContent?: Record<string, unknown>;
-  testimonials?: Array<{
-    id: number;
-    quoteEn: string;
-    quoteUk: string | null;
-    quoteSk?: string | null;
-    quoteDe?: string | null;
-    authorEn: string;
-    authorUk: string | null;
-    authorSk?: string | null;
-    authorDe?: string | null;
-    companyEn: string | null;
-    companyUk: string | null;
-    companySk?: string | null;
-    companyDe?: string | null;
-    rating: number;
-    orderIndex: number;
-    isActive: boolean;
-  }>;
 }
 
-export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
+export function WhyUs({ locale, metaContent }: WhyUsProps) {
   const cms = parseWhyUsContent(metaContent);
   const base = defaultContent[locale];
   const section = {
@@ -114,6 +102,7 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
     titleHighlight: pickText(cms.titleHighlight, base.titleHighlight),
     description: pickText(cms.description, base.description),
     carouselTitle: pickText(cms.carouselTitle, base.carouselTitle),
+    emptyReviews: pickText(pickMetaString(metaContent, "emptyReviews"), base.emptyReviews),
     prevTestimonial: pickText(pickMetaString(metaContent, "prevTestimonial"), base.prevTestimonial),
     nextTestimonial: pickText(pickMetaString(metaContent, "nextTestimonial"), base.nextTestimonial),
   };
@@ -123,59 +112,48 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
   const [showControls, setShowControls] = useState(false);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  const [userReviews, setUserReviews] = useState<SiteReviewPublic[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
 
-  const carousel = useMemo(() => {
-    if (testimonials.length === 0) {
-      const fallbackQuote = pickLocalizedRecord(
-        {
-          en: "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
-          uk: "Expert Travel допоміг нам розширити автопарк якісною технікою за відмінними цінами. Їхній сервіс та підтримка були винятковими.",
-          sk: "Expert Travel nám pomohol rozšíriť vozový park kvalitnými vozidlami za výborné ceny. Ich servis a podpora boli výnimočné.",
-          de: "Expert Travel hat uns geholfen, unsere Flotte mit hochwertigen Fahrzeugen zu erweitern. Service und Betreuung waren hervorragend.",
-        },
-        locale,
-        "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
-      );
-      const fallbackAuthor = pickLocalizedRecord(
-        { en: "Martin Novak", uk: "Мартін Новак", sk: "Martin Novák", de: "Martin Novak" },
-        locale,
-        "Martin Novak",
-      );
+  const handleReviewPublished = useCallback((review: SiteReviewPublic) => {
+    setUserReviews((prev) => {
+      if (prev.some((item) => item.id === review.id)) return prev;
+      return [review, ...prev];
+    });
+  }, []);
 
-      return [
-        {
-          id: 0,
-          quote: fallbackQuote,
-          author: fallbackAuthor,
-          company: "TransCargo s.r.o.",
-          rating: 5,
-        },
-      ];
-    }
+  useEffect(() => {
+    let cancelled = false;
 
-    return testimonials.map((item) => ({
-      id: item.id,
-      quote: pickEntityLocale(locale, {
-        en: item.quoteEn,
-        uk: item.quoteUk,
-        sk: item.quoteSk,
-        de: item.quoteDe,
-      }),
-      author: pickEntityLocale(locale, {
-        en: item.authorEn,
-        uk: item.authorUk,
-        sk: item.authorSk,
-        de: item.authorDe,
-      }),
-      company: pickEntityLocale(locale, {
-        en: item.companyEn,
-        uk: item.companyUk,
-        sk: item.companySk,
-        de: item.companyDe,
-      }),
-      rating: item.rating,
-    }));
-  }, [testimonials, locale]);
+    fetch("/api/reviews")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: { reviews?: SiteReviewPublic[] } | null) => {
+        if (cancelled) return;
+        setUserReviews(data?.reviews ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setUserReviews([]);
+      })
+      .finally(() => {
+        if (!cancelled) setReviewsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const carousel = useMemo(
+    () =>
+      userReviews.map((item) => ({
+        id: item.id,
+        quote: item.quote,
+        author: item.author,
+        company: item.company,
+        rating: item.rating,
+      })),
+    [userReviews],
+  );
 
   const carouselKey = useMemo(() => carousel.map((item) => item.id).join(","), [carousel]);
   const isMultiCarousel = carousel.length > 1;
@@ -274,8 +252,22 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
         </div>
 
         <div className="mx-auto w-full">
-          <h3 className="text-xl font-bold text-foreground mb-6">{section.carouselTitle}</h3>
+          <div className="why-us-reviews-head mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="why-us-reviews-title text-xl font-bold text-foreground">{section.carouselTitle}</h3>
+            <SubmitReviewModal locale={locale} onPublished={handleReviewPublished} />
+          </div>
 
+          {reviewsLoading ? (
+            <div className="reviews-carousel-skeleton" aria-hidden="true">
+              <div className="reviews-carousel-skeleton-card" />
+              <div className="reviews-carousel-skeleton-card hidden sm:block" />
+              <div className="reviews-carousel-skeleton-card hidden lg:block" />
+            </div>
+          ) : carousel.length === 0 ? (
+            <p className="reviews-carousel-empty rounded-xl border border-dashed border-cyan-100/25 bg-[oklch(0.14_0.02_252/0.35)] px-6 py-10 text-center text-sm text-muted-foreground">
+              {section.emptyReviews}
+            </p>
+          ) : (
           <div className="relative -mx-1 px-1 sm:mx-0 sm:px-0" ref={wrapperRef}>
             <div
               ref={trackRef}
@@ -315,7 +307,6 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
               <Button
                 type="button"
                 variant="ghost"
-                size="icon"
                 onClick={() => scrollTestimonials("prev")}
                 className="catalog-carousel-btn landing-btn landing-btn-control"
                 aria-label={section.prevTestimonial}
@@ -326,7 +317,6 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
               <Button
                 type="button"
                 variant="ghost"
-                size="icon"
                 onClick={() => scrollTestimonials("next")}
                 className="catalog-carousel-btn landing-btn landing-btn-control"
                 aria-label={section.nextTestimonial}
@@ -336,6 +326,7 @@ export function WhyUs({ locale, metaContent, testimonials = [] }: WhyUsProps) {
               </Button>
             </div>
           </div>
+          )}
         </div>
       </div>
     </section>

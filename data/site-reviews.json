@@ -1,0 +1,84 @@
+{
+  "reviews": [
+    {
+      "id": "a1000001-0001-4000-8000-000000000001",
+      "locale": "en",
+      "quote": "Expert Travel helped us expand our fleet with quality vehicles at excellent prices. Their service and support have been exceptional.",
+      "author": "Martin Novak",
+      "company": "TransCargo s.r.o.",
+      "rating": 5,
+      "createdAt": "2025-01-08T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000002-0002-4000-8000-000000000002",
+      "locale": "en",
+      "quote": "Strong technical checks and clear communication through the whole purchase cycle.",
+      "author": "Petr Sikora",
+      "company": "Bohemia Logistics",
+      "rating": 5,
+      "createdAt": "2025-01-07T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000003-0003-4000-8000-000000000003",
+      "locale": "en",
+      "quote": "Documentation and delivery planning saved our operations team a lot of time.",
+      "author": "Iryna Kovalenko",
+      "company": "EastWest Transport",
+      "rating": 5,
+      "createdAt": "2025-01-06T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000004-0004-4000-8000-000000000004",
+      "locale": "en",
+      "quote": "Excellent communication and realistic timelines.",
+      "author": "Jan Krupa",
+      "company": "NorthLine Cargo",
+      "rating": 5,
+      "createdAt": "2025-01-05T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000005-0005-4000-8000-000000000005",
+      "locale": "en",
+      "quote": "The inspection report matched the vehicle condition precisely.",
+      "author": "Olha Danyliuk",
+      "company": "Transit Group",
+      "rating": 5,
+      "createdAt": "2025-01-04T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000006-0006-4000-8000-000000000006",
+      "locale": "en",
+      "quote": "Fast paperwork and smooth handover.",
+      "author": "Marek Benes",
+      "company": "Cargo One",
+      "rating": 4,
+      "createdAt": "2025-01-03T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000007-0007-4000-8000-000000000007",
+      "locale": "en",
+      "quote": "A practical partner for scaling transport operations.",
+      "author": "Dmytro Koval",
+      "company": "RouteX",
+      "rating": 5,
+      "createdAt": "2025-01-02T12:00:00.000Z",
+      "status": "approved"
+    },
+    {
+      "id": "a1000008-0008-4000-8000-000000000008",
+      "locale": "en",
+      "quote": "Good selection and no hidden surprises.",
+      "author": "Petra Svobodova",
+      "company": "EuroMove",
+      "rating": 4,
+      "createdAt": "2025-01-01T12:00:00.000Z",
+      "status": "approved"
+    }
+  ]
+}

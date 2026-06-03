@@ -19,7 +19,11 @@ cd /root/apps/mtrucklending
 git clone https://github.com/Makmillerme/mtruck-lending.git .
 
 cp .env.example .env
-# edit .env — SMTP settings for contact form
+# edit .env — SMTP, CTA_RECEIVER_EMAIL, REVIEWS_ADMIN_PASSWORD
+
+# Reviews are stored in data/site-reviews.json (mounted into the container).
+# After git pull, ensure data/ exists; seed file is committed in the repo.
+mkdir -p data
 ```
 
 ## Deploy / update
@@ -38,6 +42,13 @@ docker compose -f docker-compose.server.yml up -d
 ```
 
 App listens on host **3002** → container 3000.
+
+## Reviews (JSON)
+
+- Public list: `GET /api/reviews`
+- Admin UI: `/admin/reviews` (password from `REVIEWS_ADMIN_PASSWORD`)
+- Persistence: host directory `./data` is mounted to `/app/data` in the container
+- Edits from admin or new submissions update `data/site-reviews.json` on the server
 
 ## Nginx (optional)
 

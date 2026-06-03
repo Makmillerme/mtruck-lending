@@ -10,98 +10,98 @@ import { localizedField, parseAboutContent, parseAboutFeatures, pickText } from 
 const defaultAbout = {
   en: {
     badge: "About Us",
-    title: "Your Reliable Partner in",
-    titleHighlight: "Commercial Transport",
+    title: "Expert Travel — your partner in",
+    titleHighlight: "commercial vehicle trade",
     description:
-      "With over 15 years of experience in the European commercial vehicle market, we specialize in importing premium trucks, trailers, and cargo vehicles from leading European manufacturers.",
+      "Expert Travel s.r.o. is a Slovak company based in Banská Bystrica. We help businesses select, buy, and sell trucks and trailers from Europe — from wholesale and brokerage to full trade administration.",
     description2:
-      "Our team of experts ensures every vehicle meets the highest quality standards before delivery. We provide complete documentation, warranty, and after-sales support.",
+      "Every unit goes through a transparent process: history verification, pre-sale preparation (maintenance without engine work), registration documentation, and coordinated logistics including warehousing services.",
     aboutImageAlt: "Premium commercial truck, neon accent lighting",
-    imageCallouts: ["EU direct import", "Full documentation", "Verified quality", "Service record", "Export ready"],
-    bridgeTitle: "Import chain",
-    importChain: ["VIN & mileage check", "Pre-shipment inspection", "Registration pack", "EU-wide delivery"],
+    imageCallouts: ["Direct EU sourcing", "Verified history", "Full documentation", "Registration ready", "After-sales support"],
+    bridgeTitle: "How we work",
+    importChain: ["Vehicle selection", "Inspection & preparation", "Registration pack", "Handover & delivery"],
     stats: [
-      { value: "500+", label: "Vehicles delivered" },
-      { value: "15+", label: "Years experience" },
-      { value: "98%", label: "Client satisfaction" },
+      { value: "EU", label: "European sourcing" },
+      { value: "SK", label: "Slovakia HQ" },
+      { value: "55336574", label: "Company ID" },
     ],
     features: [
-      { icon: "Building2", title: "Czech Based", description: "Headquartered in Prague with EU-wide operations" },
-      { icon: "Users", title: "Expert Team", description: "Experienced professionals in commercial vehicles" },
-      { icon: "Globe2", title: "EU Network", description: "Direct partnerships with European suppliers" },
-      { icon: "TrendingUp", title: "Growing Fast", description: "500+ vehicles delivered to satisfied clients" },
+      { icon: "MapPin", title: "Based in Slovakia", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovakia" },
+      { icon: "Globe2", title: "Trade & brokerage", description: "Wholesale and retail vehicle sales plus brokerage across trade, services, and production" },
+      { icon: "Truck", title: "Logistics & storage", description: "Warehousing, auxiliary transport services, and delivery coordination across the EU" },
+      { icon: "Shield", title: "Documentation & prep", description: "Administrative support, marketing services, and pre-sale vehicle preparation" },
     ],
   },
   uk: {
     badge: "Про нас",
-    title: "Ваш надійний партнер у",
-    titleHighlight: "комерційних перевезеннях",
+    title: "Expert Travel — ваш партнер у",
+    titleHighlight: "торгівлі комерційною технікою",
     description:
-      "Маючи понад 15 років досвіду на європейському ринку комерційної техніки, ми спеціалізуємося на імпорті преміальних вантажівок, причепів та комерційних автомобілів від провідних європейських виробників.",
+      "Expert Travel s.r.o. — словацька компанія з Банської Бистриці. Допомагаємо бізнесу обирати, купувати та продавати вантажівки й причепи з Європи: від опту й посередництва до повного супроводу угоди.",
     description2:
-      "Наша команда експертів забезпечує відповідність кожного транспортного засобу найвищим стандартам якості перед доставкою. Ми надаємо повну документацію, гарантію та післяпродажну підтримку.",
+      "Кожна одиниця проходить прозорий процес: перевірка історії, передпродажна підготовка (обслуговування без втручання в силову частину), реєстраційні документи та координація логістики, зокрема складських послуг.",
     aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
-    imageCallouts: ["Прямий імпорт з ЄС", "Повна документація", "Перевірена якість", "Сервісна історія", "Готово до експорту"],
-    bridgeTitle: "Ланцюг імпорту",
-    importChain: ["Перевірка VIN та пробігу", "Огляд перед відправкою", "Пакет для реєстрації", "Доставка по ЄС"],
+    imageCallouts: ["Пряме джерело в ЄС", "Перевірена історія", "Повна документація", "Готово до реєстрації", "Підтримка після угоди"],
+    bridgeTitle: "Як ми працюємо",
+    importChain: ["Підбір техніки", "Огляд і підготовка", "Пакет для реєстрації", "Передача та доставка"],
     stats: [
-      { value: "500+", label: "Авто доставлено" },
-      { value: "15+", label: "Років досвіду" },
-      { value: "98%", label: "Задоволених клієнтів" },
+      { value: "ЄС", label: "Постачання з ЄС" },
+      { value: "SK", label: "Словаччина" },
+      { value: "55336574", label: "IČO" },
     ],
     features: [
-      { icon: "Building2", title: "Базуємося в Чехії", description: "Штаб-квартира в Празі з операціями по всьому ЄС" },
-      { icon: "Users", title: "Експертна команда", description: "Досвідчені професіонали в комерційній техніці" },
-      { icon: "Globe2", title: "Мережа ЄС", description: "Прямі партнерства з європейськими постачальниками" },
-      { icon: "TrendingUp", title: "Швидкий ріст", description: "500+ авто доставлено задоволеним клієнтам" },
+      { icon: "MapPin", title: "База в Словаччині", description: "Na Troskách 12, 974 01 Banská Bystrica, Словаччина" },
+      { icon: "Globe2", title: "Торгівля та посередництво", description: "Оптовий і роздрібний продаж техніки, посередницькі послуги в торгівлі та виробництві" },
+      { icon: "Truck", title: "Логістика та склад", description: "Складські, допоміжні та транспортні послуги, координація доставки по ЄС" },
+      { icon: "Shield", title: "Документи та підготовка", description: "Адміністративний супровід, маркетинг і передпродажна підготовка авто" },
     ],
   },
   sk: {
     badge: "O nás",
-    title: "Váš spoľahlivý partner v",
-    titleHighlight: "komerčnej doprave",
+    title: "Expert Travel — partner v",
+    titleHighlight: "obchode s úžitkovými vozidlami",
     description:
-      "S viac ako 15-ročnými skúsenosťami na európskom trhu úžitkových vozidiel sa špecializujeme na dovoz prémiových nákladných vozidiel, prívesov a úžitkových vozidiel od popredných európskych výrobcov.",
+      "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici. Pomáhame firmám s výberom, kúpou a predajom nákladných vozidiel a prívesov z Európy — od veľkoobchodu a sprostredkovania až po kompletnú administratívu obchodu.",
     description2:
-      "Náš tím expertov zabezpečí, že každé vozidlo spĺňa najvyššie štandardy kvality pred dodaním. Poskytujeme kompletnú dokumentáciu, záruku a popredajnú podporu.",
+      "Každé vozidlo prechádza transparentným procesom: overenie histórie, predajná príprava (údržba bez zásahu do motorickej časti vozidla), registračná dokumentácia a koordinácia logistiky vrátane skladových a prepravných služieb.",
     aboutImageAlt: "Prémiové nákladné vozidlo s neónovým osvetlením",
-    imageCallouts: ["Priamy dovoz z EÚ", "Kompletná dokumentácia", "Overená kvalita", "Servisná história", "Pripravené na export"],
-    bridgeTitle: "Reťazec dovozu",
-    importChain: ["Kontrola VIN a kilometrov", "Inšpekcia pred odoslaním", "Balík na registráciu", "Dodanie po celej EÚ"],
+    imageCallouts: ["Priamy dovoz z EÚ", "Overená história", "Kompletná dokumentácia", "Pripravené na registráciu", "Podpora po predaji"],
+    bridgeTitle: "Ako pracujeme",
+    importChain: ["Výber vozidla", "Kontrola a príprava", "Registračný balík", "Odovzdanie a dodanie"],
     stats: [
-      { value: "500+", label: "Dodaných vozidiel" },
-      { value: "15+", label: "Rokov skúseností" },
-      { value: "98%", label: "Spokojnosť klientov" },
+      { value: "EÚ", label: "Dovoz z Európy" },
+      { value: "SK", label: "Sídlo na Slovensku" },
+      { value: "55336574", label: "IČO" },
     ],
     features: [
-      { icon: "Building2", title: "Sídlo v Česku", description: "Centrála v Prahe s pôsobnosťou v celej EÚ" },
-      { icon: "Users", title: "Expertný tím", description: "Skúsení profesionáli v oblasti úžitkových vozidiel" },
-      { icon: "Globe2", title: "Sieť EÚ", description: "Priame partnerstvá s európskymi dodávateľmi" },
-      { icon: "TrendingUp", title: "Rýchly rast", description: "500+ vozidiel dodaných spokojným klientom" },
+      { icon: "MapPin", title: "Sídlo na Slovensku", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovensko" },
+      { icon: "Globe2", title: "Obchod a sprostredkovanie", description: "Veľkoobchodný a maloobchodný predaj vozidiel a sprostredkovateľská činnosť v obchode a službách" },
+      { icon: "Truck", title: "Logistika a sklad", description: "Skladové, pomocné a prepravné služby v doprave a koordinácia dodania po EÚ" },
+      { icon: "Shield", title: "Dokumentácia a príprava", description: "Administratívna správa, marketingové služby a predajná príprava vozidla" },
     ],
   },
   de: {
     badge: "Über uns",
-    title: "Ihr zuverlässiger Partner in der",
-    titleHighlight: "Gewerblichen Transportbranche",
+    title: "Expert Travel — Ihr Partner im",
+    titleHighlight: "Nutzfahrzeughandel",
     description:
-      "Mit über 15 Jahren Erfahrung auf dem europäischen Nutzfahrzeugmarkt sind wir auf den Import premium Lkw, Auflieger und Nutzfahrzeuge führender europäischer Hersteller spezialisiert.",
+      "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Sitz in Banská Bystrica. Wir unterstützen Firmen bei Auswahl, Kauf und Verkauf von Lkw und Aufliegern aus Europa — vom Großhandel und der Vermittlung bis zur vollständigen Abwicklung.",
     description2:
-      "Unser Expertenteam stellt sicher, dass jedes Fahrzeug vor der Auslieferung höchsten Qualitätsstandards entspricht. Wir liefern vollständige Dokumentation, Garantie und After-Sales-Support.",
+      "Jedes Fahrzeug durchläuft einen transparenten Prozess: Historienprüfung, verkaufsvorbereitende Wartung (ohne Eingriff in den Motor), Registrierungsunterlagen und koordinierte Logistik inklusive Lager- und Transportleistungen.",
     aboutImageAlt: "Premium-Lkw mit Neon-Akzentbeleuchtung",
-    imageCallouts: ["Direktimport aus der EU", "Vollständige Dokumentation", "Geprüfte Qualität", "Servicehistorie", "Exportbereit"],
-    bridgeTitle: "Importkette",
-    importChain: ["VIN- und Kilometerstandprüfung", "Inspektion vor Versand", "Registrierungspaket", "EU-weite Lieferung"],
+    imageCallouts: ["Direktbezug aus der EU", "Geprüfte Historie", "Vollständige Dokumentation", "Registrierungsbereit", "Support nach dem Kauf"],
+    bridgeTitle: "So arbeiten wir",
+    importChain: ["Fahrzeugauswahl", "Prüfung & Vorbereitung", "Registrierungspaket", "Übergabe & Lieferung"],
     stats: [
-      { value: "500+", label: "Gelieferte Fahrzeuge" },
-      { value: "15+", label: "Jahre Erfahrung" },
-      { value: "98%", label: "Kundenzufriedenheit" },
+      { value: "EU", label: "Bezug aus der EU" },
+      { value: "SK", label: "Sitz in der Slowakei" },
+      { value: "55336574", label: "ID-Nr." },
     ],
     features: [
-      { icon: "Building2", title: "Sitz in Tschechien", description: "Hauptsitz in Prag mit EU-weiten Operationen" },
-      { icon: "Users", title: "Expertenteam", description: "Erfahrene Fachkräfte im Nutzfahrzeugbereich" },
-      { icon: "Globe2", title: "EU-Netzwerk", description: "Direkte Partnerschaften mit europäischen Lieferanten" },
-      { icon: "TrendingUp", title: "Starkes Wachstum", description: "500+ Fahrzeuge an zufriedene Kunden geliefert" },
+      { icon: "MapPin", title: "Sitz in der Slowakei", description: "Na Troskách 12, 974 01 Banská Bystrica, Slowakei" },
+      { icon: "Globe2", title: "Handel & Vermittlung", description: "Groß- und Einzelhandel mit Fahrzeugen sowie Vermittlung im Handel, bei Dienstleistungen und in der Produktion" },
+      { icon: "Truck", title: "Logistik & Lager", description: "Lager-, Hilfs- und Transportleistungen sowie Lieferkoordination in der EU" },
+      { icon: "Shield", title: "Dokumentation & Vorbereitung", description: "Administrative Betreuung, Marketingleistungen und verkaufsvorbereitende Aufbereitung" },
     ],
   },
 } as const;
@@ -203,7 +203,7 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
   };
   const statLabelByKey: Record<string, string> = Object.fromEntries(
     base.stats.map((item, index) => {
-      const keys = ["vehicles_delivered", "years_experience", "client_satisfaction"];
+      const keys = ["eu_sourcing", "sk_headquarters", "company_id"];
       return [keys[index] ?? `stat_${index}`, item.label];
     }),
   );
@@ -278,7 +278,7 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
               </div>
               <div className="about-callouts-overlay pointer-events-none absolute inset-0">
                 {calloutLayout.map((layout, index) => {
-                  const label = about.imageCallouts[index];
+                  const label = about.importChain[index];
                   if (!label) return null;
                   return (
                     <AboutFloatingCallout
@@ -292,23 +292,6 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
                   );
                 })}
               </div>
-            </div>
-
-            <div
-              className={cn(
-                "about-callouts-mobile",
-                sectionActive && "about-callouts-mobile--in-view",
-              )}
-            >
-              {about.imageCallouts.map((label, index) => (
-                <span
-                  key={`mobile-callout-${index}`}
-                  className="landing-pipeline-pill landing-pipeline-pill--compact"
-                  style={{ transitionDelay: `${index * 80}ms` } as CSSProperties}
-                >
-                  {label}
-                </span>
-              ))}
             </div>
 
             <div className="about-visual-lower">

@@ -73,6 +73,22 @@ test.describe("Desktop layout regression", () => {
     expect(pipelineLayout.stepCount).toBeGreaterThanOrEqual(4);
   });
 
+  test("mobile menu toggle hidden at desktop nav breakpoint (1024px)", async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    await expect(page.locator(".landing-header-nav")).toBeVisible();
+    await expect(page.locator(".landing-header-icon-toggle")).toBeHidden();
+  });
+
+  test("mobile menu toggle visible below desktop nav breakpoint (1023px)", async ({ page }) => {
+    await page.setViewportSize({ width: 1023, height: 800 });
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    await expect(page.locator(".landing-header-nav")).toBeHidden();
+    await expect(page.locator(".landing-header-icon-toggle")).toBeVisible();
+  });
+
   for (const { label, firstNav } of [
     { label: "Українська", firstNav: "Головна" },
     { label: "Deutsch", firstNav: "Start" },

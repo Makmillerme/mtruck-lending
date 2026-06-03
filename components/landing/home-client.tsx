@@ -34,6 +34,7 @@ export function HomeClient({ initialData, sectionOrder }: HomeClientProps) {
     };
   }, []);
 
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -87,11 +88,7 @@ export function HomeClient({ initialData, sectionOrder }: HomeClientProps) {
       />
     ),
     "why-us": (
-      <WhyUs
-        locale={contentLocale}
-        metaContent={data.content["why-us"][contentLocale]}
-        testimonials={data.testimonials}
-      />
+      <WhyUs locale={contentLocale} metaContent={data.content["why-us"][contentLocale]} />
     ),
     faq: (
       <FAQ locale={contentLocale} faqsData={data.faqs} metaContent={data.content["faq-meta"][contentLocale]} />

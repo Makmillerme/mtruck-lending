@@ -2,6 +2,8 @@ import {
   Building2,
   Container,
   Globe2,
+  MapPin,
+  Shield,
   TrendingUp,
   Truck,
   Users,
@@ -98,6 +100,8 @@ const featureIconMap: Record<string, LucideIcon> = {
   TrendingUp,
   Truck,
   Container,
+  MapPin,
+  Shield,
 };
 
 export function parseAboutFeatures(meta?: Record<string, unknown>) {

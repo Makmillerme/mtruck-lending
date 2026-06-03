@@ -3,7 +3,7 @@ import { pickEntityLocale } from "@/lib/pick-locale";
 import type { CatalogBrandCard } from "@/components/landing/catalog-brand-modal";
 import { getCatalogBrandLogo, getCatalogBrandLogoKey } from "@/lib/catalog-brand-logo";
 import type { CatalogBrand } from "@/lib/catalog-brands";
-import { pickLocalized } from "@/lib/catalog-brands";
+import { getCatalogBrandByName, pickBodyTypeOfferings, pickLocalized } from "@/lib/catalog-brands";
 
 export type CatalogCategory = "truck" | "trailer";
 
@@ -62,6 +62,8 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
     de: vehicle.descriptionDe,
   });
 
+  const staticBrand = getCatalogBrandByName(vehicle.brand);
+
   return {
     id: String(vehicle.id),
     name: vehicle.brand,
@@ -73,6 +75,7 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
     bodyTypes: listForLocale(meta, "bodyTypes", locale),
     configurations: listForLocale(meta, "configurations", locale),
     typicalSpecs: listForLocale(meta, "typicalSpecs", locale),
+    bodyTypeOfferings: pickBodyTypeOfferings(staticBrand?.bodyTypeItems, locale),
   };
 }
 
@@ -88,5 +91,6 @@ export function catalogBrandToCard(brand: CatalogBrand, locale: Locale): Catalog
     bodyTypes: pickLocalized(brand.bodyTypes, locale),
     configurations: pickLocalized(brand.configurations, locale),
     typicalSpecs: pickLocalized(brand.typicalSpecs, locale),
+    bodyTypeOfferings: pickBodyTypeOfferings(brand.bodyTypeItems, locale),
   };
 }
