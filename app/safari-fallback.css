@@ -1,0 +1,100 @@
+/**
+ * Color + surface fallbacks when oklch() is unsupported (older WebKit).
+ * Loaded after globals.css so tokens override invalid oklch declarations.
+ */
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --background: #1a2540;
+    --foreground: #fafafa;
+    --card: #1e2a42;
+    --card-foreground: #fafafa;
+    --popover: #182238;
+    --popover-foreground: #fafafa;
+    --primary: #b8bcc8;
+    --primary-foreground: #121a2e;
+    --secondary: #243352;
+    --secondary-foreground: #f2f4f8;
+    --muted: #2d3d5c;
+    --muted-foreground: #9aa3b5;
+    --accent: #a8adb8;
+    --accent-foreground: #10182a;
+    --destructive: #dc2626;
+    --destructive-foreground: #fafafa;
+    --border: #3a4d6e;
+    --input: #243352;
+    --ring: #8a94a8;
+    --chart-1: #6b8fd4;
+    --chart-2: #5a8ab8;
+    --chart-3: #b8bcc8;
+    --chart-4: #4a6a9a;
+    --chart-5: #c4c8d0;
+    --sidebar: #141e32;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #b0b4c0;
+    --sidebar-primary-foreground: #10182a;
+    --sidebar-accent: #1e2a40;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #2d3d5c;
+    --sidebar-ring: #7a8498;
+  }
+
+  .landing-bg {
+    background:
+      radial-gradient(ellipse 120% 70% at 50% -18%, rgba(100, 168, 240, 0.34), transparent 58%),
+      radial-gradient(ellipse 85% 55% at 100% 22%, rgba(88, 150, 228, 0.3), transparent 56%),
+      radial-gradient(ellipse 80% 50% at 0% 58%, rgba(78, 140, 220, 0.28), transparent 54%),
+      radial-gradient(ellipse 90% 45% at 50% 108%, rgba(72, 130, 210, 0.24), transparent 60%),
+      linear-gradient(180deg, #1c2844 0%, #1a2540 42%, #1b2742 100%),
+      #1a2540;
+  }
+
+  .landing-bg::before {
+    background:
+      radial-gradient(ellipse 70% 42% at 18% 8%, rgba(120, 188, 255, 0.26), transparent 62%),
+      radial-gradient(ellipse 55% 38% at 82% 18%, rgba(108, 175, 245, 0.24), transparent 58%);
+  }
+
+  .hero-bg-layer {
+    background: #0c1424;
+  }
+
+  .hero-bg-scrim {
+    background: linear-gradient(
+      90deg,
+      rgba(8, 18, 36, 0.86) 0%,
+      rgba(12, 24, 44, 0.72) 11rem,
+      rgba(14, 28, 50, 0.46) 19rem,
+      rgba(16, 32, 54, 0.18) 23.5rem,
+      transparent 28rem
+    );
+  }
+
+  .landing-bg section.section-about-bg,
+  .landing-bg section.section-services-bg,
+  .landing-bg section.section-catalog-bg {
+    background: transparent;
+  }
+
+  .landing-bg section.section-about-bg::after {
+    background:
+      radial-gradient(ellipse 96% 82% at 12% 50%, rgba(72, 140, 220, 0.28) 0%, transparent 62%),
+      radial-gradient(ellipse 70% 58% at 94% 48%, rgba(68, 128, 210, 0.22) 0%, transparent 58%),
+      radial-gradient(ellipse 120% 45% at 50% -12%, rgba(76, 140, 220, 0.18) 0%, transparent 64%);
+  }
+
+  .landing-bg section.section-services-bg::after {
+    background:
+      radial-gradient(ellipse 88% 72% at 92% 38%, rgba(78, 150, 230, 0.26) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 55% at 8% 62%, rgba(68, 130, 210, 0.18) 0%, transparent 58%);
+  }
+
+  .landing-bg section.section-catalog-bg::after {
+    background:
+      radial-gradient(ellipse 82% 68% at 8% 42%, rgba(70, 135, 215, 0.26) 0%, transparent 60%),
+      radial-gradient(ellipse 75% 60% at 92% 55%, rgba(66, 128, 205, 0.22) 0%, transparent 58%);
+  }
+
+  .chrome-gradient {
+    background: linear-gradient(135deg, #d4d8e0 0%, #9aa3b5 50%, #d4d8e0 100%);
+  }
+}

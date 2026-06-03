@@ -36,7 +36,14 @@ test.describe("Section seam accents", () => {
       expect(seam, `${selector} missing`).not.toBeNull();
       expect(seam!.hasClass).toBe(true);
       expect(seam!.beforeContent).not.toBe("none");
-      expect(seam!.afterContent).toBe("none");
+      /* ::after may hold section glow bleed (about/services/catalog) */
+      if (seam!.afterContent !== "none" && seam!.afterContent !== "") {
+        const afterBottom = await page.evaluate((sectionSelector) => {
+          const section = document.querySelector(sectionSelector) as HTMLElement | null;
+          return section ? getComputedStyle(section, "::after").bottom : null;
+        }, selector);
+        expect(afterBottom).not.toBe("0px");
+      }
       expect(seam!.bottom).toBe("0px");
       expect(seam!.animationName).toBe("seamGlowSweep");
       expect(parseFloat(seam!.height)).toBeLessThanOrEqual(3);

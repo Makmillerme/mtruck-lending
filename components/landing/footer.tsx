@@ -12,9 +12,13 @@ import { parseFooterContent, parseNavItems, pickText } from "@/lib/landing-secti
 
 const defaultContent = {
   en: {
-    ctaTitle: "Ready to find your ideal transport?",
-    ctaText: "Contact us today for a personalized consultation and a competitive offer.",
-    ctaButton: "Contact us",
+    ctaEyebrow: "Your next step",
+    ctaTitle: "Let us match the right commercial vehicle to your business",
+    ctaText:
+      "Share your routes, payload, and budget — we will shortlist vetted options from Europe with clear terms and no pushy sales.",
+    ctaPoints: ["Tailored sourcing", "Inspection & paperwork", "Delivery support"],
+    ctaHint: "We reply on business days, often the same day",
+    ctaButton: "Request a shortlist",
     brandText: "Your reliable partner for premium commercial vehicles from Europe.",
     linksTitle: "Quick links",
     servicesTitle: "Services",
@@ -30,9 +34,13 @@ const defaultContent = {
     ],
   },
   uk: {
-    ctaTitle: "Готові знайти свій ідеальний транспорт?",
-    ctaText: "Зверніться до нас сьогодні для персональної консультації та конкурентної пропозиції.",
-    ctaButton: "Зв'язатися з нами",
+    ctaEyebrow: "Наступний крок",
+    ctaTitle: "Підберемо комерційну техніку під ваш бізнес",
+    ctaText:
+      "Розкажіть про маршрути, вантаопідйомність і бюджет — запропонуємо перевірені варіанти з Європи з прозорими умовами, без нав'язливих продажів.",
+    ctaPoints: ["Підбір під задачі", "Перевірка та документи", "Доставка та супровід"],
+    ctaHint: "Відповідаємо в робочий час, зазвичай того ж дня",
+    ctaButton: "Отримати підбір",
     brandText: "Ваш надійний партнер з преміальної комерційної техніки з Європи.",
     linksTitle: "Швидкі посилання",
     servicesTitle: "Послуги",
@@ -48,9 +56,13 @@ const defaultContent = {
     ],
   },
   sk: {
-    ctaTitle: "Pripravení nájsť ideálne vozidlo?",
-    ctaText: "Kontaktujte nás ešte dnes pre personalizovanú konzultáciu a konkurenčnú ponuku.",
-    ctaButton: "Kontaktujte nás",
+    ctaEyebrow: "Ďalší krok",
+    ctaTitle: "Pomôžeme nájsť správne úžitkové vozidlo pre váš biznis",
+    ctaText:
+      "Opíšte trasy, nosnosť a rozpočet — pripravíme overené ponuky z Európy s jasnými podmienkami a bez nátlaku.",
+    ctaPoints: ["Individuálny výber", "Kontrola a dokumenty", "Doručenie a podpora"],
+    ctaHint: "Odpovedáme v pracovných dňoch, často v ten istý deň",
+    ctaButton: "Požiadať o výber",
     brandText: "Váš spoľahlivý partner pre prémiové úžitkové vozidlá z Európy.",
     linksTitle: "Rýchle odkazy",
     servicesTitle: "Služby",
@@ -66,9 +78,13 @@ const defaultContent = {
     ],
   },
   de: {
-    ctaTitle: "Bereit, Ihr ideales Fahrzeug zu finden?",
-    ctaText: "Kontaktieren Sie uns noch heute für eine persönliche Beratung und ein wettbewerbsfähiges Angebot.",
-    ctaButton: "Kontakt aufnehmen",
+    ctaEyebrow: "Ihr nächster Schritt",
+    ctaTitle: "Wir finden das passende Nutzfahrzeug für Ihr Geschäft",
+    ctaText:
+      "Beschreiben Sie Strecken, Nutzlast und Budget — wir schlagen geprüfte Optionen aus Europa mit klaren Konditionen vor, ohne Verkaufsdruck.",
+    ctaPoints: ["Individuelle Auswahl", "Prüfung & Unterlagen", "Lieferung & Betreuung"],
+    ctaHint: "Antwort an Werktagen, oft noch am selben Tag",
+    ctaButton: "Auswahl anfragen",
     brandText: "Ihr zuverlässiger Partner für Premium-Nutzfahrzeuge aus Europa.",
     linksTitle: "Schnelllinks",
     servicesTitle: "Leistungen",
@@ -117,8 +133,11 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
   const cms = parseFooterContent(sectionContent);
   const base = defaultContent[locale];
   const footer = {
+    ctaEyebrow: base.ctaEyebrow,
     ctaTitle: pickText(cms.ctaTitle, base.ctaTitle),
     ctaText: pickText(cms.ctaText, base.ctaText),
+    ctaPoints: base.ctaPoints,
+    ctaHint: base.ctaHint,
     ctaButton: pickText(cms.ctaButton, base.ctaButton),
     brandText: pickText(cms.brandText, base.brandText),
     linksTitle: pickText(cms.linksTitle, base.linksTitle),
@@ -168,28 +187,35 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
         <div className="footer-cta-card">
           <div className="footer-cta-shine" aria-hidden="true" />
           <div className="footer-cta-grid">
-            <div>
-              <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-                {footer.ctaTitle}
-              </h2>
-              <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-muted-foreground">
-                {footer.ctaText}
-              </p>
+            <div className="footer-cta-copy">
+              <p className="footer-cta-eyebrow">{footer.ctaEyebrow}</p>
+              <h2 className="footer-cta-title">{footer.ctaTitle}</h2>
+              <p className="footer-cta-lead">{footer.ctaText}</p>
+              <ul className="footer-cta-points" aria-label={footer.ctaTitle}>
+                {footer.ctaPoints.map((point) => (
+                  <li key={point} className="footer-cta-point">
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <CtaFormModal
-              locale={locale}
-              entryPoint="footer"
-              contactEmail={email}
-              contactPhone={phone}
-            >
-              <Button
-                type="button"
-                className="landing-btn landing-btn-primary footer-cta-button w-full min-w-0 px-6 sm:w-auto sm:min-w-48"
+            <div className="footer-cta-action">
+              <p className="footer-cta-action-hint">{footer.ctaHint}</p>
+              <CtaFormModal
+                locale={locale}
+                entryPoint="footer"
+                contactEmail={email}
+                contactPhone={phone}
               >
-                {footer.ctaButton}
-              </Button>
-            </CtaFormModal>
+                <Button
+                  type="button"
+                  className="landing-btn landing-btn-primary footer-cta-button w-full min-w-0 px-6 sm:w-auto sm:min-w-52"
+                >
+                  {footer.ctaButton}
+                </Button>
+              </CtaFormModal>
+            </div>
           </div>
         </div>
 

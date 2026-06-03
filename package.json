@@ -8,8 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "optimize:hero": "node scripts/optimize-hero.mjs",
+    "optimize:brands": "node scripts/optimize-brand-logos.mjs",
     "test:e2e": "playwright test",
-    "test:e2e:scroll": "playwright test tests/scroll-perf.spec.ts"
+    "test:e2e:scroll": "playwright test tests/scroll-perf.spec.ts",
+    "test:e2e:webkit": "playwright test tests/safari-visual-parity.spec.ts --project=webkit-iphone",
+    "debug:webkit-visual": "node scripts/debug-webkit-visual.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.12",

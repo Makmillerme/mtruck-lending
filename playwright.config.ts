@@ -14,18 +14,24 @@ export default defineConfig({
   projects: [
     {
       name: "mobile-chrome",
-      testIgnore: /desktop-regression/,
+      testIgnore: [/desktop-regression/, /safari-visual-parity/],
       use: { ...devices["Pixel 5"] },
     },
     {
       name: "desktop-chrome",
+      testIgnore: /safari-visual-parity/,
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "webkit-iphone",
+      testMatch: /safari-visual-parity/,
+      use: { ...devices["iPhone 13"] },
     },
   ],
   webServer: {
-    command: "npm run dev",
+    command: process.env.PLAYWRIGHT_PRODUCTION ? "npm run start" : "npm run dev",
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: process.env.PLAYWRIGHT_PRODUCTION ? 60_000 : 120_000,
   },
 });

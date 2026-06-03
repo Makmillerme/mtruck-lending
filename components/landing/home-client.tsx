@@ -34,7 +34,6 @@ export function HomeClient({ initialData, sectionOrder }: HomeClientProps) {
     };
   }, []);
 
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CatalogBodyTypeOfferingCard } from "@/components/landing/catalog-body-type-offering-card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import type { CatalogBodyTypeOffering } from "@/lib/catalog-brands";
+import { getCatalogBrandLogoFull } from "@/lib/catalog-brand-logo";
 import type { Locale } from "@/lib/locale";
 
 export type CatalogBrandCard = {
@@ -107,6 +108,7 @@ function InfoList({ title, items }: { title: string; items: string[] }) {
 
 export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalProps) {
   const t = labels[locale];
+  const modalLogoSrc = getCatalogBrandLogoFull(brand.name) ?? brand.logoSrc;
   const hasTagline = Boolean(brand.tagline?.trim());
   const hasHighlights = brand.highlights.length > 0;
   const hasOverview = Boolean(brand.overview?.trim());
@@ -128,9 +130,9 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
           <div className="catalog-brand-card-media-glow absolute inset-0" aria-hidden="true" />
 
           <div className="relative z-10 space-y-3">
-            {brand.logoSrc ? (
+            {modalLogoSrc ? (
               <Image
-                src={brand.logoSrc}
+                src={modalLogoSrc}
                 alt={brand.name}
                 width={160}
                 height={56}

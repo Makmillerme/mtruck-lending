@@ -261,7 +261,7 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
       id="about"
       ref={aboutSectionRef}
       data-about-active={sectionActive ? "" : undefined}
-      className="section-y-balanced section-about-bg section-seam-accent landing-section-deferred"
+      className="section-y-balanced section-about-bg section-seam-accent landing-section-contained"
     >
       <div className="landing-page-container">
         <div className="about-layout-grid grid items-stretch gap-10 lg:grid-cols-[0.94fr_1.06fr] lg:gap-12">
@@ -334,8 +334,8 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
             </div>
 
             <div className="max-w-2xl space-y-4">
-              <p className="text-[15px] leading-relaxed text-muted-foreground">{about.description}</p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">{about.description2}</p>
+              <p className="landing-body-text">{about.description}</p>
+              <p className="landing-body-text">{about.description2}</p>
             </div>
 
             <div className="about-features-grid landing-card-grid grid gap-4 sm:grid-cols-2">

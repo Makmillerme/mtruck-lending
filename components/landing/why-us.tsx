@@ -229,7 +229,7 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
   }, [carouselKey, carousel.length, locale]);
 
   return (
-    <section id="why-us" className="section-y-balanced section-blend section-seam-accent landing-section-deferred relative">
+    <section id="why-us" className="section-y-balanced section-blend section-seam-accent landing-section-contained relative">
       <div className="landing-page-container relative z-10">
         <div className="landing-section-head items-center text-center mx-auto mb-12">
           <span className="landing-section-badge">{section.badge}</span>

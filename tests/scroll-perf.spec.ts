@@ -50,16 +50,19 @@ test.describe("Landing scroll performance", () => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 
     const contentVisibility = await page.evaluate(() => {
+      const about = document.getElementById("about");
       const services = document.getElementById("services");
       const catalog = document.getElementById("catalog");
-      if (!services || !catalog) return { services: "", catalog: "" };
+      if (!about || !services || !catalog) return { about: "", services: "", catalog: "" };
 
       return {
+        about: getComputedStyle(about).contentVisibility,
         services: getComputedStyle(services).contentVisibility,
         catalog: getComputedStyle(catalog).contentVisibility,
       };
     });
 
+    expect(contentVisibility.about).not.toBe("auto");
     expect(contentVisibility.services).not.toBe("auto");
     expect(contentVisibility.catalog).not.toBe("auto");
 
@@ -80,19 +83,18 @@ test.describe("Landing scroll performance", () => {
     await expect(page.locator("#services")).toBeVisible();
     await expect(page.locator("#catalog")).toBeVisible();
 
-    const marqueePausedOffscreen = await page.evaluate(() => {
-      const catalog = document.getElementById("catalog");
-      const track = catalog?.querySelector(".catalog-brand-marquee-track");
-      if (!catalog || !track) return true;
-
-      const rect = catalog.getBoundingClientRect();
-      const offscreen = rect.bottom < 0 || rect.top > window.innerHeight;
-      if (!offscreen) return true;
-
-      return getComputedStyle(track).animationPlayState === "paused";
+    const marqueeState = await page.evaluate(() => {
+      const track = document.querySelector("#catalog .catalog-brand-marquee-track");
+      if (!track) return { animated: false, pillCount: 0 };
+      const style = getComputedStyle(track);
+      return {
+        animated: style.animationName !== "none",
+        pillCount: track.querySelectorAll(".catalog-brand-marquee-pill").length,
+      };
     });
 
-    expect(marqueePausedOffscreen).toBe(true);
+    expect(marqueeState.animated).toBe(true);
+    expect(marqueeState.pillCount).toBeGreaterThan(6);
   });
 
   test("hero assets are optimized and about section is reachable", async ({ page, request }) => {
@@ -233,7 +235,7 @@ test.describe("Landing mobile UI polish", () => {
     );
   });
 
-  test("catalog brand marquee animates when in view on mobile", async ({ page }) => {
+  test("catalog brand marquee animates with duplicated pills", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 
     await page.evaluate(() => {
@@ -242,18 +244,30 @@ test.describe("Landing mobile UI polish", () => {
 
     await expect(page.locator("#catalog .catalog-brand-marquee-track")).toBeVisible();
 
-    const animation = await page.evaluate(() => {
+    const marquee = await page.evaluate(() => {
       const track = document.querySelector("#catalog .catalog-brand-marquee-track");
-      if (!track) return { name: "none", duration: "0s" };
+      if (!track) return { name: "none", pillCount: 0, scrollable: false };
 
       const style = getComputedStyle(track);
       return {
         name: style.animationName,
-        duration: style.animationDuration,
+        pillCount: track.querySelectorAll(".catalog-brand-marquee-pill").length,
+        scrollable: track.scrollWidth > track.clientWidth,
       };
     });
 
-    expect(animation.name).not.toBe("none");
-    expect(parseFloat(animation.duration)).toBeGreaterThan(0);
+    const prefersReducedMotion = await page.evaluate(
+      () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    );
+
+    if (prefersReducedMotion) {
+      expect(marquee.name).toBe("none");
+      expect(marquee.scrollable || marquee.pillCount > 0).toBe(true);
+    } else {
+      expect(marquee.name).not.toBe("none");
+    }
+
+    expect(marquee.pillCount).toBeGreaterThan(6);
+    expect(marquee.pillCount % 2).toBe(0);
   });
 });

@@ -50,9 +50,18 @@ App listens on host **3002** → container 3000.
 - Persistence: host directory `./data` is mounted to `/app/data` in the container
 - Edits from admin or new submissions update `data/site-reviews.json` on the server
 
+## Public URL
+
+This app is **not** `komerciyamtruck.duckdns.org` (that is a separate project on the same server).
+
+Until you configure your own nginx vhost:
+
+- On the server: `http://127.0.0.1:3002` (or the host’s public IP with port **3002** open)
+- Local dev: `http://localhost:3000`
+
 ## Nginx (optional)
 
-Proxy your domain to `http://127.0.0.1:3002`.
+Proxy **your** Expert Travel domain to `http://127.0.0.1:3002` (do not reuse the komerciyamtruck vhost).
 
 ## Cleanup legacy partial deploy
 

@@ -6,6 +6,7 @@ import { LocaleProvider } from '@/lib/locale-context'
 import { LOCALE_COOKIE, resolveInitialLocale } from '@/lib/locale-cookie'
 import { metadataForLocale } from '@/lib/site-metadata'
 import './globals.css'
+import './safari-fallback.css'
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],

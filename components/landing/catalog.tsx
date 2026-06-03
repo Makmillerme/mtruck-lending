@@ -101,7 +101,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
   const [showCardControls, setShowCardControls] = useState(true);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
-  const [isSectionInView, setIsSectionInView] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -110,6 +109,11 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
     const unique = [...new Set(vehiclesData.map((item) => item.brand).filter(Boolean))];
     return unique.length ? unique : defaultMarqueeBrands;
   }, [vehiclesData]);
+
+  const marqueeLoop = useMemo(
+    () => [...marqueeBrands, ...marqueeBrands],
+    [marqueeBrands],
+  );
 
   const categoryBrands = useMemo<CatalogBrandCard[]>(() => {
     const fromDb = vehiclesData
@@ -143,7 +147,13 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
         ? Math.min(cards.length - 1, currentIndex + 1)
         : Math.max(0, currentIndex - 1);
 
-    cards[targetIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    const target = cards[targetIndex];
+    if (!target) return;
+
+    el.scrollTo({
+      left: target.offsetLeft,
+      behavior: "smooth",
+    });
   };
 
   const hasMultipleCards = categoryBrands.length > 1;
@@ -159,10 +169,11 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
 
     const update = () => {
       rafId = 0;
-      const maxScrollLeft = Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      const viewport = track.clientWidth;
+      const maxScrollLeft = Math.max(0, track.scrollWidth - viewport);
       const scrollLeft = track.scrollLeft;
       const epsilon = 2;
-      const scrollable = useScrollTrack && track.scrollWidth > wrapper.clientWidth + epsilon;
+      const scrollable = useScrollTrack && track.scrollWidth > viewport + epsilon;
 
       setShowCardControls((prev) => (prev === scrollable ? prev : scrollable));
       setCanScrollPrev((prev) => {
@@ -183,10 +194,10 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
     const scheduleWithFallback = () => {
       schedule();
       if (remeasureTimer) clearTimeout(remeasureTimer);
-      remeasureTimer = setTimeout(schedule, 120);
+      remeasureTimer = setTimeout(schedule, 200);
     };
 
-    scheduleWithFallback();
+    schedule();
 
     const resizeObserver = new ResizeObserver(scheduleWithFallback);
     resizeObserver.observe(wrapper);
@@ -194,7 +205,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
 
     track.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", scheduleWithFallback);
-    window.addEventListener("load", scheduleWithFallback);
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
@@ -202,80 +212,32 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
       resizeObserver.disconnect();
       track.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", scheduleWithFallback);
-      window.removeEventListener("load", scheduleWithFallback);
     };
-  }, [activeCategory, categoryBrandsKey, useScrollTrack, isSectionInView]);
+  }, [activeCategory, categoryBrandsKey, useScrollTrack]);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    let scrollEndTimer: ReturnType<typeof setTimeout> | undefined;
+    const root = document.documentElement;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        setIsSectionInView(Boolean(entry?.isIntersecting));
-      },
-      {
-        threshold: 0.05,
-        rootMargin: "200px 0px",
-      },
-    );
+    const onScroll = () => {
+      root.dataset.landingScrolling = "true";
+      if (scrollEndTimer) clearTimeout(scrollEndTimer);
+      scrollEndTimer = setTimeout(() => {
+        delete root.dataset.landingScrolling;
+      }, 280);
+    };
 
-    observer.observe(section);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollEndTimer) clearTimeout(scrollEndTimer);
+      delete root.dataset.landingScrolling;
+    };
   }, []);
 
   useEffect(() => {
     trackRef.current?.scrollTo({ left: 0 });
   }, [activeCategory]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || !useScrollTrack) return;
-
-    let startX = 0;
-    let startY = 0;
-    let scrollAxis: "x" | "y" | null = null;
-
-    const resetTrackOverflow = () => {
-      track.style.removeProperty("overflow-x");
-      scrollAxis = null;
-    };
-
-    const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length !== 1) return;
-      startX = event.touches[0].clientX;
-      startY = event.touches[0].clientY;
-      scrollAxis = null;
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      if (event.touches.length !== 1 || scrollAxis !== null) return;
-
-      const dx = event.touches[0].clientX - startX;
-      const dy = event.touches[0].clientY - startY;
-
-      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-
-      scrollAxis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-      if (scrollAxis === "y") {
-        track.style.overflowX = "hidden";
-      }
-    };
-
-    track.addEventListener("touchstart", onTouchStart, { passive: true });
-    track.addEventListener("touchmove", onTouchMove, { passive: true });
-    track.addEventListener("touchend", resetTrackOverflow, { passive: true });
-    track.addEventListener("touchcancel", resetTrackOverflow, { passive: true });
-
-    return () => {
-      track.removeEventListener("touchstart", onTouchStart);
-      track.removeEventListener("touchmove", onTouchMove);
-      track.removeEventListener("touchend", resetTrackOverflow);
-      track.removeEventListener("touchcancel", resetTrackOverflow);
-      resetTrackOverflow();
-    };
-  }, [useScrollTrack, activeCategory]);
 
   return (
     <>
@@ -293,8 +255,8 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
             </div>
 
             <div className="catalog-brand-marquee" aria-hidden="true">
-            <div className={cn("catalog-brand-marquee-track", !isSectionInView && "catalog-brand-marquee-track--paused")}>
-              {[...marqueeBrands, ...marqueeBrands].map((brand, index) => (
+            <div className="catalog-brand-marquee-track">
+              {marqueeLoop.map((brand, index) => (
                 <span
                   key={`${brand}-${index}`}
                   className="landing-pipeline-pill catalog-brand-marquee-pill"
@@ -352,11 +314,12 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                             <Image
                               src={brand.logoSrc}
                               alt={`${brand.name} logo`}
-                              fill
+                              width={160}
+                              height={120}
                               loading="lazy"
                               decoding="async"
-                              sizes="(max-width: 768px) 120px, 160px"
-                              className="catalog-brand-card-logo"
+                              sizes="160px"
+                              className="catalog-brand-card-logo h-full w-full object-contain"
                             />
                           </div>
                         ) : null}

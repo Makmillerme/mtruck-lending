@@ -81,7 +81,6 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
               srcSet="/images/hero-road-bg-mobile.webp"
               type="image/webp"
             />
-            <source srcSet="/images/hero-road-bg.avif" type="image/avif" />
             <source srcSet="/images/hero-road-bg.webp" type="image/webp" />
             <img
               src="/images/hero-road-bg.png"

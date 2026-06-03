@@ -1,5 +1,16 @@
+/** Full-size logos (modal, detail). Mercedes SVG is ~1.5MB — use card raster in carousel. */
 const brandLogos: Record<string, string> = {
   mercedes: "/brands/mercedes.svg",
+  man: "/brands/man.svg",
+  scania: "/brands/scania.svg",
+  volvo: "/brands/volvo.svg",
+  renault: "/brands/renault.svg",
+  daf: "/brands/daf.svg",
+};
+
+/** Lightweight assets for catalog carousel cards. */
+const cardBrandLogos: Record<string, string> = {
+  mercedes: "/brands/mercedes-card.webp",
   man: "/brands/man.svg",
   scania: "/brands/scania.svg",
   volvo: "/brands/volvo.svg",
@@ -26,7 +37,15 @@ export function getCatalogBrandLogoKey(brand: string): string | null {
   return firstWord && brandLogos[firstWord] ? firstWord : null;
 }
 
+/** Logo for catalog carousel cards — uses optimized raster for heavy SVGs. */
 export function getCatalogBrandLogo(brand: string): string | null {
+  const key = getCatalogBrandLogoKey(brand);
+  if (!key) return null;
+  return cardBrandLogos[key] ?? brandLogos[key] ?? null;
+}
+
+/** Full logo (e.g. brand modal) — may include large SVGs. */
+export function getCatalogBrandLogoFull(brand: string): string | null {
   const key = getCatalogBrandLogoKey(brand);
   return key ? brandLogos[key] : null;
 }
