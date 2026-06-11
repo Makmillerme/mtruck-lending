@@ -23,31 +23,37 @@ test.describe("Safari / WebKit visual parity", () => {
     await expect(page.locator("#home h1").first()).toBeVisible();
   });
 
-  test(".chrome-gradient title line stays readable", async ({ page }) => {
+  test(".chrome-gradient accent text stays readable without background box", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    const highlight = page.locator("#home .chrome-gradient").first();
-    await expect(highlight).toBeVisible();
 
-    const text = (await highlight.textContent())?.trim();
-    expect(text?.length).toBeGreaterThan(0);
+    for (const selector of ["#home", "#about", "#services"]) {
+      const highlight = page.locator(`${selector} .chrome-gradient`).first();
+      await expect(highlight, `${selector} accent`).toBeVisible();
 
-    const box = await highlight.boundingBox();
-    expect(box?.width).toBeGreaterThan(24);
-    expect(box?.height).toBeGreaterThan(16);
+      const text = (await highlight.textContent())?.trim();
+      expect(text?.length, `${selector} accent text`).toBeGreaterThan(0);
 
-    const styles = await highlight.evaluate((el) => {
-      const cs = getComputedStyle(el);
-      return {
-        color: cs.color,
-        webkitTextFillColor: cs.getPropertyValue("-webkit-text-fill-color"),
-        backgroundClip: cs.backgroundClip,
-      };
-    });
+      const styles = await highlight.evaluate((el) => {
+        const cs = getComputedStyle(el);
+        return {
+          color: cs.color,
+          webkitTextFillColor: cs.getPropertyValue("-webkit-text-fill-color"),
+          backgroundClip: cs.backgroundClip,
+          backgroundImage: cs.backgroundImage,
+        };
+      });
 
-    const fillAlpha = parseRgbAlpha(styles.webkitTextFillColor || styles.color);
-    const colorAlpha = parseRgbAlpha(styles.color);
-    const hasVisibleFill = fillAlpha > 0.15 || colorAlpha > 0.15;
-    expect(hasVisibleFill, `gradient text invisible: ${JSON.stringify(styles)}`).toBe(true);
+      const fillAlpha = parseRgbAlpha(styles.webkitTextFillColor || styles.color);
+      const colorAlpha = parseRgbAlpha(styles.color);
+      const hasVisibleFill = fillAlpha > 0.15 || colorAlpha > 0.15;
+      expect(hasVisibleFill, `${selector} gradient text invisible: ${JSON.stringify(styles)}`).toBe(
+        true,
+      );
+      expect(
+        styles.backgroundImage,
+        `${selector}: touch devices must not paint an unclipped gradient box behind accent text`,
+      ).toBe("none");
+    }
   });
 
   test("body uses a non-transparent landing background", async ({ page }) => {

@@ -95,6 +95,20 @@
   }
 
   .chrome-gradient {
-    background: linear-gradient(135deg, #d4d8e0 0%, #9aa3b5 50%, #d4d8e0 100%);
+    color: #d4d8e0;
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    @supports (background-clip: text) {
+      .chrome-gradient {
+        background: linear-gradient(135deg, #d4d8e0 0%, #9aa3b5 50%, #d4d8e0 100%);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
   }
 }

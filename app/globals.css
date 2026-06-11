@@ -2087,17 +2087,26 @@ html[data-landing-scrolling] .catalog-brand-marquee-track {
 .chrome-gradient {
   color: #d4d8e0;
   -webkit-text-fill-color: currentColor;
-  background: linear-gradient(
-    135deg,
-    oklch(0.85 0.01 250) 0%,
-    oklch(0.65 0.02 250) 50%,
-    oklch(0.85 0.01 250) 100%
-  );
+  background: none;
+}
+
+@media (pointer: coarse) {
+  .chrome-gradient {
+    background: none;
+    color: #d4d8e0;
+    -webkit-text-fill-color: currentColor;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
   @supports (background-clip: text) {
     .chrome-gradient {
+      background: linear-gradient(
+        135deg,
+        oklch(0.85 0.01 250) 0%,
+        oklch(0.65 0.02 250) 50%,
+        oklch(0.85 0.01 250) 100%
+      );
       color: transparent;
       background-clip: text;
       -webkit-background-clip: text;
