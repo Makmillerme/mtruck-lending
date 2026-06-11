@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { CatalogBodyTypeOfferingCard } from "@/components/landing/catalog-body-type-offering-card";
+import { CtaFormModal } from "@/components/landing/cta-form-modal";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import type { CatalogBodyTypeOffering } from "@/lib/catalog-brands";
 import { getCatalogBrandLogoFull } from "@/lib/catalog-brand-logo";
@@ -33,56 +35,46 @@ type ModalLabels = {
   configurations: string;
   typicalSpecs: string;
   modelRange: string;
-  modifications: string;
-  generalSpecs: string;
   note: string;
-  close: string;
+  quoteCta: string;
 };
 
 const labels: Record<Locale, ModalLabels> = {
   en: {
     overview: "About the brand",
-    bodyTypes: "Body types",
-    configurations: "Configurations",
-    typicalSpecs: "Typical specifications",
+    bodyTypes: "Chassis and body types",
+    configurations: "Configuration and equipment",
+    typicalSpecs: "Supply standard",
     modelRange: "Model range",
-    modifications: "Modifications",
-    generalSpecs: "General data",
-    note: "We help select and import equipment that matches your routes, cargo profile, and fleet standards.",
-    close: "Close",
+    note: "We help shortlist equipment for your routes, cargo profile, and fleet standards — then prepare a commercial quote from verified EU sources.",
+    quoteCta: "Get a quote",
   },
   uk: {
     overview: "Про бренд",
-    bodyTypes: "Типи кузовів",
-    configurations: "Комплектації",
-    typicalSpecs: "Типові характеристики",
+    bodyTypes: "Типи шасі та кузовів",
+    configurations: "Конфігурація та оснащення",
+    typicalSpecs: "Стандарт постачання",
     modelRange: "Моделі",
-    modifications: "Модифікації",
-    generalSpecs: "Загальні дані",
-    note: "Допомагаємо підібрати та імпортувати техніку під ваші маршрути, вантаж і стандарти автопарку.",
-    close: "Закрити",
+    note: "Допомагаємо підібрати варіанти техніки під ваші маршрути, вантаж і стандарти автопарку — далі готуємо комерційну пропозицію з перевірених джерел у ЄС.",
+    quoteCta: "Отримати пропозицію",
   },
   sk: {
     overview: "O značke",
-    bodyTypes: "Typy nadstavieb",
-    configurations: "Konfigurácie",
-    typicalSpecs: "Typické špecifikácie",
+    bodyTypes: "Typy podvozkov a nadstavieb",
+    configurations: "Konfigurácia a výbava",
+    typicalSpecs: "Štandard dodávky",
     modelRange: "Modely",
-    modifications: "Modifikácie",
-    generalSpecs: "Všeobecné údaje",
-    note: "Pomáhame vybrať a doviezť techniku podľa vašich trás, nákladu a štandardov flotily.",
-    close: "Zavrieť",
+    note: "Pomáhame vybrať varianty techniky podľa vašich trás, nákladu a štandardov flotily — potom pripravíme obchodnú ponuku z overených zdrojov v EÚ.",
+    quoteCta: "Získať ponuku",
   },
   de: {
     overview: "Über die Marke",
-    bodyTypes: "Aufbauten",
-    configurations: "Konfigurationen",
-    typicalSpecs: "Typische Spezifikationen",
+    bodyTypes: "Fahrgestell- und Aufbautypen",
+    configurations: "Konfiguration und Ausstattung",
+    typicalSpecs: "Lieferstandard",
     modelRange: "Modellpalette",
-    modifications: "Modifikationen",
-    generalSpecs: "Allgemeine Daten",
-    note: "Wir helfen bei Auswahl und Import von Fahrzeugen passend zu Ihren Strecken, Frachtprofil und Flottenstandards.",
-    close: "Schließen",
+    note: "Wir helfen bei der Auswahl passender Fahrzeuge für Ihre Strecken, Frachtprofil und Flottenstandards — anschließend erstellen wir ein Angebot aus verifizierten EU-Quellen.",
+    quoteCta: "Angebot anfordern",
   },
 };
 
@@ -175,15 +167,7 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
               </h3>
               <div className="catalog-body-type-list">
                 {bodyTypeOfferings.map((offering) => (
-                  <CatalogBodyTypeOfferingCard
-                    key={offering.id}
-                    offering={offering}
-                    labels={{
-                      bodyTypes: t.bodyTypes,
-                      modifications: t.modifications,
-                      generalSpecs: t.generalSpecs,
-                    }}
-                  />
+                  <CatalogBodyTypeOfferingCard key={offering.id} offering={offering} />
                 ))}
               </div>
             </div>
@@ -205,6 +189,14 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
               {t.note}
             </p>
           ) : null}
+
+          <div className="border-t border-cyan-200/12 pt-6">
+            <CtaFormModal locale={locale} entryPoint="catalog" brandName={brand.name}>
+              <Button type="button" className="landing-btn landing-btn-primary w-full">
+                {t.quoteCta}
+              </Button>
+            </CtaFormModal>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

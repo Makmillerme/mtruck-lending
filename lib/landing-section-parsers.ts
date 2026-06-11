@@ -284,7 +284,7 @@ export function localizedField(
   return "";
 }
 
-export type CtaEntryPoint = "header" | "hero" | "footer";
+export type CtaEntryPoint = "header" | "hero" | "footer" | "catalog";
 
 function modalGroup(value: unknown): Record<string, unknown> {
   return value && typeof value === "object" ? (value as Record<string, unknown>) : {};
@@ -335,6 +335,7 @@ export function parseContactModalContent(meta?: Record<string, unknown>): Contac
       header: asString(titles.header) || fallbackTitle,
       hero: asString(titles.hero) || fallbackTitle,
       footer: asString(titles.footer) || fallbackTitle,
+      catalog: asString(titles.catalog) || fallbackTitle,
     },
     description: asString(contact.description) || asString(contact.subtitle),
     fields: {
@@ -358,6 +359,7 @@ export function parseContactModalContent(meta?: Record<string, unknown>): Contac
       header: asString(sourceLabels.header),
       hero: asString(sourceLabels.hero),
       footer: asString(sourceLabels.footer),
+      catalog: asString(sourceLabels.catalog),
     },
   };
 }

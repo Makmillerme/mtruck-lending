@@ -10,7 +10,7 @@ export const runtime = "nodejs";
 
 const payloadSchema = z.object({
   locale: z.enum(["en", "uk", "sk", "de"]),
-  entryPoint: z.enum(["header", "hero", "footer"]),
+  entryPoint: z.enum(["header", "hero", "footer", "catalog"]),
   sourceLabel: z.string().trim().max(120).optional(),
   name: z.string().trim().min(1).max(120),
   phone: z.string().trim().min(1).max(80),

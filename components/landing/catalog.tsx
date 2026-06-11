@@ -20,42 +20,42 @@ import { parseCatalogTabs, pickMetaString, pickText } from "@/lib/landing-sectio
 
 const content = {
   en: {
-    badge: "Our Catalog",
-    title: "Brands We",
-    titleHighlight: "Work With",
+    badge: "Supply focus",
+    title: "Brands we",
+    titleHighlight: "work with",
     description:
-      "An overview of the commercial brands we import — body types, configurations, and typical specifications for your fleet planning.",
-    learnMore: "Learn more",
+      "We source, acquire, and officially export equipment from leading European manufacturers tailored to your business requirements.",
+    learnMore: "Get a quote",
     prevBrands: "Previous brands",
     nextBrands: "Next brands",
   },
   uk: {
-    badge: "Наш каталог",
+    badge: "Напрямки постачання",
     title: "Бренди, з",
     titleHighlight: "якими працюємо",
     description:
-      "Огляд комерційних брендів, які ми імпортуємо — типи кузовів, комплектації та типові характеристики для планування автопарку.",
-    learnMore: "Дізнатися більше",
+      "Ми забезпечуємо підбір, викуп та офіційний експорт техніки від провідних європейських виробників під ваші індивідуальні бізнес-задачі.",
+    learnMore: "Отримати пропозицію",
     prevBrands: "Попередні бренди",
     nextBrands: "Наступні бренди",
   },
   sk: {
-    badge: "Náš katalóg",
+    badge: "Smery dodávok",
     title: "Značky, s",
     titleHighlight: "ktorými pracujeme",
     description:
-      "Prehľad komerčných značiek, ktoré dovážame — typy nadstavieb, konfigurácie a typické špecifikácie pre plánovanie vozového parku.",
-    learnMore: "Viac informácií",
+      "Zabezpečujeme výber, výkup a oficiálny export techniky od popredných európskych výrobcov podľa vašich obchodných požiadaviek.",
+    learnMore: "Získať ponuku",
     prevBrands: "Predchádzajúce značky",
     nextBrands: "Ďalšie značky",
   },
   de: {
-    badge: "Unser Katalog",
+    badge: "Lieferrichtungen",
     title: "Marken, mit",
     titleHighlight: "denen wir arbeiten",
     description:
-      "Überblick über die Nutzfahrzeugmarken, die wir importieren — Aufbauten, Konfigurationen und typische Spezifikationen für Ihre Flottenplanung.",
-    learnMore: "Mehr erfahren",
+      "Wir übernehmen Auswahl, Ankauf und offiziellen Export von Fahrzeugen führender europäischer Hersteller — passend zu Ihren Geschäftsanforderungen.",
+    learnMore: "Angebot anfordern",
     prevBrands: "Vorherige Marken",
     nextBrands: "Nächste Marken",
   },

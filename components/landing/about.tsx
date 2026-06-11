@@ -13,7 +13,7 @@ const defaultAbout = {
     title: "Expert Travel — your partner in",
     titleHighlight: "commercial vehicle trade",
     description:
-      "Expert Travel s.r.o. is a Slovak company based in Banská Bystrica. We help businesses select, buy, and sell trucks and trailers from Europe — from wholesale and brokerage to full trade administration.",
+      "Expert Travel s.r.o. is a Slovak company with headquarters in Banská Bystrica — a full participant in the European commercial vehicle market. We cover the full B2B supply cycle: from fleet sales within the EU to organising official export of trucks and trailers to Eastern Europe and CIS countries.",
     description2:
       "Every unit goes through a transparent process: history verification, pre-sale preparation (maintenance without engine work), registration documentation, and coordinated logistics including warehousing services.",
     aboutImageAlt: "Premium commercial truck, neon accent lighting",
@@ -37,7 +37,7 @@ const defaultAbout = {
     title: "Expert Travel — ваш партнер у",
     titleHighlight: "торгівлі комерційною технікою",
     description:
-      "Expert Travel s.r.o. — словацька компанія з Банської Бистриці. Допомагаємо бізнесу обирати, купувати та продавати вантажівки й причепи з Європи: від опту й посередництва до повного супроводу угоди.",
+      "Expert Travel s.r.o. — словацька компанія з головним офісом у Банській Бистриці, повноцінний учасник європейського ринку комерційної техніки. Ми забезпечуємо повний цикл B2B-поставок: від продажу автопаркам всередині ЄС до організації офіційного експорту вантажівок та причепів у країни Східної Європи та СНД.",
     description2:
       "Кожна одиниця проходить прозорий процес: перевірка історії, передпродажна підготовка (обслуговування без втручання в силову частину), реєстраційні документи та координація логістики, зокрема складських послуг.",
     aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
@@ -61,7 +61,7 @@ const defaultAbout = {
     title: "Expert Travel — partner v",
     titleHighlight: "obchode s úžitkovými vozidlami",
     description:
-      "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici. Pomáhame firmám s výberom, kúpou a predajom nákladných vozidiel a prívesov z Európy — od veľkoobchodu a sprostredkovania až po kompletnú administratívu obchodu.",
+      "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici, plnohodnotný účastník európskeho trhu s úžitkovými vozidlami. Zabezpečujeme celý cyklus B2B dodávok: od predaja flotilám v rámci EÚ až po organizáciu oficiálneho exportu nákladných vozidiel a prívesov do krajín východnej Európy a SNŠ.",
     description2:
       "Každé vozidlo prechádza transparentným procesom: overenie histórie, predajná príprava (údržba bez zásahu do motorickej časti vozidla), registračná dokumentácia a koordinácia logistiky vrátane skladových a prepravných služieb.",
     aboutImageAlt: "Prémiové nákladné vozidlo s neónovým osvetlením",
@@ -85,7 +85,7 @@ const defaultAbout = {
     title: "Expert Travel — Ihr Partner im",
     titleHighlight: "Nutzfahrzeughandel",
     description:
-      "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Sitz in Banská Bystrica. Wir unterstützen Firmen bei Auswahl, Kauf und Verkauf von Lkw und Aufliegern aus Europa — vom Großhandel und der Vermittlung bis zur vollständigen Abwicklung.",
+      "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Hauptsitz in Banská Bystrica — ein vollwertiger Akteur auf dem europäischen Nutzfahrzeugmarkt. Wir decken den gesamten B2B-Lieferzyklus ab: vom Flottenverkauf innerhalb der EU bis zur Organisation des offiziellen Exports von Lkw und Aufliegern in Länder Osteuropas und der GUS.",
     description2:
       "Jedes Fahrzeug durchläuft einen transparenten Prozess: Historienprüfung, verkaufsvorbereitende Wartung (ohne Eingriff in den Motor), Registrierungsunterlagen und koordinierte Logistik inklusive Lager- und Transportleistungen.",
     aboutImageAlt: "Premium-Lkw mit Neon-Akzentbeleuchtung",

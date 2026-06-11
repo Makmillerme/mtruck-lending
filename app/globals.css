@@ -1244,60 +1244,13 @@ html[data-landing-scrolling] .catalog-brand-marquee-track {
   background: oklch(0.16 0.02 252 / 0.35);
 }
 
-.catalog-body-type-details {
-  display: grid;
-  gap: 1rem;
-  padding: 0 1.125rem 1.125rem;
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.catalog-body-type-detail {
-  min-width: 0;
-}
-
-@media (min-width: 640px) {
-  .catalog-body-type-details {
-    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    gap: 1.25rem;
-  }
-}
-
-.catalog-body-type-detail-title {
-  margin: 0 0 0.5rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: oklch(0.82 0.06 220 / 0.78);
-}
-
-.catalog-body-type-detail-list {
+.catalog-body-type-description {
   margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.catalog-body-type-detail-list li {
-  position: relative;
-  padding-left: 0.85rem;
-  font-size: 0.875rem;
-  line-height: 1.55;
-  color: oklch(0.88 0.02 248 / 0.82);
-}
-
-.catalog-body-type-detail-list li + li {
-  margin-top: 0.35rem;
-}
-
-.catalog-body-type-detail-list li::before {
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 0.25rem;
-  height: 0.25rem;
-  border-radius: 9999px;
-  background: oklch(0.78 0.08 220 / 0.75);
-  content: "";
+  max-width: 42rem;
+  padding: 0 1.125rem 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: oklch(0.88 0.02 248 / 0.86);
 }
 
 .catalog-spec-pill {

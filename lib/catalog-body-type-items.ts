@@ -1,43 +1,33 @@
 import type { Locale } from "@/lib/locale";
 
 type LocalizedText = Record<Locale, string>;
-type LocalizedList = Record<Locale, string[]>;
 
 export type CatalogBodyTypeItem = {
   id: string;
   imageSrc: string;
   imageAlt: LocalizedText;
   title: LocalizedText;
-  bodyTypes: LocalizedList;
-  modifications: LocalizedList;
-  specs: LocalizedList;
 };
 
 const PLACEHOLDER = "/catalog/body-types/placeholder.svg";
 
-function item(
+function modelItem(
   brandId: string,
   id: string,
   title: LocalizedText,
   imageAlt: LocalizedText,
-  bodyTypes: LocalizedList,
-  modifications: LocalizedList,
-  specs: LocalizedList,
 ): CatalogBodyTypeItem {
   return {
     id: `${brandId}-${id}`,
     imageSrc: PLACEHOLDER,
     imageAlt,
     title,
-    bodyTypes,
-    modifications,
-    specs,
   };
 }
 
 export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]> = {
   mercedes: [
-    item(
+    modelItem(
       "mercedes",
       "actros",
       { en: "Actros", uk: "Actros", sk: "Actros", de: "Actros" },
@@ -47,26 +37,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Mercedes-Benz Actros",
         de: "Mercedes-Benz Actros",
       },
-      {
-        en: ["Long-haul tractors 4x2 and 6x2", "Sleeper cab line-haul", "Swap body and container chassis"],
-        uk: ["Магістральні тягачі 4x2 та 6x2", "Sleeper cab для дальніх маршрутів", "Шасі під swap body та контейнеровоз"],
-        sk: ["Diaľkové ťahače 4x2 a 6x2", "Sleeper cab pre dlhé trasy", "Podvozok pre swap body a kontajner"],
-        de: ["Fernverkehrszugmaschinen 4x2 und 6x2", "Schlafkabine Fernverkehr", "Wechselbrücken- und Container-Fahrgestell"],
-      },
-      {
-        en: ["GigaSpace and StreamSpace sleeper cabs", "PowerShift and manual transmissions", "Predictive Powertrain Control"],
-        uk: ["Спальні кабіни GigaSpace і StreamSpace", "КПП PowerShift і механічні", "Predictive Powertrain Control"],
-        sk: ["Spacie kabíny GigaSpace a StreamSpace", "Prevodovky PowerShift a manuálne", "Predictive Powertrain Control"],
-        de: ["GigaSpace- und StreamSpace-Schlafkabinen", "PowerShift- und Schaltgetriebe", "Predictive Powertrain Control"],
-      },
-      {
-        en: ["Engine power 420–530 hp", "EURO 6", "Full air suspension and disc brakes"],
-        uk: ["Потужність двигуна 420–530 к.с.", "EURO 6", "Повна пневмопідвіска та дискові гальма"],
-        sk: ["Výkon motora 420–530 hp", "EURO 6", "Plné pneumatické odpruženie a kotúčové brzdy"],
-        de: ["Motorleistung 420–530 PS", "EURO 6", "Vollluftfederung und Scheibenbremsen"],
-      },
     ),
-    item(
+    modelItem(
       "mercedes",
       "atego",
       { en: "Atego", uk: "Atego", sk: "Atego", de: "Atego" },
@@ -76,26 +48,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Mercedes-Benz Atego",
         de: "Mercedes-Benz Atego",
       },
-      {
-        en: ["Regional distribution chassis", "Box and curtainsider bodies", "Refrigerated urban logistics"],
-        uk: ["Регіональне розподільне шасі", "Фургонні та бортові кузови", "Міський рефрижератор"],
-        sk: ["Regionálny distribučný podvozok", "Skriňové a plachtové nadstavby", "Mestská chladiarenská logistika"],
-        de: ["Regionales Verteilungsfahrgestell", "Koffer- und Planenaufbauten", "Städtische Kühllogistik"],
-      },
-      {
-        en: ["Day cab and short cab variants", "Manual and automated gearboxes", "Crane and liftgate preparation"],
-        uk: ["Day cab і коротка кабіна", "Механічні та автоматичні КПП", "Підготовка під КМУ та гідроборт"],
-        sk: ["Day cab a krátka kabína", "Manuálne a automatické prevodovky", "Príprava pre žeriav a hydraulickú čelo"],
-        de: ["Day Cab und Kurzhauber", "Schalt- und Automatikgetriebe", "Kran- und Ladebordwand-Vorbereitung"],
-      },
-      {
-        en: ["Engine power 220–340 hp", "EURO 6", "Verified service history"],
-        uk: ["Потужність 220–340 к.с.", "EURO 6", "Підтверджена сервісна історія"],
-        sk: ["Výkon 220–340 hp", "EURO 6", "Overená servisná história"],
-        de: ["Leistung 220–340 PS", "EURO 6", "Verifizierte Servicehistorie"],
-      },
     ),
-    item(
+    modelItem(
       "mercedes",
       "arocs",
       { en: "Arocs", uk: "Arocs", sk: "Arocs", de: "Arocs" },
@@ -105,28 +59,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Mercedes-Benz Arocs",
         de: "Mercedes-Benz Arocs",
       },
-      {
-        en: ["Construction and tipper chassis", "Mixer and crane superstructures", "Container and swap body setups"],
-        uk: ["Будівельне та самоскидне шасі", "Міксери та КМУ", "Контейнеровоз і swap body"],
-        sk: ["Stavebný a sklápací podvozok", "Miešače a žeriavové nadstavby", "Kontajnerovoz a swap body"],
-        de: ["Bau- und Kipperfahrgestell", "Mischer- und Kranaufbauten", "Container- und Wechselbrücken-Setups"],
-      },
-      {
-        en: ["All-wheel-drive variants", "Reinforced frame packages", "Off-road axle configurations"],
-        uk: ["Повнопривідні версії", "Посилена рама", "Пакети осей для бездоріжжя"],
-        sk: ["Plný pohon varianty", "Zosilnený rám", "Terénne konfigurácie náprav"],
-        de: ["Allradvarianten", "Verstärkter Rahmen", "Offroad-Achskonfigurationen"],
-      },
-      {
-        en: ["Engine power 360–460 hp", "EURO 6", "Fleet telematics ready"],
-        uk: ["Потужність 360–460 к.с.", "EURO 6", "Підготовка під телематику автопарку"],
-        sk: ["Výkon 360–460 hp", "EURO 6", "Pripravenosť na flotovú telematiku"],
-        de: ["Leistung 360–460 PS", "EURO 6", "Flotten-Telematik vorbereitet"],
-      },
     ),
   ],
   man: [
-    item(
+    modelItem(
       "man",
       "tgx",
       { en: "TGX", uk: "TGX", sk: "TGX", de: "TGX" },
@@ -136,26 +72,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Diaľkový ťahač MAN TGX",
         de: "MAN TGX Fernverkehrszugmaschine",
       },
-      {
-        en: ["Tractor units 4x2 and 6x2", "Sleeper cab line-haul", "International forwarding"],
-        uk: ["Тягачі 4x2 та 6x2", "Магістральні sleeper cab", "Міжнародні перевезення"],
-        sk: ["Ťahače 4x2 a 6x2", "Diaľkové sleeper cab", "Medzinárodná preprava"],
-        de: ["Zugmaschinen 4x2 und 6x2", "Fernverkehr mit Schlafkabine", "Internationaler Fernverkehr"],
-      },
-      {
-        en: ["XLX / GX sleeper cabs", "Automatic and manual transmissions", "Retarder and fleet telematics"],
-        uk: ["Спальні кабіни XLX / GX", "Автоматичні та механічні КПП", "Retarder і телематика"],
-        sk: ["Spacie kabíny XLX / GX", "Automatické a manuálne prevodovky", "Retarder a telematika"],
-        de: ["XLX- / GX-Schlafkabinen", "Automatik- und Schaltgetriebe", "Retarder und Flotten-Telematik"],
-      },
-      {
-        en: ["Engine power 400–510 hp", "EURO 6", "Verified mileage and maintenance records"],
-        uk: ["Потужність 400–510 к.с.", "EURO 6", "Підтверджений пробіг і сервісна документація"],
-        sk: ["Výkon 400–510 hp", "EURO 6", "Overený km a servisná dokumentácia"],
-        de: ["Leistung 400–510 PS", "EURO 6", "Verifizierter Kilometerstand und Wartungsnachweise"],
-      },
     ),
-    item(
+    modelItem(
       "man",
       "tgs",
       { en: "TGS", uk: "TGS", sk: "TGS", de: "TGS" },
@@ -165,26 +83,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Distribučný a stavebný MAN TGS",
         de: "MAN TGS Verteilungs- und Baufahrzeug",
       },
-      {
-        en: ["Distribution tractors", "Chassis for tipper and mixer", "Construction site logistics"],
-        uk: ["Розподільні тягачі", "Шасі під самоскид і міксер", "Будівельна логістика"],
-        sk: ["Distribučné ťahače", "Podvozok pre sklápač a miešač", "Stavebná logistika"],
-        de: ["Verteilungszugmaschinen", "Fahrgestell für Kipper und Mischer", "Baustellenlogistik"],
-      },
-      {
-        en: ["Day cab and short cab variants", "All-wheel-drive options", "PTO and hydraulics packages"],
-        uk: ["Day cab і коротка кабіна", "Повнопривідні версії", "ВОМ і гідравліка"],
-        sk: ["Day cab a krátka kabína", "Plný pohon varianty", "PTO a hydraulika"],
-        de: ["Day Cab und Kurzhauber", "Allradoptionen", "PTO- und Hydraulikpakete"],
-      },
-      {
-        en: ["Air suspension and disc brakes", "EURO 6", "Pre-delivery inspection"],
-        uk: ["Пневмопідвіска та дискові гальма", "EURO 6", "Перевірка перед передачею"],
-        sk: ["Pneumatické odpruženie a kotúčové brzdy", "EURO 6", "Kontrola pred odovzdaním"],
-        de: ["Luftfederung und Scheibenbremsen", "EURO 6", "Abnahmeprüfung"],
-      },
     ),
-    item(
+    modelItem(
       "man",
       "tgm",
       { en: "TGM", uk: "TGM", sk: "TGM", de: "TGM" },
@@ -194,26 +94,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "MAN TGM stredne ťažký nákladný automobil",
         de: "MAN TGM Mittelklasse-Lkw",
       },
-      {
-        en: ["Regional distribution chassis", "Urban delivery setups", "Municipal and service bodies"],
-        uk: ["Регіональне розподільне шасі", "Міська доставка", "Комунальні та сервісні надбудови"],
-        sk: ["Regionálny distribučný podvozok", "Mestská distribúcia", "Komunálne a servisné nadstavby"],
-        de: ["Regionales Verteilungsfahrgestell", "Stadtverteilung", "Kommunal- und Serviceaufbauten"],
-      },
-      {
-        en: ["Compact cab layouts", "Manual and automated gearboxes", "Crane and liftgate preparation"],
-        uk: ["Компактні кабіни", "Механічні та автоматичні КПП", "Підготовка під КМУ та гідроборт"],
-        sk: ["Kompaktné kabíny", "Manuálne a automatické prevodovky", "Príprava pre žeriav a hydraulickú čelo"],
-        de: ["Kompaktkabinen", "Schalt- und Automatikgetriebe", "Kran- und Ladebordwand-Vorbereitung"],
-      },
-      {
-        en: ["Engine power 220–340 hp", "EURO 6", "Fleet-ready documentation"],
-        uk: ["Потужність 220–340 к.с.", "EURO 6", "Документація для автопарку"],
-        sk: ["Výkon 220–340 hp", "EURO 6", "Dokumentácia pripravená pre flotilu"],
-        de: ["Leistung 220–340 PS", "EURO 6", "Flottenfertige Dokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "man",
       "tgl",
       { en: "TGL", uk: "TGL", sk: "TGL", de: "TGL" },
@@ -223,28 +105,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "MAN TGL ľahký nákladný automobil",
         de: "MAN TGL Leicht-Lkw",
       },
-      {
-        en: ["City and last-mile delivery", "Box and curtainsider bodies", "Refrigerated urban logistics"],
-        uk: ["Міська та остання миля", "Фургонні та бортові кузови", "Міський рефрижератор"],
-        sk: ["Mestská a posledná míľa", "Skriňové a plachtové nadstavby", "Mestská chladiarenská logistika"],
-        de: ["Stadt- und Last-Mile-Verteilung", "Koffer- und Planenaufbauten", "Städtische Kühllogistik"],
-      },
-      {
-        en: ["Low cab height options", "Efficient city axle layouts", "Body-builder friendly frame"],
-        uk: ["Низькопрофільні кабіни", "Міські схеми осей", "Шасі під надбудовника"],
-        sk: ["Nízke kabíny", "Mestské nápravové konfigurácie", "Podvozok vhodný pre karosára"],
-        de: ["Niedrigbauende Kabinen", "Stadt-Achslayouts", "Aufbauherstellerfreundlicher Rahmen"],
-      },
-      {
-        en: ["Engine power 150–250 hp", "EURO 6", "Verified service history"],
-        uk: ["Потужність 150–250 к.с.", "EURO 6", "Підтверджена сервісна історія"],
-        sk: ["Výkon 150–250 hp", "EURO 6", "Overená servisná história"],
-        de: ["Leistung 150–250 PS", "EURO 6", "Verifizierte Servicehistorie"],
-      },
     ),
   ],
   scania: [
-    item(
+    modelItem(
       "scania",
       "r-series",
       { en: "R-series", uk: "R-series", sk: "R-series", de: "R-series" },
@@ -254,26 +118,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Diaľkový ťahač Scania R-series",
         de: "Scania R-Serie Fernverkehrszugmaschine",
       },
-      {
-        en: ["Line-haul tractors 4x2 / 6x2", "Temperature-controlled fleet units", "Premium sleeper configurations"],
-        uk: ["Магістральні тягачі 4x2 / 6x2", "Рефрижераторні автопарки", "Преміальні sleeper конфігурації"],
-        sk: ["Diaľkové ťahače 4x2 / 6x2", "Chladiarenské flotily", "Prémiové sleeper konfigurácie"],
-        de: ["Fernverkehrszugmaschinen 4x2 / 6x2", "Kühlflotten-Einheiten", "Premium-Sleeper-Konfigurationen"],
-      },
-      {
-        en: ["Opticruise gearbox", "Retarder and adaptive cruise", "High-roof and normal-roof cabs"],
-        uk: ["КПП Opticruise", "Retarder і adaptive cruise", "Кабіни high-roof і standard"],
-        sk: ["Prevodovka Opticruise", "Retarder a adaptívny tempomat", "Kabíny high-roof a standard"],
-        de: ["Opticruise-Getriebe", "Retarder und adaptiver Tempomat", "Hochdach- und Standardkabinen"],
-      },
-      {
-        en: ["450–500 hp range", "EURO 6", "Full import documentation"],
-        uk: ["Діапазон 450–500 к.с.", "EURO 6", "Повний пакет імпортної документації"],
-        sk: ["Rozsah 450–500 hp", "EURO 6", "Kompletná importná dokumentácia"],
-        de: ["450–500 PS", "EURO 6", "Vollständiges Import-Dokumentationspaket"],
-      },
     ),
-    item(
+    modelItem(
       "scania",
       "s-series",
       { en: "S-series", uk: "S-series", sk: "S-series", de: "S-series" },
@@ -283,26 +129,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Prémiový diaľkový ťahač Scania S-series",
         de: "Scania S-Serie Premium-Fernverkehrszugmaschine",
       },
-      {
-        en: ["Top-tier line-haul tractors", "Driver comfort focused fleets", "Low-deck fifth wheel setups"],
-        uk: ["Топові магістральні тягачі", "Автопарки з акцентом на комфорт", "Низьке сідло"],
-        sk: ["Vrchné diaľkové ťahače", "Flotily zamerané na komfort", "Nízky odstup s sedla"],
-        de: ["Top-Fernverkehrszugmaschinen", "Komfortorientierte Flotten", "Niedrig-Sattel-Setups"],
-      },
-      {
-        en: ["P-disc brake packages", "Air-suspended cabs", "Fleet telematics ready"],
-        uk: ["P-disc гальма", "Кабіни з пневмопідвіскою", "Підготовка під телематику"],
-        sk: ["Kotúčové brzdy P-disc", "Kabíny s pneumatickým odpružením", "Pripravenosť na telematiku"],
-        de: ["P-disc-Bremspakete", "Luftgefederte Kabinen", "Flotten-Telematik vorbereitet"],
-      },
-      {
-        en: ["500+ hp options", "EURO 6", "Verified service history"],
-        uk: ["Версії 500+ к.с.", "EURO 6", "Підтверджена сервісна історія"],
-        sk: ["Verzie 500+ hp", "EURO 6", "Overená servisná história"],
-        de: ["500+ PS Optionen", "EURO 6", "Verifizierte Servicehistorie"],
-      },
     ),
-    item(
+    modelItem(
       "scania",
       "p-series",
       { en: "P-series", uk: "P-series", sk: "P-series", de: "P-series" },
@@ -312,28 +140,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Distribučný Scania P-series",
         de: "Scania P-Serie Verteilungsfahrzeug",
       },
-      {
-        en: ["Regional distribution chassis", "Day cab urban routes", "Construction support trucks"],
-        uk: ["Регіональне розподільне шасі", "Day cab для міста", "Підтримка будівельних обʼєктів"],
-        sk: ["Regionálny distribučný podvozok", "Day cab pre mesto", "Podpora stavebných projektov"],
-        de: ["Regionales Verteilungsfahrgestell", "Day Cab für Stadtverkehr", "Baustellen-Support-Lkw"],
-      },
-      {
-        en: ["Compact and medium cab heights", "Manual and Opticruise options", "Tipper and crane prep"],
-        uk: ["Компактні та середні кабіни", "Механіка та Opticruise", "Підготовка під самоскид і КМУ"],
-        sk: ["Kompaktné a stredné kabíny", "Manuál a Opticruise", "Príprava pre sklápač a žeriav"],
-        de: ["Kompakt- und Mittelkabinen", "Schaltung und Opticruise", "Kipper- und Kranvorbereitung"],
-      },
-      {
-        en: ["280–450 hp range", "EURO 6", "Import-ready documentation"],
-        uk: ["Діапазон 280–450 к.с.", "EURO 6", "Документація для імпорту"],
-        sk: ["Rozsah 280–450 hp", "EURO 6", "Dokumentácia pripravená na import"],
-        de: ["280–450 PS", "EURO 6", "Importfertige Dokumentation"],
-      },
     ),
   ],
   daf: [
-    item(
+    modelItem(
       "daf",
       "xf",
       { en: "XF", uk: "XF", sk: "XF", de: "XF" },
@@ -343,26 +153,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Diaľkový ťahač DAF XF",
         de: "DAF XF Fernverkehrszugmaschine",
       },
-      {
-        en: ["Line-haul tractors 4x2 / 6x2", "Mega and standard height fleets", "International forwarding"],
-        uk: ["Магістральні тягачі 4x2 / 6x2", "Mega і standard height", "Міжнародні перевезення"],
-        sk: ["Diaľkové ťahače 4x2 / 6x2", "Mega a standard height", "Medzinárodná preprava"],
-        de: ["Fernverkehrszugmaschinen 4x2 / 6x2", "Mega- und Standardhöhe", "Internationaler Fernverkehr"],
-      },
-      {
-        en: ["Super Space Cab", "PACCAR MX engines", "Adaptive cruise and lane assist"],
-        uk: ["Super Space Cab", "Двигуни PACCAR MX", "Adaptive cruise і lane assist"],
-        sk: ["Super Space Cab", "Motory PACCAR MX", "Adaptive cruise a lane assist"],
-        de: ["Super Space Cab", "PACCAR-MX-Motoren", "Adaptive Cruise und Spurhalteassistent"],
-      },
-      {
-        en: ["430–530 hp range", "EURO 6", "Full import documentation"],
-        uk: ["Діапазон 430–530 к.с.", "EURO 6", "Повний пакет імпортної документації"],
-        sk: ["Rozsah 430–530 hp", "EURO 6", "Kompletná importná dokumentácia"],
-        de: ["430–530 PS", "EURO 6", "Vollständige Importdokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "daf",
       "cf",
       { en: "CF", uk: "CF", sk: "CF", de: "CF" },
@@ -372,26 +164,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Distribučný a regionálny DAF CF",
         de: "DAF CF Verteilungs- und Regionalfahrzeug",
       },
-      {
-        en: ["Distribution tractors and chassis", "Construction and municipal bodies", "Regional delivery setups"],
-        uk: ["Розподільні тягачі та шасі", "Будівельні та комунальні кузови", "Регіональна доставка"],
-        sk: ["Distribučné ťahače a podvozky", "Stavebné a komunálne nadstavby", "Regionálna distribúcia"],
-        de: ["Verteilungszugmaschinen und Fahrgestelle", "Bau- und Kommunalaufbauten", "Regionale Distribution"],
-      },
-      {
-        en: ["Day cab and sleeper options", "Manual and automated gearboxes", "Body-builder preparation"],
-        uk: ["Day cab і sleeper", "Механічні та автоматичні КПП", "Підготовка під надбудовника"],
-        sk: ["Day cab a sleeper", "Manuálne a automatické prevodovky", "Príprava pre karosára"],
-        de: ["Day Cab und Schlafkabine", "Schalt- und Automatikgetriebe", "Aufbauhersteller-Vorbereitung"],
-      },
-      {
-        en: ["Air suspension", "EURO 6", "Documented service history"],
-        uk: ["Пневмопідвіска", "EURO 6", "Задокументована сервісна історія"],
-        sk: ["Pneumatické odpruženie", "EURO 6", "Dokumentovaná servisná história"],
-        de: ["Luftfederung", "EURO 6", "Dokumentierte Servicehistorie"],
-      },
     ),
-    item(
+    modelItem(
       "daf",
       "lf",
       { en: "LF", uk: "LF", sk: "LF", de: "LF" },
@@ -401,28 +175,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Mestský distribučný DAF LF",
         de: "DAF LF Stadtverteilungsfahrzeug",
       },
-      {
-        en: ["City delivery chassis", "Box and curtainsider urban bodies", "Refrigerated last-mile units"],
-        uk: ["Міське шасі", "Фургонні та бортові кузови", "Рефрижератор останньої милі"],
-        sk: ["Mestský podvozok", "Skriňové a plachtové nadstavby", "Chladiarenská posledná míľa"],
-        de: ["Stadtverteilungsfahrgestell", "Koffer- und Planenaufbauten", "Kühl-Last-Mile-Einheiten"],
-      },
-      {
-        en: ["Compact cab layouts", "Efficient urban axle packages", "Liftgate and tail-lift prep"],
-        uk: ["Компактні кабіни", "Міські пакети осей", "Підготовка під гідроборт"],
-        sk: ["Kompaktné kabíny", "Mestské balíky náprav", "Príprava pre hydraulickú čelo"],
-        de: ["Kompaktkabinen", "Stadt-Achspakete", "Ladebordwand-Vorbereitung"],
-      },
-      {
-        en: ["150–280 hp range", "EURO 6", "Fleet-ready documentation"],
-        uk: ["Діапазон 150–280 к.с.", "EURO 6", "Документація для автопарку"],
-        sk: ["Rozsah 150–280 hp", "EURO 6", "Dokumentácia pre flotilu"],
-        de: ["150–280 PS", "EURO 6", "Flottenfertige Dokumentation"],
-      },
     ),
   ],
   volvo: [
-    item(
+    modelItem(
       "volvo",
       "fh",
       { en: "FH", uk: "FH", sk: "FH", de: "FH" },
@@ -432,26 +188,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Diaľkový ťahač Volvo FH",
         de: "Volvo FH Fernverkehrszugmaschine",
       },
-      {
-        en: ["Line-haul tractors 4x2 / 6x2", "Globetrotter sleeper fleets", "International cargo operations"],
-        uk: ["Магістральні тягачі 4x2 / 6x2", "Автопарки Globetrotter", "Міжнародні вантажоперевезення"],
-        sk: ["Diaľkové ťahače 4x2 / 6x2", "Flotily Globetrotter", "Medzinárodná nákladná doprava"],
-        de: ["Fernverkehrszugmaschinen 4x2 / 6x2", "Globetrotter-Flotten", "Internationaler Güterverkehr"],
-      },
-      {
-        en: ["I-Shift automated transmission", "Volvo Dynamic Steering", "Sleeper and day cab variants"],
-        uk: ["КПП I-Shift", "Volvo Dynamic Steering", "Sleeper і day cab"],
-        sk: ["Prevodovka I-Shift", "Volvo Dynamic Steering", "Sleeper a day cab"],
-        de: ["I-Shift-Automatik", "Volvo Dynamic Steering", "Sleeper- und Day-Cab-Varianten"],
-      },
-      {
-        en: ["420–500 hp range", "EURO 6", "Service history and inspection"],
-        uk: ["Діапазон 420–500 к.с.", "EURO 6", "Сервісна історія та перевірка"],
-        sk: ["Rozsah 420–500 hp", "EURO 6", "Servisná história a kontrola"],
-        de: ["420–500 PS", "EURO 6", "Servicehistorie und Abnahmeprüfung"],
-      },
     ),
-    item(
+    modelItem(
       "volvo",
       "fm",
       { en: "FM", uk: "FM", sk: "FM", de: "FM" },
@@ -461,26 +199,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Regionálny a stavebný Volvo FM",
         de: "Volvo FM Regional- und Baufahrzeug",
       },
-      {
-        en: ["Regional distribution chassis", "Construction and tipper setups", "Crane and mixer preparation"],
-        uk: ["Регіональне шасі", "Самоскиди та будівельні конфігурації", "Підготовка під КМУ і міксер"],
-        sk: ["Regionálny podvozok", "Sklápače a stavebné konfigurácie", "Príprava pre žeriav a miešač"],
-        de: ["Regionales Fahrgestell", "Kipper- und Bau-Setups", "Kran- und Mischervorbereitung"],
-      },
-      {
-        en: ["Day cab configurations", "I-Shift and manual options", "All-wheel-drive packages"],
-        uk: ["Day cab конфігурації", "I-Shift і механіка", "Повнопривідні пакети"],
-        sk: ["Konfigurácie day cab", "I-Shift a manuál", "Balíky plného pohonu"],
-        de: ["Day-Cab-Konfigurationen", "I-Shift und Schaltung", "Allradpakete"],
-      },
-      {
-        en: ["Air suspension on all axles", "EURO 6", "Pre-delivery inspection report"],
-        uk: ["Пневмопідвіска всіх осей", "EURO 6", "Звіт перевірки перед передачею"],
-        sk: ["Pneumatické odpruženie všetkých náprav", "EURO 6", "Správa z kontroly pred odovzdaním"],
-        de: ["Luftfederung an allen Achsen", "EURO 6", "Abnahmeprüfbericht"],
-      },
     ),
-    item(
+    modelItem(
       "volvo",
       "fl",
       { en: "FL", uk: "FL", sk: "FL", de: "FL" },
@@ -490,28 +210,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Mestský distribučný Volvo FL",
         de: "Volvo FL Stadtverteilungsfahrzeug",
       },
-      {
-        en: ["City delivery chassis", "Box and curtainsider bodies", "Municipal service setups"],
-        uk: ["Міське шасі", "Фургонні та бортові кузови", "Комунальні конфігурації"],
-        sk: ["Mestský podvozok", "Skriňové a plachtové nadstavby", "Komunálne konfigurácie"],
-        de: ["Stadtverteilungsfahrgestell", "Koffer- und Planenaufbauten", "Kommunale Service-Setups"],
-      },
-      {
-        en: ["Compact low-entry cabs", "Efficient city drivelines", "Refrigerated urban bodies"],
-        uk: ["Компактні низькопідлогові кабіни", "Міські трансмісії", "Міські рефрижератори"],
-        sk: ["Kompaktné nízkopodlahové kabíny", "Mestské pohony", "Mestské chladiarenské nadstavby"],
-        de: ["Kompakte Niedrigfußkabinen", "Stadt-Antriebsstränge", "Städtische Kühlfahrzeuge"],
-      },
-      {
-        en: ["180–280 hp range", "EURO 6", "Import-ready documentation"],
-        uk: ["Діапазон 180–280 к.с.", "EURO 6", "Документація для імпорту"],
-        sk: ["Rozsah 180–280 hp", "EURO 6", "Dokumentácia pripravená na import"],
-        de: ["180–280 PS", "EURO 6", "Importfertige Dokumentation"],
-      },
     ),
   ],
   renault: [
-    item(
+    modelItem(
       "renault",
       "t-high",
       { en: "T High", uk: "T High", sk: "T High", de: "T High" },
@@ -521,26 +223,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Diaľkový ťahač Renault T High",
         de: "Renault T High Fernverkehrszugmaschine",
       },
-      {
-        en: ["Premium line-haul tractors", "International forwarding fleets", "Sleeper cab long routes"],
-        uk: ["Преміальні магістральні тягачі", "Міжнародні автопарки", "Sleeper cab на дальні маршрути"],
-        sk: ["Prémiové diaľkové ťahače", "Medzinárodné flotily", "Sleeper cab na dlhé trasy"],
-        de: ["Premium-Fernverkehrszugmaschinen", "Internationale Flotten", "Schlafkabine für Fernstrecken"],
-      },
-      {
-        en: ["Optidriver automated transmission", "Sleeper cab variants", "Fleet telematics packages"],
-        uk: ["КПП Optidriver", "Варіанти sleeper cab", "Телематика для автопарків"],
-        sk: ["Prevodovka Optidriver", "Varianty sleeper cab", "Telematické balíky"],
-        de: ["Optidriver-Automatik", "Schlafkabinen-Varianten", "Flotten-Telematikpakete"],
-      },
-      {
-        en: ["440–520 hp range", "EURO 6", "Pre-delivery inspection report"],
-        uk: ["Діапазон 440–520 к.с.", "EURO 6", "Звіт перевірки перед передачею"],
-        sk: ["Rozsah 440–520 hp", "EURO 6", "Správa z kontroly pred odovzdaním"],
-        de: ["440–520 PS", "EURO 6", "Abnahmeprüfbericht"],
-      },
     ),
-    item(
+    modelItem(
       "renault",
       "t",
       { en: "T", uk: "T", sk: "T", de: "T" },
@@ -550,26 +234,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Distribučný ťahač Renault T",
         de: "Renault T Verteilungszugmaschine",
       },
-      {
-        en: ["Regional distribution tractors", "Day cab delivery routes", "Mixed fleet operations"],
-        uk: ["Регіональні розподільні тягачі", "Day cab маршрути", "Змішані автопарки"],
-        sk: ["Regionálne distribučné ťahače", "Trasy day cab", "Zmiešané flotily"],
-        de: ["Regionale Verteilungszugmaschinen", "Day-Cab-Strecken", "Gemischte Flotten"],
-      },
-      {
-        en: ["Compact and standard cabs", "Manual and Optidriver gearboxes", "Retarder options"],
-        uk: ["Компактні та стандартні кабіни", "Механіка та Optidriver", "Retarder"],
-        sk: ["Kompaktné a štandardné kabíny", "Manuál a Optidriver", "Retarder"],
-        de: ["Kompakt- und Standardkabinen", "Schaltung und Optidriver", "Retarder-Optionen"],
-      },
-      {
-        en: ["Air suspension on drive axles", "EURO 6", "Verified service records"],
-        uk: ["Пневмопідвіска ведучих осей", "EURO 6", "Підтверджені сервісні записи"],
-        sk: ["Pneumatické odpruženie hnacích náprav", "EURO 6", "Overené servisné záznamy"],
-        de: ["Luftfederung an Antriebsachsen", "EURO 6", "Verifizierte Servicenachweise"],
-      },
     ),
-    item(
+    modelItem(
       "renault",
       "c",
       { en: "C", uk: "C", sk: "C", de: "C" },
@@ -579,28 +245,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Stavebný Renault C",
         de: "Renault C Baufahrzeug",
       },
-      {
-        en: ["Construction chassis 6x4 / 8x4", "Tipper and mixer bodies", "Off-road site logistics"],
-        uk: ["Будівельне шасі 6x4 / 8x4", "Самоскиди та міксери", "Бездоріжна будівельна логістика"],
-        sk: ["Stavebný podvozok 6x4 / 8x4", "Sklápače a miešače", "Terénna stavebná logistika"],
-        de: ["Baufahrgestell 6x4 / 8x4", "Kipper- und Mischeraufbauten", "Offroad-Baustellenlogistik"],
-      },
-      {
-        en: ["Reinforced frame options", "All-wheel-drive variants", "Crane superstructure prep"],
-        uk: ["Посилена рама", "Повнопривідні версії", "Підготовка під КМУ"],
-        sk: ["Zosilnený rám", "Plný pohon varianty", "Príprava pre žeriav"],
-        de: ["Verstärkter Rahmen", "Allradvarianten", "Kranaufbau-Vorbereitung"],
-      },
-      {
-        en: ["EURO 6", "Heavy-duty axles", "Import-ready documentation"],
-        uk: ["EURO 6", "Посилені осі", "Документація для імпорту"],
-        sk: ["EURO 6", "Ťažké nápravy", "Dokumentácia pripravená na import"],
-        de: ["EURO 6", "Schwerlastachsen", "Importfertige Dokumentation"],
-      },
     ),
   ],
   schmitz: [
-    item(
+    modelItem(
       "schmitz",
       "sko",
       { en: "S.KO", uk: "S.KO", sk: "S.KO", de: "S.KO" },
@@ -610,26 +258,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Plachtový Schmitz Cargobull S.KO",
         de: "Schmitz Cargobull S.KO Planenauflieger",
       },
-      {
-        en: ["Curtainsider semi-trailers", "General cargo and pallet transport", "Fleet curtainsider units"],
-        uk: ["Бортові напівпричепи", "Загальні та палетні вантажі", "Бортові одиниці автопарку"],
-        sk: ["Plachtové návesy", "Všeobecný a paletový náklad", "Plachtové jednotky flotily"],
-        de: ["Planenauflieger", "General- und Palettentransport", "Planen-Flotteneinheiten"],
-      },
-      {
-        en: ["Lift axle and steering axle options", "XL code variants", "Disc brakes and telematics-ready"],
-        uk: ["Підйомна та керована вісь", "XL code", "Дискові гальма та телематика"],
-        sk: ["Zdvíhacia a riadená náprava", "XL code", "Kotúčové brzdy a telematika"],
-        de: ["Liftachse und Lenkachse", "XL-Code", "Scheibenbremsen und telematikfähig"],
-      },
-      {
-        en: ["3-axle standard layout", "BPW or SAF running gear", "Documented axle inspection"],
-        uk: ["3-осьова схема", "Ходова BPW або SAF", "Документована перевірка осей"],
-        sk: ["3-nápravová konfigurácia", "Nápravy BPW alebo SAF", "Dokumentovaná kontrola náprav"],
-        de: ["3-Achsen-Layout", "BPW- oder SAF-Fahrwerk", "Dokumentierte Achsinspektion"],
-      },
     ),
-    item(
+    modelItem(
       "schmitz",
       "scs",
       { en: "S.CS", uk: "S.CS", sk: "S.CS", de: "S.CS" },
@@ -639,26 +269,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Skriňový Schmitz S.CS",
         de: "Schmitz S.CS Kofferauflieger",
       },
-      {
-        en: ["Box semi-trailers", "Dry freight and secured cargo", "Mega height options"],
-        uk: ["Фургонні напівпричепи", "Сухі та захищені вантажі", "Mega height"],
-        sk: ["Skriňové návesy", "Suchý a zabezpečený náklad", "Mega height"],
-        de: ["Kofferauflieger", "Trocken- und gesicherte Fracht", "Mega-Höhe"],
-      },
-      {
-        en: ["Reinforced floor variants", "Side door configurations", "Multi-lock systems"],
-        uk: ["Посилена підлога", "Бокові двері", "Multi-lock"],
-        sk: ["Zosilnená podlaha", "Bočné dvere", "Multi-lock"],
-        de: ["Verstärkter Boden", "Seitentüren", "Multi-lock"],
-      },
-      {
-        en: ["Disc brake systems", "Import-ready technical file", "Payload-oriented build"],
-        uk: ["Дискові гальма", "Технічний пакет для реєстрації", "Під профіль навантаження"],
-        sk: ["Kotúčové brzdy", "Technický balík na registráciu", "Podľa profilu nákladu"],
-        de: ["Scheibenbremsen", "Importfertige Technikakte", "Nutzlastorientierter Aufbau"],
-      },
     ),
-    item(
+    modelItem(
       "schmitz",
       "sko-cool",
       { en: "S.KO COOL", uk: "S.KO COOL", sk: "S.KO COOL", de: "S.KO COOL" },
@@ -668,28 +280,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Chladiarenský Schmitz S.KO COOL",
         de: "Schmitz S.KO COOL Kühlauflieger",
       },
-      {
-        en: ["Refrigerated semi-trailers", "Single and multi-temperature setups", "Food and pharma logistics"],
-        uk: ["Рефрижераторні напівпричепи", "Одно- та багатотемпературні", "Харчова та фарма логістика"],
-        sk: ["Chladiarenské návesy", "Jedno- a viacteplotné", "Potravinárska a farmaceutická logistika"],
-        de: ["Kühlauflieger", "Ein- und Mehrtemperatur", "Lebensmittel- und Pharma-Logistik"],
-      },
-      {
-        en: ["Carrier / Thermo King units", "Telematics and temperature monitoring", "Tail-lift options"],
-        uk: ["Carrier / Thermo King", "Телематика та моніторинг", "Гідроборт"],
-        sk: ["Carrier / Thermo King", "Telematika a monitoring", "Hydraulická čelo"],
-        de: ["Carrier / Thermo King", "Telematik und Monitoring", "Ladebordwand"],
-      },
-      {
-        en: ["Insulated floor and walls", "ATP certification where applicable", "Pre-delivery cold-unit check"],
-        uk: ["Ізоляція підлоги та стін", "ATP за потреби", "Перевірка холодильного агрегату"],
-        sk: ["Izolácia podlahy a stien", "ATP podľa potreby", "Kontrola chladiacej jednotky"],
-        de: ["Isolierter Boden und Wände", "ATP wo zutreffend", "Kühlaggregat-Check"],
-      },
     ),
   ],
   krone: [
-    item(
+    modelItem(
       "krone",
       "profi-liner",
       { en: "Profi Liner", uk: "Profi Liner", sk: "Profi Liner", de: "Profi Liner" },
@@ -699,26 +293,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Plachtový Krone Profi Liner",
         de: "Krone Profi Liner Planenauflieger",
       },
-      {
-        en: ["Curtainsider semi-trailers", "Standard and Mega height", "General cargo fleets"],
-        uk: ["Бортові напівпричепи", "Standard і Mega height", "Автопарки загальних вантажів"],
-        sk: ["Plachtové návesy", "Standard a Mega height", "Flotily všeobecného nákladu"],
-        de: ["Planenauflieger", "Standard- und Mega-Höhe", "Generalcargo-Flotten"],
-      },
-      {
-        en: ["Lift axle setups", "Multi-lock and XL certificate", "Disc brake systems"],
-        uk: ["Підйомні осі", "Multi-lock і XL", "Дискові гальма"],
-        sk: ["Zdvíhacie nápravy", "Multi-lock a XL", "Kotúčové brzdy"],
-        de: ["Liftachs-Setups", "Multi-lock und XL", "Scheibenbremsen"],
-      },
-      {
-        en: ["Aluminium or steel walls", "Import-ready technical file", "Condition report before delivery"],
-        uk: ["Алюмінієві або сталеві стінки", "Технічний пакет", "Звіт про стан"],
-        sk: ["Hliníkové alebo oceľové steny", "Technický balík", "Správa o stave"],
-        de: ["Aluminium- oder Stahlwände", "Technikakte", "Zustandsbericht"],
-      },
     ),
-    item(
+    modelItem(
       "krone",
       "dry-liner",
       { en: "Dry Liner", uk: "Dry Liner", sk: "Dry Liner", de: "Dry Liner" },
@@ -728,26 +304,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Skriňový Krone Dry Liner",
         de: "Krone Dry Liner Kofferauflieger",
       },
-      {
-        en: ["Dry freight box trailers", "Paper and pallet transport", "Mega height variants"],
-        uk: ["Фургони для сухих вантажів", "Палети та рулони", "Варіанти Mega height"],
-        sk: ["Skrine pre suchý náklad", "Palety a roly", "Varianty Mega height"],
-        de: ["Trockenfracht-Koffer", "Paletten- und Rollentransport", "Mega-Höhenvarianten"],
-      },
-      {
-        en: ["Reinforced floor options", "Side loading doors", "Anti-slip floor surfaces"],
-        uk: ["Посилена підлога", "Бокове завантаження", "Антиковзка підлога"],
-        sk: ["Zosilnená podlaha", "Bočné nakladanie", "Protišmyková podlaha"],
-        de: ["Verstärkter Boden", "Seitenbeladung", "Rutschfeste Böden"],
-      },
-      {
-        en: ["Typical 3-axle semi-trailer", "EURO coupling height", "Full import documentation"],
-        uk: ["3-осьовий напівпричіп", "Стандартна висота сідла EURO", "Повна імпортна документація"],
-        sk: ["3-nápravový náves", "Štandardná EURO výška spojky", "Kompletná importná dokumentácia"],
-        de: ["3-Achsen-Sattelauflieger", "Standard-EURO-Kupplungshöhe", "Vollständige Importdokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "krone",
       "box-liner",
       { en: "Box Liner", uk: "Box Liner", sk: "Box Liner", de: "Box Liner" },
@@ -757,28 +315,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Krone Box Liner so zosilnenou podlahou",
         de: "Krone Box Liner mit verstärktem Boden",
       },
-      {
-        en: ["Heavy-duty box semi-trailers", "Industrial and steel cargo", "Fleet branding-ready panels"],
-        uk: ["Посилені фургонні напівпричепи", "Промислові та сталеві вантажі", "Панелі під брендинг"],
-        sk: ["Zosilnené skriňové návesy", "Priemyselný a oceľový náklad", "Panely na branding"],
-        de: ["Schwerlast-Kofferauflieger", "Industrie- und Stahlfracht", "Branding-taugliche Paneele"],
-      },
-      {
-        en: ["Multi-chamber options", "Side and rear door layouts", "XL code setups"],
-        uk: ["Багатокамерні варіанти", "Бокові та задні двері", "XL code"],
-        sk: ["Viac-komorové varianty", "Bočné a zadné dvere", "XL code"],
-        de: ["Mehrkammer-Optionen", "Seiten- und Hecktüren", "XL-Code"],
-      },
-      {
-        en: ["Disc brakes", "BPW / SAF axles", "Pre-delivery inspection"],
-        uk: ["Дискові гальма", "Осі BPW / SAF", "Перевірка перед передачею"],
-        sk: ["Kotúčové brzdy", "Nápravy BPW / SAF", "Kontrola pred odovzdaním"],
-        de: ["Scheibenbremsen", "BPW- / SAF-Achsen", "Abnahmeprüfung"],
-      },
     ),
   ],
   koegel: [
-    item(
+    modelItem(
       "koegel",
       "cargo",
       { en: "Cargo", uk: "Cargo", sk: "Cargo", de: "Cargo" },
@@ -788,26 +328,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Plachtový Kögel Cargo",
         de: "Kögel Cargo Planenauflieger",
       },
-      {
-        en: ["Curtainsider semi-trailers", "Lightweight fleet units", "General cargo operations"],
-        uk: ["Бортові напівпричепи", "Легкі одиниці автопарку", "Загальні перевезення"],
-        sk: ["Plachtové návesy", "Ľahké jednotky flotily", "Všeobecná preprava"],
-        de: ["Planenauflieger", "Leichtbau-Flotteneinheiten", "Generalcargo"],
-      },
-      {
-        en: ["Lightweight chassis options", "XL code setups", "Custom axle and brake packages"],
-        uk: ["Легкі шасі", "XL code", "Конфігурації осей і гальм"],
-        sk: ["Ľahké podvozky", "XL code", "Vlastné balíky náprav a bŕzd"],
-        de: ["Leichtbau-Fahrgestelle", "XL-Code", "Individuelle Achs- und Bremspakete"],
-      },
-      {
-        en: ["Optimized tare weight", "Disc brake systems", "Condition report before delivery"],
-        uk: ["Оптимізована власна вага", "Дискові гальма", "Звіт про стан"],
-        sk: ["Optimalizovaná vlastná hmotnosť", "Kotúčové brzdy", "Správa o stave"],
-        de: ["Optimiertes Leergewicht", "Scheibenbremsen", "Zustandsbericht"],
-      },
     ),
-    item(
+    modelItem(
       "koegel",
       "box",
       { en: "Box / Port", uk: "Box / Port", sk: "Box / Port", de: "Box / Port" },
@@ -817,26 +339,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Skriňový a port Kögel",
         de: "Kögel Koffer- und Port-Auflieger",
       },
-      {
-        en: ["Box semi-trailers", "Port 45 ft configurations", "Swap body compatible setups"],
-        uk: ["Фургонні напівпричепи", "Port 45 ft", "Сумісність з swap body"],
-        sk: ["Skriňové návesy", "Port 45 ft", "Kompatibilita so swap body"],
-        de: ["Kofferauflieger", "Port 45 ft", "Wechselbrücken-kompatibel"],
-      },
-      {
-        en: ["Multi-chamber reefer options", "Reinforced floor builds", "Side door variants"],
-        uk: ["Багатокамерні рефри", "Посилені підлоги", "Бокові двері"],
-        sk: ["Viac-komorové chladničky", "Zosilnené podlahy", "Bočné dvere"],
-        de: ["Mehrkammer-Kühlung", "Verstärkte Böden", "Seitentür-Varianten"],
-      },
-      {
-        en: ["Standard European coupling height", "BPW / SAF axles", "Import-ready documentation"],
-        uk: ["Стандартна висота сідла EURO", "Осі BPW / SAF", "Документація для імпорту"],
-        sk: ["Štandardná EURO výška spojky", "Nápravy BPW / SAF", "Dokumentácia na import"],
-        de: ["Standard-EURO-Kupplungshöhe", "BPW- / SAF-Achsen", "Importfertige Dokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "koegel",
       "platform",
       { en: "Platform", uk: "Platform", sk: "Platform", de: "Platform" },
@@ -846,28 +350,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Platforma a nízkoplošník Kögel",
         de: "Kögel Plattform- und Tiefladerauflieger",
       },
-      {
-        en: ["Extendable platforms", "Low-bed heavy haul", "Machinery transport"],
-        uk: ["Розсувні платформи", "Низькорамник", "Перевезення техніки"],
-        sk: ["Vysúvateľné platformy", "Nízkoplošník", "Preprava techniky"],
-        de: ["Ausziehbare Plattformen", "Tieflader", "Maschinentransport"],
-      },
-      {
-        en: ["Hydraulic ramps", "Outrigger packages", "Custom lashing points"],
-        uk: ["Гідравлічні апарелі", "Опори", "Точки кріплення"],
-        sk: ["Hydraulické rampy", "Výložné opory", "Úvazné body"],
-        de: ["Hydraulische Rampen", "Abstützpakete", "Zurrgurte"],
-      },
-      {
-        en: ["Heavy-duty axles", "Disc brakes", "Technical inspection report"],
-        uk: ["Посилені осі", "Дискові гальма", "Звіт технічної перевірки"],
-        sk: ["Ťažké nápravy", "Kotúčové brzdy", "Správa z technickej kontroly"],
-        de: ["Schwerlastachsen", "Scheibenbremsen", "Technischer Prüfbericht"],
-      },
     ),
   ],
   wielton: [
-    item(
+    modelItem(
       "wielton",
       "ns3",
       { en: "NS3 / NW3", uk: "NS3 / NW3", sk: "NS3 / NW3", de: "NS3 / NW3" },
@@ -877,26 +363,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Plachtový Wielton NS3/NW3",
         de: "Wielton NS3/NW3 Planenauflieger",
       },
-      {
-        en: ["Curtainsider semi-trailers", "Standard and Mega height", "General cargo fleets"],
-        uk: ["Бортові напівпричепи", "Standard і Mega", "Автопарки загальних вантажів"],
-        sk: ["Plachtové návesy", "Standard a Mega", "Flotily všeobecného nákladu"],
-        de: ["Planenauflieger", "Standard und Mega", "Generalcargo-Flotten"],
-      },
-      {
-        en: ["Lift axle and steering axle options", "XL code and reinforced floor", "Steel and aluminium walls"],
-        uk: ["Підйомна та керована вісь", "XL code і посилена підлога", "Сталеві та алюмінієві стінки"],
-        sk: ["Zdvíhacia a riadená náprava", "XL code a zosilnená podlaha", "Oceľové a hliníkové steny"],
-        de: ["Liftachse und Lenkachse", "XL-Code und verstärkter Boden", "Stahl- und Aluminiumwände"],
-      },
-      {
-        en: ["Disc brake systems", "BPW or SAF running gear", "Import-ready documentation"],
-        uk: ["Дискові гальма", "Ходова BPW або SAF", "Документація для імпорту"],
-        sk: ["Kotúčové brzdy", "Nápravy BPW alebo SAF", "Dokumentácia na import"],
-        de: ["Scheibenbremsen", "BPW- oder SAF-Fahrwerk", "Importfertige Dokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "wielton",
       "tipper",
       { en: "Tipper", uk: "Самоскид", sk: "Sklápač", de: "Kipper" },
@@ -906,26 +374,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Sklápací náves Wielton",
         de: "Wielton Kippsattelauflieger",
       },
-      {
-        en: ["Tipper semi-trailers", "Bulk and construction cargo", "Steel body tippers"],
-        uk: ["Самоскидні напівпричепи", "Сипучі та будівельні вантажі", "Сталеві кузови"],
-        sk: ["Sklápacie návesy", "Sypký a stavebný náklad", "Oceľové sklápacie nadstavby"],
-        de: ["Kippsattelauflieger", "Schütt- und Baustoffe", "Stahl-Kippaufbauten"],
-      },
-      {
-        en: ["Hydraulic tipping systems", "Reinforced chassis", "High-lift tail configurations"],
-        uk: ["Гідравлічні системи", "Посилене шасі", "Підвищений кузов"],
-        sk: ["Hydraulické sklápacie systémy", "Zosilnený podvozok", "Zvýšená nadstavba"],
-        de: ["Hydraulische Kippsysteme", "Verstärktes Fahrgestell", "Hochkipper-Konfigurationen"],
-      },
-      {
-        en: ["3-axle standard layout", "EURO 6 tractor pairing", "Technical documentation for import"],
-        uk: ["3-осьова схема", "Сумісність з EURO 6 тягачами", "Технічна документація"],
-        sk: ["3-nápravová konfigurácia", "Kompatibilita s EURO 6 ťahačmi", "Technická dokumentácia"],
-        de: ["3-Achsen-Layout", "EURO-6-Zugmaschinen-Paarung", "Technikdokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "wielton",
       "platform",
       { en: "Platform", uk: "Platform", sk: "Platform", de: "Platform" },
@@ -935,28 +385,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Platforma a nízkoplošník Wielton",
         de: "Wielton Plattform- und Tiefladerauflieger",
       },
-      {
-        en: ["Low-bed 3-axle platforms", "Extendable platform trailers", "Oversize cargo transport"],
-        uk: ["Низькорамники 3-осi", "Розсувні платформи", "Негабаритні перевезення"],
-        sk: ["Nízkoplošníky 3-nápravové", "Vysúvateľné platformy", "Nadrozmerná preprava"],
-        de: ["3-Achsen-Tieflader", "Ausziehbare Plattformen", "Schwer- und Sondertransport"],
-      },
-      {
-        en: ["Hydraulic gooseneck options", "Reinforced loading floor", "Custom stake pockets"],
-        uk: ["Гідравлічні зʼєднання", "Посилена платформа", "Індивідуальні кріплення"],
-        sk: ["Hydraulické spojenia", "Zosilnená plocha", "Vlastné úchyty"],
-        de: ["Hydraulische Sattelkupplungen", "Verstärkter Ladeboden", "Individuelle Staukasten"],
-      },
-      {
-        en: ["BPW or SAF axles", "Disc brakes", "Pre-delivery inspection"],
-        uk: ["Осі BPW або SAF", "Дискові гальма", "Перевірка перед передачею"],
-        sk: ["Nápravy BPW alebo SAF", "Kotúčové brzdy", "Kontrola pred odovzdaním"],
-        de: ["BPW- oder SAF-Achsen", "Scheibenbremsen", "Abnahmeprüfung"],
-      },
     ),
   ],
   lamberet: [
-    item(
+    modelItem(
       "lamberet",
       "sr",
       { en: "SR", uk: "SR", sk: "SR", de: "SR" },
@@ -966,26 +398,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Chladiarenský náves Lamberet SR",
         de: "Lamberet SR Kühlauflieger",
       },
-      {
-        en: ["Single-compartment reefers", "Food and pharma logistics", "Cold-chain fleet units"],
-        uk: ["Однокамерні рефи", "Харчова та фарма логістика", "Cold-chain автопарк"],
-        sk: ["Jednokomorové chladiarenské", "Potravinárska a farmaceutická logistika", "Cold-chain flotila"],
-        de: ["Einkammer-Kühlauflieger", "Lebensmittel- und Pharma-Logistik", "Cold-Chain-Flotteneinheiten"],
-      },
-      {
-        en: ["Carrier / Thermo King / Daikin units", "Lift axle options", "Telematics monitoring"],
-        uk: ["Carrier / Thermo King / Daikin", "Підйомна вісь", "Телематичний моніторинг"],
-        sk: ["Carrier / Thermo King / Daikin", "Zdvíhacia náprava", "Telematický monitoring"],
-        de: ["Carrier / Thermo King / Daikin", "Liftachse", "Telematik-Monitoring"],
-      },
-      {
-        en: ["3-axle refrigerated layout", "Insulated floor and walls", "Pre-delivery cold-unit check"],
-        uk: ["3-осьова рефрижераторна схема", "Ізольована підлога та стінки", "Перевірка агрегату"],
-        sk: ["3-nápravová chladiarenská konfigurácia", "Izolovaná podlaha a steny", "Kontrola agregátu"],
-        de: ["3-Achsen-Kühllayout", "Isolierter Boden und Wände", "Kühlaggregat-Check"],
-      },
     ),
-    item(
+    modelItem(
       "lamberet",
       "multi-temp",
       { en: "Multi-temp", uk: "Multi-temp", sk: "Multi-temp", de: "Multi-temp" },
@@ -995,26 +409,8 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         sk: "Viacteplotný chladiarenský náves Lamberet",
         de: "Lamberet Mehrtemperatur-Kühlauflieger",
       },
-      {
-        en: ["Dual-zone reefers", "Triple-compartment builds", "Cold-chain distribution"],
-        uk: ["Двозонні рефи", "Трикамерні конфігурації", "Cold-chain дистрибуція"],
-        sk: ["Dvojzónové chladiarenské", "Trojkomorové konfigurácie", "Cold-chain distribúcia"],
-        de: ["Zwei-Zonen-Kühlauflieger", "Dreikammer-Aufbauten", "Cold-Chain-Distribution"],
-      },
-      {
-        en: ["Independent temperature zones", "Tail-lift and side door options", "Fleet telematics packages"],
-        uk: ["Незалежні температурні зони", "Гідроборт і бокові двері", "Телематика"],
-        sk: ["Nezávislé teplotné zóny", "Hydraulická čelo a bočné dvere", "Telematika"],
-        de: ["Unabhängige Temperaturzonen", "Ladebordwand und Seitentüren", "Flotten-Telematik"],
-      },
-      {
-        en: ["ATP certification where applicable", "EURO coupling height", "Import-ready documentation"],
-        uk: ["ATP за потреби", "Стандартна висота сідла EURO", "Документація для імпорту"],
-        sk: ["ATP podľa potreby", "Štandardná EURO výška spojky", "Dokumentácia na import"],
-        de: ["ATP wo zutreffend", "Standard-EURO-Kupplungshöhe", "Importfertige Dokumentation"],
-      },
     ),
-    item(
+    modelItem(
       "lamberet",
       "insulated",
       { en: "Insulated liner", uk: "Ізотерм", sk: "Izotermický", de: "Isolierter Liner" },
@@ -1023,24 +419,6 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
         uk: "Ізотермічний фургон Lamberet",
         sk: "Izotermický náves Lamberet",
         de: "Lamberet isolierter Trockenfracht-Liner",
-      },
-      {
-        en: ["Insulated box liners", "Pharma and food-grade builds", "Fleet distribution units"],
-        uk: ["Ізотермічні фургони", "Фарма та харчові конфігурації", "Розподільний автопарк"],
-        sk: ["Izotermické skrine", "Farmaceutické a potravinové konfigurácie", "Distribučná flotila"],
-        de: ["Isolierte Kofferauflieger", "Pharma- und Food-Grade", "Verteilungs-Flotteneinheiten"],
-      },
-      {
-        en: ["Enhanced insulation packages", "Side and rear door layouts", "Non-refrigerated temperature shielding"],
-        uk: ["Посилена ізоляція", "Бокові та задні двері", "Температурний захист без агрегату"],
-        sk: ["Zosilnená izolácia", "Bočné a zadné dvere", "Teplotná ochrana bez agregátu"],
-        de: ["Verstärkte Isolierung", "Seiten- und Hecktüren", "Temperaturabschirmung ohne Aggregat"],
-      },
-      {
-        en: ["3-axle layout", "Disc brake systems", "Condition report before delivery"],
-        uk: ["3-осьова схема", "Дискові гальма", "Звіт про стан"],
-        sk: ["3-nápravová konfigurácia", "Kotúčové brzdy", "Správa o stave"],
-        de: ["3-Achsen-Layout", "Scheibenbremsen", "Zustandsbericht"],
       },
     ),
   ],

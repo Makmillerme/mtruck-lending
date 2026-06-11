@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locale";
+import { buildCatalogModelDescription } from "@/lib/catalog-model-description";
 import {
   catalogBodyTypeItemsByBrandId,
   type CatalogBodyTypeItem,
@@ -16,9 +17,7 @@ export type CatalogBodyTypeOffering = {
   imageSrc: string;
   imageAlt: string;
   title: string;
-  bodyTypes: string[];
-  modifications: string[];
-  specs: string[];
+  description: string;
 };
 
 export type CatalogBrand = {
@@ -52,10 +51,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["Actros", "Atego", "Arocs"],
     },
     overview: {
-      en: "Mercedes-Benz Trucks sets the benchmark for safety, comfort, and fleet technology in European transport. We import Actros tractors for line-haul and Arocs models for demanding distribution and construction logistics.",
-      uk: "Mercedes-Benz Trucks задає стандарт безпеки, комфорту та технологій для європейської логістики. Імпортуємо Actros для магістральних перевезень і Arocs для розподільної та будівельної логістики.",
-      sk: "Mercedes-Benz Trucks je referenčnou značkou v oblasti bezpečnosti, komfortu a technológií pre európsku dopravu. Dovážame Actros pre diaľkovú dopravu a Arocs pre náročnú distribučnú a stavebnú logistiku.",
-      de: "Mercedes-Benz Trucks setzt Maßstäbe bei Sicherheit, Komfort und Flottentechnologie im europäischen Transport. Wir importieren Actros für den Fernverkehr und Arocs für anspruchsvolle Verteilungs- und Baustellenlogistik.",
+      en: "Mercedes-Benz is one of the leaders in European commercial transport. We procure and supply Mercedes-Benz equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "Mercedes-Benz — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки Mercedes-Benz у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "Mercedes-Benz patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky Mercedes-Benz v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "Mercedes-Benz zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern Mercedes-Benz-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["Actros long-haul tractors (4x2, 6x2)", "Arocs distribution and construction chassis"],
@@ -93,10 +92,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["TGX", "TGS", "EURO 6"],
     },
     overview: {
-      en: "MAN is one of the core brands in European commercial transport. We focus on tractors configured for international routes, regional logistics, and fleet renewal with transparent service history.",
-      uk: "MAN — один із ключових брендів європейської комерційної логістики. Працюємо з тягачами для міжнародних маршрутів, регіональної доставки та оновлення автопарку з прозорою сервісною історією.",
-      sk: "MAN patrí medzi kľúčové značky európskej nákladnej dopravy. Zameriavame sa na ťahače pre medzinárodné trasy, regionálnu logistiku a obnovu vozového parku s transparentnou servisnou históriou.",
-      de: "MAN zählt zu den Kernmarken im europäischen Güterverkehr. Wir konzentrieren uns auf Zugmaschinen für internationale Strecken, regionale Logistik und Flottenerneuerung mit transparenter Servicehistorie.",
+      en: "MAN is one of the leaders in European commercial transport. We procure and supply MAN equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "MAN — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки MAN у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "MAN patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky MAN v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "MAN zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern MAN-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["Tractor units (4x2, 6x2)", "Chassis for special superstructures"],
@@ -134,10 +133,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["R-series", "S-series", "Opticruise"],
     },
     overview: {
-      en: "Scania is valued for fuel efficiency, driver comfort, and predictable operating costs. We source tractors suited to line-haul, temperature-controlled logistics, and premium fleet standards.",
-      uk: "Scania цінують за економічність, комфорт водія та передбачувані експлуатаційні витрати. Імпортуємо тягачі для лінійних маршрутів, температурної логістики та преміальних автопарків.",
-      sk: "Scania je cenená pre úspornosť paliva, komfort vodiča a predvídateľné prevádzkové náklady. Dovážame ťahače vhodné pre linkovú dopravu, teplotne riadenú logistiku a prémiové vozové parky.",
-      de: "Scania schätzen Betreiber für Kraftstoffeffizienz, Fahrerkomfort und planbare Betriebskosten. Wir beschaffen Zugmaschinen für Linienverkehr, temperaturgeführte Logistik und Premium-Flotten.",
+      en: "Scania is one of the leaders in European commercial transport. We procure and supply Scania equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "Scania — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки Scania у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "Scania patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky Scania v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "Scania zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern Scania-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["High-roof and normal-roof tractors", "6x2 and 4x2 axle layouts"],
@@ -175,10 +174,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["XF", "CF", "EURO 6"],
     },
     overview: {
-      en: "DAF is a strong choice for operators seeking reliable long-haul tractors with competitive running costs. We import XF and CF models with documented service history.",
-      uk: "DAF — надійний вибір для операторів, яким потрібні магістральні тягачі з конкурентною економікою. Імпортуємо XF і CF із задокументованою сервісною історією.",
-      sk: "DAF je solídna voľba pre prevádzkovateľov, ktorí hľadajú spoľahlivé diaľkové ťahače s konkurencieschopnými prevádzkovými nákladmi. Dovážame modely XF a CF s doloženou servisnou históriou.",
-      de: "DAF ist eine starke Wahl für Spediteure, die zuverlässige Fernverkehrszugmaschinen mit wettbewerbsfähigen Betriebskosten suchen. Wir importieren XF- und CF-Modelle mit dokumentierter Servicehistorie.",
+      en: "DAF is one of the leaders in European commercial transport. We procure and supply DAF equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "DAF — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки DAF у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "DAF patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky DAF v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "DAF zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern DAF-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["XF long-haul tractors", "CF distribution and regional chassis"],
@@ -216,10 +215,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["FH", "FM", "I-Shift"],
     },
     overview: {
-      en: "Volvo trucks combine safety systems, ergonomic cabs, and strong resale value. Our focus is on tractors prepared for international forwarding and mixed cargo operations.",
-      uk: "Volvo поєднує системи безпеки, ергономічні кабіни та високу ліквідність. Працюємо з тягачами для міжнародних перевезень і змішаних вантажів.",
-      sk: "Nákladné autá Volvo spájajú bezpečnostné systémy, ergonomické kabíny a vysokú likviditu. Zameriavame sa na ťahače pripravené pre medzinárodnú prepravu a zmiešanú nákladovú dopravu.",
-      de: "Volvo-Lkw verbinden Sicherheitssysteme, ergonomische Fahrerhäuser und hohe Wiederverkaufswerte. Im Fokus stehen Zugmaschinen für internationalen Speditionsverkehr und gemischte Transporte.",
+      en: "Volvo is one of the leaders in European commercial transport. We procure and supply Volvo equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "Volvo — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки Volvo у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "Volvo patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky Volvo v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "Volvo zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern Volvo-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["FH long-haul tractors", "FM regional and construction chassis"],
@@ -257,10 +256,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: ["T High", "T", "C"],
     },
     overview: {
-      en: "Renault Trucks offers practical tractors with strong dealer support across Europe. We focus on T High and T models suited to international forwarding and regional distribution.",
-      uk: "Renault Trucks пропонує практичні тягачі з розвиненою мережею сервісу в Європі. Працюємо з T High і T для міжнародних та регіональних перевезень.",
-      sk: "Renault Trucks ponúka praktické ťahače so silnou dealerskou sieťou v celej Európe. Zameriavame sa na modely T High a T vhodné pre medzinárodnú prepravu a regionálnu distribúciu.",
-      de: "Renault Trucks bietet praxisnahe Zugmaschinen mit starkem Händlernetz in Europa. Im Fokus stehen T High- und T-Modelle für internationalen Fernverkehr und regionale Distribution.",
+      en: "Renault Trucks is one of the leaders in European commercial transport. We procure and supply Renault equipment across configurations — from line-haul tractors to specialized chassis, box bodies, and container carriers. All units are sourced from official EU leasing platforms and delivered with full service history.",
+      uk: "Renault Trucks — один із лідерів європейського комерційного транспорту. Ми забезпечуємо прямий викуп та постачання техніки Renault у різних конфігураціях: від магістральних тягачів до спеціалізованих шасі, фургонів та контейнеровозів. Уся техніка викуповується з офіційних лізингових майданчиків ЄС та постачається з повною сервісною історією.",
+      sk: "Renault Trucks patrí medzi lídrov európskej nákladnej dopravy. Zabezpečujeme priamy výkup a dodávky techniky Renault v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá. Všetka technika pochádza z oficiálnych lízingových platforiem EÚ s kompletnou servisnou históriou.",
+      de: "Renault Trucks zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir beschaffen und liefern Renault-Fahrzeuge in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen. Alle Einheiten stammen von offiziellen EU-Leasingplattformen mit vollständiger Servicehistorie.",
     },
     bodyTypes: {
       en: ["T High long-haul tractors", "T distribution tractors", "C construction chassis"],
@@ -527,13 +526,14 @@ export function pickBodyTypeOfferings(
 ): CatalogBodyTypeOffering[] {
   if (!items?.length) return [];
 
-  return items.map((item) => ({
-    id: item.id,
-    imageSrc: item.imageSrc,
-    imageAlt: pickLocalized(item.imageAlt, locale),
-    title: pickLocalized(item.title, locale),
-    bodyTypes: pickLocalized(item.bodyTypes, locale),
-    modifications: pickLocalized(item.modifications, locale),
-    specs: pickLocalized(item.specs, locale),
-  }));
+  return items.map((item) => {
+    const title = pickLocalized(item.title, locale);
+    return {
+      id: item.id,
+      imageSrc: item.imageSrc,
+      imageAlt: pickLocalized(item.imageAlt, locale),
+      title,
+      description: buildCatalogModelDescription(title, locale),
+    };
+  });
 }

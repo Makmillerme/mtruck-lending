@@ -8,11 +8,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { BRAND_CONTACT_EMAIL } from "@/lib/branding";
 import type { Locale, PublicLocale } from "@/lib/locale";
 
-type CtaEntryPoint = "header" | "hero" | "footer";
+type CtaEntryPoint = "header" | "hero" | "footer" | "catalog";
 
 interface CtaFormModalProps {
   locale: PublicLocale | Locale;
   entryPoint: CtaEntryPoint;
+  brandName?: string;
   contactEmail?: string;
   contactPhone?: string;
   children: ReactNode;
@@ -35,6 +36,17 @@ const copy = {
     errorFallback: "Unable to send the request right now. Please try again later.",
     helper: "Or contact us directly:",
     sourceLabel: { header: "Header CTA", hero: "Hero CTA", footer: "Footer CTA" },
+    catalog: {
+      title: (brand: string) => `Commercial quote request for ${brand} equipment`,
+      description: (brand: string) =>
+        `Leave your contacts and we will prepare current ${brand} options from EU warehouses and closed auctions, tailored to your configuration and budget requirements.`,
+      submit: "Get a quote",
+      sourceLabel: "Catalog brand CTA",
+      prefill: (brand: string) => `Brand: ${brand}\nConfiguration: \nBudget: \nDelivery timeline: `,
+      placeholders: {
+        message: (brand: string) => `${brand}: configuration, budget, delivery timeline...`,
+      },
+    },
   },
   uk: {
     title: {
@@ -62,6 +74,17 @@ const copy = {
     errorFallback: "Не вдалося надіслати запит. Спробуйте, будь ласка, трохи пізніше.",
     helper: "Або зв'яжіться з нами напряму:",
     sourceLabel: { header: "CTA у хедері", hero: "CTA у Hero", footer: "CTA перед футером" },
+    catalog: {
+      title: (brand: string) => `Запит комерційної пропозиції на техніку ${brand}`,
+      description: (brand: string) =>
+        `Залиште свої контакти, і ми підготуємо для вас актуальні варіанти техніки ${brand} зі складів та закритих аукціонів ЄС, враховуючи ваші вимоги до комплектації та бюджету.`,
+      submit: "Отримати пропозицію",
+      sourceLabel: "CTA каталогу (бренд)",
+      prefill: (brand: string) => `Бренд: ${brand}\nКомплектація: \nБюджет: \nТермін постачання: `,
+      placeholders: {
+        message: (brand: string) => `${brand}: комплектація, бюджет, термін постачання...`,
+      },
+    },
   },
   sk: {
     title: {
@@ -89,6 +112,17 @@ const copy = {
     errorFallback: "Dopyt sa nepodarilo odoslať. Skúste to prosím neskôr.",
     helper: "Alebo nás kontaktujte priamo:",
     sourceLabel: { header: "CTA v hlavičke", hero: "CTA v Hero", footer: "CTA pred pätičkou" },
+    catalog: {
+      title: (brand: string) => `Dopyt na obchodnú ponuku na techniku ${brand}`,
+      description: (brand: string) =>
+        `Zanechajte kontakty a pripravíme aktuálne varianty ${brand} zo skladov a uzavretých aukcií v EÚ podľa vašich požiadaviek na konfiguráciu a rozpočet.`,
+      submit: "Získať ponuku",
+      sourceLabel: "CTA katalógu (značka)",
+      prefill: (brand: string) => `Značka: ${brand}\nKonfigurácia: \nRozpočet: \nTermín dodania: `,
+      placeholders: {
+        message: (brand: string) => `${brand}: konfigurácia, rozpočet, termín dodania...`,
+      },
+    },
   },
   de: {
     title: {
@@ -116,12 +150,24 @@ const copy = {
     errorFallback: "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
     helper: "Oder kontaktieren Sie uns direkt:",
     sourceLabel: { header: "CTA im Header", hero: "CTA im Hero", footer: "CTA vor dem Footer" },
+    catalog: {
+      title: (brand: string) => `Angebotsanfrage für ${brand}-Technik`,
+      description: (brand: string) =>
+        `Hinterlassen Sie Ihre Kontaktdaten — wir bereiten aktuelle ${brand}-Optionen aus EU-Lagern und geschlossenen Auktionen vor, passend zu Konfiguration und Budget.`,
+      submit: "Angebot anfordern",
+      sourceLabel: "Katalog-CTA (Marke)",
+      prefill: (brand: string) => `Marke: ${brand}\nKonfiguration: \nBudget: \nLieferzeitpunkt: `,
+      placeholders: {
+        message: (brand: string) => `${brand}: Konfiguration, Budget, Lieferzeitpunkt...`,
+      },
+    },
   },
 };
 
 export function CtaFormModal({
   locale,
   entryPoint,
+  brandName,
   contactEmail = BRAND_CONTACT_EMAIL,
   contactPhone = "+420 775 123 456",
   children,
@@ -135,6 +181,16 @@ export function CtaFormModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
+
+  const isCatalog = entryPoint === "catalog" && Boolean(brandName?.trim());
+  const standardEntryPoint = entryPoint as Exclude<CtaEntryPoint, "catalog">;
+  const dialogTitle = isCatalog ? t.catalog.title(brandName!.trim()) : t.title[standardEntryPoint];
+  const dialogDescription = isCatalog ? t.catalog.description(brandName!.trim()) : t.description;
+  const submitLabel = isCatalog ? t.catalog.submit : t.submit;
+  const messagePlaceholder = isCatalog ? t.catalog.placeholders.message(brandName!.trim()) : t.placeholders.message;
+  const sourceLabel = isCatalog
+    ? `${t.catalog.sourceLabel}: ${brandName!.trim()}`
+    : t.sourceLabel[standardEntryPoint];
 
   const resetState = () => {
     setName("");
@@ -160,7 +216,7 @@ export function CtaFormModal({
         body: JSON.stringify({
           locale,
           entryPoint,
-          sourceLabel: t.sourceLabel[entryPoint],
+          sourceLabel,
           name: name.trim(),
           phone: phone.trim(),
           email: email.trim(),
@@ -192,6 +248,9 @@ export function CtaFormModal({
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
+    if (nextOpen && isCatalog) {
+      setMessage(t.catalog.prefill(brandName!.trim()));
+    }
     if (!nextOpen) resetState();
   };
 
@@ -200,8 +259,8 @@ export function CtaFormModal({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-h-[90dvh] overflow-y-auto border border-cyan-200/20 bg-background/95 p-0 sm:max-w-xl">
         <div className="border-b border-cyan-200/12 px-6 py-5">
-          <DialogTitle className="text-xl font-bold text-foreground">{t.title[entryPoint]}</DialogTitle>
-          <DialogDescription className="mt-2 text-sm text-muted-foreground">{t.description}</DialogDescription>
+          <DialogTitle className="text-xl font-bold text-foreground">{dialogTitle}</DialogTitle>
+          <DialogDescription className="mt-2 text-sm text-muted-foreground">{dialogDescription}</DialogDescription>
         </div>
 
         <form className="space-y-4 px-6 py-5" onSubmit={handleSubmit}>
@@ -223,12 +282,18 @@ export function CtaFormModal({
 
           <label className="space-y-1.5">
             <span className="text-xs font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.fields.message}</span>
-            <Textarea required value={message} onChange={(event) => setMessage(event.target.value)} placeholder={t.placeholders.message} className="h-28 resize-none" />
+            <Textarea
+              required
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              placeholder={messagePlaceholder}
+              className="h-28 resize-none"
+            />
           </label>
 
           <div className="space-y-3 pt-1">
             <Button type="submit" className="landing-btn landing-btn-primary w-full" disabled={isSubmitting}>
-              {isSubmitting ? t.submitting : t.submit}
+              {isSubmitting ? t.submitting : submitLabel}
             </Button>
             {feedback ? <p className={`text-xs ${hasError ? "text-rose-300" : "text-emerald-300"}`}>{feedback}</p> : null}
             <p className="text-xs text-muted-foreground">

@@ -142,18 +142,20 @@ const content: LandingBundle["content"] = {
     en: {
       badge: "European Quality",
       title: "Premium Commercial",
-      titleHighlight: "Equipment",
-      subtitle: "from Europe",
-      description: "Your trusted partner for commercial trucks, trailers, and cargo vehicles.",
+      titleHighlight: "equipment",
+      subtitle: "for your business",
+      description:
+        "Your trusted partner in the European market for trucks, trailers, and specialist vehicles. Wholesale, retail, and full documentary deal support.",
       cta: "View Catalog",
       secondary: "Contact Us",
     },
     uk: {
       badge: "Європейська якість",
       title: "Преміальна комерційна",
-      titleHighlight: "Техніка",
-      subtitle: "з Європи",
-      description: "Ваш надійний партнер з продажу вантажівок, причепів та комерційної техніки.",
+      titleHighlight: "техніка",
+      subtitle: "для вашого бізнесу",
+      description:
+        "Ваш надійний партнер на європейському ринку з продажу вантажівок, причепів та спецтехніки. Опт, роздріб та повний документальний супровід угод.",
       cta: "Переглянути каталог",
       secondary: "Зв'язатися з нами",
     },
@@ -161,17 +163,19 @@ const content: LandingBundle["content"] = {
       badge: "Európska kvalita",
       title: "Prémiová komerčná",
       titleHighlight: "technika",
-      subtitle: "z Európy",
-      description: "Váš spoľahlivý partner pre nákladné vozidlá, prívesy a úžitkovú techniku.",
+      subtitle: "pre váš biznis",
+      description:
+        "Váš spoľahlivý partner na európskom trhu s predajom nákladných vozidiel, prívesov a špeciálnej techniky. Veľkoobchod, maloobchod a kompletný dokumentárny sprievod obchodov.",
       cta: "Prezrieť katalóg",
       secondary: "Kontaktujte nás",
     },
     de: {
       badge: "Europäische Qualität",
-      title: "Premium-Nutzfahrzeuge",
-      titleHighlight: "und Auflieger",
-      subtitle: "aus Europa",
-      description: "Ihr zuverlässiger Partner für Lkw, Auflieger und Nutzfahrzeuge.",
+      title: "Premium-Nutzfahrzeug-",
+      titleHighlight: "technik",
+      subtitle: "für Ihr Unternehmen",
+      description:
+        "Ihr zuverlässiger Partner auf dem europäischen Markt für Lkw, Auflieger und Spezialfahrzeuge. Großhandel, Einzelhandel und vollständige dokumentarische Abwicklung.",
       cta: "Katalog ansehen",
       secondary: "Kontakt aufnehmen",
     },
@@ -182,7 +186,7 @@ const content: LandingBundle["content"] = {
       title: "Expert Travel — your partner in",
       titleHighlight: "commercial vehicle trade",
       description:
-        "Expert Travel s.r.o. is a Slovak company based in Banská Bystrica. We help businesses select, buy, and sell trucks and trailers from Europe — from wholesale and brokerage to full trade administration.",
+        "Expert Travel s.r.o. is a Slovak company with headquarters in Banská Bystrica — a full participant in the European commercial vehicle market. We cover the full B2B supply cycle: from fleet sales within the EU to organising official export of trucks and trailers to Eastern Europe and CIS countries.",
       description2:
         "Every unit goes through a transparent process: history verification, pre-sale preparation (maintenance without engine work), registration documentation, and coordinated logistics including warehousing services.",
       aboutImageAlt: "Premium commercial truck, neon accent lighting",
@@ -201,7 +205,7 @@ const content: LandingBundle["content"] = {
       title: "Expert Travel — ваш партнер у",
       titleHighlight: "торгівлі комерційною технікою",
       description:
-        "Expert Travel s.r.o. — словацька компанія з Банської Бистриці. Допомагаємо бізнесу обирати, купувати та продавати вантажівки й причепи з Європи: від опту й посередництва до повного супроводу угоди.",
+        "Expert Travel s.r.o. — словацька компанія з головним офісом у Банській Бистриці, повноцінний учасник європейського ринку комерційної техніки. Ми забезпечуємо повний цикл B2B-поставок: від продажу автопаркам всередині ЄС до організації офіційного експорту вантажівок та причепів у країни Східної Європи та СНД.",
       description2:
         "Кожна одиниця проходить прозорий процес: перевірка історії, передпродажна підготовка (обслуговування без втручання в силову частину), реєстраційні документи та координація логістики, зокрема складських послуг.",
       aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
@@ -220,7 +224,7 @@ const content: LandingBundle["content"] = {
       title: "Expert Travel — partner v",
       titleHighlight: "obchode s úžitkovými vozidlami",
       description:
-        "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici. Pomáhame firmám s výberom, kúpou a predajom nákladných vozidiel a prívesov z Európy — od veľkoobchodu a sprostredkovania až po kompletnú administratívu obchodu.",
+        "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici, plnohodnotný účastník európskeho trhu s úžitkovými vozidlami. Zabezpečujeme celý cyklus B2B dodávok: od predaja flotilám v rámci EÚ až po organizáciu oficiálneho exportu nákladných vozidiel a prívesov do krajín východnej Európy a SNŠ.",
       description2:
         "Každé vozidlo prechádza transparentným procesom: overenie histórie, predajná príprava (údržba bez zásahu do motorickej časti vozidla), registračná dokumentácia a koordinácia logistiky vrátane skladových a prepravných služieb.",
       aboutImageAlt: "Prémiové nákladné vozidlo s neónovým osvetlením",
@@ -239,7 +243,7 @@ const content: LandingBundle["content"] = {
       title: "Expert Travel — Ihr Partner im",
       titleHighlight: "Nutzfahrzeughandel",
       description:
-        "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Sitz in Banská Bystrica. Wir unterstützen Firmen bei Auswahl, Kauf und Verkauf von Lkw und Aufliegern aus Europa — vom Großhandel und der Vermittlung bis zur vollständigen Abwicklung.",
+        "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Hauptsitz in Banská Bystrica — ein vollwertiger Akteur auf dem europäischen Nutzfahrzeugmarkt. Wir decken den gesamten B2B-Lieferzyklus ab: vom Flottenverkauf innerhalb der EU bis zur Organisation des offiziellen Exports von Lkw und Aufliegern in Länder Osteuropas und der GUS.",
       description2:
         "Jedes Fahrzeug durchläuft einen transparenten Prozess: Historienprüfung, verkaufsvorbereitende Wartung (ohne Eingriff in den Motor), Registrierungsunterlagen und koordinierte Logistik inklusive Lager- und Transportleistungen.",
       aboutImageAlt: "Premium-Lkw mit Neon-Akzentbeleuchtung",
@@ -264,24 +268,24 @@ const content: LandingBundle["content"] = {
       carouselTitle: "Client Reviews",
       reasons: [
         {
-          title: "Direct European Imports",
+          title: "Direct access to the EU market",
           description:
-            "No middlemen — we source vehicles directly from European suppliers ensuring best prices.",
+            "We operate within the European market. We acquire vehicles directly from leasing companies and corporate fleets without unnecessary middlemen.",
         },
         {
-          title: "Full Documentation",
+          title: "Transparent history and documents",
           description:
-            "Complete vehicle history, service records, and all necessary import documents included.",
+            "Each vehicle has verified European service history. We prepare a full document package for local registration or further export.",
         },
         {
           title: "Quality Guarantee",
           description:
-            "Every vehicle undergoes rigorous inspection before delivery with warranty coverage.",
+            "Before sale, every vehicle undergoes a detailed technical audit and cosmetic preparation at our base to meet high operational standards.",
         },
         {
-          title: "Competitive Pricing",
+          title: "Net sales (VAT-free)",
           description:
-            "Direct import model allows us to offer premium vehicles at competitive market prices.",
+            "We structure export deals at zero VAT (VAT 0% / Netto) for foreign buyers, ensuring full financial and legal transparency.",
         },
         {
           title: "Expert Consultation",
@@ -302,24 +306,24 @@ const content: LandingBundle["content"] = {
       carouselTitle: "Відгуки клієнтів",
       reasons: [
         {
-          title: "Прямий імпорт з Європи",
+          title: "Власний доступ до ринку ЄС",
           description:
-            "Без посередників — ми закуповуємо техніку безпосередньо у європейських постачальників за найкращими цінами.",
+            "Ми працюємо всередині європейського ринку. Викуповуємо техніку напряму з лізингових компаній та корпоративних автопарків без зайвих посередників.",
         },
         {
-          title: "Повна документація",
+          title: "Прозора історія та документи",
           description:
-            "Повна історія авто, сервісні записи та всі необхідні імпортні документи включені.",
+            "Кожен транспортний засіб має підтверджену європейську сервісну історію. Ми готуємо повний пакет документів для локальної реєстрації або подальшого експорту.",
         },
         {
           title: "Гарантія якості",
           description:
-            "Кожен транспортний засіб проходить ретельну перевірку перед доставкою з гарантійним покриттям.",
+            "Перед продажем техніка проходить детальний технічний аудит та косметичну підготовку на нашій базі, щоб відповідати високим стандартам експлуатації.",
         },
         {
-          title: "Конкурентні ціни",
+          title: "Продаж без ПДВ (Netto)",
           description:
-            "Модель прямого імпорту дозволяє нам пропонувати преміальну техніку за конкурентними цінами.",
+            "Оформлюємо експортні угоди за нульовою ставкою ПДВ (VAT 0% / Netto) для іноземних покупців, забезпечуючи повну фінансову та юридичну прозорість.",
         },
         {
           title: "Експертна консультація",
@@ -339,10 +343,10 @@ const content: LandingBundle["content"] = {
         "Medzi konkurenciou vynikáme záväzkom ku kvalite, transparentnosti a spokojnosti zákazníkov.",
       carouselTitle: "Hodnotenia klientov",
       reasons: [
-        { title: "Priamy dovoz z Európy", description: "Bez sprostredkovateľov — vozidlá získavame priamo od európskych dodávateľov za najlepšie ceny." },
-        { title: "Kompletná dokumentácia", description: "Úplná história vozidla, servisné záznamy a všetky potrebné dovozné dokumenty sú súčasťou dodávky." },
-        { title: "Záruka kvality", description: "Každé vozidlo prechádza dôkladnou kontrolou pred dodaním so záručným krytím." },
-        { title: "Konkurenčné ceny", description: "Model priameho dovozu nám umožňuje ponúkať prémiovú techniku za konkurenčné trhové ceny." },
+        { title: "Vlastný prístup na trh EÚ", description: "Pôsobíme na európskom trhu. Vozidlá vykupujeme priamo od lízingových spoločností a firemných flotíl bez zbytočných sprostredkovateľov." },
+        { title: "Transparentná história a dokumenty", description: "Každé vozidlo má overenú európsku servisnú históriu. Pripravíme kompletný balík dokumentov na lokálnu registráciu alebo ďalší export." },
+        { title: "Záruka kvality", description: "Pred predajom vozidlo prechádza detailným technickým auditom a kozmetickou prípravou v našej základni, aby spĺňalo vysoké prevádzkové štandardy." },
+        { title: "Predaj bez DPH (Netto)", description: "Exportné obchody vybavujeme s nulovou sadzbou DPH (VAT 0% / Netto) pre zahraničných kupujúcich s plnou finančnou a právnou transparentnosťou." },
         { title: "Odborné poradenstvo", description: "Náš tím vám pomôže nájsť ideálne vozidlo pre vaše konkrétne obchodné potreby." },
         { title: "Popredajná podpora", description: "Vyhradený tím podpory pre akékoľvek otázky alebo problémy po nákupe." },
       ],
@@ -355,10 +359,10 @@ const content: LandingBundle["content"] = {
         "Wir heben uns durch unser Engagement für Qualität, Transparenz und Kundenzufriedenheit von der Konkurrenz ab.",
       carouselTitle: "Kundenbewertungen",
       reasons: [
-        { title: "Direktimport aus Europa", description: "Ohne Zwischenhändler — wir beziehen Fahrzeuge direkt von europäischen Lieferanten zu besten Preisen." },
-        { title: "Vollständige Dokumentation", description: "Komplette Fahrzeughistorie, Serviceunterlagen und alle erforderlichen Importdokumente inklusive." },
-        { title: "Qualitätsgarantie", description: "Jedes Fahrzeug durchläuft vor der Auslieferung eine gründliche Prüfung mit Garantieabdeckung." },
-        { title: "Wettbewerbsfähige Preise", description: "Das Direktimportmodell ermöglicht uns Premium-Fahrzeuge zu wettbewerbsfähigen Marktpreisen anzubieten." },
+        { title: "Eigener Zugang zum EU-Markt", description: "Wir arbeiten innerhalb des europäischen Marktes. Wir erwerben Fahrzeuge direkt von Leasinggesellschaften und Firmenflotten ohne unnötige Zwischenhändler." },
+        { title: "Transparente Historie und Dokumente", description: "Jedes Fahrzeug hat eine nachgewiesene europäische Servicehistorie. Wir bereiten ein vollständiges Dokumentenpaket für die lokale Zulassung oder den weiteren Export vor." },
+        { title: "Qualitätsgarantie", description: "Vor dem Verkauf durchläuft jedes Fahrzeug ein detailliertes technisches Audit und eine kosmetische Aufbereitung in unserer Basis, um hohe Betriebsstandards zu erfüllen." },
+        { title: "Netto-Verkauf (ohne MwSt.)", description: "Exportgeschäfte führen wir mit Null-Mehrwertsteuer (VAT 0% / Netto) für ausländische Käufer — mit vollständiger finanzieller und rechtlicher Transparenz." },
         { title: "Fachberatung", description: "Unser Team hilft Ihnen, das passende Fahrzeug für Ihre spezifischen Geschäftsanforderungen zu finden." },
         { title: "After-Sales-Support", description: "Dediziertes Support-Team für alle Fragen oder Anliegen nach Ihrem Kauf." },
       ],
@@ -400,44 +404,48 @@ const content: LandingBundle["content"] = {
   },
   "catalog-meta": {
     en: {
-      badge: "Our Catalog",
-      title: "Premium Equipment",
-      titleHighlight: "Ready for Delivery",
-      description: "Browse our offer.",
-      viewDetails: "Learn more",
+      badge: "Supply focus",
+      title: "Brands we",
+      titleHighlight: "work with",
+      description:
+        "We source, acquire, and officially export equipment from leading European manufacturers tailored to your business requirements.",
+      viewDetails: "Get a quote",
       categories: [
         { icon: "Truck", name: "Trucks", count: "120+", description: "Heavy duty trucks", brands: ["MAN", "Scania"] },
         { icon: "Container", name: "Trailers", count: "80+", description: "Semi trailers", brands: ["Schmitz", "Krone"] },
       ],
     },
     uk: {
-      badge: "Наш каталог",
-      title: "Преміальна техніка",
-      titleHighlight: "Готова до доставки",
-      description: "Перегляньте нашу пропозицію.",
-      viewDetails: "Дізнатися більше",
+      badge: "Напрямки постачання",
+      title: "Бренди, з",
+      titleHighlight: "якими працюємо",
+      description:
+        "Ми забезпечуємо підбір, викуп та офіційний експорт техніки від провідних європейських виробників під ваші індивідуальні бізнес-задачі.",
+      viewDetails: "Отримати пропозицію",
       categories: [
         { icon: "Truck", name: "Вантажівки", count: "120+", description: "Важкі вантажівки", brands: ["MAN", "Scania"] },
         { icon: "Container", name: "Причепи", count: "80+", description: "Напівпричепи", brands: ["Schmitz", "Krone"] },
       ],
     },
     sk: {
-      badge: "Náš katalóg",
-      title: "Prémiová technika",
-      titleHighlight: "pripravená na dodanie",
-      description: "Prezrite si našu ponuku.",
-      viewDetails: "Viac informácií",
+      badge: "Smery dodávok",
+      title: "Značky, s",
+      titleHighlight: "ktorými pracujeme",
+      description:
+        "Zabezpečujeme výber, výkup a oficiálny export techniky od popredných európskych výrobcov podľa vašich obchodných požiadaviek.",
+      viewDetails: "Získať ponuku",
       categories: [
         { icon: "Truck", name: "Nákladné vozidlá", count: "120+", description: "Ťažké nákladné vozidlá", brands: ["MAN", "Scania"] },
         { icon: "Container", name: "Prívesy", count: "80+", description: "Návesy", brands: ["Schmitz", "Krone"] },
       ],
     },
     de: {
-      badge: "Unser Katalog",
-      title: "Premium-Ausstattung",
-      titleHighlight: "Lieferbereit",
-      description: "Durchsuchen Sie unser Angebot.",
-      viewDetails: "Mehr erfahren",
+      badge: "Lieferrichtungen",
+      title: "Marken, mit",
+      titleHighlight: "denen wir arbeiten",
+      description:
+        "Wir übernehmen Auswahl, Ankauf und offiziellen Export von Fahrzeugen führender europäischer Hersteller — passend zu Ihren Geschäftsanforderungen.",
+      viewDetails: "Angebot anfordern",
       categories: [
         { icon: "Truck", name: "Lkw", count: "120+", description: "Schwere Lkw", brands: ["MAN", "Scania"] },
         { icon: "Container", name: "Auflieger", count: "80+", description: "Sattelauflieger", brands: ["Schmitz", "Krone"] },
@@ -449,25 +457,25 @@ const content: LandingBundle["content"] = {
       badge: "FAQ",
       title: "Frequently Asked",
       titleHighlight: "Questions",
-      description: "Practical answers about buying vehicles, paperwork, and working with Expert Travel.",
+      description: "Practical answers about supply terms, paperwork, and working with Expert Travel.",
     },
     uk: {
       badge: "FAQ",
       title: "Часті",
       titleHighlight: "запитання",
-      description: "Практичні відповіді про купівлю техніки, документи та співпрацю з Expert Travel.",
+      description: "Практичні відповіді про умови постачання, документи та співпрацю з Expert Travel.",
     },
     sk: {
       badge: "FAQ",
       title: "Často kladené",
       titleHighlight: "Otázky",
-      description: "Praktické odpovede o kúpe vozidiel, dokumentoch a spolupráci s Expert Travel.",
+      description: "Praktické odpovede o podmienkach dodávok, dokumentoch a spolupráci s Expert Travel.",
     },
     de: {
       badge: "FAQ",
       title: "Häufig gestellte",
       titleHighlight: "Fragen",
-      description: "Praktische Antworten zu Fahrzeugkauf, Unterlagen und der Zusammenarbeit mit Expert Travel.",
+      description: "Praktische Antworten zu Lieferbedingungen, Unterlagen und der Zusammenarbeit mit Expert Travel.",
     },
   },
   footer: {
@@ -514,13 +522,13 @@ const services: LandingBundle["services"] = [
     titleSk: "Výber vozidiel",
     titleDe: "Fahrzeugbeschaffung",
     descriptionEn:
-      "We source trucks and trailers directly from verified European auctions and fleet operators — matched to your budget, payload, route profile, and compliance requirements.",
+      "We source trucks and trailers from verified European auctions and closed corporate fleets — matched to your budget, payload, route profile, and compliance requirements.",
     descriptionUk:
-      "Підбираємо вантажівки та причепи напряму з перевірених європейських аукціонів і корпоративних автопарків — під ваш бюджет, вантажність, профіль маршрутів і регуляторні вимоги.",
+      "Підбираємо вантажівки та причепи з перевірених європейських аукціонів і закритих корпоративних баз — під ваш бюджет, вантажність, профіль маршрутів і регуляторні вимоги.",
     descriptionSk:
-      "Získavame nákladné vozidlá a prívesy priamo z overených európskych aukcií a firemných flotíl — podľa vášho rozpočtu, nosnosti, profilu trás a regulačných požiadaviek.",
+      "Vyberáme nákladné vozidlá a prívesy z overených európskych aukcií a uzavretých firemných báz — podľa vášho rozpočtu, nosnosti, profilu trás a regulačných požiadaviek.",
     descriptionDe:
-      "Wir beschaffen Lkw und Auflieger direkt aus verifizierten europäischen Auktionen und Flottenbetreibern — abgestimmt auf Ihr Budget, Ihre Nutzlast, Routenprofil und Compliance-Anforderungen.",
+      "Wir beschaffen Lkw und Auflieger aus verifizierten europäischen Auktionen und geschlossenen Firmenflotten — abgestimmt auf Budget, Nutzlast, Routenprofil und Compliance-Anforderungen.",
     icon: "Truck",
     orderIndex: 1,
   },
@@ -548,13 +556,13 @@ const services: LandingBundle["services"] = [
     titleSk: "Dokumentácia",
     titleDe: "Dokumentation",
     descriptionEn:
-      "Complete registration, customs, and accounting package prepared for smooth handover in your country.",
+      "Customs and export clearance: We prepare a full export document package (including EX-1 declarations, transit plates, and certificates of origin) for fast and legal customs processing.",
     descriptionUk:
-      "Повний пакет документів для реєстрації, митниці та бухгалтерії — готовий до безперебійної передачі техніки у вашій країні.",
+      "Митне та експортне оформлення: Готуємо повний пакет документів для експорту (включаючи декларації EX-1, транзитні номери та сертифікати походження), що гарантує швидке та легальне проходження митниці.",
     descriptionSk:
-      "Kompletný balík pre registráciu, colnicu a účtovníctvo pripravený na hladké prevzatie vozidla vo vašej krajine.",
+      "Colné a exportné vybavenie: Pripravíme kompletný balík exportných dokumentov (vrátane deklarácií EX-1, tranzitných značiek a certifikátov pôvodu) pre rýchle a legálne colné konanie.",
     descriptionDe:
-      "Vollständiges Paket für Registrierung, Zoll und Buchhaltung — vorbereitet für eine reibungslose Übergabe in Ihrem Land.",
+      "Zoll- und Exportabwicklung: Wir bereiten ein vollständiges Exportdokumentenpaket vor (einschließlich EX-1-Erklärungen, Transitkennzeichen und Ursprungszeugnisse) für eine schnelle und rechtmäßige Zollabfertigung.",
     icon: "ShieldCheck",
     orderIndex: 3,
   },
@@ -565,13 +573,13 @@ const services: LandingBundle["services"] = [
     titleSk: "Logistika a dodanie",
     titleDe: "Logistik & Lieferung",
     descriptionEn:
-      "End-to-end delivery planning with clear ETA, route coordination, and a structured handover checklist.",
+      "International logistics: We organise delivery from our Slovakia warehouse to any point in Europe or to importer country borders. Clear timelines, verified drivers, and cargo insurance.",
     descriptionUk:
-      "Планування доставки від початку до кінця: чіткий ETA, координація маршруту та структурований чекліст передачі.",
+      "Міжнародна логістика: Організовуємо доставку техніки зі складу в Словаччині до будь-якої точки Європи чи до кордонів країн-імпортерів. Чіткі терміни, перевірені водії та страхування вантажу.",
     descriptionSk:
-      "Plánovanie dodania od začiatku do konca s jasným ETA, koordináciou trasy a štruktúrovaným odovzdávacím checklistom.",
+      "Medzinárodná logistika: Organizujeme dodanie techniky zo skladu na Slovensku do ľubovoľného miesta v Európe alebo k hraniciam krajín dovozcov. Jasné termíny, overení vodiči a poistenie nákladu.",
     descriptionDe:
-      "End-to-End-Lieferplanung mit klarem ETA, Routenkoordination und strukturierter Übergabe-Checkliste.",
+      "Internationale Logistik: Wir organisieren die Lieferung von unserem Lager in der Slowakei zu jedem Punkt in Europa oder an die Grenzen der Importländer. Klare Termine, geprüfte Fahrer und Frachtversicherung.",
     icon: "MapPin",
     orderIndex: 4,
   },
@@ -599,13 +607,13 @@ const services: LandingBundle["services"] = [
     titleSk: "Sprostredkovanie a podpora obchodu",
     titleDe: "Vermittlung & Handelsbegleitung",
     descriptionEn:
-      "Wholesale, retail, and brokerage across EU trade flows — we structure the deal, paperwork, and coordination end to end.",
+      "Wholesale, retail, and B2B partnerships. We structure deals, prepare supporting documents, and coordinate the process from first inspection to key handover.",
     descriptionUk:
-      "Опт, роздріб і посередництво в торгівлі по ЄС — структуруємо угоду, документи та координацію від початку до кінця.",
+      "Опт, роздріб та B2B-партнерство. Структуруємо угоди, готуємо супровідні документи та координуємо процес від першого огляду до передачі ключів.",
     descriptionSk:
-      "Veľkoobchod, maloobchod a sprostredkovanie v EÚ — zabezpečíme štruktúru obchodu, dokumentáciu a koordináciu.",
+      "Veľkoobchod, maloobchod a B2B partnerstvo. Štruktúrujeme obchody, pripravíme sprievodné dokumenty a koordinujeme proces od prvého obhliadnutia po odovzdanie kľúčov.",
     descriptionDe:
-      "Großhandel, Einzelhandel und Vermittlung in der EU — wir strukturieren Deal, Unterlagen und Koordination durchgängig.",
+      "Großhandel, Einzelhandel und B2B-Partnerschaften. Wir strukturieren Geschäfte, bereiten Begleitdokumente vor und koordinieren den Prozess von der ersten Besichtigung bis zur Schlüsselübergabe.",
     icon: "CreditCard",
     orderIndex: 6,
   },
@@ -723,6 +731,38 @@ const faqs: LandingBundle["faqs"] = [
     answerDe:
       "Senden Sie Ihre Anfrage über das Formular oder den Katalog — Fahrzeugtyp, Stückzahl und Land. Wir klären Details, senden ein Angebot und nach der Einigung vereinbaren wir Vertrag und Übergabe.",
     orderIndex: 7,
+  },
+  {
+    id: 8,
+    questionEn: "Can vehicles be purchased at Netto price (without VAT)?",
+    questionUk: "Чи можна отримати техніку за ціною Нетто (без ПДВ)?",
+    questionSk: "Je možné kúpiť vozidlo za cenu Netto (bez DPH)?",
+    questionDe: "Kann die Technik zum Netto-Preis (ohne MwSt.) gekauft werden?",
+    answerEn:
+      "Yes. When purchasing for export outside the EU or for a VAT-registered company in another EU country, the deal is priced Netto with a zero VAT rate.",
+    answerUk:
+      "Так. При оформленні постачання на експорт за межі ЄС або на компанію-платника ПДВ в іншій країні Євросоюзу, угода оформлюється за ціною Netto з нульовою ставкою VAT.",
+    answerSk:
+      "Áno. Pri kúpe na export mimo EÚ alebo na spoločnosť platcu DPH v inej krajine EÚ sa obchod uzatvára za cenu Netto s nulovou sadzbou DPH.",
+    answerDe:
+      "Ja. Beim Kauf für den Export außerhalb der EU oder für ein mehrwertsteuerpflichtiges Unternehmen in einem anderen EU-Land wird der Deal zum Netto-Preis mit Null-Mehrwertsteuersatz abgeschlossen.",
+    orderIndex: 8,
+  },
+  {
+    id: 9,
+    questionEn: "What export documents do you provide?",
+    questionUk: "Які експортні документи ви надаєте?",
+    questionSk: "Aké exportné dokumenty poskytujete?",
+    questionDe: "Welche Exportdokumente stellen Sie bereit?",
+    answerEn:
+      "We handle the export declaration (EX-1), transit documents (T1/T2 as needed), insurance, and assistance obtaining compliance certificates for customs clearance in your country.",
+    answerUk:
+      "Ми повністю беремо на себе відкриття експортної декларації (EX-1), оформлення транзитних документів (T1/T2 за потреби), страхування та допомогу в отриманні сертифікатів відповідності для розмитнення у вашій країні.",
+    answerSk:
+      "Kompletne zabezpečíme exportnú deklaráciu (EX-1), tranzitné dokumenty (T1/T2 podľa potreby), poistenie a pomoc pri získaní certifikátov zhody pre colné konanie vo vašej krajine.",
+    answerDe:
+      "Wir übernehmen die Ausfuhranmeldung (EX-1), Transitdokumente (T1/T2 bei Bedarf), Versicherung und Unterstützung bei Konformitätszertifikaten für die Zollabfertigung in Ihrem Land.",
+    orderIndex: 9,
   },
 ];
 
