@@ -124,10 +124,10 @@ export const catalogBodyTypeItemsByBrandId: Record<string, CatalogBodyTypeItem[]
       "s-series",
       { en: "S-series", uk: "S-series", sk: "S-series", de: "S-series" },
       {
-        en: "Scania S-series premium long-haul tractor",
-        uk: "Преміальний магістральний тягач Scania S-series",
-        sk: "Prémiový diaľkový ťahač Scania S-series",
-        de: "Scania S-Serie Premium-Fernverkehrszugmaschine",
+        en: "Scania S-series long-haul tractor",
+        uk: "Магістральний тягач Scania S-series",
+        sk: "Diaľkový ťahač Scania S-series",
+        de: "Scania S-Serie Fernverkehrszugmaschine",
       },
     ),
     modelItem(

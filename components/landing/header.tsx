@@ -50,10 +50,10 @@ const navigation = {
 } as const;
 
 const ctaText = {
-  en: "Get Quote",
-  uk: "Пропозиція",
-  sk: "Získať ponuku",
-  de: "Angebot",
+  en: "Send a request",
+  uk: "Зв'язатися",
+  sk: "Odoslať dopyt",
+  de: "Anfrage senden",
 } as const;
 
 const languageItems: Array<{ locale: PublicLocale; label: string }> = PUBLIC_LOCALES.map((locale) => ({

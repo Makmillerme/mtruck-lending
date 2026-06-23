@@ -6,6 +6,12 @@ const brandLogos: Record<string, string> = {
   volvo: "/brands/volvo.svg",
   renault: "/brands/renault.svg",
   daf: "/brands/daf.svg",
+  schmitz: "/brands/schmitz.svg",
+  krone: "/brands/krone.svg",
+  koegel: "/brands/koegel.svg",
+  kogel: "/brands/koegel.svg",
+  wielton: "/brands/wielton.svg",
+  lamberet: "/brands/lamberet.svg",
 };
 
 /** Lightweight assets for catalog carousel cards. */
@@ -16,6 +22,12 @@ const cardBrandLogos: Record<string, string> = {
   volvo: "/brands/volvo.svg",
   renault: "/brands/renault.svg",
   daf: "/brands/daf.svg",
+  schmitz: "/brands/schmitz.svg",
+  krone: "/brands/krone.svg",
+  koegel: "/brands/koegel.svg",
+  kogel: "/brands/koegel.svg",
+  wielton: "/brands/wielton.svg",
+  lamberet: "/brands/lamberet.svg",
 };
 
 function normalizeBrandName(brand: string) {

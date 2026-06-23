@@ -201,7 +201,7 @@ const catalogIconToKey: Record<string, CatalogCategory> = {
 
 const catalogTabDefaults: Record<Locale, Record<CatalogCategory, string>> = {
   en: { truck: "Trucks", trailer: "Trailers" },
-  uk: { truck: "Вантажівки", trailer: "Причепи" },
+  uk: { truck: "Вантажні авто", trailer: "Причепи" },
   sk: { truck: "Nákladné autá", trailer: "Prívesy" },
   de: { truck: "Lkw", trailer: "Anhänger" },
 };

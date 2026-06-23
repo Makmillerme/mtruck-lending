@@ -98,10 +98,28 @@ function parseSmtpConfig():
   };
 }
 
-async function resolveRecipientEmail() {
-  const envRecipient = process.env.CTA_RECEIVER_EMAIL?.trim();
-  if (envRecipient) return envRecipient;
-  return landingData.contact.email.trim() || null;
+function parseRecipientList(value: string | undefined): string[] {
+  return (value ?? "")
+    .split(/[;,]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function uniqueEmails(emails: string[]): string[] {
+  const seen = new Set<string>();
+  return emails.filter((email) => {
+    const normalized = email.toLowerCase();
+    if (seen.has(normalized)) return false;
+    seen.add(normalized);
+    return true;
+  });
+}
+
+function resolveRecipientEmails() {
+  return uniqueEmails([
+    ...parseRecipientList(process.env.CTA_RECEIVER_EMAIL),
+    landingData.contact.email.trim(),
+  ]).filter(Boolean);
 }
 
 function resolveFormSubmitEndpoint(recipientEmail: string): string {
@@ -240,8 +258,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const to = await resolveRecipientEmail();
-    if (!to) {
+    const recipients = resolveRecipientEmails();
+    if (recipients.length === 0) {
       return NextResponse.json({ error: "Recipient email is not configured" }, { status: 503 });
     }
 
@@ -299,7 +317,7 @@ export async function POST(request: Request) {
         await transport.verify();
         await transport.sendMail({
           from: smtp.from,
-          to,
+          to: recipients,
           replyTo: email || undefined,
           subject,
           text,
@@ -325,30 +343,32 @@ export async function POST(request: Request) {
     }
 
     try {
-      const formSubmitResult = await sendWithFormSubmit({
-        endpoint: resolveFormSubmitEndpoint(to),
-        origin,
-        referer,
-        source,
-        locale: payload.locale,
-        name: safeName,
-        phone: safePhone,
-        email,
-        message: safeMessage,
-        submittedAt: createdAt,
-        ip,
-        userAgent,
-        subject,
-      });
+      const formSubmitResults = await Promise.all(
+        recipients.map((recipient) =>
+          sendWithFormSubmit({
+            endpoint: resolveFormSubmitEndpoint(recipient),
+            origin,
+            referer,
+            source,
+            locale: payload.locale,
+            name: safeName,
+            phone: safePhone,
+            email,
+            message: safeMessage,
+            submittedAt: createdAt,
+            ip,
+            userAgent,
+            subject,
+          })
+        )
+      );
 
-      if (!formSubmitResult.ok) {
-        console.error("CTA FormSubmit failed", formSubmitResult.error);
-        if (formSubmitResult.activationRequired) {
+      const failedResult = formSubmitResults.find((result) => !result.ok);
+      if (failedResult && !failedResult.ok) {
+        console.error("CTA FormSubmit failed", failedResult.error);
+        if (failedResult.activationRequired) {
           return NextResponse.json(
-            {
-              error:
-                "FormSubmit requires one-time activation. Open inbox it.dev.mtruck@gmail.com and click 'Activate Form'.",
-            },
+            { error: "FormSubmit requires one-time activation for the configured recipient inbox." },
             { status: 503 }
           );
         }

@@ -1,7 +1,8 @@
 "use client";
 
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { CatalogBodyTypeOfferingCard } from "@/components/landing/catalog-body-type-offering-card";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -31,10 +32,9 @@ interface CatalogBrandModalProps {
 
 type ModalLabels = {
   overview: string;
-  bodyTypes: string;
-  configurations: string;
-  typicalSpecs: string;
-  modelRange: string;
+  galleryTitle: string;
+  prevPhoto: string;
+  nextPhoto: string;
   note: string;
   quoteCta: string;
 };
@@ -42,58 +42,129 @@ type ModalLabels = {
 const labels: Record<Locale, ModalLabels> = {
   en: {
     overview: "About the brand",
-    bodyTypes: "Chassis and body types",
-    configurations: "Configuration and equipment",
-    typicalSpecs: "Supply standard",
-    modelRange: "Model range",
-    note: "We help shortlist equipment for your routes, cargo profile, and fleet standards — then prepare a commercial quote from verified EU sources.",
-    quoteCta: "Get a quote",
+    galleryTitle: "Vehicle photos",
+    prevPhoto: "Previous photo",
+    nextPhoto: "Next photo",
+    note: "We help shortlist equipment for your routes, cargo profile, and fleet needs — then prepare a clear commercial option for cooperation.",
+    quoteCta: "Send a request",
   },
   uk: {
     overview: "Про бренд",
-    bodyTypes: "Типи шасі та кузовів",
-    configurations: "Конфігурація та оснащення",
-    typicalSpecs: "Стандарт постачання",
-    modelRange: "Моделі",
-    note: "Допомагаємо підібрати варіанти техніки під ваші маршрути, вантаж і стандарти автопарку — далі готуємо комерційну пропозицію з перевірених джерел у ЄС.",
-    quoteCta: "Отримати пропозицію",
+    galleryTitle: "Фото техніки",
+    prevPhoto: "Попереднє фото",
+    nextPhoto: "Наступне фото",
+    note: "Допомагаємо підібрати варіанти техніки під ваші маршрути, вантаж і потреби автопарку — далі формуємо зрозумілий варіант співпраці.",
+    quoteCta: "Надіслати запит",
   },
   sk: {
     overview: "O značke",
-    bodyTypes: "Typy podvozkov a nadstavieb",
-    configurations: "Konfigurácia a výbava",
-    typicalSpecs: "Štandard dodávky",
-    modelRange: "Modely",
-    note: "Pomáhame vybrať varianty techniky podľa vašich trás, nákladu a štandardov flotily — potom pripravíme obchodnú ponuku z overených zdrojov v EÚ.",
-    quoteCta: "Získať ponuku",
+    galleryTitle: "Fotografie techniky",
+    prevPhoto: "Predchádzajúca fotografia",
+    nextPhoto: "Ďalšia fotografia",
+    note: "Pomáhame vybrať varianty techniky podľa vašich trás, nákladu a potrieb flotily — potom pripravíme jasnú možnosť spolupráce.",
+    quoteCta: "Odoslať dopyt",
   },
   de: {
     overview: "Über die Marke",
-    bodyTypes: "Fahrgestell- und Aufbautypen",
-    configurations: "Konfiguration und Ausstattung",
-    typicalSpecs: "Lieferstandard",
-    modelRange: "Modellpalette",
-    note: "Wir helfen bei der Auswahl passender Fahrzeuge für Ihre Strecken, Frachtprofil und Flottenstandards — anschließend erstellen wir ein Angebot aus verifizierten EU-Quellen.",
-    quoteCta: "Angebot anfordern",
+    galleryTitle: "Fahrzeugfotos",
+    prevPhoto: "Vorheriges Foto",
+    nextPhoto: "Nächstes Foto",
+    note: "Wir helfen bei der Auswahl passender Fahrzeuge für Routen, Frachtprofil und Fuhrparkbedarf — danach erstellen wir eine klare Kooperationsoption.",
+    quoteCta: "Anfrage senden",
   },
 };
 
-function InfoList({ title, items }: { title: string; items: string[] }) {
-  if (!items.length) return null;
+type BrandGalleryImage = {
+  id: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+function BrandPhotoCarousel({ images, labels: t }: { images: BrandGalleryImage[]; labels: ModalLabels }) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const showControls = images.length > 1;
+
+  const updateScrollState = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    setCanScrollPrev(track.scrollLeft > 1);
+    setCanScrollNext(track.scrollLeft + track.clientWidth < track.scrollWidth - 1);
+  }, []);
+
+  const scrollPhotos = useCallback((direction: "prev" | "next") => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const firstSlide = track.querySelector<HTMLElement>("[data-brand-photo-slide]");
+    const distance = firstSlide?.offsetWidth ? firstSlide.offsetWidth + 16 : track.clientWidth * 0.85;
+    track.scrollBy({ left: direction === "next" ? distance : -distance, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    const track = trackRef.current;
+    if (!track) return;
+
+    track.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+
+    return () => {
+      track.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [images.length, updateScrollState]);
+
+  if (!images.length) return null;
 
   return (
-    <div>
-      <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{title}</h3>
-      <ul className="space-y-2">
-        {items.map((item, index) => (
-          <li
-            key={`${title}-${item}-${index}`}
-            className="flex gap-2 text-sm leading-relaxed text-muted-foreground before:mt-2 before:h-1 before:w-1 before:shrink-0 before:rounded-full before:bg-cyan-200/70 before:content-['']"
-          >
-            <span>{item}</span>
-          </li>
+    <div className="catalog-brand-photo-gallery">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h3 className="text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.galleryTitle}</h3>
+
+        {showControls ? (
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="catalog-carousel-btn landing-btn landing-btn-control"
+              aria-label={t.prevPhoto}
+              disabled={!canScrollPrev}
+              onClick={() => scrollPhotos("prev")}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="catalog-carousel-btn landing-btn landing-btn-control"
+              aria-label={t.nextPhoto}
+              disabled={!canScrollNext}
+              onClick={() => scrollPhotos("next")}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : null}
+      </div>
+
+      <div ref={trackRef} className="catalog-brand-photo-track" onScroll={updateScrollState}>
+        {images.map((image) => (
+          <figure key={image.id} data-brand-photo-slide className="catalog-brand-photo-slide">
+            <Image
+              src={image.imageSrc}
+              alt={image.imageAlt}
+              width={720}
+              height={405}
+              className="catalog-brand-photo-image"
+            />
+          </figure>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -101,14 +172,21 @@ function InfoList({ title, items }: { title: string; items: string[] }) {
 export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalProps) {
   const t = labels[locale];
   const modalLogoSrc = getCatalogBrandLogoFull(brand.name) ?? brand.logoSrc;
-  const hasTagline = Boolean(brand.tagline?.trim());
-  const hasHighlights = brand.highlights.length > 0;
   const hasOverview = Boolean(brand.overview?.trim());
-  const bodyTypeOfferings = brand.bodyTypeOfferings ?? [];
-  const hasBodyTypeOfferings = bodyTypeOfferings.length > 0;
-  const hasMetaLists =
-    !hasBodyTypeOfferings &&
-    (brand.bodyTypes.length > 0 || brand.configurations.length > 0 || brand.typicalSpecs.length > 0);
+  const galleryImages = useMemo<BrandGalleryImage[]>(() => {
+    const seen = new Set<string>();
+    return (brand.bodyTypeOfferings ?? [])
+      .filter((offering) => {
+        if (!offering.imageSrc || seen.has(offering.imageSrc)) return false;
+        seen.add(offering.imageSrc);
+        return true;
+      })
+      .map((offering) => ({
+        id: offering.id,
+        imageSrc: offering.imageSrc,
+        imageAlt: offering.imageAlt,
+      }));
+  }, [brand.bodyTypeOfferings]);
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
@@ -134,21 +212,6 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
               <h2 className="catalog-brand-modal-title">{brand.name}</h2>
             )}
 
-            {hasTagline || hasHighlights ? (
-              <div className="catalog-brand-modal-copy space-y-2.5">
-                {hasTagline ? <p className="catalog-brand-modal-tagline">{brand.tagline}</p> : null}
-
-                {hasHighlights ? (
-                  <div className="flex flex-wrap gap-2">
-                    {brand.highlights.map((item, index) => (
-                      <span key={`${brand.id}-highlight-${item}-${index}`} className="catalog-spec-pill">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ) : null}
           </div>
         </div>
 
@@ -160,35 +223,11 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
             </div>
           ) : null}
 
-          {hasBodyTypeOfferings ? (
-            <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">
-                {t.modelRange}
-              </h3>
-              <div className="catalog-body-type-list">
-                {bodyTypeOfferings.map((offering) => (
-                  <CatalogBodyTypeOfferingCard key={offering.id} offering={offering} />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <>
-              {brand.bodyTypes.length > 0 || brand.configurations.length > 0 ? (
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <InfoList title={t.bodyTypes} items={brand.bodyTypes} />
-                  <InfoList title={t.configurations} items={brand.configurations} />
-                </div>
-              ) : null}
+          <BrandPhotoCarousel images={galleryImages} labels={t} />
 
-              <InfoList title={t.typicalSpecs} items={brand.typicalSpecs} />
-            </>
-          )}
-
-          {hasMetaLists || hasBodyTypeOfferings ? (
-            <p className="rounded-xl border border-cyan-200/12 bg-cyan-200/5 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
-              {t.note}
-            </p>
-          ) : null}
+          <p className="rounded-xl border border-cyan-200/12 bg-cyan-200/5 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+            {t.note}
+          </p>
 
           <div className="border-t border-cyan-200/12 pt-6">
             <CtaFormModal locale={locale} entryPoint="catalog" brandName={brand.name}>

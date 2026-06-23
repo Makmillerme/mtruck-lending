@@ -2,7 +2,7 @@ export const BRAND_NAME = "Expert Travel";
 export const BRAND_NAME_UPPER = "EXPERT TRAVEL";
 export const BRAND_LOGO_SRC = "/expert-travel.png";
 export const BRAND_LOGO_ALT = "Expert Travel logo";
-export const BRAND_CONTACT_EMAIL = "sales@m-truck.cz";
+export const BRAND_CONTACT_EMAIL = "exp.travel.sro@gmail.com";
 
 const LEGACY_LOGO_SRC: Record<string, string> = {
   "/m-truck-logo.png": BRAND_LOGO_SRC,

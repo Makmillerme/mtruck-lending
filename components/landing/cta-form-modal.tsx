@@ -26,7 +26,7 @@ const copy = {
     fields: { name: "Name", phone: "Phone", email: "Email (optional)", message: "Request details" },
     placeholders: {
       name: "Your name",
-      phone: "+420 ...",
+      phone: "+421 ...",
       email: "name@company.com",
       message: "Brand, category, budget, delivery timeline...",
     },
@@ -64,7 +64,7 @@ const copy = {
     },
     placeholders: {
       name: "Ваше ім'я",
-      phone: "+420 ...",
+      phone: "+421 ...",
       email: "name@company.com",
       message: "Бренд, категорія, бюджет, термін поставки...",
     },
@@ -102,7 +102,7 @@ const copy = {
     },
     placeholders: {
       name: "Vaše meno",
-      phone: "+420 ...",
+      phone: "+421 ...",
       email: "name@company.com",
       message: "Značka, kategória, rozpočet, termín dodania...",
     },
@@ -140,7 +140,7 @@ const copy = {
     },
     placeholders: {
       name: "Ihr Name",
-      phone: "+420 ...",
+      phone: "+421 ...",
       email: "name@company.com",
       message: "Marke, Kategorie, Budget, Lieferzeitpunkt...",
     },
@@ -169,7 +169,7 @@ export function CtaFormModal({
   entryPoint,
   brandName,
   contactEmail = BRAND_CONTACT_EMAIL,
-  contactPhone = "+420 775 123 456",
+  contactPhone = "+421 904 752 306",
   children,
 }: CtaFormModalProps) {
   const t = copy[locale] ?? copy.en;

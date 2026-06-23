@@ -24,38 +24,38 @@ const content = {
     title: "Brands we",
     titleHighlight: "work with",
     description:
-      "We source, acquire, and officially export equipment from leading European manufacturers tailored to your business requirements.",
-    learnMore: "Get a quote",
+      "We work with leading European commercial transport brands and help companies find suitable cooperation options for their fleet needs.",
+    learnMore: "Send a request",
     prevBrands: "Previous brands",
     nextBrands: "Next brands",
   },
   uk: {
-    badge: "Напрямки постачання",
+    badge: "Напрями роботи",
     title: "Бренди, з",
     titleHighlight: "якими працюємо",
     description:
-      "Ми забезпечуємо підбір, викуп та офіційний експорт техніки від провідних європейських виробників під ваші індивідуальні бізнес-задачі.",
-    learnMore: "Отримати пропозицію",
+      "Працюємо з провідними європейськими брендами комерційного транспорту та допомагаємо компаніям знайти відповідні варіанти співпраці для автопарку.",
+    learnMore: "Надіслати запит",
     prevBrands: "Попередні бренди",
     nextBrands: "Наступні бренди",
   },
   sk: {
-    badge: "Smery dodávok",
+    badge: "Smery práce",
     title: "Značky, s",
     titleHighlight: "ktorými pracujeme",
     description:
-      "Zabezpečujeme výber, výkup a oficiálny export techniky od popredných európskych výrobcov podľa vašich obchodných požiadaviek.",
-    learnMore: "Získať ponuku",
+      "Pracujeme s poprednými európskymi značkami komerčnej dopravy a pomáhame firmám nájsť vhodné možnosti spolupráce pre ich flotilu.",
+    learnMore: "Odoslať dopyt",
     prevBrands: "Predchádzajúce značky",
     nextBrands: "Ďalšie značky",
   },
   de: {
-    badge: "Lieferrichtungen",
+    badge: "Arbeitsbereiche",
     title: "Marken, mit",
     titleHighlight: "denen wir arbeiten",
     description:
-      "Wir übernehmen Auswahl, Ankauf und offiziellen Export von Fahrzeugen führender europäischer Hersteller — passend zu Ihren Geschäftsanforderungen.",
-    learnMore: "Angebot anfordern",
+      "Wir arbeiten mit führenden europäischen Marken im gewerblichen Transport und helfen Unternehmen, passende Kooperationsoptionen für ihren Fuhrpark zu finden.",
+    learnMore: "Anfrage senden",
     prevBrands: "Vorherige Marken",
     nextBrands: "Nächste Marken",
   },
@@ -334,13 +334,6 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
 
                       <div className="catalog-brand-card-body">
                         <p className="catalog-brand-card-tagline">{brand.tagline}</p>
-                        <div className="mt-auto flex flex-wrap gap-2 pt-4">
-                          {brand.highlights.map((item) => (
-                            <span key={`${brand.id}-${item}`} className="catalog-spec-pill">
-                              {item}
-                            </span>
-                          ))}
-                        </div>
                       </div>
                     </article>
                   ))}

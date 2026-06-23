@@ -9,28 +9,28 @@ export type SiteMetadataEntry = {
 
 export const SITE_METADATA: Record<Locale, SiteMetadataEntry> = {
   en: {
-    title: "Expert Travel | Commercial Vehicles from Europe",
+    title: "Expert Travel | Commercial Transport Partner",
     description:
-      "Expert Travel — premium commercial trucks, trailers and cargo vehicles from Europe. Full documentation, warranty and after-sales support.",
-    keywords: ["trucks", "trailers", "commercial vehicles", "Europe", "Czech Republic", "cargo"],
+      "Expert Travel — European B2B partner for trucks, trailers and commercial transport. Cooperation with buyers, sellers, dealers and companies.",
+    keywords: ["trucks", "trailers", "commercial vehicles", "Europe", "B2B", "transport"],
   },
   uk: {
-    title: "Expert Travel | Комерційна техніка з Європи",
+    title: "Expert Travel | Партнер у комерційному транспорті",
     description:
-      "Expert Travel — преміальні вантажівки, причепи та комерційна техніка з Європи. Повна документація, гарантія та післяпродажна підтримка.",
-    keywords: ["вантажівки", "причепи", "комерційна техніка", "Європа", "Чехія", "вантажоперевезення"],
+      "Expert Travel — європейський B2B-партнер у сфері вантажівок, причепів і комерційного транспорту. Співпраця з покупцями, продавцями, дилерами та компаніями.",
+    keywords: ["вантажівки", "причепи", "комерційна техніка", "Європа", "B2B", "транспорт"],
   },
   sk: {
-    title: "Expert Travel | Úžitkové vozidlá z Európy",
+    title: "Expert Travel | Partner v komerčnej doprave",
     description:
-      "Expert Travel — prémiové nákladné vozidlá, prívesy a úžitková technika z Európy. Kompletná dokumentácia, záruka a popredajná podpora.",
-    keywords: ["nákladné autá", "prívesy", "úžitkové vozidlá", "Európa", "Česko", "doprava"],
+      "Expert Travel — európsky B2B partner pre nákladné vozidlá, prívesy a komerčnú dopravu. Spolupráca s kupujúcimi, predajcami, dílermi a firmami.",
+    keywords: ["nákladné autá", "prívesy", "úžitkové vozidlá", "Európa", "B2B", "doprava"],
   },
   de: {
-    title: "Expert Travel | Nutzfahrzeuge aus Europa",
+    title: "Expert Travel | Partner im gewerblichen Transport",
     description:
-      "Expert Travel — Premium-Lkw, Auflieger und Nutzfahrzeuge aus Europa. Vollständige Dokumentation, Garantie und After-Sales-Support.",
-    keywords: ["Lkw", "Auflieger", "Nutzfahrzeuge", "Europa", "Tschechien", "Transport"],
+      "Expert Travel — europäischer B2B-Partner für Lkw, Auflieger und gewerblichen Transport. Zusammenarbeit mit Käufern, Verkäufern, Händlern und Unternehmen.",
+    keywords: ["Lkw", "Auflieger", "Nutzfahrzeuge", "Europa", "B2B", "Transport"],
   },
 };
 

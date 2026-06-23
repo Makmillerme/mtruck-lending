@@ -16,36 +16,36 @@ import { parseStringArray, pickMetaString, pickText } from "@/lib/landing-sectio
 
 const content = {
   en: {
-    badge: "Our Services",
-    title: "Complete Solutions for",
-    titleHighlight: "Your Business",
+    badge: "Our services",
+    title: "Work areas",
+    titleHighlight: "for partners",
     description:
-      "From vehicle selection to delivery and after-sales support, we provide comprehensive services tailored to your needs.",
-    pipeline: ["Selection", "Inspection", "Documents", "Delivery"],
+      "We work with companies, sellers, dealers, and owners of commercial transport. We help structure cooperation from the first request to vehicle handover.",
+    pipeline: ["Request", "Terms", "Support", "Handover"],
   },
   uk: {
     badge: "Наші послуги",
-    title: "Комплексні рішення для",
-    titleHighlight: "Вашого бізнесу",
+    title: "Напрями роботи",
+    titleHighlight: "для партнерів",
     description:
-      "Від вибору транспорту до доставки та післяпродажної підтримки ми надаємо комплексні послуги, адаптовані до ваших потреб.",
-    pipeline: ["Підбір", "Перевірка", "Документи", "Доставка"],
+      "Працюємо з компаніями, продавцями, дилерами та власниками комерційного транспорту. Допомагаємо структурувати співпрацю від першого запиту до передачі транспорту.",
+    pipeline: ["Запит", "Умови", "Супровід", "Передача"],
   },
   sk: {
     badge: "Naše služby",
-    title: "Komplexné riešenia pre",
-    titleHighlight: "váš biznis",
+    title: "Oblasti práce",
+    titleHighlight: "pre partnerov",
     description:
-      "Od výberu vozidla až po dodanie a popredajnú podporu poskytujeme komplexné služby prispôsobené vašim potrebám.",
-    pipeline: ["Výber", "Kontrola", "Dokumenty", "Dodanie"],
+      "Pracujeme s firmami, predajcami, dílermi a vlastníkmi komerčnej dopravy. Pomáhame nastaviť spoluprácu od prvého dopytu až po odovzdanie vozidla.",
+    pipeline: ["Dopyt", "Podmienky", "Podpora", "Odovzdanie"],
   },
   de: {
     badge: "Unsere Leistungen",
-    title: "Komplettlösungen für",
-    titleHighlight: "Ihr Unternehmen",
+    title: "Arbeitsbereiche",
+    titleHighlight: "für Partner",
     description:
-      "Von der Fahrzeugauswahl bis zur Lieferung und After-Sales-Support bieten wir umfassende, auf Ihre Bedürfnisse zugeschnittene Leistungen.",
-    pipeline: ["Auswahl", "Inspektion", "Dokumente", "Lieferung"],
+      "Wir arbeiten mit Unternehmen, Verkäufern, Händlern und Eigentümern von gewerblichem Transport. Wir helfen, die Zusammenarbeit von der ersten Anfrage bis zur Fahrzeugübergabe zu strukturieren.",
+    pipeline: ["Anfrage", "Bedingungen", "Begleitung", "Übergabe"],
   },
 };
 

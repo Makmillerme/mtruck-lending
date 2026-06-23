@@ -1,165 +1,102 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LandingGlassCard } from "@/components/landing/landing-glass-card";
 import { NeonAvtoAssemble } from "@/components/landing/neon-avto-assemble";
 import type { Locale } from "@/lib/locale";
-import { cn } from "@/lib/utils";
 import { localizedField, parseAboutContent, parseAboutFeatures, pickText } from "@/lib/landing-section-parsers";
 
 const defaultAbout = {
   en: {
     badge: "About Us",
-    title: "Expert Travel — your partner in",
-    titleHighlight: "commercial vehicle trade",
+    title: "Expert Travel s.r.o. — your partner in",
+    titleHighlight: "the European transport market",
     description:
-      "Expert Travel s.r.o. is a Slovak company with headquarters in Banská Bystrica — a full participant in the European commercial vehicle market. We cover the full B2B supply cycle: from fleet sales within the EU to organising official export of trucks and trailers to Eastern Europe and CIS countries.",
-    description2:
-      "Every unit goes through a transparent process: history verification, pre-sale preparation (maintenance without engine work), registration documentation, and coordinated logistics including warehousing services.",
-    aboutImageAlt: "Premium commercial truck, neon accent lighting",
-    imageCallouts: ["Direct EU sourcing", "Verified history", "Full documentation", "Registration ready", "After-sales support"],
+      "Expert Travel s.r.o. is a Slovak company specializing in international trade in trucks, trailers, and commercial transport. We support a complete B2B cooperation cycle for companies and partners.",
+    description2: "",
+    aboutImageAlt: "Commercial truck with neon accent lighting",
+    imageCallouts: ["Partner request", "Commercial terms", "Market coordination", "Vehicle handover"],
     bridgeTitle: "How we work",
-    importChain: ["Vehicle selection", "Inspection & preparation", "Registration pack", "Handover & delivery"],
+    importChain: ["Partner request", "Commercial terms", "Coordination", "Vehicle handover"],
     stats: [
-      { value: "EU", label: "European sourcing" },
-      { value: "SK", label: "Slovakia HQ" },
-      { value: "55336574", label: "Company ID" },
+      { value: "3+", label: "Years on the market" },
+      { value: "11", label: "Brands in work" },
     ],
     features: [
       { icon: "MapPin", title: "Based in Slovakia", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovakia" },
-      { icon: "Globe2", title: "Trade & brokerage", description: "Wholesale and retail vehicle sales plus brokerage across trade, services, and production" },
-      { icon: "Truck", title: "Logistics & storage", description: "Warehousing, auxiliary transport services, and delivery coordination across the EU" },
-      { icon: "Shield", title: "Documentation & prep", description: "Administrative support, marketing services, and pre-sale vehicle preparation" },
+      { icon: "Globe2", title: "International trade", description: "Cooperation with buyers, sellers, and dealers of commercial transport" },
+      { icon: "Truck", title: "Logistics coordination", description: "We coordinate vehicle transfer and delivery within agreed business arrangements" },
+      { icon: "Shield", title: "Cooperation support", description: "We help align the main stages of cooperation, communication, and vehicle handover" },
     ],
   },
   uk: {
     badge: "Про нас",
-    title: "Expert Travel — ваш партнер у",
-    titleHighlight: "торгівлі комерційною технікою",
+    title: "Expert Travel s.r.o. — ваш партнер на",
+    titleHighlight: "європейському ринку транспорту",
     description:
-      "Expert Travel s.r.o. — словацька компанія з головним офісом у Банській Бистриці, повноцінний учасник європейського ринку комерційної техніки. Ми забезпечуємо повний цикл B2B-поставок: від продажу автопаркам всередині ЄС до організації офіційного експорту вантажівок та причепів у країни Східної Європи та СНД.",
-    description2:
-      "Кожна одиниця проходить прозорий процес: перевірка історії, передпродажна підготовка (обслуговування без втручання в силову частину), реєстраційні документи та координація логістики, зокрема складських послуг.",
+      "Expert Travel s.r.o. — словацька компанія, що спеціалізується на міжнародній торгівлі вантажівками, причепами та комерційною технікою. Ми забезпечуємо повний цикл B2B-співпраці для компаній і партнерів.",
+    description2: "",
     aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
-    imageCallouts: ["Пряме джерело в ЄС", "Перевірена історія", "Повна документація", "Готово до реєстрації", "Підтримка після угоди"],
+    imageCallouts: ["Партнерський запит", "Комерційні умови", "Координація ринку", "Передача транспорту"],
     bridgeTitle: "Як ми працюємо",
-    importChain: ["Підбір техніки", "Огляд і підготовка", "Пакет для реєстрації", "Передача та доставка"],
+    importChain: ["Партнерський запит", "Комерційні умови", "Координація", "Передача транспорту"],
     stats: [
-      { value: "ЄС", label: "Постачання з ЄС" },
-      { value: "SK", label: "Словаччина" },
-      { value: "55336574", label: "IČO" },
+      { value: "3+", label: "роки на ринку" },
+      { value: "11", label: "брендів у роботі" },
     ],
     features: [
       { icon: "MapPin", title: "База в Словаччині", description: "Na Troskách 12, 974 01 Banská Bystrica, Словаччина" },
-      { icon: "Globe2", title: "Торгівля та посередництво", description: "Оптовий і роздрібний продаж техніки, посередницькі послуги в торгівлі та виробництві" },
-      { icon: "Truck", title: "Логістика та склад", description: "Складські, допоміжні та транспортні послуги, координація доставки по ЄС" },
-      { icon: "Shield", title: "Документи та підготовка", description: "Адміністративний супровід, маркетинг і передпродажна підготовка авто" },
+      { icon: "Globe2", title: "Міжнародна торгівля", description: "Співпраця з покупцями, продавцями та дилерами комерційного транспорту" },
+      { icon: "Truck", title: "Координація логістики", description: "Організовуємо передачу та доставку комерційного транспорту в межах угод" },
+      { icon: "Shield", title: "Супровід співпраці", description: "Допомагаємо узгодити основні етапи співпраці, комунікації та передачі транспорту" },
     ],
   },
   sk: {
     badge: "O nás",
-    title: "Expert Travel — partner v",
-    titleHighlight: "obchode s úžitkovými vozidlami",
+    title: "Expert Travel s.r.o. — partner na",
+    titleHighlight: "európskom trhu dopravy",
     description:
-      "Expert Travel s.r.o. je slovenská spoločnosť so sídlom v Banskej Bystrici, plnohodnotný účastník európskeho trhu s úžitkovými vozidlami. Zabezpečujeme celý cyklus B2B dodávok: od predaja flotilám v rámci EÚ až po organizáciu oficiálneho exportu nákladných vozidiel a prívesov do krajín východnej Európy a SNŠ.",
-    description2:
-      "Každé vozidlo prechádza transparentným procesom: overenie histórie, predajná príprava (údržba bez zásahu do motorickej časti vozidla), registračná dokumentácia a koordinácia logistiky vrátane skladových a prepravných služieb.",
-    aboutImageAlt: "Prémiové nákladné vozidlo s neónovým osvetlením",
-    imageCallouts: ["Priamy dovoz z EÚ", "Overená história", "Kompletná dokumentácia", "Pripravené na registráciu", "Podpora po predaji"],
+      "Expert Travel s.r.o. je slovenská spoločnosť špecializovaná na medzinárodný obchod s nákladnými vozidlami, prívesmi a komerčnou dopravou. Zabezpečujeme celý cyklus B2B spolupráce pre firmy a partnerov.",
+    description2: "",
+    aboutImageAlt: "Komerčné nákladné vozidlo s neónovým osvetlením",
+    imageCallouts: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia trhu", "Odovzdanie vozidla"],
     bridgeTitle: "Ako pracujeme",
-    importChain: ["Výber vozidla", "Kontrola a príprava", "Registračný balík", "Odovzdanie a dodanie"],
+    importChain: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia", "Odovzdanie vozidla"],
     stats: [
-      { value: "EÚ", label: "Dovoz z Európy" },
-      { value: "SK", label: "Sídlo na Slovensku" },
-      { value: "55336574", label: "IČO" },
+      { value: "3+", label: "roky na trhu" },
+      { value: "11", label: "značiek v práci" },
     ],
     features: [
       { icon: "MapPin", title: "Sídlo na Slovensku", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovensko" },
-      { icon: "Globe2", title: "Obchod a sprostredkovanie", description: "Veľkoobchodný a maloobchodný predaj vozidiel a sprostredkovateľská činnosť v obchode a službách" },
-      { icon: "Truck", title: "Logistika a sklad", description: "Skladové, pomocné a prepravné služby v doprave a koordinácia dodania po EÚ" },
-      { icon: "Shield", title: "Dokumentácia a príprava", description: "Administratívna správa, marketingové služby a predajná príprava vozidla" },
+      { icon: "Globe2", title: "Medzinárodný obchod", description: "Spolupráca s kupujúcimi, predávajúcimi a dílermi komerčnej dopravy" },
+      { icon: "Truck", title: "Koordinácia logistiky", description: "Koordinujeme odovzdanie a dodanie komerčnej dopravy v rámci dohôd" },
+      { icon: "Shield", title: "Podpora spolupráce", description: "Pomáhame zladiť hlavné fázy spolupráce, komunikáciu a odovzdanie vozidla" },
     ],
   },
   de: {
     badge: "Über uns",
-    title: "Expert Travel — Ihr Partner im",
-    titleHighlight: "Nutzfahrzeughandel",
+    title: "Expert Travel s.r.o. — Ihr Partner im",
+    titleHighlight: "europäischen Transportmarkt",
     description:
-      "Expert Travel s.r.o. ist ein slowakisches Unternehmen mit Hauptsitz in Banská Bystrica — ein vollwertiger Akteur auf dem europäischen Nutzfahrzeugmarkt. Wir decken den gesamten B2B-Lieferzyklus ab: vom Flottenverkauf innerhalb der EU bis zur Organisation des offiziellen Exports von Lkw und Aufliegern in Länder Osteuropas und der GUS.",
-    description2:
-      "Jedes Fahrzeug durchläuft einen transparenten Prozess: Historienprüfung, verkaufsvorbereitende Wartung (ohne Eingriff in den Motor), Registrierungsunterlagen und koordinierte Logistik inklusive Lager- und Transportleistungen.",
-    aboutImageAlt: "Premium-Lkw mit Neon-Akzentbeleuchtung",
-    imageCallouts: ["Direktbezug aus der EU", "Geprüfte Historie", "Vollständige Dokumentation", "Registrierungsbereit", "Support nach dem Kauf"],
+      "Expert Travel s.r.o. ist ein slowakisches Unternehmen, spezialisiert auf den internationalen Handel mit Lkw, Aufliegern und gewerblichem Transport. Wir begleiten den gesamten B2B-Kooperationszyklus für Unternehmen und Partner.",
+    description2: "",
+    aboutImageAlt: "Gewerblicher Lkw mit Neon-Akzentbeleuchtung",
+    imageCallouts: ["Partneranfrage", "Geschäftsbedingungen", "Marktkoordination", "Fahrzeugübergabe"],
     bridgeTitle: "So arbeiten wir",
-    importChain: ["Fahrzeugauswahl", "Prüfung & Vorbereitung", "Registrierungspaket", "Übergabe & Lieferung"],
+    importChain: ["Partneranfrage", "Geschäftsbedingungen", "Koordination", "Fahrzeugübergabe"],
     stats: [
-      { value: "EU", label: "Bezug aus der EU" },
-      { value: "SK", label: "Sitz in der Slowakei" },
-      { value: "55336574", label: "ID-Nr." },
+      { value: "3+", label: "Jahre am Markt" },
+      { value: "11", label: "Marken im Fokus" },
     ],
     features: [
       { icon: "MapPin", title: "Sitz in der Slowakei", description: "Na Troskách 12, 974 01 Banská Bystrica, Slowakei" },
-      { icon: "Globe2", title: "Handel & Vermittlung", description: "Groß- und Einzelhandel mit Fahrzeugen sowie Vermittlung im Handel, bei Dienstleistungen und in der Produktion" },
-      { icon: "Truck", title: "Logistik & Lager", description: "Lager-, Hilfs- und Transportleistungen sowie Lieferkoordination in der EU" },
-      { icon: "Shield", title: "Dokumentation & Vorbereitung", description: "Administrative Betreuung, Marketingleistungen und verkaufsvorbereitende Aufbereitung" },
+      { icon: "Globe2", title: "Internationaler Handel", description: "Zusammenarbeit mit Käufern, Verkäufern und Händlern von gewerblichem Transport" },
+      { icon: "Truck", title: "Logistikkoordination", description: "Wir koordinieren Übergabe und Lieferung von gewerblichem Transport im Rahmen vereinbarter Geschäfte" },
+      { icon: "Shield", title: "Begleitung der Zusammenarbeit", description: "Wir helfen, die wichtigsten Phasen der Zusammenarbeit, Kommunikation und Fahrzeugübergabe abzustimmen" },
     ],
   },
 } as const;
 
-const calloutLayout = [
-  {
-    phase: 0 as const,
-    className: "top-3 left-3 sm:top-4 sm:left-4",
-  },
-  {
-    phase: 1 as const,
-    className: "top-[40%] right-2 sm:top-[42%] sm:right-4",
-  },
-  {
-    phase: 2 as const,
-    className: "bottom-3 left-3 sm:bottom-4 sm:left-4",
-  },
-  {
-    phase: 1 as const,
-    className: "bottom-[18%] right-2 sm:bottom-[19%] sm:right-4",
-  },
-  {
-    phase: 2 as const,
-    className: "top-[13%] left-[39%] sm:top-[15%] sm:left-[41%]",
-  },
-];
-
-function AboutFloatingCallout({
-  label,
-  className,
-  phase,
-  inView,
-  enterStaggerMs,
-}: {
-  label: string;
-  className?: string;
-  phase: 0 | 1 | 2;
-  inView: boolean;
-  enterStaggerMs: number;
-}) {
-  const lag =
-    phase === 0
-      ? undefined
-      : phase === 1
-        ? "about-float-callout--lag-1"
-        : "about-float-callout--lag-2";
-
-  return (
-    <div
-      className={cn("about-float-callout absolute z-10", className, inView && "about-float-callout--in-view")}
-      style={{ "--about-callout-stagger": `${enterStaggerMs}ms` } as CSSProperties}
-    >
-      <div className={cn("about-float-callout-inner", lag)}>
-        <span className="landing-pipeline-pill">{label}</span>
-      </div>
-    </div>
-  );
-}
 
 interface AboutProps {
   locale: Locale;
@@ -197,13 +134,12 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
     description2: pickText(cms.description2, base.description2),
     aboutImageAlt: pickText(cms.aboutImageAlt, base.aboutImageAlt),
     bridgeTitle: pickText(cms.bridgeTitle, base.bridgeTitle),
-    imageCallouts: cms.imageCallouts.length > 0 ? cms.imageCallouts : [...base.imageCallouts],
     importChain: cms.importChain.length > 0 ? cms.importChain : [...base.importChain],
     features: mergedFeatures,
   };
   const statLabelByKey: Record<string, string> = Object.fromEntries(
     base.stats.map((item, index) => {
-      const keys = ["eu_sourcing", "sk_headquarters", "company_id"];
+      const keys = ["years_on_market", "brands_in_work"];
       return [keys[index] ?? `stat_${index}`, item.label];
     }),
   );
@@ -276,23 +212,7 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
                   <NeonAvtoAssemble alt={about.aboutImageAlt || "About visual"} play={sectionActive} />
                 </div>
               </div>
-              <div className="about-callouts-overlay pointer-events-none absolute inset-0">
-                {calloutLayout.map((layout, index) => {
-                  const label = about.importChain[index];
-                  if (!label) return null;
-                  return (
-                    <AboutFloatingCallout
-                      key={`overlay-${layout.phase}-${index}`}
-                      label={label}
-                      phase={layout.phase}
-                      className={layout.className}
-                      inView={sectionActive}
-                      enterStaggerMs={index * 120}
-                    />
-                  );
-                })}
               </div>
-            </div>
 
             <div className="about-visual-lower">
               <div className="about-visual-bridge">
@@ -335,7 +255,7 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
 
             <div className="max-w-2xl space-y-4">
               <p className="landing-body-text">{about.description}</p>
-              <p className="landing-body-text">{about.description2}</p>
+              {about.description2 ? <p className="landing-body-text">{about.description2}</p> : null}
             </div>
 
             <div className="about-features-grid landing-card-grid grid gap-4 sm:grid-cols-2">

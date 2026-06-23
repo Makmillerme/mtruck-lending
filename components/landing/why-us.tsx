@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LandingGlassCard } from "@/components/landing/landing-glass-card";
@@ -8,7 +8,6 @@ import type { Locale } from "@/lib/locale";
 
 import { cn } from "@/lib/utils";
 
-import { SubmitReviewModal } from "@/components/landing/submit-review-modal";
 import { parseWhyUsContent, pickMetaString, pickText } from "@/lib/landing-section-parsers";
 import type { SiteReviewPublic } from "@/lib/site-reviews";
 
@@ -18,72 +17,72 @@ const defaultContent = {
     title: "The Expert Travel",
     titleHighlight: "Advantage",
     description:
-      "We stand out from the competition with our commitment to quality, transparency, and customer satisfaction.",
+      "A clear business process for companies, sellers, dealers, and partners in commercial transport.",
     carouselTitle: "Client Reviews",
-    emptyReviews: "No reviews yet. Be the first to share your experience.",
+    emptyReviews: "No reviews yet.",
     prevTestimonial: "Previous testimonial",
     nextTestimonial: "Next testimonial",
     reasons: [
-      { title: "Direct access to the EU market", description: "We operate within the European market. We acquire vehicles directly from leasing companies and corporate fleets without unnecessary middlemen." },
-      { title: "Transparent history and documents", description: "Each vehicle has verified European service history. We prepare a full document package for local registration or further export." },
-      { title: "Quality Guarantee", description: "Before sale, every vehicle undergoes a detailed technical audit and cosmetic preparation at our base to meet high operational standards." },
-      { title: "Net sales (VAT-free)", description: "We structure export deals at zero VAT (VAT 0% / Netto) for foreign buyers, ensuring full financial and legal transparency." },
-      { title: "Expert Consultation", description: "Our team helps you find the perfect vehicle for your specific business needs." },
-      { title: "After-Sales Support", description: "Dedicated support team for any questions or issues after your purchase." },
+      { title: "European market presence", description: "We work inside the European commercial transport market and connect relevant parties for cooperation." },
+      { title: "Transparent cooperation", description: "We keep the process clear from the first request through agreed terms and vehicle handover." },
+      { title: "Business-focused approach", description: "We prepare cooperation options around the company request, vehicle type, and practical deal conditions." },
+      { title: "Partner network", description: "We work with buyers, sellers, dealers, and owners of commercial transport across different markets." },
+      { title: "Clear communication", description: "We help the parties align expectations, key terms, and next steps without unnecessary complexity." },
+      { title: "Handover coordination", description: "We coordinate the final stage so the vehicle moves from agreement to partner or client handover." },
     ],
   },
   uk: {
     badge: "Чому ми",
     title: "Переваги",
     titleHighlight: "Expert Travel",
-    description: "Ми виділяємося серед конкурентів завдяки нашій відданості якості, прозорості та задоволеності клієнтів.",
+    description: "Зрозумілий бізнес-процес для компаній, продавців, дилерів і партнерів у сфері комерційного транспорту.",
     carouselTitle: "Відгуки клієнтів",
-    emptyReviews: "Поки немає відгуків. Станьте першим — залиште свій досвід.",
+    emptyReviews: "Поки немає відгуків.",
     prevTestimonial: "Попередній відгук",
     nextTestimonial: "Наступний відгук",
     reasons: [
-      { title: "Власний доступ до ринку ЄС", description: "Ми працюємо всередині європейського ринку. Викуповуємо техніку напряму з лізингових компаній та корпоративних автопарків без зайвих посередників." },
-      { title: "Прозора історія та документи", description: "Кожен транспортний засіб має підтверджену європейську сервісну історію. Ми готуємо повний пакет документів для локальної реєстрації або подальшого експорту." },
-      { title: "Гарантія якості", description: "Перед продажем техніка проходить детальний технічний аудит та косметичну підготовку на нашій базі, щоб відповідати високим стандартам експлуатації." },
-      { title: "Продаж без ПДВ (Netto)", description: "Оформлюємо експортні угоди за нульовою ставкою ПДВ (VAT 0% / Netto) для іноземних покупців, забезпечуючи повну фінансову та юридичну прозорість." },
-      { title: "Експертна консультація", description: "Наша команда допоможе знайти ідеальний транспорт для ваших конкретних бізнес-потреб." },
-      { title: "Післяпродажна підтримка", description: "Спеціалізована команда підтримки для будь-яких питань після покупки." },
+      { title: "Робота на ринку ЄС", description: "Працюємо всередині європейського ринку комерційного транспорту та поєднуємо релевантні сторони для співпраці." },
+      { title: "Прозора співпраця", description: "Тримаємо процес зрозумілим від першого запиту до погоджених умов і передачі транспорту." },
+      { title: "Бізнес-підхід", description: "Формуємо варіанти співпраці під запит компанії, тип транспорту та практичні умови угоди." },
+      { title: "Партнерська мережа", description: "Працюємо з покупцями, продавцями, дилерами та власниками комерційного транспорту на різних ринках." },
+      { title: "Чітка комунікація", description: "Допомагаємо сторонам узгодити очікування, ключові умови та наступні кроки без зайвої складності." },
+      { title: "Координація передачі", description: "Координуємо фінальний етап, щоб транспорт перейшов від домовленості до партнера або клієнта." },
     ],
   },
   sk: {
     badge: "Prečo si vybrať nás",
     title: "Výhoda",
     titleHighlight: "Expert Travel",
-    description: "Medzi konkurenciou vynikáme záväzkom ku kvalite, transparentnosti a spokojnosti zákazníkov.",
+    description: "Jasný obchodný proces pre firmy, predajcov, dílerov a partnerov v oblasti komerčnej dopravy.",
     carouselTitle: "Hodnotenia klientov",
-    emptyReviews: "Zatiaľ žiadne hodnotenia. Buďte prvý — podeľte sa o skúsenosť.",
+    emptyReviews: "Zatiaľ žiadne hodnotenia.",
     prevTestimonial: "Predchádzajúce hodnotenie",
     nextTestimonial: "Ďalšie hodnotenie",
     reasons: [
-      { title: "Vlastný prístup na trh EÚ", description: "Pôsobíme na európskom trhu. Vozidlá vykupujeme priamo od lízingových spoločností a firemných flotíl bez zbytočných sprostredkovateľov." },
-      { title: "Transparentná história a dokumenty", description: "Každé vozidlo má overenú európsku servisnú históriu. Pripravíme kompletný balík dokumentov na lokálnu registráciu alebo ďalší export." },
-      { title: "Záruka kvality", description: "Pred predajom vozidlo prechádza detailným technickým auditom a kozmetickou prípravou v našej základni, aby spĺňalo vysoké prevádzkové štandardy." },
-      { title: "Predaj bez DPH (Netto)", description: "Exportné obchody vybavujeme s nulovou sadzbou DPH (VAT 0% / Netto) pre zahraničných kupujúcich s plnou finančnou a právnou transparentnosťou." },
-      { title: "Odborné poradenstvo", description: "Náš tím vám pomôže nájsť ideálne vozidlo pre vaše konkrétne obchodné potreby." },
-      { title: "Popredajná podpora", description: "Vyhradený tím podpory pre akékoľvek otázky alebo problémy po nákupe." },
+      { title: "Pôsobenie na trhu EÚ", description: "Pracujeme na európskom trhu komerčnej dopravy a prepájame relevantné strany pre spoluprácu." },
+      { title: "Transparentná spolupráca", description: "Proces držíme jasný od prvého dopytu cez dohodnuté podmienky až po odovzdanie vozidla." },
+      { title: "Obchodný prístup", description: "Pripravujeme možnosti spolupráce podľa dopytu firmy, typu vozidla a praktických podmienok obchodu." },
+      { title: "Partnerská sieť", description: "Pracujeme s kupujúcimi, predávajúcimi, dílermi a vlastníkmi komerčnej dopravy na rôznych trhoch." },
+      { title: "Jasná komunikácia", description: "Pomáhame stranám zladiť očakávania, hlavné podmienky a ďalšie kroky bez zbytočnej zložitosti." },
+      { title: "Koordinácia odovzdania", description: "Koordinujeme záverečnú fázu, aby vozidlo prešlo od dohody k partnerovi alebo klientovi." },
     ],
   },
   de: {
     badge: "Warum wir",
     title: "Der Expert Travel",
     titleHighlight: "Vorteil",
-    description: "Wir heben uns durch unser Engagement für Qualität, Transparenz und Kundenzufriedenheit von der Konkurrenz ab.",
+    description: "Ein klarer Geschäftsprozess für Unternehmen, Verkäufer, Händler und Partner im gewerblichen Transport.",
     carouselTitle: "Kundenbewertungen",
-    emptyReviews: "Noch keine Bewertungen. Seien Sie der Erste.",
+    emptyReviews: "Noch keine Bewertungen.",
     prevTestimonial: "Vorherige Bewertung",
     nextTestimonial: "Nächste Bewertung",
     reasons: [
-      { title: "Eigener Zugang zum EU-Markt", description: "Wir arbeiten innerhalb des europäischen Marktes. Wir erwerben Fahrzeuge direkt von Leasinggesellschaften und Firmenflotten ohne unnötige Zwischenhändler." },
-      { title: "Transparente Historie und Dokumente", description: "Jedes Fahrzeug hat eine nachgewiesene europäische Servicehistorie. Wir bereiten ein vollständiges Dokumentenpaket für die lokale Zulassung oder den weiteren Export vor." },
-      { title: "Qualitätsgarantie", description: "Vor dem Verkauf durchläuft jedes Fahrzeug ein detailliertes technisches Audit und eine kosmetische Aufbereitung in unserer Basis, um hohe Betriebsstandards zu erfüllen." },
-      { title: "Netto-Verkauf (ohne MwSt.)", description: "Exportgeschäfte führen wir mit Null-Mehrwertsteuer (VAT 0% / Netto) für ausländische Käufer — mit vollständiger finanzieller und rechtlicher Transparenz." },
-      { title: "Fachberatung", description: "Unser Team hilft Ihnen, das passende Fahrzeug für Ihre spezifischen Geschäftsanforderungen zu finden." },
-      { title: "After-Sales-Support", description: "Dediziertes Support-Team für alle Fragen oder Anliegen nach Ihrem Kauf." },
+      { title: "Präsenz im EU-Markt", description: "Wir arbeiten im europäischen Markt für gewerblichen Transport und verbinden passende Parteien für die Zusammenarbeit." },
+      { title: "Transparente Zusammenarbeit", description: "Wir halten den Prozess von der ersten Anfrage über abgestimmte Bedingungen bis zur Fahrzeugübergabe klar." },
+      { title: "Geschäftlicher Ansatz", description: "Wir entwickeln Kooperationsoptionen nach Unternehmensanfrage, Fahrzeugtyp und praktischen Geschäftsbedingungen." },
+      { title: "Partnernetzwerk", description: "Wir arbeiten mit Käufern, Verkäufern, Händlern und Eigentümern von gewerblichem Transport in verschiedenen Märkten." },
+      { title: "Klare Kommunikation", description: "Wir helfen den Parteien, Erwartungen, Hauptbedingungen und nächste Schritte ohne unnötige Komplexität abzustimmen." },
+      { title: "Koordination der Übergabe", description: "Wir koordinieren die finale Phase, damit das Fahrzeug von der Vereinbarung an Partner oder Kunden übergeben wird." },
     ],
   },
 } as const;
@@ -115,12 +114,6 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
   const [userReviews, setUserReviews] = useState<SiteReviewPublic[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
 
-  const handleReviewPublished = useCallback((review: SiteReviewPublic) => {
-    setUserReviews((prev) => {
-      if (prev.some((item) => item.id === review.id)) return prev;
-      return [review, ...prev];
-    });
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -254,7 +247,6 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
         <div className="mx-auto w-full">
           <div className="why-us-reviews-head mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="why-us-reviews-title text-xl font-bold text-foreground">{section.carouselTitle}</h3>
-            <SubmitReviewModal locale={locale} onPublished={handleReviewPublished} />
           </div>
 
           {reviewsLoading ? (

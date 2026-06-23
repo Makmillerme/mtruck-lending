@@ -13,13 +13,13 @@ import { parseFooterContent, parseNavItems, pickText } from "@/lib/landing-secti
 const defaultContent = {
   en: {
     ctaEyebrow: "Your next step",
-    ctaTitle: "Let us match the right commercial vehicle to your business",
+    ctaTitle: "Let us match commercial transport to your business request",
     ctaText:
-      "Share your routes, payload, and budget — we will shortlist vetted options from Europe with clear terms and no pushy sales.",
-    ctaPoints: ["Tailored sourcing", "Inspection & paperwork", "Delivery support"],
+      "Share your routes, payload, and budget — we will prepare clear cooperation options with practical terms and no pushy sales.",
+    ctaPoints: ["Business request", "Cooperation terms", "Vehicle handover"],
     ctaHint: "We reply on business days, often the same day",
-    ctaButton: "Request a shortlist",
-    brandText: "Your reliable partner for premium commercial vehicles from Europe.",
+    ctaButton: "Send a request",
+    brandText: "European B2B partner for commercial transport cooperation.",
     linksTitle: "Quick links",
     servicesTitle: "Services",
     contactTitle: "Contact",
@@ -35,13 +35,13 @@ const defaultContent = {
   },
   uk: {
     ctaEyebrow: "Наступний крок",
-    ctaTitle: "Підберемо комерційну техніку під ваш бізнес",
+    ctaTitle: "Підберемо комерційний транспорт під ваш бізнес-запит",
     ctaText:
-      "Розкажіть про маршрути, вантаопідйомність і бюджет — запропонуємо перевірені варіанти з Європи з прозорими умовами, без нав'язливих продажів.",
-    ctaPoints: ["Підбір під задачі", "Перевірка та документи", "Доставка та супровід"],
+      "Розкажіть про маршрути, вантажопідйомність і бюджет — підготуємо зрозумілі варіанти співпраці з практичними умовами, без нав'язливих продажів.",
+    ctaPoints: ["Бізнес-запит", "Умови співпраці", "Передача транспорту"],
     ctaHint: "Відповідаємо в робочий час, зазвичай того ж дня",
-    ctaButton: "Отримати підбір",
-    brandText: "Ваш надійний партнер з преміальної комерційної техніки з Європи.",
+    ctaButton: "Надіслати запит",
+    brandText: "Європейський B2B-партнер у співпраці з комерційним транспортом.",
     linksTitle: "Швидкі посилання",
     servicesTitle: "Послуги",
     contactTitle: "Контакти",
@@ -57,13 +57,13 @@ const defaultContent = {
   },
   sk: {
     ctaEyebrow: "Ďalší krok",
-    ctaTitle: "Pomôžeme nájsť správne úžitkové vozidlo pre váš biznis",
+    ctaTitle: "Pomôžeme zladiť komerčnú dopravu s vaším biznis dopytom",
     ctaText:
-      "Opíšte trasy, nosnosť a rozpočet — pripravíme overené ponuky z Európy s jasnými podmienkami a bez nátlaku.",
-    ctaPoints: ["Individuálny výber", "Kontrola a dokumenty", "Doručenie a podpora"],
+      "Opíšte trasy, nosnosť a rozpočet — pripravíme jasné možnosti spolupráce s praktickými podmienkami a bez nátlaku.",
+    ctaPoints: ["Biznis dopyt", "Podmienky spolupráce", "Odovzdanie vozidla"],
     ctaHint: "Odpovedáme v pracovných dňoch, často v ten istý deň",
-    ctaButton: "Požiadať o výber",
-    brandText: "Váš spoľahlivý partner pre prémiové úžitkové vozidlá z Európy.",
+    ctaButton: "Odoslať dopyt",
+    brandText: "Európsky B2B partner pre spoluprácu v komerčnej doprave.",
     linksTitle: "Rýchle odkazy",
     servicesTitle: "Služby",
     contactTitle: "Kontakt",
@@ -79,13 +79,13 @@ const defaultContent = {
   },
   de: {
     ctaEyebrow: "Ihr nächster Schritt",
-    ctaTitle: "Wir finden das passende Nutzfahrzeug für Ihr Geschäft",
+    ctaTitle: "Wir stimmen gewerblichen Transport auf Ihre Anfrage ab",
     ctaText:
-      "Beschreiben Sie Strecken, Nutzlast und Budget — wir schlagen geprüfte Optionen aus Europa mit klaren Konditionen vor, ohne Verkaufsdruck.",
-    ctaPoints: ["Individuelle Auswahl", "Prüfung & Unterlagen", "Lieferung & Betreuung"],
+      "Beschreiben Sie Strecken, Nutzlast und Budget — wir erstellen klare Kooperationsoptionen mit praktischen Bedingungen, ohne Verkaufsdruck.",
+    ctaPoints: ["Geschäftsanfrage", "Kooperationsbedingungen", "Fahrzeugübergabe"],
     ctaHint: "Antwort an Werktagen, oft noch am selben Tag",
-    ctaButton: "Auswahl anfragen",
-    brandText: "Ihr zuverlässiger Partner für Premium-Nutzfahrzeuge aus Europa.",
+    ctaButton: "Anfrage senden",
+    brandText: "Europäischer B2B-Partner für Zusammenarbeit im gewerblichen Transport.",
     linksTitle: "Schnelllinks",
     servicesTitle: "Leistungen",
     contactTitle: "Kontakt",
@@ -152,8 +152,8 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
       : parseNavItems(fallbackLinks).length > 0
         ? parseNavItems(fallbackLinks)
         : [...base.links];
-  const email = contactData?.email || "sales@m-truck.cz";
-  const phone = contactData?.phone || "+420 775 123 456";
+  const email = contactData?.email || "exp.travel.sro@gmail.com";
+  const phone = contactData?.phone || "+421 904 752 306";
   const address =
     pickEntityLocale(locale, {
       en: contactData?.addressEn,
@@ -169,7 +169,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
       sk: contactData?.workingHoursSk,
       de: contactData?.workingHoursDe,
     }) ||
-    "Mon-Fri 08:00-18:00";
+    "Mon-Fri 08:00-16:00";
   const serviceLinks = servicesData
     .map((service) =>
       pickEntityLocale(locale, {
