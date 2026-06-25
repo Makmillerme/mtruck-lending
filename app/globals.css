@@ -1198,26 +1198,28 @@ body.react-remove-scroll-bar {
 
 .catalog-brand-photo-gallery {
   min-width: 0;
+  overflow: hidden;
 }
 
 .catalog-brand-photo-track {
   display: grid;
-  grid-auto-columns: minmax(16rem, 82%);
-  grid-auto-flow: column;
+  width: 100%;
+  align-items: stretch;
   gap: 1rem;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding-bottom: 0.125rem;
 }
 
-.catalog-brand-photo-track::-webkit-scrollbar {
-  display: none;
+.catalog-brand-photo-track--scroll {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, min(100%, 18rem));
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .catalog-brand-photo-slide {
   position: relative;
+  width: 100%;
+  min-width: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   margin: 0;
@@ -1226,7 +1228,6 @@ body.react-remove-scroll-bar {
   background:
     radial-gradient(circle at 25% 15%, oklch(0.74 0.09 205 / 0.18), transparent 42%),
     linear-gradient(145deg, oklch(0.16 0.02 252 / 0.78), oklch(0.1 0.015 258 / 0.92));
-  scroll-snap-align: start;
 }
 
 .catalog-brand-photo-image {
@@ -1236,8 +1237,14 @@ body.react-remove-scroll-bar {
 }
 
 @media (min-width: 640px) {
-  .catalog-brand-photo-track {
-    grid-auto-columns: minmax(20rem, 58%);
+  .catalog-brand-photo-track--scroll {
+    grid-auto-columns: clamp(20rem, 72vw, 32rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .catalog-brand-photo-track--scroll {
+    grid-auto-columns: clamp(22rem, 58vw, 34rem);
   }
 }
 

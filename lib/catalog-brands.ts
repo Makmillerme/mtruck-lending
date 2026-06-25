@@ -20,6 +20,18 @@ export type CatalogBodyTypeOffering = {
   description: string;
 };
 
+export type CatalogBrandGalleryImage = {
+  id: string;
+  imageSrc: string;
+  imageAlt: LocalizedText;
+};
+
+export type CatalogBrandGalleryItem = {
+  id: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
 export type CatalogBrand = {
   id: string;
   category: CatalogCategory;
@@ -31,7 +43,16 @@ export type CatalogBrand = {
   configurations: LocalizedList;
   typicalSpecs: LocalizedList;
   bodyTypeItems?: CatalogBodyTypeItem[];
+  galleryImages?: CatalogBrandGalleryImage[];
 };
+
+function galleryImage(brandId: string, id: string, filename: string, imageAlt: LocalizedText): CatalogBrandGalleryImage {
+  return {
+    id,
+    imageSrc: `/brands_img/${brandId}/${filename}`,
+    imageAlt,
+  };
+}
 
 const rawCatalogBrands: CatalogBrand[] = [
   {
@@ -97,6 +118,68 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "MAN patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou MAN v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "MAN zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit MAN-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
+    galleryImages: [
+      galleryImage("man", "man-swap-body-chassis", "MAN-TGX-26-460-6x2-4-LL-Wechselfahrgestell-NLA-7-45m-Germaniya_41383_3576083952366.jpg", {
+        en: "MAN swap body chassis",
+        uk: "MAN шасі під змінний кузов",
+        sk: "MAN podvozok pre výmennú nadstavbu",
+        de: "MAN Wechselbrücken-Fahrgestell",
+      }),
+      galleryImage("man", "man-insulated-box", "MAN-TGL-12-250-KONTENER-IZOTERMA-WINDA-2017R-EURO-6-LIFT-SPROWADZONY-ZADBANY-E6-17-PALET-Pol-sha_40134_3773997172984.jpg", {
+        en: "MAN insulated box truck",
+        uk: "Ізотермічний фургон MAN",
+        sk: "Izotermické skriňové vozidlo MAN",
+        de: "MAN Isolierkoffer-Lkw",
+      }),
+      galleryImage("man", "man-box-body-combination", "MAN-TGX-26-510-6x2-4-BL-mit-Hanger-Aufbau-Avstriya_15827_3362079717489.jpg", {
+        en: "MAN box body truck combination",
+        uk: "MAN у фургонній конфігурації",
+        sk: "MAN v skriňovej konfigurácii",
+        de: "MAN in Kofferaufbau-Konfiguration",
+      }),
+      galleryImage("man", "man-commercial-truck-front", "photo_2026-02-17_12-06-21.jpg", {
+        en: "MAN commercial truck",
+        uk: "Комерційний автомобіль MAN",
+        sk: "Komerčné vozidlo MAN",
+        de: "MAN Nutzfahrzeug",
+      }),
+      galleryImage("man", "man-commercial-truck-side", "photo_2026-04-02_12-36-38.jpg", {
+        en: "MAN truck side view",
+        uk: "Комерційний MAN, боковий ракурс",
+        sk: "Komerčné vozidlo MAN z bočného pohľadu",
+        de: "MAN Nutzfahrzeug in Seitenansicht",
+      }),
+      galleryImage("man", "man-chassis-cab", "MAN-TGS-26-500-6x2-4-LL-Daniya_19477_6555959857805.jpg", {
+        en: "MAN chassis cab configuration",
+        uk: "MAN у конфігурації шасі-кабіна",
+        sk: "MAN v konfigurácii podvozok-kabína",
+        de: "MAN Fahrgestell-Fahrerhaus-Konfiguration",
+      }),
+      galleryImage("man", "man-container-truck", "photo_2026-06-09_17-34-17.jpg", {
+        en: "MAN container transport truck",
+        uk: "MAN для контейнерних перевезень",
+        sk: "MAN pre kontajnerovú dopravu",
+        de: "MAN für Containertransport",
+      }),
+      galleryImage("man", "man-container-chassis", "2023-MAN-TGS-26-510-Containerbil-6x2-Bakloft-EU-godkjent-Norvegiya_39035_4832705942253.jpg", {
+        en: "MAN container chassis truck",
+        uk: "MAN контейнерне шасі",
+        sk: "MAN kontajnerový podvozok",
+        de: "MAN Container-Fahrgestell",
+      }),
+      galleryImage("man", "man-light-commercial-truck", "MAN-TGL-8-190-Germaniya_328_8932375624581.jpg", {
+        en: "MAN light commercial truck",
+        uk: "Легкий комерційний автомобіль MAN",
+        sk: "Ľahšie komerčné vozidlo MAN",
+        de: "Leichter MAN Nutzfahrzeug-Lkw",
+      }),
+      galleryImage("man", "man-tractor-unit", "MAN-26-420-TGX-XXL-INTARDER-Niderlandy_124_945532671912.jpg", {
+        en: "MAN tractor unit",
+        uk: "Сідельний тягач MAN",
+        sk: "Ťahač MAN",
+        de: "MAN Sattelzugmaschine",
+      }),
+    ],
     bodyTypes: {
       en: ["Tractor units (4x2, 6x2)", "Chassis for special superstructures"],
       uk: ["Тягачі (4x2, 6x2)", "Шасі під спеціальні надбудови"],
@@ -138,6 +221,50 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "Scania patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou Scania v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá pre potreby flotíl.",
       de: "Scania zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit Scania-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen für Fuhrparkbedarf.",
     },
+    galleryImages: [
+      galleryImage("scania", "scania-delivery-tail-lift", "Scania-P280-4x2-Delivery-Truck-Zepro-2T-Tail-Lift-2019-Shveciya_19288_758237632262.jpg", {
+        en: "Scania delivery truck with tail lift",
+        uk: "Вантажний автомобіль Scania з гідробортом",
+        sk: "Nákladné vozidlo Scania s čelom",
+        de: "Scania Lkw mit Ladebordwand",
+      }),
+      galleryImage("scania", "scania-refrigerated-box", "SCANIA-R500-Hook-Up-Refrigerated-Truck-KIESLING-20-EPAL-Carrier-Supra-1250-Silent-Pol-sha_6472_3290579914.jpg", {
+        en: "Scania refrigerated box truck",
+        uk: "Рефрижераторний вантажний автомобіль Scania",
+        sk: "Chladiarenské nákladné vozidlo Scania",
+        de: "Scania Kühlkoffer-Lkw",
+      }),
+      galleryImage("scania", "scania-chassis-cab", "Scania-P280-6X2-NL-TRUCK-6X2-DIJSEL-23-200-LTR-EURO5-4-COMP-AUTOMAAT-Niderlandy_35982_6280468884660.jpg", {
+        en: "Scania commercial chassis configuration",
+        uk: "Комерційне шасі Scania",
+        sk: "Komerčný podvozok Scania",
+        de: "Scania Nutzfahrzeug-Fahrgestell",
+      }),
+      galleryImage("scania", "scania-cold-chain", "SCANIA-R-420-4X2-CHLODNIA-SOLOWKA-7-3-m-THERMO-KING-WINDA-EPS-SPRZEGLO-EURO-5-Pol-sha_40040_4778050040631.jpg", {
+        en: "Scania temperature-controlled truck",
+        uk: "Scania для температурних перевезень",
+        sk: "Scania pre teplotne riadenú dopravu",
+        de: "Scania für temperaturgeführten Transport",
+      }),
+      galleryImage("scania", "scania-silo-truck", "Scania-R500-NGS-6x2-26-m3-Grain-silo-Kompressor-Daniya_1341_3117315637218.jpg", {
+        en: "Scania specialized silo truck",
+        uk: "Спеціалізований силосний автомобіль Scania",
+        sk: "Špecializované silo vozidlo Scania",
+        de: "Scania Spezial-Silofahrzeug",
+      }),
+      galleryImage("scania", "scania-commercial-truck", "SCANIA-G400-Pol-sha_15673_4090742946.jpg", {
+        en: "Scania commercial truck",
+        uk: "Комерційний автомобіль Scania",
+        sk: "Komerčné vozidlo Scania",
+        de: "Scania Nutzfahrzeug",
+      }),
+      galleryImage("scania", "scania-curtainsider", "SCANIA-R-450-FIRANKA-7-7-m-6x2-DACH-PODNOSZONY-OS-PODNOSZONA-SKRETNA-WINDA-DHOLLANDIA-3-500-KG-KLIMA-POSTOJOWA-EURO-6-Pol-sha_40040_9371535108230.jpg", {
+        en: "Scania curtainsider truck",
+        uk: "Тентований вантажний автомобіль Scania",
+        sk: "Plachtové nákladné vozidlo Scania",
+        de: "Scania Planen-Lkw",
+      }),
+    ],
     bodyTypes: {
       en: ["High-roof and normal-roof tractors", "6x2 and 4x2 axle layouts"],
       uk: ["Тягачі з високою та звичайною кабіною", "Конфігурації осей 6x2 та 4x2"],
@@ -536,4 +663,17 @@ export function pickBodyTypeOfferings(
       description: buildCatalogModelDescription(title, locale),
     };
   });
+}
+
+export function pickBrandGalleryImages(
+  items: CatalogBrandGalleryImage[] | undefined,
+  locale: Locale,
+): CatalogBrandGalleryItem[] {
+  if (!items?.length) return [];
+
+  return items.map((item) => ({
+    id: item.id,
+    imageSrc: item.imageSrc,
+    imageAlt: pickLocalized(item.imageAlt, locale),
+  }));
 }

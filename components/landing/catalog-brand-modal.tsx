@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import type { CatalogBodyTypeOffering } from "@/lib/catalog-brands";
+import type { CatalogBodyTypeOffering, CatalogBrandGalleryItem } from "@/lib/catalog-brands";
 import { getCatalogBrandLogoFull } from "@/lib/catalog-brand-logo";
 import type { Locale } from "@/lib/locale";
 
@@ -22,6 +22,7 @@ export type CatalogBrandCard = {
   configurations: string[];
   typicalSpecs: string[];
   bodyTypeOfferings?: CatalogBodyTypeOffering[];
+  galleryImages?: CatalogBrandGalleryItem[];
 };
 
 interface CatalogBrandModalProps {
@@ -74,96 +75,137 @@ const labels: Record<Locale, ModalLabels> = {
   },
 };
 
-type BrandGalleryImage = {
-  id: string;
-  imageSrc: string;
-  imageAlt: string;
-};
-
-function BrandPhotoCarousel({ images, labels: t }: { images: BrandGalleryImage[]; labels: ModalLabels }) {
+function BrandPhotoCarousel({ images, labels: t }: { images: CatalogBrandGalleryItem[]; labels: ModalLabels }) {
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const [showControls, setShowControls] = useState(false);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
-  const showControls = images.length > 1;
+  const carouselKey = useMemo(() => images.map((image) => image.id).join(","), [images]);
 
-  const updateScrollState = useCallback(() => {
+  const scrollPhotos = (direction: "prev" | "next") => {
     const track = trackRef.current;
     if (!track) return;
 
-    setCanScrollPrev(track.scrollLeft > 1);
-    setCanScrollNext(track.scrollLeft + track.clientWidth < track.scrollWidth - 1);
-  }, []);
+    const slides = Array.from(track.querySelectorAll("[data-brand-photo-slide]")) as HTMLElement[];
+    if (!slides.length) return;
 
-  const scrollPhotos = useCallback((direction: "prev" | "next") => {
-    const track = trackRef.current;
-    if (!track) return;
+    const currentLeft = track.scrollLeft;
+    let currentIndex = slides.findIndex((slide) => slide.offsetLeft >= currentLeft - 8);
+    if (currentIndex < 0) currentIndex = slides.length - 1;
 
-    const firstSlide = track.querySelector<HTMLElement>("[data-brand-photo-slide]");
-    const distance = firstSlide?.offsetWidth ? firstSlide.offsetWidth + 16 : track.clientWidth * 0.85;
-    track.scrollBy({ left: direction === "next" ? distance : -distance, behavior: "smooth" });
-  }, []);
+    const targetIndex =
+      direction === "next"
+        ? Math.min(slides.length - 1, currentIndex + 1)
+        : Math.max(0, currentIndex - 1);
+
+    track.scrollTo({
+      left: slides[targetIndex]?.offsetLeft ?? 0,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
-    updateScrollState();
+    const wrapper = wrapperRef.current;
     const track = trackRef.current;
-    if (!track) return;
+    if (!wrapper || !track) return;
 
-    track.addEventListener("scroll", updateScrollState, { passive: true });
-    window.addEventListener("resize", updateScrollState);
+    let rafId = 0;
+    let remeasureTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const update = () => {
+      rafId = 0;
+      const maxScrollLeft = Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      const scrollLeft = track.scrollLeft;
+      const epsilon = 2;
+      const nextShowControls = images.length > 1 || track.scrollWidth > wrapper.clientWidth + 1;
+
+      setShowControls((prev) => (prev === nextShowControls ? prev : nextShowControls));
+      setCanScrollPrev((prev) => {
+        const next = scrollLeft > epsilon;
+        return prev === next ? prev : next;
+      });
+      setCanScrollNext((prev) => {
+        const next = scrollLeft < maxScrollLeft - epsilon;
+        return prev === next ? prev : next;
+      });
+    };
+
+    const schedule = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(update);
+    };
+
+    const scheduleWithFallback = () => {
+      schedule();
+      if (remeasureTimer) clearTimeout(remeasureTimer);
+      remeasureTimer = setTimeout(schedule, 200);
+    };
+
+    scheduleWithFallback();
+
+    const resizeObserver = new ResizeObserver(scheduleWithFallback);
+    resizeObserver.observe(wrapper);
+    resizeObserver.observe(track);
+
+    track.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", scheduleWithFallback);
 
     return () => {
-      track.removeEventListener("scroll", updateScrollState);
-      window.removeEventListener("resize", updateScrollState);
+      if (rafId) cancelAnimationFrame(rafId);
+      if (remeasureTimer) clearTimeout(remeasureTimer);
+      resizeObserver.disconnect();
+      track.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", scheduleWithFallback);
     };
-  }, [images.length, updateScrollState]);
+  }, [carouselKey, images.length]);
 
   if (!images.length) return null;
 
   return (
     <div className="catalog-brand-photo-gallery">
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.galleryTitle}</h3>
+      <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.galleryTitle}</h3>
 
-        {showControls ? (
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="catalog-carousel-btn landing-btn landing-btn-control"
-              aria-label={t.prevPhoto}
-              disabled={!canScrollPrev}
-              onClick={() => scrollPhotos("prev")}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="catalog-carousel-btn landing-btn landing-btn-control"
-              aria-label={t.nextPhoto}
-              disabled={!canScrollNext}
-              onClick={() => scrollPhotos("next")}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-        ) : null}
-      </div>
+      <div className="relative w-full" ref={wrapperRef}>
+        <div
+          ref={trackRef}
+          className="catalog-brand-photo-track catalog-brand-photo-track--scroll w-full scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory overflow-x-auto"
+        >
+          {images.map((image) => (
+            <figure key={image.id} data-brand-photo-slide className="catalog-brand-photo-slide snap-start">
+              <Image
+                src={image.imageSrc}
+                alt={image.imageAlt}
+                width={720}
+                height={405}
+                className="catalog-brand-photo-image"
+              />
+            </figure>
+          ))}
+        </div>
 
-      <div ref={trackRef} className="catalog-brand-photo-track" onScroll={updateScrollState}>
-        {images.map((image) => (
-          <figure key={image.id} data-brand-photo-slide className="catalog-brand-photo-slide">
-            <Image
-              src={image.imageSrc}
-              alt={image.imageAlt}
-              width={720}
-              height={405}
-              className="catalog-brand-photo-image"
-            />
-          </figure>
-        ))}
+        <div className="mt-4 flex items-center justify-center gap-2">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => scrollPhotos("prev")}
+            className="catalog-carousel-btn landing-btn landing-btn-control"
+            aria-label={t.prevPhoto}
+            disabled={!showControls || !canScrollPrev}
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => scrollPhotos("next")}
+            className="catalog-carousel-btn landing-btn landing-btn-control"
+            aria-label={t.nextPhoto}
+            disabled={!showControls || !canScrollNext}
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -173,24 +215,18 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
   const t = labels[locale];
   const modalLogoSrc = getCatalogBrandLogoFull(brand.name) ?? brand.logoSrc;
   const hasOverview = Boolean(brand.overview?.trim());
-  const galleryImages = useMemo<BrandGalleryImage[]>(() => {
+  const galleryImages = useMemo<CatalogBrandGalleryItem[]>(() => {
     const seen = new Set<string>();
-    return (brand.bodyTypeOfferings ?? [])
-      .filter((offering) => {
-        if (!offering.imageSrc || seen.has(offering.imageSrc)) return false;
-        seen.add(offering.imageSrc);
-        return true;
-      })
-      .map((offering) => ({
-        id: offering.id,
-        imageSrc: offering.imageSrc,
-        imageAlt: offering.imageAlt,
-      }));
-  }, [brand.bodyTypeOfferings]);
+    return (brand.galleryImages ?? []).filter((image) => {
+      if (!image.imageSrc || seen.has(image.imageSrc)) return false;
+      seen.add(image.imageSrc);
+      return true;
+    });
+  }, [brand.galleryImages]);
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-h-[90dvh] gap-0 overflow-y-auto border border-cyan-200/15 bg-background/95 p-0 sm:max-w-2xl lg:max-w-3xl">
+      <DialogContent className="max-h-[90dvh] gap-0 overflow-hidden border border-cyan-200/15 bg-background/95 p-0 sm:max-w-2xl lg:max-w-[52rem]">
         <DialogTitle className="sr-only">{brand.name}</DialogTitle>
         <DialogDescription className="sr-only">
           {hasOverview ? brand.overview : brand.tagline || brand.name}
@@ -215,7 +251,7 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
           </div>
         </div>
 
-        <div className="space-y-8 p-6 lg:p-8">
+        <div className="max-h-[calc(90dvh-5.75rem)] space-y-6 overflow-y-auto p-5 sm:p-6 lg:p-7">
           {hasOverview ? (
             <div>
               <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.overview}</h3>
