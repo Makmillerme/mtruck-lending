@@ -149,7 +149,25 @@ function BrandPhotoCarousel({ images, labels: t }: { images: CatalogBrandGallery
     resizeObserver.observe(wrapper);
     resizeObserver.observe(track);
 
+    const handleWheel = (event: WheelEvent) => {
+      const primarilyVertical = Math.abs(event.deltaY) > Math.abs(event.deltaX);
+      if (!primarilyVertical) return;
+
+      const maxScrollLeft = Math.max(0, track.scrollWidth - track.clientWidth);
+      if (maxScrollLeft <= 0) return;
+
+      const direction = Math.sign(event.deltaY);
+      const canScrollInDirection =
+        direction > 0 ? track.scrollLeft < maxScrollLeft - 1 : track.scrollLeft > 1;
+      if (!canScrollInDirection) return;
+
+      event.preventDefault();
+      track.scrollLeft = Math.min(maxScrollLeft, Math.max(0, track.scrollLeft + event.deltaY));
+      schedule();
+    };
+
     track.addEventListener("scroll", schedule, { passive: true });
+    track.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("resize", scheduleWithFallback);
 
     return () => {
@@ -157,6 +175,7 @@ function BrandPhotoCarousel({ images, labels: t }: { images: CatalogBrandGallery
       if (remeasureTimer) clearTimeout(remeasureTimer);
       resizeObserver.disconnect();
       track.removeEventListener("scroll", schedule);
+      track.removeEventListener("wheel", handleWheel);
       window.removeEventListener("resize", scheduleWithFallback);
     };
   }, [carouselKey, images.length]);

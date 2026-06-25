@@ -333,6 +333,15 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "Renault Trucks patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou Renault v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "Renault Trucks zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit Renault-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
+    galleryImages: brandGalleryImages("renault", "Renault Trucks", [
+      "IMG-20260625-WA0010.jpg",
+      "IMG-20260625-WA0012(1).jpg",
+      "IMG-20260625-WA0029.jpg",
+      "IMG-20260625-WA0030.jpg",
+      "IMG-20260625-WA0053.jpg",
+      "IMG-20260625-WA0084.jpg",
+      "IMG_20260625_151518.jpg",
+    ]),
     bodyTypes: {
       en: ["T High long-haul tractors", "T distribution tractors", "C construction chassis"],
       uk: ["Магістральні T High", "Розподільні T", "Будівельні шасі C"],
