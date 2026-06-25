@@ -54,6 +54,21 @@ function galleryImage(brandId: string, id: string, filename: string, imageAlt: L
   };
 }
 
+function galleryAlt(brandName: string): LocalizedText {
+  return {
+    en: `${brandName} commercial vehicle`,
+    uk: `Комерційний автомобіль ${brandName}`,
+    sk: `Komerčné vozidlo ${brandName}`,
+    de: `${brandName} Nutzfahrzeug`,
+  };
+}
+
+function brandGalleryImages(brandId: string, brandName: string, filenames: string[]): CatalogBrandGalleryImage[] {
+  return filenames.map((filename, index) =>
+    galleryImage(brandId, `${brandId}-${index + 1}`, filename, galleryAlt(brandName)),
+  );
+}
+
 const rawCatalogBrands: CatalogBrand[] = [
   {
     id: "mercedes",
@@ -77,6 +92,14 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "Mercedes-Benz patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou Mercedes-Benz v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "Mercedes-Benz zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit Mercedes-Benz-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
+    galleryImages: brandGalleryImages("mercedes", "Mercedes-Benz", [
+      "photo_2025-10-15_16-46-51.jpg",
+      "photo_2025-12-01_17-34-03.jpg",
+      "photo_2025-12-17_11-55-02.jpg",
+      "photo_2026-01-27_13-28-21.jpg",
+      "photo_2026-03-13_11-53-47.jpg",
+      "photo_2026-03-13_11-55-27.jpg",
+    ]),
     bodyTypes: {
       en: ["Actros long-haul tractors (4x2, 6x2)", "Arocs distribution and construction chassis"],
       uk: ["Магістральні Actros (4x2, 6x2)", "Розподільні та будівельні шасі Arocs"],
@@ -118,68 +141,24 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "MAN patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou MAN v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "MAN zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit MAN-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
-    galleryImages: [
-      galleryImage("man", "man-swap-body-chassis", "MAN-TGX-26-460-6x2-4-LL-Wechselfahrgestell-NLA-7-45m-Germaniya_41383_3576083952366.jpg", {
-        en: "MAN swap body chassis",
-        uk: "MAN шасі під змінний кузов",
-        sk: "MAN podvozok pre výmennú nadstavbu",
-        de: "MAN Wechselbrücken-Fahrgestell",
-      }),
-      galleryImage("man", "man-insulated-box", "MAN-TGL-12-250-KONTENER-IZOTERMA-WINDA-2017R-EURO-6-LIFT-SPROWADZONY-ZADBANY-E6-17-PALET-Pol-sha_40134_3773997172984.jpg", {
-        en: "MAN insulated box truck",
-        uk: "Ізотермічний фургон MAN",
-        sk: "Izotermické skriňové vozidlo MAN",
-        de: "MAN Isolierkoffer-Lkw",
-      }),
-      galleryImage("man", "man-box-body-combination", "MAN-TGX-26-510-6x2-4-BL-mit-Hanger-Aufbau-Avstriya_15827_3362079717489.jpg", {
-        en: "MAN box body truck combination",
-        uk: "MAN у фургонній конфігурації",
-        sk: "MAN v skriňovej konfigurácii",
-        de: "MAN in Kofferaufbau-Konfiguration",
-      }),
-      galleryImage("man", "man-commercial-truck-front", "photo_2026-02-17_12-06-21.jpg", {
-        en: "MAN commercial truck",
-        uk: "Комерційний автомобіль MAN",
-        sk: "Komerčné vozidlo MAN",
-        de: "MAN Nutzfahrzeug",
-      }),
-      galleryImage("man", "man-commercial-truck-side", "photo_2026-04-02_12-36-38.jpg", {
-        en: "MAN truck side view",
-        uk: "Комерційний MAN, боковий ракурс",
-        sk: "Komerčné vozidlo MAN z bočného pohľadu",
-        de: "MAN Nutzfahrzeug in Seitenansicht",
-      }),
-      galleryImage("man", "man-chassis-cab", "MAN-TGS-26-500-6x2-4-LL-Daniya_19477_6555959857805.jpg", {
-        en: "MAN chassis cab configuration",
-        uk: "MAN у конфігурації шасі-кабіна",
-        sk: "MAN v konfigurácii podvozok-kabína",
-        de: "MAN Fahrgestell-Fahrerhaus-Konfiguration",
-      }),
-      galleryImage("man", "man-container-truck", "photo_2026-06-09_17-34-17.jpg", {
-        en: "MAN container transport truck",
-        uk: "MAN для контейнерних перевезень",
-        sk: "MAN pre kontajnerovú dopravu",
-        de: "MAN für Containertransport",
-      }),
-      galleryImage("man", "man-container-chassis", "2023-MAN-TGS-26-510-Containerbil-6x2-Bakloft-EU-godkjent-Norvegiya_39035_4832705942253.jpg", {
-        en: "MAN container chassis truck",
-        uk: "MAN контейнерне шасі",
-        sk: "MAN kontajnerový podvozok",
-        de: "MAN Container-Fahrgestell",
-      }),
-      galleryImage("man", "man-light-commercial-truck", "MAN-TGL-8-190-Germaniya_328_8932375624581.jpg", {
-        en: "MAN light commercial truck",
-        uk: "Легкий комерційний автомобіль MAN",
-        sk: "Ľahšie komerčné vozidlo MAN",
-        de: "Leichter MAN Nutzfahrzeug-Lkw",
-      }),
-      galleryImage("man", "man-tractor-unit", "MAN-26-420-TGX-XXL-INTARDER-Niderlandy_124_945532671912.jpg", {
-        en: "MAN tractor unit",
-        uk: "Сідельний тягач MAN",
-        sk: "Ťahač MAN",
-        de: "MAN Sattelzugmaschine",
-      }),
-    ],
+    galleryImages: brandGalleryImages("man", "MAN", [
+      "photo_2025-09-18_17-11-06.jpg",
+      "photo_2025-11-14_10-22-39.jpg",
+      "photo_2025-12-02_12-23-24.jpg",
+      "photo_2025-12-02_13-02-26.jpg",
+      "photo_2025-12-04_14-43-06.jpg",
+      "photo_2025-12-23_15-29-46.jpg",
+      "photo_2026-02-17_12-06-33.jpg",
+      "photo_2026-02-17_12-08-27.jpg",
+      "photo_2026-02-17_12-09-33.jpg",
+      "photo_2026-02-17_12-10-42.jpg",
+      "photo_2026-03-13_12-00-08.jpg",
+      "photo_2026-03-24_15-06-43.jpg",
+      "photo_2026-03-24_15-57-09.jpg",
+      "photo_2026-06-04_12-33-27.jpg",
+      "photo_2026-06-04_12-37-48.jpg",
+      "photo_2026-06-09_12-09-32.jpg",
+    ]),
     bodyTypes: {
       en: ["Tractor units (4x2, 6x2)", "Chassis for special superstructures"],
       uk: ["Тягачі (4x2, 6x2)", "Шасі під спеціальні надбудови"],
@@ -221,50 +200,9 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "Scania patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou Scania v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá pre potreby flotíl.",
       de: "Scania zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit Scania-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen für Fuhrparkbedarf.",
     },
-    galleryImages: [
-      galleryImage("scania", "scania-delivery-tail-lift", "Scania-P280-4x2-Delivery-Truck-Zepro-2T-Tail-Lift-2019-Shveciya_19288_758237632262.jpg", {
-        en: "Scania delivery truck with tail lift",
-        uk: "Вантажний автомобіль Scania з гідробортом",
-        sk: "Nákladné vozidlo Scania s čelom",
-        de: "Scania Lkw mit Ladebordwand",
-      }),
-      galleryImage("scania", "scania-refrigerated-box", "SCANIA-R500-Hook-Up-Refrigerated-Truck-KIESLING-20-EPAL-Carrier-Supra-1250-Silent-Pol-sha_6472_3290579914.jpg", {
-        en: "Scania refrigerated box truck",
-        uk: "Рефрижераторний вантажний автомобіль Scania",
-        sk: "Chladiarenské nákladné vozidlo Scania",
-        de: "Scania Kühlkoffer-Lkw",
-      }),
-      galleryImage("scania", "scania-chassis-cab", "Scania-P280-6X2-NL-TRUCK-6X2-DIJSEL-23-200-LTR-EURO5-4-COMP-AUTOMAAT-Niderlandy_35982_6280468884660.jpg", {
-        en: "Scania commercial chassis configuration",
-        uk: "Комерційне шасі Scania",
-        sk: "Komerčný podvozok Scania",
-        de: "Scania Nutzfahrzeug-Fahrgestell",
-      }),
-      galleryImage("scania", "scania-cold-chain", "SCANIA-R-420-4X2-CHLODNIA-SOLOWKA-7-3-m-THERMO-KING-WINDA-EPS-SPRZEGLO-EURO-5-Pol-sha_40040_4778050040631.jpg", {
-        en: "Scania temperature-controlled truck",
-        uk: "Scania для температурних перевезень",
-        sk: "Scania pre teplotne riadenú dopravu",
-        de: "Scania für temperaturgeführten Transport",
-      }),
-      galleryImage("scania", "scania-silo-truck", "Scania-R500-NGS-6x2-26-m3-Grain-silo-Kompressor-Daniya_1341_3117315637218.jpg", {
-        en: "Scania specialized silo truck",
-        uk: "Спеціалізований силосний автомобіль Scania",
-        sk: "Špecializované silo vozidlo Scania",
-        de: "Scania Spezial-Silofahrzeug",
-      }),
-      galleryImage("scania", "scania-commercial-truck", "SCANIA-G400-Pol-sha_15673_4090742946.jpg", {
-        en: "Scania commercial truck",
-        uk: "Комерційний автомобіль Scania",
-        sk: "Komerčné vozidlo Scania",
-        de: "Scania Nutzfahrzeug",
-      }),
-      galleryImage("scania", "scania-curtainsider", "SCANIA-R-450-FIRANKA-7-7-m-6x2-DACH-PODNOSZONY-OS-PODNOSZONA-SKRETNA-WINDA-DHOLLANDIA-3-500-KG-KLIMA-POSTOJOWA-EURO-6-Pol-sha_40040_9371535108230.jpg", {
-        en: "Scania curtainsider truck",
-        uk: "Тентований вантажний автомобіль Scania",
-        sk: "Plachtové nákladné vozidlo Scania",
-        de: "Scania Planen-Lkw",
-      }),
-    ],
+    galleryImages: brandGalleryImages("scania", "Scania", [
+      "photo_2025-09-10_10-23-20.jpg",
+    ]),
     bodyTypes: {
       en: ["High-roof and normal-roof tractors", "6x2 and 4x2 axle layouts"],
       uk: ["Тягачі з високою та звичайною кабіною", "Конфігурації осей 6x2 та 4x2"],
@@ -306,6 +244,10 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "DAF patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou DAF v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "DAF zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit DAF-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
+    galleryImages: brandGalleryImages("daf", "DAF", [
+      "photo_2026-06-04_12-32-19.jpg",
+      "photo_2026-06-04_12-32-48.jpg",
+    ]),
     bodyTypes: {
       en: ["XF long-haul tractors", "CF distribution and regional chassis"],
       uk: ["Магістральні XF", "Розподільні та регіональні шасі CF"],
@@ -347,6 +289,9 @@ const rawCatalogBrands: CatalogBrand[] = [
       sk: "Volvo patrí medzi lídrov európskej nákladnej dopravy. Pracujeme s technikou Volvo v rôznych konfiguráciách — od diaľkových ťahačov po špecializované podvozky, skriňové nadstavby a kontajnerové vozidlá.",
       de: "Volvo zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit Volvo-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
+    galleryImages: brandGalleryImages("volvo", "Volvo", [
+      "photo_2025-12-16_15-13-37.jpg",
+    ]),
     bodyTypes: {
       en: ["FH long-haul tractors", "FM regional and construction chassis"],
       uk: ["Магістральні FH", "Регіональні та будівельні шасі FM"],

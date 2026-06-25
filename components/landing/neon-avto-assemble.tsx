@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-const FINAL_SVG = "/images/neon_avto_assemble.svg";
+const FINAL_IMAGE = "/images/neon_avto_assemble.png";
 
 /** Static neon truck visual (no canvas animation). */
 export function NeonAvtoAssemble({
@@ -28,7 +28,7 @@ export function NeonAvtoAssemble({
       aria-hidden={!play}
     >
       <Image
-        src={FINAL_SVG}
+        src={FINAL_IMAGE}
         alt={alt}
         fill
         unoptimized

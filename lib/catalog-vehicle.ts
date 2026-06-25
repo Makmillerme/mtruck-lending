@@ -2,10 +2,10 @@ import type { Locale } from "@/lib/locale";
 import { pickEntityLocale } from "@/lib/pick-locale";
 import type { CatalogBrandCard } from "@/components/landing/catalog-brand-modal";
 import { getCatalogBrandLogo, getCatalogBrandLogoKey } from "@/lib/catalog-brand-logo";
-import type { CatalogBrand } from "@/lib/catalog-brands";
+import type { CatalogBrand, CatalogCategory } from "@/lib/catalog-brands";
 import { getCatalogBrandByName, pickBodyTypeOfferings, pickBrandGalleryImages, pickLocalized } from "@/lib/catalog-brands";
 
-export type CatalogCategory = "truck" | "trailer";
+export type { CatalogCategory } from "@/lib/catalog-brands";
 
 export type VehicleCatalogMeta = {
   bodyTypes?: Partial<Record<Locale, string[]>>;
@@ -45,6 +45,10 @@ export function matchesCatalogCategory(vehicleCategory: string, tabKey: CatalogC
   return vehicleCategory === "trailer" || vehicleCategory === "van";
 }
 
+function vehicleCategoryToCatalogCategory(vehicleCategory: string): CatalogCategory {
+  return vehicleCategory === "truck" ? "truck" : "trailer";
+}
+
 export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale: Locale): CatalogBrandCard {
   const meta = parseVehicleCatalogMeta(vehicle.catalogMeta);
 
@@ -66,6 +70,7 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
 
   return {
     id: String(vehicle.id),
+    category: vehicleCategoryToCatalogCategory(vehicle.category),
     name: vehicle.brand,
     logoKey: getCatalogBrandLogoKey(vehicle.brand),
     logoSrc: getCatalogBrandLogo(vehicle.brand),
@@ -83,6 +88,7 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
 export function catalogBrandToCard(brand: CatalogBrand, locale: Locale): CatalogBrandCard {
   return {
     id: brand.id,
+    category: brand.category,
     name: brand.name,
     logoKey: getCatalogBrandLogoKey(brand.name),
     logoSrc: getCatalogBrandLogo(brand.name),

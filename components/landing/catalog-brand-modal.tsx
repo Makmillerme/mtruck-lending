@@ -6,12 +6,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CtaFormModal } from "@/components/landing/cta-form-modal";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import type { CatalogBodyTypeOffering, CatalogBrandGalleryItem } from "@/lib/catalog-brands";
+import type { CatalogBodyTypeOffering, CatalogBrandGalleryItem, CatalogCategory } from "@/lib/catalog-brands";
 import { getCatalogBrandLogoFull } from "@/lib/catalog-brand-logo";
 import type { Locale } from "@/lib/locale";
 
 export type CatalogBrandCard = {
   id: string;
+  category: CatalogCategory;
   name: string;
   logoSrc?: string | null;
   logoKey?: string | null;
@@ -176,8 +177,8 @@ function BrandPhotoCarousel({ images, labels: t }: { images: CatalogBrandGallery
               <Image
                 src={image.imageSrc}
                 alt={image.imageAlt}
-                width={720}
-                height={405}
+                width={960}
+                height={720}
                 className="catalog-brand-photo-image"
               />
             </figure>
@@ -215,14 +216,17 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
   const t = labels[locale];
   const modalLogoSrc = getCatalogBrandLogoFull(brand.name) ?? brand.logoSrc;
   const hasOverview = Boolean(brand.overview?.trim());
+  const shouldShowGallery = brand.category === "truck";
   const galleryImages = useMemo<CatalogBrandGalleryItem[]>(() => {
+    if (!shouldShowGallery) return [];
+
     const seen = new Set<string>();
     return (brand.galleryImages ?? []).filter((image) => {
       if (!image.imageSrc || seen.has(image.imageSrc)) return false;
       seen.add(image.imageSrc);
       return true;
     });
-  }, [brand.galleryImages]);
+  }, [brand.galleryImages, shouldShowGallery]);
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
@@ -259,7 +263,7 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
             </div>
           ) : null}
 
-          <BrandPhotoCarousel images={galleryImages} labels={t} />
+          {shouldShowGallery ? <BrandPhotoCarousel images={galleryImages} labels={t} /> : null}
 
           <p className="rounded-xl border border-cyan-200/12 bg-cyan-200/5 px-4 py-3 text-sm leading-relaxed text-muted-foreground">
             {t.note}
