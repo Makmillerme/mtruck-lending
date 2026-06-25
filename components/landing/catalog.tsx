@@ -319,8 +319,8 @@ export function Catalog({ locale, vehiclesData = [], metaContent }: CatalogProps
                               loading="lazy"
                               decoding="async"
                               sizes="160px"
-                              style={{ width: "auto" }}
-                              className="catalog-brand-card-logo h-full object-contain"
+                              style={{ width: "100%", height: "100%" }}
+                              className="catalog-brand-card-logo object-contain"
                               unoptimized={brand.logoSrc?.endsWith(".svg")}
                             />
                           </div>

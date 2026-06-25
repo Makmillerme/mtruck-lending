@@ -279,7 +279,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
                   <Phone className="footer-contact-icon" />
                   <span>{phone}</span>
                 </a>
-                <p className="footer-contact-item">
+                <p className="footer-contact-item footer-contact-item--multiline">
                   <MapPin className="footer-contact-icon" />
                   <span>{address}</span>
                 </p>
