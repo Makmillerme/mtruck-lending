@@ -190,7 +190,7 @@ const content: LandingBundle["content"] = {
       description2: "",
       aboutImageAlt: "Commercial truck with neon accent lighting",
       bridgeTitle: "How we work",
-      imageCallouts: ["Partner request", "Commercial terms", "Market coordination", "Vehicle handover"],
+      imageCallouts: ["Partner request", "Commercial terms", "Request coordination", "Vehicle handover"],
       importChain: ["Partner request", "Commercial terms", "Coordination", "Vehicle handover"],
       features: [
         { icon: "MapPin", title: "Based in Slovakia", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovakia" },
@@ -208,7 +208,7 @@ const content: LandingBundle["content"] = {
       description2: "",
       aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
       bridgeTitle: "Як ми працюємо",
-      imageCallouts: ["Партнерський запит", "Комерційні умови", "Координація ринку", "Передача транспорту"],
+      imageCallouts: ["Партнерський запит", "Комерційні умови", "Координація запиту", "Передача транспорту"],
       importChain: ["Партнерський запит", "Комерційні умови", "Координація", "Передача транспорту"],
       features: [
         { icon: "MapPin", title: "База в Словаччині", description: "Na Troskách 12, 974 01 Banská Bystrica, Словаччина" },
@@ -226,7 +226,7 @@ const content: LandingBundle["content"] = {
       description2: "",
       aboutImageAlt: "Komerčné nákladné vozidlo s neónovým osvetlením",
       bridgeTitle: "Ako pracujeme",
-      imageCallouts: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia trhu", "Odovzdanie vozidla"],
+      imageCallouts: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia dopytu", "Odovzdanie vozidla"],
       importChain: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia", "Odovzdanie vozidla"],
       features: [
         { icon: "MapPin", title: "Sídlo na Slovensku", description: "Na Troskách 12, 974 01 Banská Bystrica, Slovensko" },
@@ -244,7 +244,7 @@ const content: LandingBundle["content"] = {
       description2: "",
       aboutImageAlt: "Gewerblicher Lkw mit Neon-Akzentbeleuchtung",
       bridgeTitle: "So arbeiten wir",
-      imageCallouts: ["Partneranfrage", "Geschäftsbedingungen", "Marktkoordination", "Fahrzeugübergabe"],
+      imageCallouts: ["Partneranfrage", "Geschäftsbedingungen", "Koordination der Anfrage", "Fahrzeugübergabe"],
       importChain: ["Partneranfrage", "Geschäftsbedingungen", "Koordination", "Fahrzeugübergabe"],
       features: [
         { icon: "MapPin", title: "Sitz in der Slowakei", description: "Na Troskách 12, 974 01 Banská Bystrica, Slowakei" },
@@ -266,7 +266,7 @@ const content: LandingBundle["content"] = {
         {
           title: "European market presence",
           description:
-            "We work inside the European commercial transport market and connect relevant parties for cooperation.",
+            "We work in the European commercial transport market and help parties align their cooperation format.",
         },
         {
           title: "Transparent cooperation",
@@ -304,7 +304,7 @@ const content: LandingBundle["content"] = {
         {
           title: "Робота на ринку ЄС",
           description:
-            "Працюємо всередині європейського ринку комерційного транспорту та поєднуємо релевантні сторони для співпраці.",
+            "Працюємо на європейському ринку комерційного транспорту та допомагаємо сторонам узгодити формат співпраці.",
         },
         {
           title: "Прозора співпраця",
@@ -339,7 +339,7 @@ const content: LandingBundle["content"] = {
         "Jasný obchodný proces pre firmy, predajcov, dílerov a partnerov v oblasti komerčnej dopravy.",
       carouselTitle: "Hodnotenia klientov",
       reasons: [
-        { title: "Pôsobenie na trhu EÚ", description: "Pracujeme na európskom trhu komerčnej dopravy a prepájame relevantné strany pre spoluprácu." },
+        { title: "Pôsobenie na trhu EÚ", description: "Pracujeme na európskom trhu komerčnej dopravy a pomáhame stranám dohodnúť formát spolupráce." },
         { title: "Transparentná spolupráca", description: "Proces držíme jasný od prvého dopytu cez dohodnuté podmienky až po odovzdanie vozidla." },
         { title: "Obchodný prístup", description: "Pripravujeme možnosti spolupráce podľa dopytu firmy, typu vozidla a praktických podmienok obchodu." },
         { title: "Partnerská sieť", description: "Pracujeme s kupujúcimi, predávajúcimi, dílermi a vlastníkmi komerčnej dopravy na rôznych trhoch." },
@@ -355,7 +355,7 @@ const content: LandingBundle["content"] = {
         "Ein klarer Geschäftsprozess für Unternehmen, Verkäufer, Händler und Partner im gewerblichen Transport.",
       carouselTitle: "Kundenbewertungen",
       reasons: [
-        { title: "Präsenz im EU-Markt", description: "Wir arbeiten im europäischen Markt für gewerblichen Transport und verbinden passende Parteien für die Zusammenarbeit." },
+        { title: "Präsenz im EU-Markt", description: "Wir arbeiten auf dem europäischen Markt für gewerblichen Transport und helfen den Parteien, das Format der Zusammenarbeit abzustimmen." },
         { title: "Transparente Zusammenarbeit", description: "Wir halten den Prozess von der ersten Anfrage über abgestimmte Bedingungen bis zur Fahrzeugübergabe klar." },
         { title: "Geschäftlicher Ansatz", description: "Wir entwickeln Kooperationsoptionen nach Unternehmensanfrage, Fahrzeugtyp und praktischen Geschäftsbedingungen." },
         { title: "Partnernetzwerk", description: "Wir arbeiten mit Käufern, Verkäufern, Händlern und Eigentümern von gewerblichem Transport in verschiedenen Märkten." },
@@ -476,36 +476,36 @@ const content: LandingBundle["content"] = {
   },
   footer: {
     en: {
-      cta: { title: "Ready to Find Your Perfect Vehicle?", description: "Contact us today.", button: "Get in Touch" },
+      cta: { title: "Ready to discuss a commercial transport request?", description: "Contact us today.", button: "Get in Touch" },
       links: { title: "Quick Links", items: nav.en },
       services: { title: "Services" },
       copyright: "© 2026 Expert Travel s.r.o. · ID 55336574. All rights reserved.",
       legal: ["Privacy Policy", "Terms of Service", "Cookies"],
-      brandDescription: "Expert Travel s.r.o. — European B2B partner for commercial transport. Banská Bystrica, Slovakia.",
+      brandDescription: "Expert Travel s.r.o. — European B2B partner in international commercial transport trade.",
     },
     uk: {
-      cta: { title: "Готові знайти свій ідеальний транспорт?", description: "Зверніться до нас сьогодні.", button: "Зв'язатися" },
+      cta: { title: "Готові обговорити запит на комерційний транспорт?", description: "Зверніться до нас сьогодні.", button: "Зв'язатися" },
       links: { title: "Швидкі посилання", items: nav.uk },
       services: { title: "Послуги" },
       copyright: "© 2026 Expert Travel s.r.o. · IČO 55336574. Всі права захищені.",
       legal: ["Приватність", "Умови", "Cookies"],
-      brandDescription: "Expert Travel s.r.o. — комерційна техніка з Європи. Словаччина, Banská Bystrica.",
+      brandDescription: "Expert Travel s.r.o. — європейський B2B-партнер у міжнародній торгівлі комерційним транспортом.",
     },
     sk: {
-      cta: { title: "Pripravení nájsť ideálne vozidlo?", description: "Kontaktujte nás ešte dnes.", button: "Kontaktovať" },
+      cta: { title: "Pripravení prediskutovať dopyt na komerčnú dopravu?", description: "Opíšte trasy, nosnosť a rozpočet — pripravíme jasné možnosti spolupráce s praktickými podmienkami.", button: "Kontaktovať" },
       links: { title: "Rýchle odkazy", items: nav.sk },
       services: { title: "Služby" },
       copyright: "© 2026 Expert Travel s.r.o. · IČO 55336574. Všetky práva vyhradené.",
       legal: ["Ochrana súkromia", "Podmienky služby", "Cookies"],
-      brandDescription: "Expert Travel s.r.o. — prémiové úžitkové vozidlá z Európy. Sídlo: Banská Bystrica, Slovensko.",
+      brandDescription: "Expert Travel s.r.o. — európsky B2B partner v medzinárodnom obchode s komerčnou dopravou.",
     },
     de: {
-      cta: { title: "Bereit, Ihr ideales Fahrzeug zu finden?", description: "Kontaktieren Sie uns noch heute.", button: "Kontakt aufnehmen" },
+      cta: { title: "Bereit, Ihre Anfrage für gewerblichen Transport zu besprechen?", description: "Beschreiben Sie Strecken, Nutzlast und Budget — wir erstellen klare Kooperationsoptionen mit praktischen Bedingungen.", button: "Kontakt aufnehmen" },
       links: { title: "Schnelllinks", items: nav.de },
       services: { title: "Leistungen" },
       copyright: "© 2026 Expert Travel s.r.o. · ID 55336574. Alle Rechte vorbehalten.",
       legal: ["Datenschutz", "Nutzungsbedingungen", "Cookies"],
-      brandDescription: "Expert Travel s.r.o. — Premium-Nutzfahrzeuge aus Europa. Sitz in Banská Bystrica, Slowakei.",
+      brandDescription: "Expert Travel s.r.o. — europäischer B2B-Partner im internationalen Handel mit gewerblichem Transport.",
     },
   },
 };

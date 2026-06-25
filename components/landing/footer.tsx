@@ -13,13 +13,13 @@ import { parseFooterContent, parseNavItems, pickText } from "@/lib/landing-secti
 const defaultContent = {
   en: {
     ctaEyebrow: "Your next step",
-    ctaTitle: "Let us match commercial transport to your business request",
+    ctaTitle: "Ready to discuss a commercial transport request?",
     ctaText:
       "Share your routes, payload, and budget — we will prepare clear cooperation options with practical terms and no pushy sales.",
     ctaPoints: ["Business request", "Cooperation terms", "Vehicle handover"],
     ctaHint: "We reply on business days, often the same day",
     ctaButton: "Send a request",
-    brandText: "European B2B partner for commercial transport cooperation.",
+    brandText: "Expert Travel s.r.o. — European B2B partner in international commercial transport trade.",
     linksTitle: "Quick links",
     servicesTitle: "Services",
     contactTitle: "Contact",
@@ -35,13 +35,13 @@ const defaultContent = {
   },
   uk: {
     ctaEyebrow: "Наступний крок",
-    ctaTitle: "Підберемо комерційний транспорт під ваш бізнес-запит",
+    ctaTitle: "Готові обговорити запит на комерційний транспорт?",
     ctaText:
       "Розкажіть про маршрути, вантажопідйомність і бюджет — підготуємо зрозумілі варіанти співпраці з практичними умовами, без нав'язливих продажів.",
     ctaPoints: ["Бізнес-запит", "Умови співпраці", "Передача транспорту"],
     ctaHint: "Відповідаємо в робочий час, зазвичай того ж дня",
     ctaButton: "Надіслати запит",
-    brandText: "Європейський B2B-партнер у співпраці з комерційним транспортом.",
+    brandText: "Європейський B2B-партнер у міжнародній торгівлі комерційним транспортом.",
     linksTitle: "Швидкі посилання",
     servicesTitle: "Послуги",
     contactTitle: "Контакти",
@@ -57,13 +57,13 @@ const defaultContent = {
   },
   sk: {
     ctaEyebrow: "Ďalší krok",
-    ctaTitle: "Pomôžeme zladiť komerčnú dopravu s vaším biznis dopytom",
+    ctaTitle: "Pripravení prediskutovať dopyt na komerčnú dopravu?",
     ctaText:
       "Opíšte trasy, nosnosť a rozpočet — pripravíme jasné možnosti spolupráce s praktickými podmienkami a bez nátlaku.",
     ctaPoints: ["Biznis dopyt", "Podmienky spolupráce", "Odovzdanie vozidla"],
     ctaHint: "Odpovedáme v pracovných dňoch, často v ten istý deň",
     ctaButton: "Odoslať dopyt",
-    brandText: "Európsky B2B partner pre spoluprácu v komerčnej doprave.",
+    brandText: "Expert Travel s.r.o. — európsky B2B partner v medzinárodnom obchode s komerčnou dopravou.",
     linksTitle: "Rýchle odkazy",
     servicesTitle: "Služby",
     contactTitle: "Kontakt",
@@ -79,13 +79,13 @@ const defaultContent = {
   },
   de: {
     ctaEyebrow: "Ihr nächster Schritt",
-    ctaTitle: "Wir stimmen gewerblichen Transport auf Ihre Anfrage ab",
+    ctaTitle: "Bereit, Ihre Anfrage für gewerblichen Transport zu besprechen?",
     ctaText:
       "Beschreiben Sie Strecken, Nutzlast und Budget — wir erstellen klare Kooperationsoptionen mit praktischen Bedingungen, ohne Verkaufsdruck.",
     ctaPoints: ["Geschäftsanfrage", "Kooperationsbedingungen", "Fahrzeugübergabe"],
     ctaHint: "Antwort an Werktagen, oft noch am selben Tag",
     ctaButton: "Anfrage senden",
-    brandText: "Europäischer B2B-Partner für Zusammenarbeit im gewerblichen Transport.",
+    brandText: "Expert Travel s.r.o. — europäischer B2B-Partner im internationalen Handel mit gewerblichem Transport.",
     linksTitle: "Schnelllinks",
     servicesTitle: "Leistungen",
     contactTitle: "Kontakt",

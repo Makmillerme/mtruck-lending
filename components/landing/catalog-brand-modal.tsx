@@ -265,7 +265,9 @@ export function CatalogBrandModal({ brand, locale, onClose }: CatalogBrandModalP
                 alt={brand.name}
                 width={160}
                 height={56}
-                className="catalog-brand-modal-logo-mark h-12 w-auto max-w-[10rem] object-contain object-left sm:h-14 sm:max-w-[12rem]"
+                style={{ width: "auto" }}
+                className="catalog-brand-modal-logo-mark h-12 max-w-[10rem] object-contain object-left sm:h-14 sm:max-w-[12rem]"
+                unoptimized={modalLogoSrc.endsWith(".svg")}
               />
             ) : (
               <h2 className="catalog-brand-modal-title">{brand.name}</h2>

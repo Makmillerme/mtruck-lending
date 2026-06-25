@@ -15,7 +15,7 @@ const defaultAbout = {
       "Expert Travel s.r.o. is a Slovak company specializing in international trade in trucks, trailers, and commercial transport. We support a complete B2B cooperation cycle for companies and partners.",
     description2: "",
     aboutImageAlt: "Commercial truck with neon accent lighting",
-    imageCallouts: ["Partner request", "Commercial terms", "Market coordination", "Vehicle handover"],
+    imageCallouts: ["Partner request", "Commercial terms", "Request coordination", "Vehicle handover"],
     bridgeTitle: "How we work",
     importChain: ["Partner request", "Commercial terms", "Coordination", "Vehicle handover"],
     stats: [
@@ -37,7 +37,7 @@ const defaultAbout = {
       "Expert Travel s.r.o. — словацька компанія, що спеціалізується на міжнародній торгівлі вантажівками, причепами та комерційною технікою. Ми забезпечуємо повний цикл B2B-співпраці для компаній і партнерів.",
     description2: "",
     aboutImageAlt: "Комерційна вантажівка з неоновим підсвічуванням",
-    imageCallouts: ["Партнерський запит", "Комерційні умови", "Координація ринку", "Передача транспорту"],
+    imageCallouts: ["Партнерський запит", "Комерційні умови", "Координація запиту", "Передача транспорту"],
     bridgeTitle: "Як ми працюємо",
     importChain: ["Партнерський запит", "Комерційні умови", "Координація", "Передача транспорту"],
     stats: [
@@ -59,7 +59,7 @@ const defaultAbout = {
       "Expert Travel s.r.o. je slovenská spoločnosť špecializovaná na medzinárodný obchod s nákladnými vozidlami, prívesmi a komerčnou dopravou. Zabezpečujeme celý cyklus B2B spolupráce pre firmy a partnerov.",
     description2: "",
     aboutImageAlt: "Komerčné nákladné vozidlo s neónovým osvetlením",
-    imageCallouts: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia trhu", "Odovzdanie vozidla"],
+    imageCallouts: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia dopytu", "Odovzdanie vozidla"],
     bridgeTitle: "Ako pracujeme",
     importChain: ["Partnerský dopyt", "Obchodné podmienky", "Koordinácia", "Odovzdanie vozidla"],
     stats: [
@@ -81,7 +81,7 @@ const defaultAbout = {
       "Expert Travel s.r.o. ist ein slowakisches Unternehmen, spezialisiert auf den internationalen Handel mit Lkw, Aufliegern und gewerblichem Transport. Wir begleiten den gesamten B2B-Kooperationszyklus für Unternehmen und Partner.",
     description2: "",
     aboutImageAlt: "Gewerblicher Lkw mit Neon-Akzentbeleuchtung",
-    imageCallouts: ["Partneranfrage", "Geschäftsbedingungen", "Marktkoordination", "Fahrzeugübergabe"],
+    imageCallouts: ["Partneranfrage", "Geschäftsbedingungen", "Koordination der Anfrage", "Fahrzeugübergabe"],
     bridgeTitle: "So arbeiten wir",
     importChain: ["Partneranfrage", "Geschäftsbedingungen", "Koordination", "Fahrzeugübergabe"],
     stats: [

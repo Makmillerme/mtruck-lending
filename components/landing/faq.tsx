@@ -16,25 +16,25 @@ const content = {
     badge: "FAQ",
     title: "Frequently Asked",
     titleHighlight: "Questions",
-    description: "Practical answers about supply terms, paperwork, and working with Expert Travel.",
+    description: "Practical answers about requests, cooperation terms, and working with Expert Travel.",
   },
   uk: {
     badge: "FAQ",
     title: "Часті",
     titleHighlight: "запитання",
-    description: "Практичні відповіді про умови постачання, документи та співпрацю з Expert Travel.",
+    description: "Практичні відповіді про запити, умови співпраці та роботу з Expert Travel.",
   },
   sk: {
     badge: "FAQ",
     title: "Často kladené",
     titleHighlight: "Otázky",
-    description: "Praktické odpovede o podmienkach dodávok, dokumentoch a spolupráci s Expert Travel.",
+    description: "Praktické odpovede o dopytoch, podmienkach spolupráce a práci s Expert Travel.",
   },
   de: {
     badge: "FAQ",
     title: "Häufig gestellte",
     titleHighlight: "Fragen",
-    description: "Praktische Antworten zu Lieferbedingungen, Unterlagen und der Zusammenarbeit mit Expert Travel.",
+    description: "Praktische Antworten zu Anfragen, Kooperationsbedingungen und der Zusammenarbeit mit Expert Travel.",
   },
 };
 

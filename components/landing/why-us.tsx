@@ -23,7 +23,7 @@ const defaultContent = {
     prevTestimonial: "Previous testimonial",
     nextTestimonial: "Next testimonial",
     reasons: [
-      { title: "European market presence", description: "We work inside the European commercial transport market and connect relevant parties for cooperation." },
+      { title: "European market presence", description: "We work in the European commercial transport market and help parties align their cooperation format." },
       { title: "Transparent cooperation", description: "We keep the process clear from the first request through agreed terms and vehicle handover." },
       { title: "Business-focused approach", description: "We prepare cooperation options around the company request, vehicle type, and practical deal conditions." },
       { title: "Partner network", description: "We work with buyers, sellers, dealers, and owners of commercial transport across different markets." },
@@ -41,7 +41,7 @@ const defaultContent = {
     prevTestimonial: "Попередній відгук",
     nextTestimonial: "Наступний відгук",
     reasons: [
-      { title: "Робота на ринку ЄС", description: "Працюємо всередині європейського ринку комерційного транспорту та поєднуємо релевантні сторони для співпраці." },
+      { title: "Робота на ринку ЄС", description: "Працюємо на європейському ринку комерційного транспорту та допомагаємо сторонам узгодити формат співпраці." },
       { title: "Прозора співпраця", description: "Тримаємо процес зрозумілим від першого запиту до погоджених умов і передачі транспорту." },
       { title: "Бізнес-підхід", description: "Формуємо варіанти співпраці під запит компанії, тип транспорту та практичні умови угоди." },
       { title: "Партнерська мережа", description: "Працюємо з покупцями, продавцями, дилерами та власниками комерційного транспорту на різних ринках." },
@@ -59,7 +59,7 @@ const defaultContent = {
     prevTestimonial: "Predchádzajúce hodnotenie",
     nextTestimonial: "Ďalšie hodnotenie",
     reasons: [
-      { title: "Pôsobenie na trhu EÚ", description: "Pracujeme na európskom trhu komerčnej dopravy a prepájame relevantné strany pre spoluprácu." },
+      { title: "Pôsobenie na trhu EÚ", description: "Pracujeme na európskom trhu komerčnej dopravy a pomáhame stranám dohodnúť formát spolupráce." },
       { title: "Transparentná spolupráca", description: "Proces držíme jasný od prvého dopytu cez dohodnuté podmienky až po odovzdanie vozidla." },
       { title: "Obchodný prístup", description: "Pripravujeme možnosti spolupráce podľa dopytu firmy, typu vozidla a praktických podmienok obchodu." },
       { title: "Partnerská sieť", description: "Pracujeme s kupujúcimi, predávajúcimi, dílermi a vlastníkmi komerčnej dopravy na rôznych trhoch." },
@@ -77,7 +77,7 @@ const defaultContent = {
     prevTestimonial: "Vorherige Bewertung",
     nextTestimonial: "Nächste Bewertung",
     reasons: [
-      { title: "Präsenz im EU-Markt", description: "Wir arbeiten im europäischen Markt für gewerblichen Transport und verbinden passende Parteien für die Zusammenarbeit." },
+      { title: "Präsenz im EU-Markt", description: "Wir arbeiten auf dem europäischen Markt für gewerblichen Transport und helfen den Parteien, das Format der Zusammenarbeit abzustimmen." },
       { title: "Transparente Zusammenarbeit", description: "Wir halten den Prozess von der ersten Anfrage über abgestimmte Bedingungen bis zur Fahrzeugübergabe klar." },
       { title: "Geschäftlicher Ansatz", description: "Wir entwickeln Kooperationsoptionen nach Unternehmensanfrage, Fahrzeugtyp und praktischen Geschäftsbedingungen." },
       { title: "Partnernetzwerk", description: "Wir arbeiten mit Käufern, Verkäufern, Händlern und Eigentümern von gewerblichem Transport in verschiedenen Märkten." },
