@@ -142,7 +142,6 @@ const rawCatalogBrands: CatalogBrand[] = [
       de: "MAN zählt zu den führenden Marken im europäischen Nutzfahrzeugverkehr. Wir arbeiten mit MAN-Fahrzeugen in vielfältigen Konfigurationen — von Fernverkehrszugmaschinen bis zu Spezialfahrgestellen, Kofferaufbauten und Containerfahrzeugen.",
     },
     galleryImages: brandGalleryImages("man", "MAN", [
-      "photo_2025-09-18_17-11-06.jpg",
       "photo_2025-11-14_10-22-39.jpg",
       "photo_2025-12-02_12-23-24.jpg",
       "photo_2025-12-02_13-02-26.jpg",
