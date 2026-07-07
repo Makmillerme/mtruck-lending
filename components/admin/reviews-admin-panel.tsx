@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AdminReviewsChrome } from "@/components/admin/admin-reviews-chrome";
-import type { SiteReviewRecord, SiteReviewStatus } from "@/lib/site-reviews";
+import type { SiteReviewRecord, SiteReviewsSettings, SiteReviewStatus } from "@/lib/site-reviews";
 import type { Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +25,47 @@ const statusLabel: Record<SiteReviewStatus, string> = {
 interface ReviewsAdminPanelProps {
   initialAuthenticated: boolean;
   initialReviews: SiteReviewRecord[];
+  initialSettings: SiteReviewsSettings;
+}
+
+type SettingsToggleProps = {
+  id: string;
+  label: string;
+  description: string;
+  checked: boolean;
+  disabled?: boolean;
+  onCheckedChange: (checked: boolean) => void;
+};
+
+function AdminSettingsSwitch({
+  id,
+  label,
+  description,
+  checked,
+  disabled,
+  onCheckedChange,
+}: SettingsToggleProps) {
+  return (
+    <div className="admin-reviews-setting-row">
+      <div className="admin-reviews-setting-copy">
+        <label className="admin-reviews-setting-label" htmlFor={id}>
+          {label}
+        </label>
+        <p className="admin-reviews-setting-desc">{description}</p>
+      </div>
+      <button
+        id={id}
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        disabled={disabled}
+        className={cn("admin-reviews-switch", checked && "admin-reviews-switch--on")}
+        onClick={() => onCheckedChange(!checked)}
+      >
+        <span className="admin-reviews-switch-thumb" aria-hidden />
+      </button>
+    </div>
+  );
 }
 
 type EditDraft = {
@@ -36,12 +77,18 @@ type EditDraft = {
   status: SiteReviewStatus;
 };
 
-export function ReviewsAdminPanel({ initialAuthenticated, initialReviews }: ReviewsAdminPanelProps) {
+export function ReviewsAdminPanel({
+  initialAuthenticated,
+  initialReviews,
+  initialSettings,
+}: ReviewsAdminPanelProps) {
   const [authenticated, setAuthenticated] = useState(initialAuthenticated);
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [reviews, setReviews] = useState<SiteReviewRecord[]>(initialReviews);
+  const [settings, setSettings] = useState<SiteReviewsSettings>(initialSettings);
+  const [settingsSaving, setSettingsSaving] = useState<Partial<Record<keyof SiteReviewsSettings, boolean>>>({});
   const [loading, setLoading] = useState(false);
   const [listError, setListError] = useState("");
   const [editing, setEditing] = useState<SiteReviewRecord | null>(null);
@@ -67,12 +114,17 @@ export function ReviewsAdminPanel({ initialAuthenticated, initialReviews }: Revi
         setReviews([]);
         return;
       }
-      const data = (await response.json()) as { reviews?: SiteReviewRecord[]; error?: string };
+      const data = (await response.json()) as {
+        reviews?: SiteReviewRecord[];
+        settings?: SiteReviewsSettings;
+        error?: string;
+      };
       if (!response.ok) {
         setListError(data.error || "Не вдалося завантажити відгуки");
         return;
       }
       setReviews(data.reviews ?? []);
+      if (data.settings) setSettings(data.settings);
     } catch {
       setListError("Не вдалося завантажити відгуки");
     } finally {
@@ -174,6 +226,50 @@ export function ReviewsAdminPanel({ initialAuthenticated, initialReviews }: Revi
     }
   };
 
+  const updateSetting = async (key: keyof SiteReviewsSettings, value: boolean) => {
+    if (key === "allowSubmit" && value && !settings.showReviews) return;
+
+    const previous = settings;
+    const payload: Partial<SiteReviewsSettings> =
+      key === "showReviews" && !value
+        ? { showReviews: false, allowSubmit: false }
+        : { [key]: value };
+    const optimistic: SiteReviewsSettings =
+      key === "showReviews" && !value
+        ? { showReviews: false, allowSubmit: false }
+        : { ...settings, [key]: value };
+
+    setSettings(optimistic);
+    setSettingsSaving((prev) => ({
+      ...prev,
+      [key]: true,
+      ...(key === "showReviews" && !value ? { allowSubmit: true } : {}),
+    }));
+    try {
+      const response = await fetch("/api/admin/reviews/settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await response.json()) as { settings?: SiteReviewsSettings; error?: string };
+      if (!response.ok) {
+        setSettings(previous);
+        setListError(data.error || "Не вдалося оновити налаштування");
+        return;
+      }
+      if (data.settings) setSettings(data.settings);
+    } catch {
+      setSettings(previous);
+      setListError("Не вдалося оновити налаштування");
+    } finally {
+      setSettingsSaving((prev) => ({
+        ...prev,
+        [key]: false,
+        ...(key === "showReviews" && !value ? { allowSubmit: false } : {}),
+      }));
+    }
+  };
+
   const quickApprove = async (review: SiteReviewRecord) => {
     const response = await fetch(`/api/admin/reviews/${review.id}`, {
       method: "PATCH",
@@ -272,6 +368,43 @@ export function ReviewsAdminPanel({ initialAuthenticated, initialReviews }: Revi
           <p className="admin-reviews-stat-label">Очікує</p>
         </div>
       </div>
+
+      <section className="admin-reviews-settings-card" aria-labelledby="admin-reviews-settings-title">
+        <h2 id="admin-reviews-settings-title" className="admin-reviews-settings-title">
+          Відображення на сайті
+        </h2>
+        <p className="admin-reviews-settings-desc">
+          Керує видимістю блоку відгуків і кнопки додавання на головній сторінці. Дані в JSON не видаляються.
+        </p>
+        <div className="admin-reviews-settings-list">
+          <AdminSettingsSwitch
+            id="admin-show-reviews"
+            label="Показувати відгуки"
+            description={
+              settings.showReviews
+                ? "Блок «Відгуки клієнтів» видно відвідувачам"
+                : "Блок відгуків приховано на сайті"
+            }
+            checked={settings.showReviews}
+            disabled={Boolean(settingsSaving.showReviews)}
+            onCheckedChange={(value) => void updateSetting("showReviews", value)}
+          />
+          <AdminSettingsSwitch
+            id="admin-allow-submit"
+            label="Дозволити додавання відгуків"
+            description={
+              !settings.showReviews
+                ? "Спочатку увімкніть показ відгуків на сайті"
+                : settings.allowSubmit
+                  ? "Кнопка «Залишити відгук» доступна на сайті"
+                  : "Нові відгуки через сайт тимчасово вимкнено"
+            }
+            checked={settings.showReviews && settings.allowSubmit}
+            disabled={!settings.showReviews || Boolean(settingsSaving.allowSubmit)}
+            onCheckedChange={(value) => void updateSetting("allowSubmit", value)}
+          />
+        </div>
+      </section>
 
       {listError ? <p className="mb-4 text-sm text-destructive">{listError}</p> : null}
 

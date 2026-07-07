@@ -9,7 +9,8 @@ import type { Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 import { parseWhyUsContent, pickMetaString, pickText } from "@/lib/landing-section-parsers";
-import type { SiteReviewPublic } from "@/lib/site-reviews";
+import { SubmitReviewModal } from "@/components/landing/submit-review-modal";
+import type { SiteReviewPublic, SiteReviewsSettings } from "@/lib/site-reviews";
 
 const defaultContent = {
   en: {
@@ -112,16 +113,17 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
   const [userReviews, setUserReviews] = useState<SiteReviewPublic[]>([]);
+  const [reviewSettings, setReviewSettings] = useState<SiteReviewsSettings | null>(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
-
 
   useEffect(() => {
     let cancelled = false;
 
-    fetch("/api/reviews")
+    fetch("/api/reviews", { cache: "no-store" })
       .then((response) => (response.ok ? response.json() : null))
-      .then((data: { reviews?: SiteReviewPublic[] } | null) => {
+      .then((data: { reviews?: SiteReviewPublic[]; settings?: SiteReviewsSettings } | null) => {
         if (cancelled) return;
+        setReviewSettings(data?.settings ?? { showReviews: true, allowSubmit: true });
         setUserReviews(data?.reviews ?? []);
       })
       .catch(() => {
@@ -244,9 +246,16 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
           ))}
         </div>
 
+        {reviewSettings?.showReviews ? (
         <div className="mx-auto w-full">
           <div className="why-us-reviews-head mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h3 className="why-us-reviews-title text-xl font-bold text-foreground">{section.carouselTitle}</h3>
+            {reviewSettings.allowSubmit ? (
+              <SubmitReviewModal
+                locale={locale}
+                onPublished={(review) => setUserReviews((prev) => [review, ...prev])}
+              />
+            ) : null}
           </div>
 
           {reviewsLoading ? (
@@ -320,6 +329,7 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
           </div>
           )}
         </div>
+        ) : null}
       </div>
     </section>
   );

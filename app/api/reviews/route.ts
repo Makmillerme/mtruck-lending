@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { z } from "zod";
-import { createSiteReview, listApprovedSiteReviews } from "@/lib/site-reviews";
+import {
+  createSiteReview,
+  getSiteReviewsSettings,
+  listApprovedSiteReviews,
+} from "@/lib/site-reviews";
 import { consumeRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -30,8 +34,12 @@ function getClientIp(forwardedFor: string | null, realIp: string | null): string
 
 export async function GET() {
   try {
-    const reviews = await listApprovedSiteReviews();
-    return NextResponse.json({ reviews });
+    const settings = await getSiteReviewsSettings();
+    const reviews = settings.showReviews ? await listApprovedSiteReviews() : [];
+    return NextResponse.json(
+      { settings, reviews },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch (error) {
     console.error("Reviews GET failed", error);
     return NextResponse.json({ error: "Unable to load reviews" }, { status: 500 });
@@ -49,6 +57,11 @@ export async function POST(request: Request) {
 
     if (parsed.data.website) {
       return NextResponse.json({ success: true });
+    }
+
+    const settings = await getSiteReviewsSettings();
+    if (!settings.showReviews || !settings.allowSubmit) {
+      return NextResponse.json({ error: "Review submissions are disabled" }, { status: 403 });
     }
 
     const reqHeaders = await headers();

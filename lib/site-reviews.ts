@@ -18,9 +18,28 @@ export type SiteReviewRecord = {
 
 export type SiteReviewPublic = Omit<SiteReviewRecord, "status">;
 
+export type SiteReviewsSettings = {
+  showReviews: boolean;
+  allowSubmit: boolean;
+};
+
+export type UpdateSiteReviewsSettingsInput = Partial<SiteReviewsSettings>;
+
 type ReviewsFile = {
+  settings?: Partial<SiteReviewsSettings>;
   reviews: SiteReviewRecord[];
 };
+
+const DEFAULT_SETTINGS: SiteReviewsSettings = {
+  showReviews: true,
+  allowSubmit: true,
+};
+
+function normalizeSettings(value: Partial<SiteReviewsSettings> | undefined): SiteReviewsSettings {
+  const showReviews = value?.showReviews !== false;
+  const allowSubmit = showReviews && value?.allowSubmit !== false;
+  return { showReviews, allowSubmit };
+}
 
 const REVIEWS_FILE = path.join(process.cwd(), "data", "site-reviews.json");
 
@@ -34,11 +53,14 @@ async function readReviewsFile(): Promise<ReviewsFile> {
   try {
     const raw = await fs.readFile(REVIEWS_FILE, "utf8");
     const parsed: unknown = JSON.parse(raw);
-    if (!isReviewsFile(parsed)) return { reviews: [] };
-    return parsed;
+    if (!isReviewsFile(parsed)) return { settings: DEFAULT_SETTINGS, reviews: [] };
+    return {
+      settings: normalizeSettings(parsed.settings),
+      reviews: parsed.reviews,
+    };
   } catch (error) {
     const code = (error as NodeJS.ErrnoException).code;
-    if (code === "ENOENT") return { reviews: [] };
+    if (code === "ENOENT") return { settings: DEFAULT_SETTINGS, reviews: [] };
     throw error;
   }
 }
@@ -61,6 +83,26 @@ export function toPublicReview(review: SiteReviewRecord): SiteReviewPublic {
     rating: review.rating,
     createdAt: review.createdAt,
   };
+}
+
+export async function getSiteReviewsSettings(): Promise<SiteReviewsSettings> {
+  const file = await readReviewsFile();
+  return normalizeSettings(file.settings);
+}
+
+export async function updateSiteReviewsSettings(
+  input: UpdateSiteReviewsSettingsInput,
+): Promise<SiteReviewsSettings> {
+  const file = await readReviewsFile();
+  const merged = { ...file.settings, ...input };
+  if (input.allowSubmit === true && merged.showReviews === false) {
+    throw new Error("allowSubmit requires showReviews");
+  }
+  const next = normalizeSettings(
+    merged.showReviews === false ? { ...merged, allowSubmit: false } : merged,
+  );
+  await writeReviewsFile({ ...file, settings: next });
+  return next;
 }
 
 export async function listApprovedSiteReviews(): Promise<SiteReviewPublic[]> {
