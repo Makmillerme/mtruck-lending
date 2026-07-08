@@ -69,7 +69,8 @@ export default async function RootLayout({
       <body className={`${inter.variable} ${inter.className} antialiased`}>
         <LocaleProvider initialLocale={initialLocale}>
           {children}
-          {process.env.NODE_ENV === 'production' && <Analytics />}
+          {/* Vercel Analytics only on Vercel; self-hosted Docker has no /_vercel/insights */}
+          {process.env.VERCEL === "1" && <Analytics />}
         </LocaleProvider>
       </body>
     </html>

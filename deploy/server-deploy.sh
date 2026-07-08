@@ -54,6 +54,10 @@ deploy() {
   fi
 
   mkdir -p data
+  # Container runs as nextjs (uid 1001); host-mounted data must be writable.
+  chown -R 1001:1001 "${APP_DIR}/data" || {
+    log "WARN: could not chown data/ to 1001 — reviews settings writes may fail with EACCES"
+  }
 
   log "Pulling image and starting container"
   docker compose -f "${COMPOSE_FILE}" pull

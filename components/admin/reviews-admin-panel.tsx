@@ -22,6 +22,18 @@ const statusLabel: Record<SiteReviewStatus, string> = {
   pending: "Очікує",
 };
 
+/** Fixed timezone so SSR (UTC container) and browser render the same string (avoids React #418). */
+function formatReviewDate(iso: string): string {
+  return new Date(iso).toLocaleString("uk-UA", {
+    timeZone: "Europe/Kyiv",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 interface ReviewsAdminPanelProps {
   initialAuthenticated: boolean;
   initialReviews: SiteReviewRecord[];
@@ -476,7 +488,7 @@ export function ReviewsAdminPanel({
                   </div>
                   <p className="admin-reviews-review-quote">&ldquo;{review.quote}&rdquo;</p>
                   <time className="admin-reviews-review-date" dateTime={review.createdAt}>
-                    {new Date(review.createdAt).toLocaleString("uk-UA")}
+                    {formatReviewDate(review.createdAt)}
                   </time>
                 </div>
                 <div className="admin-reviews-review-actions">

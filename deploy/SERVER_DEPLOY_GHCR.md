@@ -26,6 +26,9 @@ cp .env.example .env
 
 # Reviews are stored in data/site-reviews.json (mounted into the container).
 # After git pull, ensure data/ exists; seed file is committed in the repo.
+# Container runs as uid 1001 (nextjs) — host data/ must be writable:
+#   chown -R 1001:1001 /root/apps/mtrucklending/data
+# (server-deploy.sh does this automatically.)
 mkdir -p data
 ```
 
