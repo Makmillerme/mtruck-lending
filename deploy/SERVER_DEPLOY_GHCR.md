@@ -19,7 +19,10 @@ cd /root/apps/mtrucklending
 git clone https://github.com/Makmillerme/mtruck-lending.git .
 
 cp .env.example .env
-# edit .env — SMTP, CTA_RECEIVER_EMAIL, REVIEWS_ADMIN_PASSWORD
+# edit .env — SMTP, CTA_RECEIVER_EMAIL, REVIEWS_ADMIN_PASSWORD (min. 8 chars)
+
+# Or sync secrets from your Windows machine (recommended — .env is gitignored):
+# powershell -ExecutionPolicy Bypass -File deploy/sync-env-to-server.ps1
 
 # Reviews are stored in data/site-reviews.json (mounted into the container).
 # After git pull, ensure data/ exists; seed file is committed in the repo.
@@ -46,7 +49,10 @@ App listens on host **3002** → container 3000.
 ## Reviews (JSON)
 
 - Public list: `GET /api/reviews`
-- Admin UI: `/admin/reviews` (password from `REVIEWS_ADMIN_PASSWORD`)
+- Admin UI: `/admin/reviews` (password from `REVIEWS_ADMIN_PASSWORD` in server `.env`)
+- `REVIEWS_ADMIN_PASSWORD` is **required**; without it login returns HTTP 503
+- Session cookie uses `COOKIE_SECURE=false` by default so login works over `http://IP:3002`
+- Do **not** commit `.env` to git; sync with `deploy/sync-env-to-server.ps1` before/after deploy
 - Persistence: host directory `./data` is mounted to `/app/data` in the container
 - Edits from admin or new submissions update `data/site-reviews.json` on the server
 

@@ -31,10 +31,29 @@ deploy() {
   git pull --ff-only
 
   if [ ! -f .env ]; then
-    log "Missing .env — copy from .env.example and fill SMTP settings"
+    log "Missing .env — copy from .env.example and fill SMTP + REVIEWS_ADMIN_PASSWORD"
     cp .env.example .env
     exit 1
   fi
+
+  if ! grep -qE '^[[:space:]]*REVIEWS_ADMIN_PASSWORD=' .env; then
+    log "ERROR: REVIEWS_ADMIN_PASSWORD is missing in .env — admin login at /admin/reviews will fail (HTTP 503)"
+    log "Add: REVIEWS_ADMIN_PASSWORD=your-password-min-8-chars"
+    exit 1
+  fi
+
+  ADMIN_PASS_RAW="$(grep -E '^[[:space:]]*REVIEWS_ADMIN_PASSWORD=' .env | head -n1 | cut -d= -f2-)"
+  ADMIN_PASS_STRIPPED="${ADMIN_PASS_RAW%\"}"
+  ADMIN_PASS_STRIPPED="${ADMIN_PASS_STRIPPED#\"}"
+  ADMIN_PASS_STRIPPED="${ADMIN_PASS_STRIPPED%\'}"
+  ADMIN_PASS_STRIPPED="${ADMIN_PASS_STRIPPED#\'}"
+  ADMIN_PASS_STRIPPED="$(printf '%s' "${ADMIN_PASS_STRIPPED}" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+  if [ "${#ADMIN_PASS_STRIPPED}" -lt 8 ]; then
+    log "ERROR: REVIEWS_ADMIN_PASSWORD must be at least 8 characters"
+    exit 1
+  fi
+
+  mkdir -p data
 
   log "Pulling image and starting container"
   docker compose -f "${COMPOSE_FILE}" pull

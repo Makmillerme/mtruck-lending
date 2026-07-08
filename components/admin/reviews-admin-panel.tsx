@@ -144,6 +144,13 @@ export function ReviewsAdminPanel({
       });
       const data = (await response.json()) as { error?: string };
       if (!response.ok) {
+        if (response.status === 503) {
+          setLoginError(
+            data.error ||
+              "На сервері не налаштовано REVIEWS_ADMIN_PASSWORD у .env (мін. 8 символів).",
+          );
+          return;
+        }
         setLoginError(data.error || "Невірний пароль");
         return;
       }

@@ -17,7 +17,10 @@ const loginSchema = z.object({
 export async function POST(request: Request) {
   if (!isReviewsAdminConfigured()) {
     return NextResponse.json(
-      { error: "Admin access is not configured. Set REVIEWS_ADMIN_PASSWORD in .env" },
+      {
+        error:
+          "REVIEWS_ADMIN_PASSWORD is missing or shorter than 8 characters in server .env. Restart the container after updating .env.",
+      },
       { status: 503 },
     );
   }
