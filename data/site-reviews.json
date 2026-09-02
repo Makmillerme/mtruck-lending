@@ -1,7 +1,7 @@
 {
   "settings": {
-    "showReviews": true,
-    "allowSubmit": true
+    "showReviews": false,
+    "allowSubmit": false
   },
   "reviews": [
     {

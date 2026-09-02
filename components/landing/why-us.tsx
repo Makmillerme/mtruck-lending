@@ -141,7 +141,7 @@ export function WhyUs({ locale, metaContent }: WhyUsProps) {
       .then((response) => (response.ok ? response.json() : null))
       .then((data: { reviews?: SiteReviewPublic[]; settings?: SiteReviewsSettings } | null) => {
         if (cancelled) return;
-        setReviewSettings(data?.settings ?? { showReviews: true, allowSubmit: true });
+        setReviewSettings(data?.settings ?? { showReviews: false, allowSubmit: false });
         setUserReviews(data?.reviews ?? []);
       })
       .catch(() => {

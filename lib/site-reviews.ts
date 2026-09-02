@@ -31,13 +31,13 @@ type ReviewsFile = {
 };
 
 const DEFAULT_SETTINGS: SiteReviewsSettings = {
-  showReviews: true,
-  allowSubmit: true,
+  showReviews: false,
+  allowSubmit: false,
 };
 
 function normalizeSettings(value: Partial<SiteReviewsSettings> | undefined): SiteReviewsSettings {
-  const showReviews = value?.showReviews !== false;
-  const allowSubmit = showReviews && value?.allowSubmit !== false;
+  const showReviews = value?.showReviews === true;
+  const allowSubmit = showReviews && value?.allowSubmit === true;
   return { showReviews, allowSubmit };
 }
 

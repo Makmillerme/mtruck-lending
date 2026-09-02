@@ -82,7 +82,7 @@ export function Hero({ locale, onNavigate, contactEmail, contactPhone, sectionCo
   };
 
   return (
-    <section id="home" className="relative section-seam-accent section-seam-full-width">
+    <section id="home" className="relative section-seam-accent">
       <div className="hero-shell relative overflow-hidden">
         <div className="hero-bg-layer" aria-hidden="true">
           <picture className="absolute inset-0 block">

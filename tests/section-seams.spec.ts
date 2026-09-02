@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 const seamSections = ["#home", "#about", "#services", "#catalog", "#why-us", "#faq"];
-const fullWidthSeams = new Set(["#home"]);
 
 test.describe("Section seam accents", () => {
   test.beforeEach(({ }, testInfo) => {
@@ -11,8 +10,7 @@ test.describe("Section seam accents", () => {
   test("each section has one bottom seam pseudo with taper and sweep animation", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 
-    const viewportWidth = page.viewportSize()?.width ?? 1280;
-
+    const seams = [];
     for (const selector of seamSections) {
       const seam = await page.evaluate((sectionSelector) => {
         const section = document.querySelector(sectionSelector) as HTMLElement | null;
@@ -29,6 +27,7 @@ test.describe("Section seam accents", () => {
           animationName: beforeStyle.animationName,
           width: beforeStyle.width,
           height: beforeStyle.height,
+          opacity: beforeStyle.opacity,
           hasClass: section.classList.contains("section-seam-accent"),
         };
       }, selector);
@@ -46,14 +45,16 @@ test.describe("Section seam accents", () => {
       }
       expect(seam!.bottom).toBe("0px");
       expect(seam!.animationName).toBe("seamGlowSweep");
-      expect(parseFloat(seam!.height)).toBeLessThanOrEqual(3);
+      expect(parseFloat(seam!.height)).toBe(2);
+      expect(seam!.opacity).toBe("1");
+      expect(seam!.maskImage).toContain("radial-gradient");
+      seams.push(seam!);
+    }
 
-      if (fullWidthSeams.has(selector)) {
-        expect(seam!.maskImage).toContain("radial-gradient");
-        expect(parseFloat(seam!.width)).toBeGreaterThanOrEqual(viewportWidth - 2);
-      } else {
-        expect(seam!.maskImage).toContain("radial-gradient");
-      }
+    const widths = seams.map((seam) => parseFloat(seam.width));
+    const baseline = widths[0];
+    for (const width of widths) {
+      expect(Math.abs(width - baseline)).toBeLessThanOrEqual(2);
     }
   });
 
