@@ -8,6 +8,29 @@ export type SiteMetadataEntry = {
   keywords: string[];
 };
 
+const DEFAULT_SITE_ORIGIN = "https://experttravelsro.com";
+
+/** Absolute site origin without www or trailing slash. */
+export function siteOrigin(): string {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+    process.env.SITE_URL?.trim() ||
+    DEFAULT_SITE_ORIGIN;
+  try {
+    const url = new URL(raw.includes("://") ? raw : `https://${raw}`);
+    const host = url.hostname.replace(/^www\./i, "");
+    return `${url.protocol}//${host}`;
+  } catch {
+    return DEFAULT_SITE_ORIGIN;
+  }
+}
+
+export function absoluteUrlForLocale(locale: PublicLocale): string {
+  const path = pathForLocale(locale);
+  const origin = siteOrigin();
+  return path === "/" ? `${origin}/` : `${origin}${path}`;
+}
+
 export const SITE_METADATA: Record<Locale, SiteMetadataEntry> = {
   en: {
     title: "Expert Travel | Commercial Transport Partner",
@@ -44,19 +67,18 @@ export const SITE_METADATA: Record<Locale, SiteMetadataEntry> = {
 export function metadataAlternatesForLocale(locale: PublicLocale): NonNullable<Metadata["alternates"]> {
   const languages: Record<string, string> = {};
   for (const loc of PUBLIC_LOCALES) {
-    languages[loc] = pathForLocale(loc);
+    languages[loc] = absoluteUrlForLocale(loc);
   }
+  languages["x-default"] = absoluteUrlForLocale(DEFAULT_PUBLIC_LOCALE);
   return {
-    canonical: pathForLocale(locale),
+    canonical: absoluteUrlForLocale(locale),
     languages,
   };
 }
 
+/** Title/description/icons only — canonical/hreflang live on `[locale]` page metadata. */
 export function metadataForLocale(locale: Locale): Metadata {
   const entry = SITE_METADATA[locale] ?? SITE_METADATA.en;
-  const publicLocale = PUBLIC_LOCALES.includes(locale as PublicLocale)
-    ? (locale as PublicLocale)
-    : DEFAULT_PUBLIC_LOCALE;
   return {
     title: entry.title,
     description: entry.description,
@@ -65,6 +87,5 @@ export function metadataForLocale(locale: Locale): Metadata {
       icon: "/favicon.png",
       apple: "/favicon.png",
     },
-    alternates: metadataAlternatesForLocale(publicLocale),
   };
 }

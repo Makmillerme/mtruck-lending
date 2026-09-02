@@ -5,7 +5,7 @@ import { headers } from 'next/headers'
 import { LocaleProvider } from '@/lib/locale-context'
 import { DEFAULT_PUBLIC_LOCALE, PUBLIC_LOCALES, type Locale, type PublicLocale } from '@/lib/locale'
 import { LOCALE_HEADER } from '@/lib/locale-path'
-import { metadataForLocale } from '@/lib/site-metadata'
+import { metadataForLocale, siteOrigin } from '@/lib/site-metadata'
 import './globals.css'
 import './safari-fallback.css'
 
@@ -46,7 +46,10 @@ async function getRequestLocale(): Promise<PublicLocale> {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getRequestLocale()
-  return metadataForLocale(locale)
+  return {
+    metadataBase: new URL(siteOrigin()),
+    ...metadataForLocale(locale),
+  }
 }
 
 export const viewport: Viewport = {

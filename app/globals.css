@@ -1511,33 +1511,27 @@ body.react-remove-scroll-bar {
 }
 
 .footer-contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  justify-content: center;
+  display: block;
+  width: 100%;
+  max-width: 20rem;
   font-size: 0.875rem;
   line-height: 1.4;
   color: oklch(0.88 0.02 248 / 0.78);
   text-align: center;
+  text-wrap: pretty;
 }
 
 .footer-contact-item--multiline {
-  display: inline-flex;
-  width: fit-content;
-  max-width: 100%;
-  align-items: flex-start;
-  text-align: left;
+  max-width: 20rem;
 }
 
 .footer-contact-icon {
+  display: inline;
   height: 1rem;
   width: 1rem;
-  flex-shrink: 0;
+  margin-inline-end: 0.4rem;
+  vertical-align: -0.15em;
   color: oklch(0.82 0.1 220);
-}
-
-.footer-contact-item--multiline .footer-contact-icon {
-  margin-top: 0.125rem;
 }
 
 .footer-main-grid {
@@ -1632,13 +1626,15 @@ body.react-remove-scroll-bar {
   justify-content: center;
 }
 
+/* Contact rows: icon + text as one centered inline flow (mobile). */
 .footer-contact-list {
   margin-top: 0.85rem;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.65rem;
   width: 100%;
-  max-width: 20rem;
+  margin-inline: auto;
 }
 
 .footer-legal-row {
@@ -1725,7 +1721,8 @@ body.react-remove-scroll-bar {
   }
 
   .footer-contact-list {
-    justify-items: start;
+    align-items: flex-start;
+    width: 100%;
   }
 
   .footer-brand-logo-box {
@@ -1751,7 +1748,6 @@ body.react-remove-scroll-bar {
   }
 
   .footer-contact-item {
-    justify-content: flex-start;
     text-align: left;
   }
 
