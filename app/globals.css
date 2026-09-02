@@ -2306,23 +2306,23 @@ body.react-remove-scroll-bar {
 
 .about-stats-strip-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(8rem, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
-  width: min(100%, 22rem);
+  width: 100%;
   min-height: 5rem;
-  margin-inline: auto;
   padding: 0.95rem clamp(0.875rem, 2vw, 1.25rem);
 }
 
 .about-stats-strip-item {
   display: flex;
+  width: 100%;
   min-width: 0;
   min-height: 3.25rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.125rem clamp(0.75rem, 2vw, 1.1rem);
+  padding: 0.125rem clamp(0.5rem, 1.5vw, 0.75rem);
   text-align: center;
 }
 
@@ -2350,7 +2350,6 @@ body.react-remove-scroll-bar {
 
 @media (max-width: 1023px) {
   .about-stats-strip-grid {
-    width: min(100%, 24rem);
     min-height: 5.25rem;
     padding: 1rem;
   }
@@ -2360,7 +2359,6 @@ body.react-remove-scroll-bar {
   .about-stats-strip-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
-    max-width: 20rem;
     min-height: 4.75rem;
     padding: 0.85rem 0.75rem;
   }
