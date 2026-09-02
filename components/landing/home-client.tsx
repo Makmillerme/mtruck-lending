@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocale } from "@/lib/locale-context";
 import { Header } from "@/components/landing/header";
 import { Hero } from "@/components/landing/hero";
@@ -25,7 +25,7 @@ export function HomeClient({ initialData, sectionOrder }: HomeClientProps) {
   const data = initialData;
   const contentLocale = locale as Locale;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (window.location.hash) return;
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);

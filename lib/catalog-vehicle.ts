@@ -22,10 +22,12 @@ export type CatalogVehicleRecord = {
   tagUk: string | null;
   tagSk?: string | null;
   tagDe?: string | null;
+  tagPl?: string | null;
   descriptionEn: string | null;
   descriptionUk: string | null;
   descriptionSk?: string | null;
   descriptionDe?: string | null;
+  descriptionPl?: string | null;
   catalogMeta: unknown;
   orderIndex?: number;
 };
@@ -57,6 +59,7 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
     uk: vehicle.tagUk,
     sk: vehicle.tagSk,
     de: vehicle.tagDe,
+    pl: vehicle.tagPl,
   });
 
   const overview = pickEntityLocale(locale, {
@@ -64,6 +67,7 @@ export function vehicleToCatalogBrandCard(vehicle: CatalogVehicleRecord, locale:
     uk: vehicle.descriptionUk,
     sk: vehicle.descriptionSk,
     de: vehicle.descriptionDe,
+    pl: vehicle.descriptionPl,
   });
 
   const staticBrand = getCatalogBrandByName(vehicle.brand);

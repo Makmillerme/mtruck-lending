@@ -4,9 +4,10 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import {
   LOCALE_COOKIE,
   localeCookieHeaderValue,
-  parseLocaleCookie,
 } from "@/lib/locale-cookie";
 import type { PublicLocale } from "@/lib/locale";
+import { localeFromPathname, pathForLocale } from "@/lib/locale-path";
+import { SITE_METADATA } from "@/lib/site-metadata";
 
 export type { PublicLocale as Locale };
 
@@ -17,22 +18,15 @@ interface LocaleContextType {
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
-function readCookieLocale(): PublicLocale | null {
-  if (typeof document === "undefined") return null;
-
-  const match = document.cookie
-    .split(";")
-    .map((part) => part.trim())
-    .find((part) => part.startsWith(`${LOCALE_COOKIE}=`));
-
-  if (!match) return null;
-  return parseLocaleCookie(match.slice(LOCALE_COOKIE.length + 1));
+function syncDocumentTitle(next: PublicLocale) {
+  document.title = SITE_METADATA[next]?.title ?? SITE_METADATA.en.title;
 }
 
 function persistLocale(next: PublicLocale) {
   document.cookie = localeCookieHeaderValue(next);
   localStorage.setItem(LOCALE_COOKIE, next);
   document.documentElement.lang = next;
+  syncDocumentTitle(next);
 }
 
 export function LocaleProvider({
@@ -45,29 +39,21 @@ export function LocaleProvider({
   const [locale, setLocaleState] = useState<PublicLocale>(initialLocale);
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
+    const onPopState = () => {
+      const urlLocale = localeFromPathname(window.location.pathname);
+      setLocaleState(urlLocale);
+      persistLocale(urlLocale);
+    };
 
-  useEffect(() => {
-    const cookieLocale = readCookieLocale();
-    if (cookieLocale) {
-      localStorage.setItem(LOCALE_COOKIE, cookieLocale);
-      return;
-    }
-
-    const saved = parseLocaleCookie(localStorage.getItem(LOCALE_COOKIE));
-    if (saved) {
-      requestAnimationFrame(() => {
-        setLocaleState(saved);
-        persistLocale(saved);
-      });
-      return;
-    }
-
-    persistLocale(initialLocale);
-  }, [initialLocale]);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   const setLocale = (next: PublicLocale) => {
+    if (next === locale) return;
+
+    const target = `${pathForLocale(next)}${window.location.hash}`;
+    window.history.replaceState(window.history.state, "", target);
     setLocaleState(next);
     persistLocale(next);
   };

@@ -85,6 +85,23 @@ const copy = {
     pending: "Vielen Dank! Ihre Bewertung wurde empfangen und erscheint nach Freigabe.",
     errorFallback: "Bewertung konnte nicht gespeichert werden. Bitte später erneut versuchen.",
   },
+  pl: {
+    trigger: "Dodaj opinię",
+    title: "Podziel się doświadczeniem",
+    description:
+      "Opinia jest zapisywana w języku, w którym ją piszesz, i wyświetlana innym odwiedzającym bez tłumaczenia.",
+    fields: { author: "Twoje imię", company: "Firma (opcjonalnie)", quote: "Twoja opinia", rating: "Ocena" },
+    placeholders: {
+      author: "Jan Kowalski",
+      company: "TransCargo s.r.o.",
+      quote: "Opisz zakup lub współpracę z Expert Travel...",
+    },
+    submit: "Opublikuj opinię",
+    submitting: "Publikowanie...",
+    success: "Dziękujemy! Twoja opinia została opublikowana.",
+    pending: "Dziękujemy! Opinia została przyjęta — pojawi się po moderacji.",
+    errorFallback: "Nie udało się zapisać opinii. Spróbuj ponownie później.",
+  },
 } as const;
 
 interface SubmitReviewModalProps {

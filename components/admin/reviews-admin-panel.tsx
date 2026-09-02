@@ -15,7 +15,7 @@ import type { SiteReviewRecord, SiteReviewsSettings, SiteReviewStatus } from "@/
 import type { Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
-const LOCALES: Locale[] = ["uk", "sk", "en", "de"];
+const LOCALES: Locale[] = ["uk", "sk", "en", "de", "pl"];
 
 const statusLabel: Record<SiteReviewStatus, string> = {
   approved: "Опубліковано",

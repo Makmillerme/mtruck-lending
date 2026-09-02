@@ -21,10 +21,12 @@ export type LandingBundle = {
     titleUk: string | null;
     titleSk?: string | null;
     titleDe?: string | null;
+    titlePl?: string | null;
     descriptionEn: string;
     descriptionUk: string | null;
     descriptionSk?: string | null;
     descriptionDe?: string | null;
+    descriptionPl?: string | null;
     icon: string;
     orderIndex: number;
   }>;
@@ -37,10 +39,12 @@ export type LandingBundle = {
     tagUk: string | null;
     tagSk?: string | null;
     tagDe?: string | null;
+    tagPl?: string | null;
     descriptionEn: string | null;
     descriptionUk: string | null;
     descriptionSk?: string | null;
     descriptionDe?: string | null;
+    descriptionPl?: string | null;
     catalogMeta: unknown;
     orderIndex: number;
   }>;
@@ -50,10 +54,12 @@ export type LandingBundle = {
     questionUk: string | null;
     questionSk?: string | null;
     questionDe?: string | null;
+    questionPl?: string | null;
     answerEn: string;
     answerUk: string | null;
     answerSk?: string | null;
     answerDe?: string | null;
+    answerPl?: string | null;
     orderIndex: number;
   }>;
   contact: {
@@ -63,10 +69,12 @@ export type LandingBundle = {
     addressUk: string | null;
     addressSk?: string | null;
     addressDe?: string | null;
+    addressPl?: string | null;
     workingHoursEn: string | null;
     workingHoursUk: string | null;
     workingHoursSk?: string | null;
     workingHoursDe?: string | null;
+    workingHoursPl?: string | null;
     socialLinks: Record<string, unknown>;
   };
   stats: Array<{
@@ -77,6 +85,7 @@ export type LandingBundle = {
     labelUk: string;
     labelSk?: string;
     labelDe?: string;
+    labelPl?: string;
     orderIndex: number;
   }>;
 };
@@ -129,6 +138,15 @@ const nav = {
     { name: "FAQ", id: "faq" },
     { name: "Kontakt", id: "contact" },
   ],
+  pl: [
+    { name: "Strona główna", id: "home" },
+    { name: "O nas", id: "about" },
+    { name: "Usługi", id: "services" },
+    { name: "Katalog", id: "catalog" },
+    { name: "Dlaczego my", id: "why-us" },
+    { name: "FAQ", id: "faq" },
+    { name: "Kontakt", id: "contact" },
+  ],
 } as const;
 
 const content: LandingBundle["content"] = {
@@ -137,6 +155,7 @@ const content: LandingBundle["content"] = {
     uk: { navigation: nav.uk, ctaText: "Зв'язатися", logo: { src: "/expert-travel.png", alt: "Expert Travel logo" } },
     sk: { navigation: nav.sk, ctaText: "Odoslať dopyt", logo: { src: "/expert-travel.png", alt: "Logo Expert Travel" } },
     de: { navigation: nav.de, ctaText: "Anfrage senden", logo: { src: "/expert-travel.png", alt: "Expert Travel Logo" } },
+    pl: { navigation: nav.pl, ctaText: "Wyślij zapytanie", logo: { src: "/expert-travel.png", alt: "Logo Expert Travel" } },
   },
   hero: {
     en: {
@@ -178,6 +197,16 @@ const content: LandingBundle["content"] = {
         "Wir arbeiten mit Käufern und Verkäufern von gewerblichem Transport. Offen für Partnerschaften mit Unternehmen, Händlern und Fahrzeugeigentümern.",
       cta: "Angebote ansehen",
       secondary: "Anfrage senden",
+    },
+    pl: {
+      badge: "Europejska jakość",
+      title: "Expert Travel",
+      titleHighlight: "handel międzynarodowy",
+      subtitle: "transportem komercyjnym",
+      description:
+        "Współpracujemy z kupującymi i sprzedającymi transportem komercyjnym. Otwarci na partnerstwo z firmami, dealerami i właścicielami pojazdów.",
+      cta: "Zobacz oferty",
+      secondary: "Wyślij zapytanie",
     },
   },
   about: {
@@ -251,6 +280,24 @@ const content: LandingBundle["content"] = {
         { icon: "Globe2", title: "Internationaler Handel", description: "Zusammenarbeit mit Käufern, Verkäufern und Händlern von gewerblichem Transport" },
         { icon: "Truck", title: "Logistikkoordination", description: "Wir koordinieren Übergabe und Lieferung von gewerblichem Transport im Rahmen vereinbarter Geschäfte" },
         { icon: "Shield", title: "Begleitung der Zusammenarbeit", description: "Wir helfen, die wichtigsten Phasen der Zusammenarbeit, Kommunikation und Fahrzeugübergabe abzustimmen" },
+      ],
+    },
+    pl: {
+      badge: "O nas",
+      title: "Expert Travel s.r.o. — partner na",
+      titleHighlight: "europejskim rynku transportu",
+      description:
+        "Expert Travel s.r.o. to słowacka firma specjalizująca się w międzynarodowym handlu ciężarówkami, naczepami i transportem komercyjnym. Zapewniamy pełny cykl współpracy B2B dla firm i partnerów.",
+      description2: "",
+      aboutImageAlt: "Ciężarówka komercyjna z neonowym podświetleniem",
+      bridgeTitle: "Jak pracujemy",
+      imageCallouts: ["Zapytanie partnerskie", "Warunki handlowe", "Koordynacja zapytania", "Przekazanie pojazdu"],
+      importChain: ["Zapytanie partnerskie", "Warunki handlowe", "Koordynacja", "Przekazanie pojazdu"],
+      features: [
+        { icon: "MapPin", title: "Siedziba na Słowacji", description: "Na Troskách 12, 974 01 Banská Bystrica, Słowacja" },
+        { icon: "Globe2", title: "Handel międzynarodowy", description: "Współpraca z kupującymi, sprzedającymi i dealerami transportu komercyjnego" },
+        { icon: "Truck", title: "Koordynacja logistyki", description: "Koordynujemy przekazanie i dostawę transportu komercyjnego w ramach uzgodnionych ustaleń" },
+        { icon: "Shield", title: "Wsparcie współpracy", description: "Pomagamy uzgodnić główne etapy współpracy, komunikacji i przekazania pojazdu" },
       ],
     },
   },
@@ -363,6 +410,22 @@ const content: LandingBundle["content"] = {
         { title: "Koordination der Übergabe", description: "Wir koordinieren die finale Phase, damit das Fahrzeug von der Vereinbarung an Partner oder Kunden übergeben wird." },
       ],
     },
+    pl: {
+      badge: "Dlaczego my",
+      title: "Przewaga",
+      titleHighlight: "Expert Travel",
+      description:
+        "Przejrzysty proces biznesowy dla firm, sprzedawców, dealerów i partnerów w transporcie komercyjnym.",
+      carouselTitle: "Opinie klientów",
+      reasons: [
+        { title: "Obecność na rynku UE", description: "Działamy na europejskim rynku transportu komercyjnego i pomagamy stronom uzgodnić format współpracy." },
+        { title: "Transparentna współpraca", description: "Proces utrzymujemy przejrzysty od pierwszego zapytania przez uzgodnione warunki aż po przekazanie pojazdu." },
+        { title: "Podejście biznesowe", description: "Przygotowujemy opcje współpracy według zapytania firmy, typu pojazdu i praktycznych warunków transakcji." },
+        { title: "Sieć partnerów", description: "Współpracujemy z kupującymi, sprzedającymi, dealerami i właścicielami transportu komercyjnego na różnych rynkach." },
+        { title: "Jasna komunikacja", description: "Pomagamy stronom uzgodnić oczekiwania, kluczowe warunki i kolejne kroki bez zbędnej złożoności." },
+        { title: "Koordynacja przekazania", description: "Koordynujemy etap końcowy, aby pojazd przeszedł od ustaleń do partnera lub klienta." },
+      ],
+    },
   },
   "services-meta": {
     en: {
@@ -396,6 +459,14 @@ const content: LandingBundle["content"] = {
       description:
         "Wir arbeiten mit Unternehmen, Verkäufern, Händlern und Eigentümern von gewerblichem Transport. Wir helfen, die Zusammenarbeit von der ersten Anfrage bis zur Fahrzeugübergabe zu strukturieren.",
       pipeline: ["Anfrage", "Bedingungen", "Begleitung", "Übergabe"],
+    },
+    pl: {
+      badge: "Nasze usługi",
+      title: "Obszary pracy",
+      titleHighlight: "dla partnerów",
+      description:
+        "Współpracujemy z firmami, sprzedawcami, dealerami i właścicielami transportu komercyjnego. Pomagamy ustrukturyzować współpracę od pierwszego zapytania do przekazania pojazdu.",
+      pipeline: ["Zapytanie", "Warunki", "Wsparcie", "Przekazanie"],
     },
   },
   "catalog-meta": {
@@ -447,6 +518,18 @@ const content: LandingBundle["content"] = {
         { icon: "Container", name: "Auflieger", count: "80+", description: "Sattelauflieger", brands: ["Schmitz", "Krone"] },
       ],
     },
+    pl: {
+      badge: "Obszary pracy",
+      title: "Marki, z",
+      titleHighlight: "którymi pracujemy",
+      description:
+        "Współpracujemy z wiodącymi europejskimi markami transportu komercyjnego i pomagamy firmom znaleźć odpowiednie opcje współpracy dla ich floty.",
+      viewDetails: "Wyślij zapytanie",
+      categories: [
+        { icon: "Truck", name: "Ciężarówki", count: "120+", description: "Ciężarówki", brands: ["MAN", "Scania"] },
+        { icon: "Container", name: "Naczepy", count: "80+", description: "Naczepy", brands: ["Schmitz", "Krone"] },
+      ],
+    },
   },
   "faq-meta": {
     en: {
@@ -472,6 +555,12 @@ const content: LandingBundle["content"] = {
       title: "Häufig gestellte",
       titleHighlight: "Fragen",
       description: "Praktische Antworten zu Anfragen, Kooperationsbedingungen und der Zusammenarbeit mit Expert Travel.",
+    },
+    pl: {
+      badge: "FAQ",
+      title: "Najczęściej zadawane",
+      titleHighlight: "pytania",
+      description: "Praktyczne odpowiedzi na temat zapytań, warunków współpracy i współpracy z Expert Travel.",
     },
   },
   footer: {
@@ -507,6 +596,14 @@ const content: LandingBundle["content"] = {
       legal: ["Datenschutz", "Nutzungsbedingungen", "Cookies"],
       brandDescription: "Expert Travel s.r.o. — europäischer B2B-Partner im internationalen Handel mit gewerblichem Transport.",
     },
+    pl: {
+      cta: { title: "Gotowi omówić zapytanie dotyczące transportu komercyjnego?", description: "Opisz trasy, ładowność i budżet — przygotujemy jasne opcje współpracy z praktycznymi warunkami.", button: "Skontaktuj się" },
+      links: { title: "Szybkie linki", items: nav.pl },
+      services: { title: "Usługi" },
+      copyright: "© 2026 Expert Travel s.r.o. · ID 55336574. Wszelkie prawa zastrzeżone.",
+      legal: ["Polityka prywatności", "Regulamin", "Cookies"],
+      brandDescription: "Expert Travel s.r.o. — europejski partner B2B w międzynarodowym handlu transportem komercyjnym.",
+    },
   },
 };
 
@@ -517,6 +614,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Партнерська співпраця",
     titleSk: "Partnerská spolupráca",
     titleDe: "Partnerkooperation",
+    titlePl: "Współpraca partnerska",
     descriptionEn:
       "We work with buyers, sellers, and dealers of commercial transport on the European market.",
     descriptionUk:
@@ -525,6 +623,8 @@ const services: LandingBundle["services"] = [
       "Pracujeme s kupujúcimi, predávajúcimi a dílermi komerčnej dopravy na európskom trhu.",
     descriptionDe:
       "Wir arbeiten mit Käufern, Verkäufern und Händlern von gewerblichem Transport auf dem europäischen Markt.",
+    descriptionPl:
+      "Współpracujemy z kupującymi, sprzedającymi i dealerami transportu komercyjnego na rynku europejskim.",
     icon: "Truck",
     orderIndex: 1,
   },
@@ -534,6 +634,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Комерційні пропозиції",
     titleSk: "Obchodné ponuky",
     titleDe: "Kommerzielle Angebote",
+    titlePl: "Oferty handlowe",
     descriptionEn:
       "We prepare clear cooperation options based on the company request, vehicle type, and deal terms.",
     descriptionUk:
@@ -542,6 +643,8 @@ const services: LandingBundle["services"] = [
       "Pripravujeme jasné možnosti spolupráce podľa dopytu firmy, typu vozidla a podmienok obchodu.",
     descriptionDe:
       "Wir erarbeiten klare Kooperationsoptionen auf Basis der Anfrage, des Fahrzeugtyps und der Geschäftsbedingungen.",
+    descriptionPl:
+      "Przygotowujemy jasne opcje współpracy na podstawie zapytania firmy, typu pojazdu i warunków transakcji.",
     icon: "CreditCard",
     orderIndex: 2,
   },
@@ -551,6 +654,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Координація угоди",
     titleSk: "Koordinácia obchodu",
     titleDe: "Koordination der Vereinbarung",
+    titlePl: "Koordynacja transakcji",
     descriptionEn:
       "We support communication between the parties and help align the main terms of vehicle handover.",
     descriptionUk:
@@ -559,6 +663,8 @@ const services: LandingBundle["services"] = [
       "Podporujeme komunikáciu medzi stranami a pomáhame zladiť hlavné podmienky odovzdania vozidla.",
     descriptionDe:
       "Wir begleiten die Kommunikation zwischen den Parteien und helfen, die wichtigsten Bedingungen der Fahrzeugübergabe abzustimmen.",
+    descriptionPl:
+      "Wspieramy komunikację między stronami i pomagamy uzgodnić główne warunki przekazania pojazdu.",
     icon: "ShieldCheck",
     orderIndex: 3,
   },
@@ -568,6 +674,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Передача транспорту",
     titleSk: "Odovzdanie vozidla",
     titleDe: "Fahrzeugübergabe",
+    titlePl: "Przekazanie pojazdu",
     descriptionEn:
       "We coordinate the final stage of cooperation and the handover of commercial transport to a partner or client.",
     descriptionUk:
@@ -576,6 +683,8 @@ const services: LandingBundle["services"] = [
       "Koordinujeme záverečnú fázu spolupráce a odovzdanie komerčného vozidla partnerovi alebo klientovi.",
     descriptionDe:
       "Wir koordinieren die abschließende Phase der Zusammenarbeit und die Übergabe des gewerblichen Fahrzeugs an Partner oder Kunden.",
+    descriptionPl:
+      "Koordynujemy końcowy etap współpracy i przekazanie pojazdu komercyjnego partnerowi lub klientowi.",
     icon: "MapPin",
     orderIndex: 4,
   },
@@ -585,6 +694,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Ринкова комунікація",
     titleSk: "Trhová komunikácia",
     titleDe: "Marktkommunikation",
+    titlePl: "Komunikacja rynkowa",
     descriptionEn:
       "We help parties exchange key information quickly and move toward a clear business agreement.",
     descriptionUk:
@@ -593,6 +703,8 @@ const services: LandingBundle["services"] = [
       "Pomáhame stranám rýchlo si vymeniť kľúčové informácie a smerovať k jasnej obchodnej dohode.",
     descriptionDe:
       "Wir helfen den Parteien, wichtige Informationen schnell auszutauschen und zu einer klaren geschäftlichen Vereinbarung zu kommen.",
+    descriptionPl:
+      "Pomagamy stronom szybko wymieniać kluczowe informacje i dojść do jasnej umowy handlowej.",
     icon: "FileCheck",
     orderIndex: 5,
   },
@@ -602,6 +714,7 @@ const services: LandingBundle["services"] = [
     titleUk: "Потреби автопарку",
     titleSk: "Potreby flotily",
     titleDe: "Fuhrparkbedarf",
+    titlePl: "Potrzeby floty",
     descriptionEn:
       "We help companies navigate transport options according to fleet tasks, priorities, and available offers.",
     descriptionUk:
@@ -610,6 +723,8 @@ const services: LandingBundle["services"] = [
       "Pomáhame firmám zorientovať sa v možnostiach dopravy podľa úloh flotily, priorít a dostupných ponúk.",
     descriptionDe:
       "Wir helfen Unternehmen, Transportoptionen nach Fuhrparkaufgaben, Prioritäten und verfügbaren Angeboten einzuordnen.",
+    descriptionPl:
+      "Pomagamy firmom orientować się w opcjach transportu według zadań floty, priorytetów i dostępnych ofert.",
     icon: "Wrench",
     orderIndex: 6,
   },
@@ -622,6 +737,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Від чого залежать строки передачі транспорту?",
     questionSk: "Od čoho závisí termín odovzdania vozidla?",
     questionDe: "Wovon hängt der Zeitpunkt der Fahrzeugübergabe ab?",
+    questionPl: "Od czego zależy termin przekazania pojazdu?",
     answerEn:
       "Timing depends on vehicle type, seller location, availability, and the agreed handover format. We discuss a realistic schedule before cooperation starts.",
     answerUk:
@@ -630,6 +746,8 @@ const faqs: LandingBundle["faqs"] = [
       "Termín závisí od typu vozidla, miesta predajcu, dostupnosti techniky a dohodnutého formátu odovzdania. Realistický harmonogram riešime pred začiatkom spolupráce.",
     answerDe:
       "Der Zeitrahmen hängt von Fahrzeugtyp, Standort des Verkäufers, Verfügbarkeit und vereinbartem Übergabeformat ab. Einen realistischen Ablauf klären wir vor Beginn der Zusammenarbeit.",
+    answerPl:
+      "Termin zależy od typu pojazdu, lokalizacji sprzedawcy, dostępności i uzgodnionego formatu przekazania. Realistyczny harmonogram ustalamy przed rozpoczęciem współpracy.",
     orderIndex: 1,
   },
   {
@@ -638,6 +756,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Яку інформацію я отримую до рішення?",
     questionSk: "Aké informácie dostanem pred rozhodnutím?",
     questionDe: "Welche Informationen erhalte ich vor einer Entscheidung?",
+    questionPl: "Jakie informacje otrzymam przed podjęciem decyzji?",
     answerEn:
       "We share the available vehicle information, photos, key parameters, and a clear summary of the cooperation option. If something needs clarification, we say it directly.",
     answerUk:
@@ -646,6 +765,8 @@ const faqs: LandingBundle["faqs"] = [
       "Poskytneme dostupné informácie o vozidle, fotografie, hlavné parametre a jasný opis možnosti spolupráce. Ak niečo treba upresniť, povieme to priamo.",
     answerDe:
       "Wir teilen verfügbare Fahrzeuginformationen, Fotos, zentrale Parameter und eine klare Zusammenfassung der Kooperationsoption. Wenn etwas zu klären ist, sprechen wir es direkt an.",
+    answerPl:
+      "Udostępniamy dostępne informacje o pojeździe, zdjęcia, kluczowe parametry i jasne podsumowanie opcji współpracy. Jeśli coś wymaga doprecyzowania — mówimy o tym wprost.",
     orderIndex: 2,
   },
   {
@@ -654,6 +775,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Чи підберете техніку під профіль нашого автопарку?",
     questionSk: "Viete prispôsobiť vozidlá profilu našej flotily?",
     questionDe: "Können Sie Fahrzeuge an unser Flottenprofil anpassen?",
+    questionPl: "Czy dopasujecie pojazdy do profilu naszej floty?",
     answerEn:
       "Yes. We narrow down options by vehicle type, configuration, intended use, quantity, and budget so the offer fits the company request.",
     answerUk:
@@ -662,6 +784,8 @@ const faqs: LandingBundle["faqs"] = [
       "Áno. Možnosti zužujeme podľa typu vozidla, konfigurácie, účelu, počtu kusov a rozpočtu, aby ponuka zodpovedala dopytu firmy.",
     answerDe:
       "Ja. Wir grenzen Optionen nach Fahrzeugtyp, Konfiguration, Einsatzzweck, Stückzahl und Budget ein, damit das Angebot zur Unternehmensanfrage passt.",
+    answerPl:
+      "Tak. Zawężamy opcje według typu pojazdu, konfiguracji, przeznaczenia, liczby sztuk i budżetu, aby oferta odpowiadała zapytaniu firmy.",
     orderIndex: 3,
   },
   {
@@ -670,6 +794,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Як погоджуються умови співпраці?",
     questionSk: "Ako sa dohadujú podmienky spolupráce?",
     questionDe: "Wie werden Kooperationsbedingungen abgestimmt?",
+    questionPl: "Jak uzgadniane są warunki współpracy?",
     answerEn:
       "We clarify the request, parties involved, vehicle type, budget range, timing, and handover format. After that, we prepare a clear cooperation option.",
     answerUk:
@@ -678,6 +803,8 @@ const faqs: LandingBundle["faqs"] = [
       "Upresníme dopyt, zapojené strany, typ vozidla, rozpočet, termíny a formát odovzdania. Potom pripravíme jasnú možnosť spolupráce.",
     answerDe:
       "Wir klären Anfrage, beteiligte Parteien, Fahrzeugtyp, Budgetrahmen, Zeitplan und Übergabeformat. Danach erstellen wir eine klare Kooperationsoption.",
+    answerPl:
+      "Doprecyzowujemy zapytanie, strony współpracy, typ pojazdu, zakres budżetu, terminy i format przekazania. Następnie przygotowujemy jasną opcję współpracy.",
     orderIndex: 4,
   },
   {
@@ -686,6 +813,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Коли посередництво доречніше за прямий продаж?",
     questionSk: "Kedy dáva sprostredkovanie zmysel namiesto priameho predaja?",
     questionDe: "Wann ist Vermittlung sinnvoller als ein Direktverkauf?",
+    questionPl: "Kiedy pośrednictwo ma sens zamiast sprzedaży bezpośredniej?",
     answerEn:
       "Brokerage helps when buyer and seller are in different markets, conditions need alignment, or both sides want a structured process with clear roles.",
     answerUk:
@@ -694,6 +822,8 @@ const faqs: LandingBundle["faqs"] = [
       "Sprostredkovanie sa hodí, keď kupujúci a predávajúci pôsobia na rôznych trhoch, treba zladiť podmienky alebo obe strany chcú štruktúrovaný proces s jasnými rolami.",
     answerDe:
       "Vermittlung ist sinnvoll, wenn Käufer und Verkäufer in unterschiedlichen Märkten arbeiten, Bedingungen abzustimmen sind oder beide Seiten einen strukturierten Prozess mit klaren Rollen wünschen.",
+    answerPl:
+      "Pośrednictwo ma sens, gdy kupujący i sprzedający działają na różnych rynkach, trzeba uzgodnić warunki lub obie strony chcą uporządkowanego procesu z jasno określonymi rolami.",
     orderIndex: 5,
   },
   {
@@ -702,6 +832,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Чи працюєте ви з продавцями та дилерами?",
     questionSk: "Pracujete s predajcami a dílermi?",
     questionDe: "Arbeiten Sie mit Verkäufern und Händlern?",
+    questionPl: "Czy współpracujecie ze sprzedawcami i dealerami?",
     answerEn:
       "Yes. We are open to cooperation with companies, sellers, dealers, and commercial transport owners who want to work through a clear business process.",
     answerUk:
@@ -710,6 +841,8 @@ const faqs: LandingBundle["faqs"] = [
       "Áno. Sme otvorení spolupráci s firmami, predajcami, dílermi a vlastníkmi komerčnej dopravy, ktorí chcú jasný obchodný proces.",
     answerDe:
       "Ja. Wir sind offen für die Zusammenarbeit mit Unternehmen, Verkäufern, Händlern und Eigentümern von gewerblichem Transport, die einen klaren Geschäftsprozess wünschen.",
+    answerPl:
+      "Tak. Jesteśmy otwarci na współpracę z firmami, sprzedawcami, dealerami i właścicielami transportu komercyjnego, którzy potrzebują przejrzystego procesu biznesowego.",
     orderIndex: 6,
   },
   {
@@ -718,6 +851,7 @@ const faqs: LandingBundle["faqs"] = [
     questionUk: "Як розпочати співпрацю з вами?",
     questionSk: "Ako s vami začať spoluprácu?",
     questionDe: "Wie starten wir die Zusammenarbeit?",
+    questionPl: "Jak rozpocząć współpracę?",
     answerEn:
       "Send your request via the contact form or catalog. Tell us the vehicle type, quantity, country, and cooperation goal, and we will clarify the next steps.",
     answerUk:
@@ -726,6 +860,8 @@ const faqs: LandingBundle["faqs"] = [
       "Pošlite dopyt cez formulár alebo katalóg. Uveďte typ vozidla, počet kusov, krajinu a cieľ spolupráce — upresníme ďalšie kroky.",
     answerDe:
       "Senden Sie Ihre Anfrage über Formular oder Katalog. Nennen Sie Fahrzeugtyp, Stückzahl, Land und Ziel der Zusammenarbeit, dann klären wir die nächsten Schritte.",
+    answerPl:
+      "Wyślij zapytanie przez formularz lub katalog. Podaj typ pojazdu, liczbę sztuk, kraj i cel współpracy — doprecyzujemy kolejne kroki.",
     orderIndex: 7,
   },
 ];
@@ -739,10 +875,12 @@ const vehicles: LandingBundle["vehicles"] = catalogBrands.map((brand, index) => 
   tagUk: brand.tagline.uk,
   tagSk: brand.tagline.sk,
   tagDe: brand.tagline.de,
+  tagPl: brand.tagline.pl,
   descriptionEn: brand.overview.en,
   descriptionUk: brand.overview.uk,
   descriptionSk: brand.overview.sk,
   descriptionDe: brand.overview.de,
+  descriptionPl: brand.overview.pl,
   catalogMeta: {
     bodyTypes: brand.bodyTypes,
     configurations: brand.configurations,
@@ -763,15 +901,17 @@ export const landingData: LandingBundle = {
     addressUk: "Na Troskách 12, 974 01 Banská Bystrica, Словаччина",
     addressSk: "Na Troskách 12, 974 01 Banská Bystrica, Slovensko",
     addressDe: "Na Troskách 12, 974 01 Banská Bystrica, Slowakei",
+    addressPl: "Na Troskách 12, 974 01 Banská Bystrica, Słowacja",
     workingHoursEn: "Mon-Fri 08:00-16:00",
     workingHoursUk: "Пн-Пт 08:00-16:00",
     workingHoursSk: "Po–Pi 08:00–16:00",
     workingHoursDe: "Mo–Fr 08:00–16:00",
+    workingHoursPl: "Pn–Pt 08:00–16:00",
     socialLinks: {},
   },
   stats: [
-    { id: 1, key: "years_on_market", value: "3+", labelEn: "Years on the market", labelUk: "роки на ринку", labelSk: "roky na trhu", labelDe: "Jahre am Markt", orderIndex: 1 },
-    { id: 2, key: "brands_in_work", value: "11", labelEn: "Brands in work", labelUk: "брендів у роботі", labelSk: "značiek v práci", labelDe: "Marken im Fokus", orderIndex: 2 },
+    { id: 1, key: "years_on_market", value: "3+", labelEn: "Years on the market", labelUk: "роки на ринку", labelSk: "roky na trhu", labelDe: "Jahre am Markt", labelPl: "lat na rynku", orderIndex: 1 },
+    { id: 2, key: "brands_in_work", value: "11", labelEn: "Brands in work", labelUk: "брендів у роботі", labelSk: "značiek v práci", labelDe: "Marken im Fokus", labelPl: "marek w ofercie", orderIndex: 2 },
   ],
 };
 

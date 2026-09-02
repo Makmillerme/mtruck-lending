@@ -23,7 +23,7 @@ const copy = {
   en: {
     title: { header: "Get a personalized quote", hero: "Request consultation", footer: "Send us a request" },
     description: "Leave your details and preferred vehicle type. We will contact you with a tailored offer.",
-    fields: { name: "Name", phone: "Phone", email: "Email (optional)", message: "Request details" },
+    fields: { name: "Name", phone: "Phone (optional)", email: "Email", message: "Request details" },
     placeholders: {
       name: "Your name",
       phone: "+421 ...",
@@ -58,8 +58,8 @@ const copy = {
       "Залиште контакти та бажаний тип техніки. Ми зв'яжемося з вами з персональною пропозицією.",
     fields: {
       name: "Ім'я",
-      phone: "Телефон",
-      email: "Email (необов'язково)",
+      phone: "Телефон (необов'язково)",
+      email: "Email",
       message: "Деталі запиту",
     },
     placeholders: {
@@ -96,8 +96,8 @@ const copy = {
       "Zanechajte kontaktné údaje a preferovaný typ vozidla. Ozveme sa vám s ponukou na mieru.",
     fields: {
       name: "Meno",
-      phone: "Telefón",
-      email: "Email (nepovinné)",
+      phone: "Telefón (nepovinné)",
+      email: "Email",
       message: "Detaily dopytu",
     },
     placeholders: {
@@ -134,8 +134,8 @@ const copy = {
       "Hinterlassen Sie Ihre Kontaktdaten und den gewünschten Fahrzeugtyp. Wir melden uns mit einem passenden Angebot.",
     fields: {
       name: "Name",
-      phone: "Telefon",
-      email: "E-Mail (optional)",
+      phone: "Telefon (optional)",
+      email: "E-Mail",
       message: "Anfragedetails",
     },
     placeholders: {
@@ -159,6 +159,44 @@ const copy = {
       prefill: (brand: string) => `Marke: ${brand}\nKonfiguration: \nBudget: \nLieferzeitpunkt: `,
       placeholders: {
         message: (brand: string) => `${brand}: Konfiguration, Budget, Lieferzeitpunkt...`,
+      },
+    },
+  },
+  pl: {
+    title: {
+      header: "Uzyskaj spersonalizowaną ofertę",
+      hero: "Poproś o konsultację",
+      footer: "Wyślij zapytanie",
+    },
+    description:
+      "Zostaw dane kontaktowe i preferowany typ pojazdu. Skontaktujemy się z dopasowaną ofertą.",
+    fields: {
+      name: "Imię",
+      phone: "Telefon (opcjonalnie)",
+      email: "E-mail",
+      message: "Szczegóły zapytania",
+    },
+    placeholders: {
+      name: "Twoje imię",
+      phone: "+421 ...",
+      email: "name@company.com",
+      message: "Marka, kategoria, budżet, termin dostawy...",
+    },
+    submit: "Wyślij zapytanie",
+    submitting: "Wysyłanie...",
+    success: "Zapytanie wysłane. Wkrótce się skontaktujemy.",
+    errorFallback: "Nie udało się wysłać zapytania. Spróbuj ponownie później.",
+    helper: "Lub skontaktuj się z nami bezpośrednio:",
+    sourceLabel: { header: "CTA w nagłówku", hero: "CTA w Hero", footer: "CTA przed stopką" },
+    catalog: {
+      title: (brand: string) => `Zapytanie ofertowe na sprzęt ${brand}`,
+      description: (brand: string) =>
+        `Zostaw kontakt — przygotujemy aktualne opcje ${brand} ze składów i zamkniętych aukcji UE, dopasowane do konfiguracji i budżetu.`,
+      submit: "Uzyskaj ofertę",
+      sourceLabel: "CTA katalogu (marka)",
+      prefill: (brand: string) => `Marka: ${brand}\nKonfiguracja: \nBudżet: \nTermin dostawy: `,
+      placeholders: {
+        message: (brand: string) => `${brand}: konfiguracja, budżet, termin dostawy...`,
       },
     },
   },
@@ -271,13 +309,13 @@ export function CtaFormModal({
             </label>
             <label className="space-y-1.5">
               <span className="text-xs font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.fields.phone}</span>
-              <Input required type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder={t.placeholders.phone} autoComplete="tel" />
+              <Input type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder={t.placeholders.phone} autoComplete="tel" />
             </label>
           </div>
 
           <label className="space-y-1.5">
             <span className="text-xs font-semibold uppercase tracking-[0.06em] text-cyan-100/85">{t.fields.email}</span>
-            <Input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={t.placeholders.email} autoComplete="email" />
+            <Input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder={t.placeholders.email} autoComplete="email" />
           </label>
 
           <label className="space-y-1.5">

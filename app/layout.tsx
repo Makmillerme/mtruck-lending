@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { cookies, headers } from 'next/headers'
+import { headers } from 'next/headers'
 import { LocaleProvider } from '@/lib/locale-context'
-import { LOCALE_COOKIE, resolveInitialLocale } from '@/lib/locale-cookie'
-import type { Locale } from '@/lib/locale'
+import { DEFAULT_PUBLIC_LOCALE, PUBLIC_LOCALES, type Locale, type PublicLocale } from '@/lib/locale'
+import { LOCALE_HEADER } from '@/lib/locale-path'
 import { metadataForLocale } from '@/lib/site-metadata'
 import './globals.css'
 import './safari-fallback.css'
@@ -28,19 +28,24 @@ const interByLocale: Record<Locale, typeof interLatin> = {
   uk: interUk,
   sk: interLatin,
   de: interLatin,
+  pl: interLatin,
 }
 
 function interForLocale(locale: Locale) {
   return interByLocale[locale] ?? interLatin
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = await cookies()
+async function getRequestLocale(): Promise<PublicLocale> {
   const headerStore = await headers()
-  const locale = resolveInitialLocale(
-    cookieStore.get(LOCALE_COOKIE)?.value,
-    headerStore.get('accept-language'),
-  )
+  const fromHeader = headerStore.get(LOCALE_HEADER)
+  if (fromHeader && PUBLIC_LOCALES.includes(fromHeader as PublicLocale)) {
+    return fromHeader as PublicLocale
+  }
+  return DEFAULT_PUBLIC_LOCALE
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale()
   return metadataForLocale(locale)
 }
 
@@ -56,12 +61,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookieStore = await cookies()
-  const headerStore = await headers()
-  const initialLocale = resolveInitialLocale(
-    cookieStore.get(LOCALE_COOKIE)?.value,
-    headerStore.get('accept-language'),
-  )
+  const initialLocale = await getRequestLocale()
   const inter = interForLocale(initialLocale)
 
   return (
@@ -69,7 +69,6 @@ export default async function RootLayout({
       <body className={`${inter.variable} ${inter.className} antialiased`}>
         <LocaleProvider initialLocale={initialLocale}>
           {children}
-          {/* Vercel Analytics only on Vercel; self-hosted Docker has no /_vercel/insights */}
           {process.env.VERCEL === "1" && <Analytics />}
         </LocaleProvider>
       </body>

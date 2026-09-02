@@ -9,6 +9,8 @@ const MODEL_DESCRIPTION_TEMPLATE: Record<Locale, (modelName: string) => string> 
     `Pracujeme s ${modelName} v rôznych konfiguráciách pre potreby firemných flotíl: ťahače, skriňové vozidlá, podvozky, prívesy a špeciálne riešenia. Pomáhame zladiť dopyt, možnosti spolupráce a odovzdanie komerčného vozidla.`,
   de: (modelName) =>
     `Wir arbeiten mit ${modelName} in verschiedenen Konfigurationen für Fuhrparkbedarf von Unternehmen: Sattelzugmaschinen, Kofferaufbauten, Fahrgestelle, Auflieger und Speziallösungen. Wir helfen, Anfrage, Kooperationsoptionen und Fahrzeugübergabe abzustimmen.`,
+  pl: (modelName) =>
+    `Pracujemy z ${modelName} w różnych konfiguracjach dla potrzeb flot firmowych: ciągniki siodłowe, zabudowy skrzyniowe, podwozia, naczepy i rozwiązania specjalistyczne. Pomagamy uzgodnić zapytanie, opcje współpracy i przekazanie pojazdu użytkowego.`,
 };
 
 export function buildCatalogModelDescription(modelName: string, locale: Locale): string {

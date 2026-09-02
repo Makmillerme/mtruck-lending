@@ -1653,10 +1653,8 @@ body.react-remove-scroll-bar {
   padding-top: 1rem;
   border-top: 1px solid oklch(0.82 0.04 220 / 0.14);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
   text-align: center;
 }
 
@@ -1770,11 +1768,6 @@ body.react-remove-scroll-bar {
     white-space: normal;
   }
 
-  .footer-legal-row {
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-  }
 }
 
 /* Single tapered seam at the bottom edge of each landing section */
@@ -2129,14 +2122,14 @@ body.react-remove-scroll-bar {
     .chrome-gradient {
       background: linear-gradient(
         135deg,
-        oklch(0.85 0.01 250) 0%,
-        oklch(0.65 0.02 250) 50%,
-        oklch(0.85 0.01 250) 100%
-      );
+    oklch(0.85 0.01 250) 0%, 
+    oklch(0.65 0.02 250) 50%, 
+    oklch(0.85 0.01 250) 100%
+  );
       color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
     }
   }
 }

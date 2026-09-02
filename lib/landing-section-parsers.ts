@@ -204,6 +204,7 @@ const catalogTabDefaults: Record<Locale, Record<CatalogCategory, string>> = {
   uk: { truck: "Вантажні авто", trailer: "Причепи" },
   sk: { truck: "Nákladné autá", trailer: "Prívesy" },
   de: { truck: "Lkw", trailer: "Anhänger" },
+  pl: { truck: "Ciężarówki", trailer: "Naczepy" },
 };
 
 function withCatalogTabDefaults(
@@ -274,11 +275,12 @@ export function localizedField(
   uk?: string | null,
   sk?: string | null,
   de?: string | null,
+  pl?: string | null,
 ): string {
-  const byLocale: Record<Locale, string | null | undefined> = { en, uk, sk, de };
+  const byLocale: Record<Locale, string | null | undefined> = { en, uk, sk, de, pl };
   const direct = byLocale[locale];
   if (typeof direct === "string" && direct.trim()) return direct.trim();
-  for (const value of [en, uk, sk, de]) {
+  for (const value of [en, sk, de, pl, uk]) {
     if (typeof value === "string" && value.trim()) return value.trim();
   }
   return "";
@@ -293,7 +295,7 @@ function modalGroup(value: unknown): Record<string, unknown> {
 export function parseLanguageSwitcher(meta?: Record<string, unknown>) {
   const switcher = modalGroup(meta?.languageSwitcher);
   const enabled = switcher.enabled !== false;
-  const raw = Array.isArray(switcher.languages) ? switcher.languages : ["en", "uk", "sk", "de"];
+  const raw = Array.isArray(switcher.languages) ? switcher.languages : ["en", "sk", "de", "pl"];
   const items = raw
     .map((item) => (typeof item === "string" ? item.trim() : ""))
     .filter((item): item is PublicLocale => (PUBLIC_LOCALE_LABELS as Record<string, string>)[item] !== undefined)

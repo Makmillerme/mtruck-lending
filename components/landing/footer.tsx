@@ -24,7 +24,6 @@ const defaultContent = {
     servicesTitle: "Services",
     contactTitle: "Contact",
     copyright: "© 2026 EXPERT TRAVEL. All rights reserved.",
-    legal: ["Privacy Policy", "Terms of Service"],
     links: [
       { id: "home", name: "Home" },
       { id: "about", name: "About" },
@@ -46,7 +45,6 @@ const defaultContent = {
     servicesTitle: "Послуги",
     contactTitle: "Контакти",
     copyright: "© 2026 EXPERT TRAVEL. Всі права захищені.",
-    legal: ["Політика конфіденційності", "Умови сервісу"],
     links: [
       { id: "home", name: "Головна" },
       { id: "about", name: "Про нас" },
@@ -68,7 +66,6 @@ const defaultContent = {
     servicesTitle: "Služby",
     contactTitle: "Kontakt",
     copyright: "© 2026 EXPERT TRAVEL. Všetky práva vyhradené.",
-    legal: ["Ochrana súkromia", "Podmienky služby"],
     links: [
       { id: "home", name: "Domov" },
       { id: "about", name: "O nás" },
@@ -90,11 +87,31 @@ const defaultContent = {
     servicesTitle: "Leistungen",
     contactTitle: "Kontakt",
     copyright: "© 2026 EXPERT TRAVEL. Alle Rechte vorbehalten.",
-    legal: ["Datenschutz", "Nutzungsbedingungen"],
     links: [
       { id: "home", name: "Start" },
       { id: "about", name: "Über uns" },
       { id: "services", name: "Leistungen" },
+      { id: "catalog", name: "Katalog" },
+      { id: "faq", name: "FAQ" },
+    ],
+  },
+  pl: {
+    ctaEyebrow: "Następny krok",
+    ctaTitle: "Gotowi omówić zapytanie o transport komercyjny?",
+    ctaText:
+      "Opisz trasy, ładowność i budżet — przygotujemy jasne opcje współpracy z praktycznymi warunkami, bez nachalnej sprzedaży.",
+    ctaPoints: ["Zapytanie biznesowe", "Warunki współpracy", "Przekazanie pojazdu"],
+    ctaHint: "Odpowiadamy w dni robocze, często tego samego dnia",
+    ctaButton: "Wyślij zapytanie",
+    brandText: "Expert Travel s.r.o. — europejski partner B2B w międzynarodowym handlu transportem komercyjnym.",
+    linksTitle: "Szybkie linki",
+    servicesTitle: "Usługi",
+    contactTitle: "Kontakt",
+    copyright: "© 2026 EXPERT TRAVEL. Wszelkie prawa zastrzeżone.",
+    links: [
+      { id: "home", name: "Strona główna" },
+      { id: "about", name: "O nas" },
+      { id: "services", name: "Usługi" },
       { id: "catalog", name: "Katalog" },
       { id: "faq", name: "FAQ" },
     ],
@@ -115,6 +132,8 @@ interface FooterProps {
     workingHoursUk?: string | null;
     workingHoursSk?: string | null;
     workingHoursDe?: string | null;
+    addressPl?: string | null;
+    workingHoursPl?: string | null;
   } | null;
   servicesData?: Array<{
     id: number;
@@ -122,6 +141,7 @@ interface FooterProps {
     titleUk: string | null;
     titleSk?: string | null;
     titleDe?: string | null;
+    titlePl?: string | null;
   }>;
   sectionContent?: Record<string, unknown>;
   fallbackLinks?: unknown;
@@ -144,7 +164,6 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
     servicesTitle: pickText(cms.servicesTitle, base.servicesTitle),
     contactTitle: pickText(cms.contactTitle, base.contactTitle),
     copyright: pickText(cms.copyright, base.copyright),
-    legal: cms.legal.length > 0 ? cms.legal : [...base.legal],
   };
   const links =
     cms.links.length > 0
@@ -160,6 +179,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
       uk: contactData?.addressUk,
       sk: contactData?.addressSk,
       de: contactData?.addressDe,
+      pl: contactData?.addressPl,
     }) ||
     "Europe";
   const workingHours =
@@ -168,6 +188,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
       uk: contactData?.workingHoursUk,
       sk: contactData?.workingHoursSk,
       de: contactData?.workingHoursDe,
+      pl: contactData?.workingHoursPl,
     }) ||
     "Mon-Fri 08:00-16:00";
   const serviceLinks = servicesData
@@ -177,6 +198,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
         uk: service.titleUk,
         sk: service.titleSk,
         de: service.titleDe,
+        pl: service.titlePl,
       }),
     )
     .filter(Boolean);
@@ -292,14 +314,7 @@ export function Footer({ locale, onNavigate, contactData, servicesData = [], sec
           </div>
 
           <div className="footer-legal-row">
-            <p className="text-xs text-muted-foreground">{footer.copyright}</p>
-            <div className="flex flex-wrap gap-4">
-              {footer.legal.map((item) => (
-                <span key={item} className="footer-nav-link text-xs">
-                  {item}
-                </span>
-              ))}
-            </div>
+            <p className="w-full text-center text-xs text-muted-foreground">{footer.copyright}</p>
           </div>
         </div>
       </div>

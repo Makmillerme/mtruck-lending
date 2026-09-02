@@ -55,7 +55,7 @@ test.describe("Desktop layout regression", () => {
       document.getElementById("about")?.scrollIntoView({ block: "center", behavior: "auto" });
     });
 
-    await expect(page.locator("#about .about-callouts-overlay")).toBeVisible();
+    await expect(page.locator("#about .about-visual-bridge")).toBeVisible();
 
     await page.evaluate(() => {
       document.getElementById("services")?.scrollIntoView({ block: "center", behavior: "auto" });
@@ -90,7 +90,7 @@ test.describe("Desktop layout regression", () => {
   });
 
   for (const { label, firstNav } of [
-    { label: "Українська", firstNav: "Головна" },
+    { label: "Polski", firstNav: "Strona główna" },
     { label: "Deutsch", firstNav: "Start" },
     { label: "Slovenčina", firstNav: "Domov" },
   ]) {

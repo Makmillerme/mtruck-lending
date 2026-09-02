@@ -1,4 +1,4 @@
-import { PUBLIC_LOCALES, type PublicLocale } from "@/lib/locale";
+import { DEFAULT_PUBLIC_LOCALE, PUBLIC_LOCALES, type PublicLocale } from "@/lib/locale";
 
 export const LOCALE_COOKIE = "locale";
 export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -6,36 +6,15 @@ export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 export function parseLocaleCookie(value: string | undefined | null): PublicLocale | null {
   if (!value) return null;
   const normalized = value.trim().toLowerCase();
+  if (normalized === "uk") return DEFAULT_PUBLIC_LOCALE;
   return PUBLIC_LOCALES.includes(normalized as PublicLocale) ? (normalized as PublicLocale) : null;
-}
-
-function localeFromAcceptLanguage(acceptLanguage: string | null | undefined): PublicLocale | null {
-  if (!acceptLanguage) return null;
-
-  const tags = acceptLanguage
-    .split(",")
-    .map((part) => part.trim().split(";")[0]?.trim().toLowerCase())
-    .filter(Boolean);
-
-  for (const tag of tags) {
-    if (tag.startsWith("uk")) return "uk";
-    if (tag.startsWith("sk")) return "sk";
-    if (tag.startsWith("de")) return "de";
-    if (tag.startsWith("en")) return "en";
-  }
-
-  return null;
 }
 
 export function resolveInitialLocale(
   cookieValue: string | null | undefined,
-  acceptLanguage?: string | null,
+  _acceptLanguage?: string | null,
 ): PublicLocale {
-  return (
-    parseLocaleCookie(cookieValue) ??
-    localeFromAcceptLanguage(acceptLanguage) ??
-    "uk"
-  );
+  return parseLocaleCookie(cookieValue) ?? DEFAULT_PUBLIC_LOCALE;
 }
 
 export function localeCookieHeaderValue(locale: PublicLocale): string {

@@ -10,7 +10,7 @@ type RouteContext = {
 };
 
 const patchSchema = z.object({
-  locale: z.enum(["en", "uk", "sk", "de"]).optional(),
+  locale: z.enum(["en", "uk", "sk", "de", "pl"]).optional(),
   quote: z.string().trim().min(20).max(2000).optional(),
   author: z.string().trim().min(1).max(120).optional(),
   company: z.string().trim().max(160).optional(),

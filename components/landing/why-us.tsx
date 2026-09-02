@@ -86,6 +86,24 @@ const defaultContent = {
       { title: "Koordination der Übergabe", description: "Wir koordinieren die finale Phase, damit das Fahrzeug von der Vereinbarung an Partner oder Kunden übergeben wird." },
     ],
   },
+  pl: {
+    badge: "Dlaczego my",
+    title: "Przewaga",
+    titleHighlight: "Expert Travel",
+    description: "Jasny proces biznesowy dla firm, sprzedających, dealerów i partnerów w transporcie komercyjnym.",
+    carouselTitle: "Opinie klientów",
+    emptyReviews: "Brak opinii.",
+    prevTestimonial: "Poprzednia opinia",
+    nextTestimonial: "Następna opinia",
+    reasons: [
+      { title: "Obecność na rynku UE", description: "Działamy na europejskim rynku transportu komercyjnego i pomagamy stronom uzgodnić format współpracy." },
+      { title: "Transparentna współpraca", description: "Utrzymujemy jasny proces od pierwszego zapytania przez uzgodnione warunki po przekazanie pojazdu." },
+      { title: "Podejście biznesowe", description: "Przygotowujemy opcje współpracy pod zapytanie firmy, typ pojazdu i praktyczne warunki transakcji." },
+      { title: "Sieć partnerska", description: "Współpracujemy z kupującymi, sprzedającymi, dealerami i właścicielami transportu komercyjnego na różnych rynkach." },
+      { title: "Jasna komunikacja", description: "Pomagamy stronom uzgodnić oczekiwania, kluczowe warunki i kolejne kroki bez zbędnej złożoności." },
+      { title: "Koordynacja przekazania", description: "Koordynujemy etap końcowy, aby pojazd przeszedł od umowy do partnera lub klienta." },
+    ],
+  },
 } as const;
 
 interface WhyUsProps {

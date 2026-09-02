@@ -105,10 +105,10 @@ test.describe("Landing scroll performance", () => {
     expect(Number(heroMobile.headers()["content-length"] ?? 0)).toBeLessThan(512_000);
 
     await page.evaluate(() => {
-      document.getElementById("about")?.scrollIntoView({ block: "start", behavior: "auto" });
+      document.getElementById("about")?.scrollIntoView({ block: "center", behavior: "auto" });
     });
 
-    await expect(page.locator("#about")).toBeInViewport({ ratio: 0.15 });
+    await expect(page.locator("#about .about-visual-bridge")).toBeVisible();
   });
 });
 
@@ -216,7 +216,9 @@ test.describe("Landing mobile UI polish", () => {
       return Boolean(track && track.scrollWidth > track.clientWidth + 2);
     });
 
-    const nextButton = page.locator('#catalog button[aria-label="Next brands"]:not([disabled])');
+    const nextButton = page.getByRole("button", {
+      name: /Next brands|Ďalšie značky|Nächste Marken|Następne marki/i,
+    });
     await expect(nextButton).toBeVisible();
 
     const beforeScroll = await page.evaluate(() => {

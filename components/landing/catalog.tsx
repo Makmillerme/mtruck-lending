@@ -59,6 +59,16 @@ const content = {
     prevBrands: "Vorherige Marken",
     nextBrands: "Nächste Marken",
   },
+  pl: {
+    badge: "Obszary pracy",
+    title: "Marki, z",
+    titleHighlight: "którymi pracujemy",
+    description:
+      "Pracujemy z wiodącymi europejskimi markami transportu komercyjnego i pomagamy firmom znaleźć odpowiednie opcje współpracy dla ich floty.",
+    learnMore: "Wyślij zapytanie",
+    prevBrands: "Poprzednie marki",
+    nextBrands: "Następne marki",
+  },
 };
 
 const defaultMarqueeBrands = [

@@ -48,6 +48,16 @@ const content = {
     cta: "Angebote ansehen",
     secondary: "Anfrage senden",
   },
+  pl: {
+    badge: "Europejska jakość",
+    title: "Expert Travel",
+    titleHighlight: "handel międzynarodowy",
+    subtitle: "w transporcie komercyjnym",
+    description:
+      "Współpracujemy z kupującymi i sprzedającymi transportem komercyjnym. Otwarci na partnerstwo z firmami, dealerami i właścicielami pojazdów.",
+    cta: "Zobacz oferty",
+    secondary: "Wyślij zapytanie",
+  },
 };
 
 interface HeroProps {

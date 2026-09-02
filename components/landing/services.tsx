@@ -47,6 +47,14 @@ const content = {
       "Wir arbeiten mit Unternehmen, Verkäufern, Händlern und Eigentümern von gewerblichem Transport. Wir helfen, die Zusammenarbeit von der ersten Anfrage bis zur Fahrzeugübergabe zu strukturieren.",
     pipeline: ["Anfrage", "Bedingungen", "Begleitung", "Übergabe"],
   },
+  pl: {
+    badge: "Nasze usługi",
+    title: "Obszary pracy",
+    titleHighlight: "dla partnerów",
+    description:
+      "Współpracujemy z firmami, sprzedającymi, dealerami i właścicielami transportu komercyjnego. Pomagamy uporządkować współpracę od pierwszego zapytania do przekazania pojazdu.",
+    pipeline: ["Zapytanie", "Warunki", "Wsparcie", "Przekazanie"],
+  },
 };
 
 const iconMap: Record<string, LucideIcon> = {
@@ -66,10 +74,12 @@ interface ServicesProps {
     titleUk: string | null;
     titleSk?: string | null;
     titleDe?: string | null;
+    titlePl?: string | null;
     descriptionEn: string;
     descriptionUk: string | null;
     descriptionSk?: string | null;
     descriptionDe?: string | null;
+    descriptionPl?: string | null;
     icon: string;
   }>;
   metaContent?: Record<string, unknown>;
@@ -92,12 +102,14 @@ export function Services({ locale, servicesData = [], metaContent }: ServicesPro
       uk: service.titleUk,
       sk: service.titleSk,
       de: service.titleDe,
+      pl: service.titlePl,
     }),
     description: pickEntityLocale(locale, {
       en: service.descriptionEn,
       uk: service.descriptionUk,
       sk: service.descriptionSk,
       de: service.descriptionDe,
+      pl: service.descriptionPl,
     }),
   }));
 

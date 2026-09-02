@@ -4,17 +4,17 @@ import nodemailer from "nodemailer";
 import { z } from "zod";
 import { consumeRateLimit } from "@/lib/rate-limit";
 import { landingData } from "@/lib/landing-data";
-import { PUBLIC_LOCALE_LABELS, type Locale } from "@/lib/locale";
+import { PUBLIC_LOCALE_LABELS, type Locale, type PublicLocale } from "@/lib/locale";
 
 export const runtime = "nodejs";
 
 const payloadSchema = z.object({
-  locale: z.enum(["en", "uk", "sk", "de"]),
+  locale: z.enum(["en", "uk", "sk", "de", "pl"]),
   entryPoint: z.enum(["header", "hero", "footer", "catalog"]),
   sourceLabel: z.string().trim().max(120).optional(),
   name: z.string().trim().min(1).max(120),
-  phone: z.string().trim().min(1).max(80),
-  email: z.string().trim().max(255).optional().default(""),
+  phone: z.string().trim().max(80).optional().default(""),
+  email: z.string().trim().email().max(255),
   message: z.string().trim().min(1).max(4000),
 });
 
@@ -57,7 +57,13 @@ type SmtpConfig = {
 };
 
 function formatLanguageTag(locale: Locale): string {
-  return `${PUBLIC_LOCALE_LABELS[locale]} (${locale})`;
+  const label =
+    locale in PUBLIC_LOCALE_LABELS
+      ? PUBLIC_LOCALE_LABELS[locale as PublicLocale]
+      : locale === "uk"
+        ? "Українська"
+        : locale;
+  return `${label} (${locale})`;
 }
 
 function parseSmtpConfig():
@@ -220,10 +226,8 @@ export async function POST(request: Request) {
     }
 
     const payload = parsed.data;
-    const email = payload.email ? payload.email.trim() : "";
-    if (email && !z.string().email().safeParse(email).success) {
-      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
-    }
+    const email = payload.email.trim();
+    const phone = payload.phone ? payload.phone.trim() : "";
 
     const reqHeaders = await headers();
     const ip = getClientIp(reqHeaders.get("x-forwarded-for"), reqHeaders.get("x-real-ip"));
@@ -242,7 +246,7 @@ export async function POST(request: Request) {
       blockMs: BLOCK_MS,
     });
 
-    const identity = (email || payload.phone).toLowerCase().slice(0, 255);
+    const identity = (email || phone).toLowerCase().slice(0, 255);
     const identityLimit = consumeRateLimit({
       key: `cta:identity:${identity}:${ip}`,
       maxAttempts: MAX_ATTEMPTS,
@@ -265,7 +269,7 @@ export async function POST(request: Request) {
 
     const source = payload.sourceLabel?.trim() || payload.entryPoint;
     const safeName = oneLine(payload.name);
-    const safePhone = oneLine(payload.phone);
+    const safePhone = oneLine(phone || "-");
     const safeEmail = oneLine(email || "-");
     const safeMessage = payload.message.trim();
     const createdAt = new Date().toISOString();

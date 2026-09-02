@@ -74,6 +74,14 @@ const labels: Record<Locale, ModalLabels> = {
     note: "Wir helfen bei der Auswahl passender Fahrzeuge für Routen, Frachtprofil und Fuhrparkbedarf — danach erstellen wir eine klare Kooperationsoption.",
     quoteCta: "Anfrage senden",
   },
+  pl: {
+    overview: "O marce",
+    galleryTitle: "Zdjęcia pojazdów",
+    prevPhoto: "Poprzednie zdjęcie",
+    nextPhoto: "Następne zdjęcie",
+    note: "Pomagamy dobrać pojazdy pod trasy, profil ładunku i potrzeby floty — następnie przygotowujemy jasną opcję współpracy.",
+    quoteCta: "Wyślij zapytanie",
+  },
 };
 
 function BrandPhotoCarousel({ images, labels: t }: { images: CatalogBrandGalleryItem[]; labels: ModalLabels }) {

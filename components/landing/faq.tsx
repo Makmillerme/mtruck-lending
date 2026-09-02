@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import {
   Accordion,
@@ -36,6 +36,12 @@ const content = {
     titleHighlight: "Fragen",
     description: "Praktische Antworten zu Anfragen, Kooperationsbedingungen und der Zusammenarbeit mit Expert Travel.",
   },
+  pl: {
+    badge: "FAQ",
+    title: "Najczęściej zadawane",
+    titleHighlight: "pytania",
+    description: "Praktyczne odpowiedzi o zapytaniach, warunkach współpracy i pracy z Expert Travel.",
+  },
 };
 
 interface FAQProps {
@@ -46,10 +52,12 @@ interface FAQProps {
     questionUk: string | null;
     questionSk?: string | null;
     questionDe?: string | null;
+    questionPl?: string | null;
     answerEn: string;
     answerUk: string | null;
     answerSk?: string | null;
     answerDe?: string | null;
+    answerPl?: string | null;
   }>;
   metaContent?: Record<string, unknown>;
 }
@@ -68,12 +76,14 @@ export function FAQ({ locale, faqsData = [], metaContent }: FAQProps) {
       uk: item.questionUk,
       sk: item.questionSk,
       de: item.questionDe,
+      pl: item.questionPl,
     }),
     answer: pickEntityLocale(locale, {
       en: item.answerEn,
       uk: item.answerUk,
       sk: item.answerSk,
       de: item.answerDe,
+      pl: item.answerPl,
     }),
   }));
 

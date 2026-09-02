@@ -1,4 +1,5 @@
-import type { Locale } from "@/lib/locale";
+import { DEFAULT_PUBLIC_LOCALE, PUBLIC_LOCALES, type Locale, type PublicLocale } from "@/lib/locale";
+import { pathForLocale } from "@/lib/locale-path";
 import type { Metadata } from "next";
 
 export type SiteMetadataEntry = {
@@ -32,18 +33,38 @@ export const SITE_METADATA: Record<Locale, SiteMetadataEntry> = {
       "Expert Travel — europäischer B2B-Partner für Lkw, Auflieger und gewerblichen Transport. Zusammenarbeit mit Käufern, Verkäufern, Händlern und Unternehmen.",
     keywords: ["Lkw", "Auflieger", "Nutzfahrzeuge", "Europa", "B2B", "Transport"],
   },
+  pl: {
+    title: "Expert Travel | Partner w transporcie komercyjnym",
+    description:
+      "Expert Travel — europejski partner B2B w zakresie ciężarówek, naczep i transportu komercyjnego. Współpraca z kupującymi, sprzedającymi, dealerami i firmami.",
+    keywords: ["ciężarówki", "naczepy", "pojazdy użytkowe", "Europa", "B2B", "transport"],
+  },
 };
+
+export function metadataAlternatesForLocale(locale: PublicLocale): NonNullable<Metadata["alternates"]> {
+  const languages: Record<string, string> = {};
+  for (const loc of PUBLIC_LOCALES) {
+    languages[loc] = pathForLocale(loc);
+  }
+  return {
+    canonical: pathForLocale(locale),
+    languages,
+  };
+}
 
 export function metadataForLocale(locale: Locale): Metadata {
   const entry = SITE_METADATA[locale] ?? SITE_METADATA.en;
+  const publicLocale = PUBLIC_LOCALES.includes(locale as PublicLocale)
+    ? (locale as PublicLocale)
+    : DEFAULT_PUBLIC_LOCALE;
   return {
     title: entry.title,
     description: entry.description,
     keywords: entry.keywords,
-    generator: "v0.app",
     icons: {
       icon: "/favicon.png",
       apple: "/favicon.png",
     },
+    alternates: metadataAlternatesForLocale(publicLocale),
   };
 }

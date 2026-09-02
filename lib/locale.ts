@@ -1,12 +1,14 @@
-export type Locale = "en" | "uk" | "sk" | "de";
+export type Locale = "en" | "uk" | "sk" | "de" | "pl";
 
-export type PublicLocale = Locale;
+export type PublicLocale = "en" | "sk" | "de" | "pl";
 
-export const PUBLIC_LOCALES: readonly PublicLocale[] = ["en", "uk", "sk", "de"];
+export const DEFAULT_PUBLIC_LOCALE: PublicLocale = "en";
+
+export const PUBLIC_LOCALES: readonly PublicLocale[] = ["en", "sk", "de", "pl"];
 
 export const PUBLIC_LOCALE_LABELS: Record<PublicLocale, string> = {
   en: "English",
-  uk: "Українська",
   sk: "Slovenčina",
   de: "Deutsch",
+  pl: "Polski",
 };

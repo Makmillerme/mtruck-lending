@@ -11,7 +11,7 @@ import { consumeRateLimit } from "@/lib/rate-limit";
 export const runtime = "nodejs";
 
 const postSchema = z.object({
-  locale: z.enum(["en", "uk", "sk", "de"]),
+  locale: z.enum(["en", "uk", "sk", "de", "pl"]),
   quote: z.string().trim().min(20).max(2000),
   author: z.string().trim().min(1).max(120),
   company: z.string().trim().max(160).optional().default(""),

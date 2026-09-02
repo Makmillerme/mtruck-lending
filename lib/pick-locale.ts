@@ -5,15 +5,19 @@ export type EntityLocaleFields = {
   uk?: string | null;
   sk?: string | null;
   de?: string | null;
+  pl?: string | null;
 };
 
-const LOCALE_FALLBACK_ORDER: readonly Locale[] = ["en", "uk", "sk", "de"];
+const PUBLIC_LOCALE_FALLBACK_ORDER: readonly Locale[] = ["en", "sk", "de", "pl"];
+const ADMIN_LOCALE_FALLBACK_ORDER: readonly Locale[] = ["en", "uk", "sk", "de", "pl"];
 
 export function pickEntityLocale(locale: Locale, fields: EntityLocaleFields): string {
   const direct = fields[locale];
   if (typeof direct === "string" && direct.trim()) return direct.trim();
 
-  for (const key of LOCALE_FALLBACK_ORDER) {
+  const order = locale === "uk" ? ADMIN_LOCALE_FALLBACK_ORDER : PUBLIC_LOCALE_FALLBACK_ORDER;
+  for (const key of order) {
+    if (key === "uk" && locale !== "uk") continue;
     const value = fields[key];
     if (typeof value === "string" && value.trim()) return value.trim();
   }
@@ -25,7 +29,8 @@ export function pickLocalizedRecord<T>(record: Partial<Record<Locale, T>>, local
   const direct = record[locale];
   if (direct !== undefined && direct !== null) return direct;
 
-  for (const key of LOCALE_FALLBACK_ORDER) {
+  const order = locale === "uk" ? ADMIN_LOCALE_FALLBACK_ORDER : PUBLIC_LOCALE_FALLBACK_ORDER;
+  for (const key of order) {
     const value = record[key];
     if (value !== undefined && value !== null) return value;
   }

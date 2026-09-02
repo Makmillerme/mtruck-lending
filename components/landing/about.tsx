@@ -95,6 +95,28 @@ const defaultAbout = {
       { icon: "Shield", title: "Begleitung der Zusammenarbeit", description: "Wir helfen, die wichtigsten Phasen der Zusammenarbeit, Kommunikation und Fahrzeugübergabe abzustimmen" },
     ],
   },
+  pl: {
+    badge: "O nas",
+    title: "Expert Travel s.r.o. — partner na",
+    titleHighlight: "europejskim rynku transportu",
+    description:
+      "Expert Travel s.r.o. to słowacka firma specjalizująca się w międzynarodowym handlu ciężarówkami, naczepami i transportem komercyjnym. Zapewniamy pełny cykl współpracy B2B dla firm i partnerów.",
+    description2: "",
+    aboutImageAlt: "Ciężarówka komercyjna z neonowym oświetleniem",
+    imageCallouts: ["Zapytanie partnerskie", "Warunki handlowe", "Koordynacja zapytania", "Przekazanie pojazdu"],
+    bridgeTitle: "Jak pracujemy",
+    importChain: ["Zapytanie partnerskie", "Warunki handlowe", "Koordynacja", "Przekazanie pojazdu"],
+    stats: [
+      { value: "3+", label: "lat na rynku" },
+      { value: "11", label: "marek w ofercie" },
+    ],
+    features: [
+      { icon: "MapPin", title: "Siedziba na Słowacji", description: "Na Troskách 12, 974 01 Banská Bystrica, Słowacja" },
+      { icon: "Globe2", title: "Handel międzynarodowy", description: "Współpraca z kupującymi, sprzedającymi i dealerami transportu komercyjnego" },
+      { icon: "Truck", title: "Koordynacja logistyki", description: "Koordynujemy przekazanie i dostawę transportu komercyjnego w ramach umów" },
+      { icon: "Shield", title: "Wsparcie współpracy", description: "Pomagamy uzgodnić główne etapy współpracy, komunikacji i przekazania pojazdu" },
+    ],
+  },
 } as const;
 
 
@@ -209,7 +231,11 @@ export function About({ locale, sectionContent, statsData = [] }: AboutProps) {
             <div className="about-truck-stage relative w-full overflow-hidden rounded-[1.35rem] border border-white/[0.07] shadow-[0_20px_56px_rgba(0,0,0,0.45)]">
               <div className="absolute inset-0 z-0 overflow-hidden">
                 <div className="about-truck-visual relative h-full w-full origin-center">
-                  <NeonAvtoAssemble alt={about.aboutImageAlt || "About visual"} play={sectionActive} />
+                  <NeonAvtoAssemble
+                    key="about-neon-truck"
+                    alt={about.aboutImageAlt || "About visual"}
+                    play={sectionActive}
+                  />
                 </div>
               </div>
               </div>

@@ -47,6 +47,15 @@ const navigation = {
     { name: "FAQ", id: "faq" },
     { name: "Kontakt", id: "contact" },
   ],
+  pl: [
+    { name: "Strona główna", id: "home" },
+    { name: "O nas", id: "about" },
+    { name: "Usługi", id: "services" },
+    { name: "Katalog", id: "catalog" },
+    { name: "Dlaczego my", id: "why-us" },
+    { name: "FAQ", id: "faq" },
+    { name: "Kontakt", id: "contact" },
+  ],
 } as const;
 
 const ctaText = {
@@ -54,6 +63,7 @@ const ctaText = {
   uk: "Зв'язатися",
   sk: "Odoslať dopyt",
   de: "Anfrage senden",
+  pl: "Wyślij zapytanie",
 } as const;
 
 const languageItems: Array<{ locale: PublicLocale; label: string }> = PUBLIC_LOCALES.map((locale) => ({
@@ -197,7 +207,11 @@ export function Header({ locale, onLocaleChange, onNavigate, contactEmail, conta
                   <span className="landing-header-locale-label">{locale}</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="border-border bg-card">
+              <DropdownMenuContent
+                align="end"
+                className="border-border bg-card"
+                onCloseAutoFocus={(event) => event.preventDefault()}
+              >
                 {languageItems.map((item) => (
                   <DropdownMenuItem
                     key={item.locale}
