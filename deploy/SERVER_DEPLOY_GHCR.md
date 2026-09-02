@@ -47,7 +47,7 @@ docker compose -f docker-compose.server.yml pull
 docker compose -f docker-compose.server.yml up -d
 ```
 
-App listens on host **3002** → container 3000.
+App listens on **127.0.0.1:3002** → container 3000 (not published publicly; nginx terminates TLS).
 
 ## Reviews (JSON)
 
